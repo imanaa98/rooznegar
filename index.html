@@ -171,6 +171,93 @@
   .save-btn:active{transform:translateY(0);}
   .save-btn:disabled{opacity:.6; cursor:default; transform:none;}
 
+  /* ---------- Settings button ---------- */
+  .icon-btn{
+    display:flex; align-items:center; justify-content:center;
+    width:38px; height:38px; border-radius:50%; border:1px solid var(--c-line);
+    background:var(--c-card); color:var(--c-ink-soft); flex:none; box-shadow:var(--shadow-1);
+  }
+  .icon-btn:hover{color:var(--c-sleep); border-color:var(--c-sleep);}
+  .icon-btn svg{width:18px; height:18px;}
+  .topbar-actions{display:flex; align-items:center; gap:10px;}
+
+  /* ---------- Optional health group ---------- */
+  .group[data-cat="health"] .group-icon{background:#FBEFE0; color:#C97A1E;}
+  .optional-tag{font-size:10.5px; font-weight:600; color:var(--c-ink-soft); background:var(--c-linen); padding:2px 8px; border-radius:999px; margin-right:6px;}
+  .health-grid{display:grid; grid-template-columns:1fr 1fr; gap:10px;}
+  .health-grid .field-full{grid-column:1 / -1;}
+  .num-input{
+    width:100%; border:1.5px solid var(--c-line); border-radius:var(--radius-sm);
+    padding:10px 12px; font-size:13.5px; font-family:inherit; color:var(--c-ink);
+    background:var(--c-linen); outline:none;
+  }
+  .num-input:focus{border-color:var(--c-gold); background:#fff;}
+  .mood-row{display:flex; gap:6px; justify-content:space-between;}
+  .mood-chip{
+    flex:1; border:1.5px solid var(--c-line); background:#fff; border-radius:var(--radius-sm);
+    padding:9px 4px; font-size:20px; text-align:center; line-height:1;
+  }
+  .mood-chip.is-selected{border-color:#C97A1E; background:#FBEFE0;}
+  .bmi-readout{font-size:12px; color:var(--c-ink-soft); margin-top:6px; font-weight:600;}
+  .bmi-readout b{color:var(--c-ink); font-weight:700;}
+
+  /* ---------- Goals & Analysis ---------- */
+  .goal-row{margin-bottom:13px;}
+  .goal-row:last-child{margin-bottom:0;}
+  .goal-row-head{display:flex; justify-content:space-between; font-size:12.5px; font-weight:600; margin-bottom:6px;}
+  .goal-row-head .goal-pct{color:var(--c-ink-soft); font-weight:700;}
+  .goal-track{height:8px; border-radius:999px; background:var(--c-track); overflow:hidden;}
+  .goal-fill{height:100%; border-radius:999px; transition:width .4s ease;}
+
+  .analysis-box{display:flex; flex-direction:column; gap:10px;}
+  .analysis-item{display:flex; gap:10px; align-items:flex-start; padding:11px 12px; border-radius:var(--radius-sm); font-size:12.5px; line-height:1.7;}
+  .analysis-item b{display:block; font-size:12px; margin-bottom:2px;}
+  .analysis-item.is-strength{background:var(--c-nutrition-soft); color:#2E6B43;}
+  .analysis-item.is-weakness{background:var(--c-exercise-soft); color:#B85A3A;}
+  .analysis-item.is-suggestion{background:var(--c-sleep-soft); color:var(--c-sleep);}
+  .analysis-emoji{font-size:17px; flex:none;}
+
+  /* ---------- Stats dashboard ---------- */
+  .stats-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:10px;}
+  .stat-tile{background:var(--c-linen); border-radius:var(--radius-sm); padding:12px;}
+  .stat-tile-label{font-size:11.5px; color:var(--c-ink-soft); font-weight:600; margin-bottom:4px;}
+  .stat-tile-value{font-size:17px; font-weight:800;}
+  .stat-tile-sub{font-size:11px; color:var(--c-ink-soft); margin-top:2px;}
+
+  /* ---------- Calendar heatmap ---------- */
+  .cal-head{display:flex; align-items:center; justify-content:space-between; margin-bottom:12px;}
+  .cal-nav-btn{
+    width:30px; height:30px; border-radius:50%; border:1px solid var(--c-line); background:#fff;
+    color:var(--c-ink-soft); display:flex; align-items:center; justify-content:center; font-size:14px;
+  }
+  .cal-nav-btn:hover{color:var(--c-sleep); border-color:var(--c-sleep);}
+  .cal-title{font-size:13.5px; font-weight:700;}
+  .cal-grid{display:grid; grid-template-columns:repeat(7,1fr); gap:5px;}
+  .cal-dow{font-size:10.5px; color:var(--c-ink-soft); text-align:center; font-weight:600; padding-bottom:3px;}
+  .cal-cell{
+    aspect-ratio:1; border-radius:8px; display:flex; align-items:center; justify-content:center;
+    font-size:11px; font-weight:700; color:var(--c-ink-soft); background:var(--c-linen); position:relative;
+    border:1.5px solid transparent;
+  }
+  .cal-cell.has-data{color:#fff; cursor:pointer;}
+  .cal-cell.is-empty{visibility:hidden;}
+  .cal-cell.is-future{opacity:.45;}
+  .cal-cell.is-today{border-color:var(--c-gold);}
+  .cal-legend{display:flex; align-items:center; gap:10px; margin-top:12px; flex-wrap:wrap; font-size:11px; color:var(--c-ink-soft);}
+  .cal-legend-dot{width:9px; height:9px; border-radius:50%; display:inline-block; margin-left:4px;}
+
+  /* ---------- Backup / restore ---------- */
+  .backup-row{display:flex; gap:10px; margin-top:10px;}
+  .backup-btn{
+    flex:1; background:var(--c-card); border:1.5px solid var(--c-line); color:var(--c-ink);
+    border-radius:var(--radius-sm); padding:11px; font-size:12.5px; font-weight:700;
+  }
+  .backup-btn:hover{border-color:var(--c-sleep); color:var(--c-sleep);}
+
+  /* ---------- Settings modal extras ---------- */
+  .settings-field{margin-bottom:14px;}
+  .settings-field label{display:block; font-size:12.5px; font-weight:600; color:var(--c-ink-soft); margin-bottom:6px;}
+
   /* ---------- Edit banner ---------- */
   .edit-banner{
     display:flex; align-items:center; justify-content:space-between; gap:10px;
@@ -335,8 +422,13 @@
         <div class="subtitle">خواب، ورزش و تغذیه‌ی هر روزت</div>
       </div>
     </div>
-    <div class="streak-pill" id="streakPill" style="display:none;">
-      <span>🔥</span><span id="streakNum">۰</span>
+    <div class="topbar-actions">
+      <button class="icon-btn" id="settingsBtn" aria-label="تنظیمات">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M19.4 13a7.97 7.97 0 0 0 0-2l2.1-1.6-2-3.4-2.5 1a8 8 0 0 0-1.7-1L14.9 3h-4l-.4 2.9a8 8 0 0 0-1.7 1l-2.5-1-2 3.4L6.4 11a7.97 7.97 0 0 0 0 2l-2.1 1.6 2 3.4 2.5-1a8 8 0 0 0 1.7 1l.4 3h4l.4-2.9a8 8 0 0 0 1.7-1l2.5 1 2-3.4-2.1-1.6Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.4"/></svg>
+      </button>
+      <div class="streak-pill" id="streakPill" style="display:none;">
+        <span>🔥</span><span id="streakNum">۰</span>
+      </div>
     </div>
   </div>
   <div class="horizon-bar"></div>
@@ -453,12 +545,77 @@
           </div>
         </div>
 
+        <div class="group" data-cat="health">
+          <div class="group-head">
+            <div class="group-icon">➕</div>
+            <div class="group-title">سلامت تکمیلی <span class="optional-tag">اختیاری</span></div>
+          </div>
+          <div class="field">
+            <div class="field-label-row"><span class="field-label">خلق و خو</span></div>
+            <div class="mood-row" id="moodChips">
+              <button class="mood-chip" data-value="4" aria-label="عالی">😀</button>
+              <button class="mood-chip" data-value="3" aria-label="خوب">🙂</button>
+              <button class="mood-chip" data-value="2" aria-label="معمولی">😐</button>
+              <button class="mood-chip" data-value="1" aria-label="بد">😔</button>
+              <button class="mood-chip" data-value="0" aria-label="خیلی بد">😣</button>
+            </div>
+          </div>
+          <div class="field field-full">
+            <div class="health-grid">
+              <div class="field-full">
+                <div class="field-label-row"><span class="field-label">وزن (کیلوگرم)</span></div>
+                <input type="number" class="num-input" id="weightInput" min="20" max="300" step="0.1" placeholder="مثلاً ۷۰">
+                <div class="bmi-readout" id="bmiReadout" style="display:none;"></div>
+              </div>
+              <div>
+                <div class="field-label-row"><span class="field-label">فشار سیستول</span></div>
+                <input type="number" class="num-input" id="bpSystolicInput" min="60" max="260" placeholder="۱۲۰">
+              </div>
+              <div>
+                <div class="field-label-row"><span class="field-label">فشار دیاستول</span></div>
+                <input type="number" class="num-input" id="bpDiastolicInput" min="40" max="160" placeholder="۸۰">
+              </div>
+              <div class="field-full">
+                <div class="field-label-row"><span class="field-label">نبض (ضربان در دقیقه)</span></div>
+                <input type="number" class="num-input" id="pulseInput" min="30" max="220" placeholder="۷۲">
+              </div>
+            </div>
+          </div>
+        </div>
+
         <button class="save-btn" id="saveBtn">ثبت امتیاز امروز</button>
       </div>
     </div>
 
     <!-- RIGHT PANEL -->
     <div class="panel-right">
+      <div class="card">
+        <div class="card-title">اهداف امروز</div>
+        <div class="card-subtitle">پیشرفت نسبت به اهدافی که تنظیم کردی</div>
+        <div id="goalsBox">
+          <div class="goal-row">
+            <div class="goal-row-head"><span>😴 خواب</span><span class="goal-pct" id="goalSleepPct">—</span></div>
+            <div class="goal-track"><div class="goal-fill" id="goalSleepFill" style="width:0%; background:var(--c-sleep);"></div></div>
+          </div>
+          <div class="goal-row">
+            <div class="goal-row-head"><span>🥗 آب</span><span class="goal-pct" id="goalWaterPct">—</span></div>
+            <div class="goal-track"><div class="goal-fill" id="goalWaterFill" style="width:0%; background:var(--c-nutrition);"></div></div>
+          </div>
+          <div class="goal-row">
+            <div class="goal-row-head"><span>🏃 ورزش</span><span class="goal-pct" id="goalExercisePct">—</span></div>
+            <div class="goal-track"><div class="goal-fill" id="goalExerciseFill" style="width:0%; background:var(--c-exercise);"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">تحلیل هوشمند روز</div>
+        <div class="card-subtitle">بر اساس امتیاز ثبت‌شده‌ی این روز</div>
+        <div class="analysis-box" id="analysisBox">
+          <div class="empty-state"><span class="emoji">🧠</span>بعد از ثبت امتیاز، تحلیل اینجا نمایش داده می‌شه.</div>
+        </div>
+      </div>
+
       <div class="card">
         <div class="card-title">کارهای مهم</div>
         <div class="card-subtitle">کارهایی که می‌خوای امروز انجام بدی</div>
@@ -477,12 +634,38 @@
       </div>
 
       <div class="card">
+        <div class="cal-head">
+          <button class="cal-nav-btn" id="calPrevBtn" aria-label="ماه قبل">‹</button>
+          <div class="cal-title" id="calTitle">—</div>
+          <button class="cal-nav-btn" id="calNextBtn" aria-label="ماه بعد">›</button>
+        </div>
+        <div class="cal-grid" id="calGrid"></div>
+        <div class="cal-legend">
+          <span><span class="cal-legend-dot" style="background:#3F8F5C;"></span>عالی</span>
+          <span><span class="cal-legend-dot" style="background:#4F9A68;"></span>خوب</span>
+          <span><span class="cal-legend-dot" style="background:#E08A3C;"></span>متوسط</span>
+          <span><span class="cal-legend-dot" style="background:#D9684A;"></span>نیاز به مراقبت</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">داشبورد آماری ماه</div>
+        <div class="card-subtitle" id="statsSubtitle">—</div>
+        <div class="stats-grid" id="statsGrid"></div>
+      </div>
+
+      <div class="card">
         <div class="card-title">تاریخچه</div>
         <div class="card-subtitle">روزهای ثبت‌شده، از جدید به قدیم — برای ویرایش روی ✎ بزن</div>
         <div class="history-list" id="historyList"></div>
       </div>
 
       <div class="footer-row">
+        <div class="backup-row">
+          <button class="backup-btn" id="exportBtn">📤 خروجی پشتیبان (JSON)</button>
+          <button class="backup-btn" id="importBtn">📥 بازیابی از فایل</button>
+        </div>
+        <input type="file" id="importFileInput" accept="application/json" style="display:none;">
         <button class="reset-link" id="resetLink">پاک‌کردن همه داده‌ها</button>
       </div>
     </div>
@@ -498,6 +681,33 @@
     <div class="modal-actions">
       <button class="btn-cancel" id="modalCancel">انصراف</button>
       <button class="btn-danger" id="modalConfirm">حذف</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="settingsModalOverlay">
+  <div class="modal-box">
+    <div class="modal-title">تنظیمات و هدف‌گذاری</div>
+    <p class="modal-text">این مقادیر برای محاسبه BMI و درصد تحقق اهداف روزانه استفاده می‌شن.</p>
+    <div class="settings-field">
+      <label>قد (سانتی‌متر)</label>
+      <input type="number" class="num-input" id="settingHeight" min="100" max="230" placeholder="مثلاً ۱۷۵">
+    </div>
+    <div class="settings-field">
+      <label>هدف خواب (ساعت)</label>
+      <input type="number" class="num-input" id="settingSleepGoal" min="4" max="12" step="0.5" placeholder="۸">
+    </div>
+    <div class="settings-field">
+      <label>هدف آب (لیوان)</label>
+      <input type="number" class="num-input" id="settingWaterGoal" min="1" max="15" placeholder="۸">
+    </div>
+    <div class="settings-field">
+      <label>هدف ورزش (دقیقه)</label>
+      <input type="number" class="num-input" id="settingExerciseGoal" min="0" max="180" placeholder="۴۵">
+    </div>
+    <div class="modal-actions">
+      <button class="btn-cancel" id="settingsCancel">انصراف</button>
+      <button class="btn-danger" id="settingsSave" style="background:var(--c-sleep);">ذخیره</button>
     </div>
   </div>
 </div>
@@ -523,6 +733,37 @@
     try{
       return new Intl.DateTimeFormat('fa-IR', Object.assign({calendar:'persian'}, opts)).format(date);
     }catch(e){ return date.toLocaleDateString('fa-IR'); }
+  }
+
+  /* Reliable Gregorian -> Jalali conversion using Intl's own persian calendar,
+     so the calendar heatmap's grid always agrees with its Persian month title. */
+  const jalaliFormatter = new Intl.DateTimeFormat('en-US-u-ca-persian', {year:'numeric', month:'numeric', day:'numeric'});
+  function gregorianToJalali(date){
+    const parts = jalaliFormatter.formatToParts(date);
+    const get = (t)=> Number(parts.find(p=>p.type===t).value);
+    return { jy: get('year'), jm: get('month'), jd: get('day') };
+  }
+  function jalaliMonthInfo(jy, jm){
+    // Rough Gregorian anchor near the start of this Jalali month, then scan
+    // a small window to find the exact Gregorian date where Jalali day===1.
+    const guess = new Date(jy+621, 2, 21);
+    guess.setDate(guess.getDate() + (jm-1)*30);
+    let firstGregorian = null;
+    for(let offset=-40; offset<=40; offset++){
+      const d = new Date(guess.getFullYear(), guess.getMonth(), guess.getDate()+offset);
+      const j = gregorianToJalali(d);
+      if(j.jy===jy && j.jm===jm && j.jd===1){ firstGregorian = d; break; }
+    }
+    if(!firstGregorian) return null;
+    let daysInMonth = 0;
+    let cursor = new Date(firstGregorian);
+    while(true){
+      const j = gregorianToJalali(cursor);
+      if(j.jy!==jy || j.jm!==jm) break;
+      daysInMonth++;
+      cursor = new Date(cursor.getFullYear(), cursor.getMonth(), cursor.getDate()+1);
+    }
+    return { firstGregorian, daysInMonth };
   }
 
   function polarToCartesian(cx, cy, r, angleDeg){
@@ -567,9 +808,22 @@
     return '#D9684A';
   }
 
+  function computeBmi(weightKg, heightCm){
+    if(!weightKg || !heightCm) return null;
+    const h = heightCm/100;
+    return weightKg / (h*h);
+  }
+  function bmiLabel(bmi){
+    if(bmi<18.5) return 'کمبود وزن';
+    if(bmi<25) return 'طبیعی';
+    if(bmi<30) return 'اضافه وزن';
+    return 'چاقی';
+  }
+
   /* ===================== State ===================== */
   const STORAGE_KEY = 'daily-entries';
   const TODO_KEY = 'todo-tasks';
+  const SETTINGS_KEY = 'app-settings';
   let entries = {};
   let todos = [];
   const TODAY = new Date();
@@ -578,8 +832,11 @@
   const DEFAULT_STATE = {
     sleepHours:7, sleepQuality:1,
     exerciseMinutes:20, exerciseIntensity:1,
-    nutritionQuality:1, waterGlasses:5
+    nutritionQuality:1, waterGlasses:5,
+    weight:null, bpSystolic:null, bpDiastolic:null, pulse:null, mood:null
   };
+  const DEFAULT_SETTINGS = { height:175, sleepGoal:8, waterGoal:8, exerciseGoal:45 };
+  let settings = Object.assign({}, DEFAULT_SETTINGS);
   let state = Object.assign({}, DEFAULT_STATE);
   let savedSnapshot = null;
   let editingKey = todayKey; // which day's entry the form is currently editing
@@ -629,6 +886,14 @@
   }
   async function persistTodos(){
     return await storageSet(TODO_KEY, JSON.stringify(todos));
+  }
+  async function loadSettings(){
+    const v = await storageGet(SETTINGS_KEY);
+    try{ return v ? Object.assign({}, DEFAULT_SETTINGS, JSON.parse(v)) : Object.assign({}, DEFAULT_SETTINGS); }
+    catch(e){ return Object.assign({}, DEFAULT_SETTINGS); }
+  }
+  async function persistSettings(){
+    return await storageSet(SETTINGS_KEY, JSON.stringify(settings));
   }
 
   /* ===================== Gauge ===================== */
@@ -688,6 +953,47 @@
     const scores = computeScores(state);
     renderGauge(scores, true);
     refreshSaveStateBadge();
+    renderGoals();
+  }
+
+  function renderGoals(){
+    const sleepPct = clamp(Math.round(state.sleepHours/settings.sleepGoal*100), 0, 100);
+    const waterPct = clamp(Math.round(state.waterGlasses/settings.waterGoal*100), 0, 100);
+    const exercisePct = clamp(Math.round(state.exerciseMinutes/Math.max(1,settings.exerciseGoal)*100), 0, 100);
+
+    document.getElementById('goalSleepFill').style.width = sleepPct+'%';
+    document.getElementById('goalSleepPct').textContent = toFa(sleepPct)+'٪ از '+toFa(settings.sleepGoal)+' ساعت';
+    document.getElementById('goalWaterFill').style.width = waterPct+'%';
+    document.getElementById('goalWaterPct').textContent = toFa(waterPct)+'٪ از '+toFa(settings.waterGoal)+' لیوان';
+    document.getElementById('goalExerciseFill').style.width = exercisePct+'%';
+    document.getElementById('goalExercisePct').textContent = toFa(exercisePct)+'٪ از '+toFa(settings.exerciseGoal)+' دقیقه';
+  }
+
+  function renderAnalysis(entry){
+    const box = document.getElementById('analysisBox');
+    if(!entry){
+      box.innerHTML = '<div class="empty-state"><span class="emoji">🧠</span>بعد از ثبت امتیاز، تحلیل اینجا نمایش داده می‌شه.</div>';
+      return;
+    }
+    const cats = [
+      {key:'sleep', label:'خواب', emoji:'😴', score:entry.scores.sleep},
+      {key:'nutrition', label:'تغذیه', emoji:'🥗', score:entry.scores.nutrition},
+      {key:'exercise', label:'ورزش', emoji:'🏃', score:entry.scores.exercise}
+    ];
+    const sorted = cats.slice().sort((a,b)=>b.score-a.score);
+    const strongest = sorted[0], weakest = sorted[sorted.length-1];
+
+    const suggestions = {
+      sleep: state.sleepHours < settings.sleepGoal ? 'سعی کن امشب کمی زودتر بخوابی تا به '+toFa(settings.sleepGoal)+' ساعت برسی.' : 'کیفیت خوابت رو با ساعت خواب منظم حفظ کن.',
+      nutrition: entry.waterGlasses < settings.waterGoal ? toFa(Math.max(1, settings.waterGoal-entry.waterGlasses))+' لیوان آب بیشتر بنوش.' : 'تغذیه‌ت رو متنوع و کم‌نمک نگه دار.',
+      exercise: entry.exerciseMinutes < settings.exerciseGoal ? 'حتی '+toFa(15)+' دقیقه پیاده‌روی امروز کمک می‌کنه.' : 'همین روند فعالیت رو ادامه بده.'
+    };
+
+    let html = '';
+    html += `<div class="analysis-item is-strength"><span class="analysis-emoji">${strongest.emoji}</span><div><b>نقطه قوت امروز</b>${strongest.label} (${toFa(strongest.score)} امتیاز)</div></div>`;
+    html += `<div class="analysis-item is-weakness"><span class="analysis-emoji">${weakest.emoji}</span><div><b>نقطه ضعف امروز</b>${weakest.label} (${toFa(weakest.score)} امتیاز)</div></div>`;
+    html += `<div class="analysis-item is-suggestion"><span class="analysis-emoji">💡</span><div><b>پیشنهاد</b>${suggestions[weakest.key]}</div></div>`;
+    box.innerHTML = html;
   }
 
   /* ===================== Form wiring ===================== */
@@ -702,6 +1008,15 @@
     setChipSelected('sleepQualityChips', state.sleepQuality);
     setChipSelected('nutritionQualityChips', state.nutritionQuality);
     setChipSelected('exerciseIntensityChips', state.exerciseIntensity);
+
+    document.getElementById('weightInput').value = state.weight!=null ? state.weight : '';
+    document.getElementById('bpSystolicInput').value = state.bpSystolic!=null ? state.bpSystolic : '';
+    document.getElementById('bpDiastolicInput').value = state.bpDiastolic!=null ? state.bpDiastolic : '';
+    document.getElementById('pulseInput').value = state.pulse!=null ? state.pulse : '';
+    document.querySelectorAll('#moodChips .mood-chip').forEach(chip=>{
+      chip.classList.toggle('is-selected', state.mood!=null && Number(chip.dataset.value)===state.mood);
+    });
+    updateBmiReadout();
   }
   function setChipSelected(groupId, value){
     const group = document.getElementById(groupId);
@@ -709,6 +1024,46 @@
       chip.classList.toggle('is-selected', Number(chip.dataset.value)===value);
     });
   }
+  function updateBmiReadout(){
+    const el = document.getElementById('bmiReadout');
+    const bmi = computeBmi(state.weight, settings.height);
+    if(bmi){
+      el.style.display = 'block';
+      el.innerHTML = 'BMI: <b>'+toFa(bmi.toFixed(1))+'</b> — '+bmiLabel(bmi);
+    } else {
+      el.style.display = 'none';
+    }
+  }
+
+  document.getElementById('weightInput').addEventListener('input', e=>{
+    const v = e.target.value;
+    state.weight = v===''? null : Number(v);
+    updateBmiReadout();
+    onStateChange();
+  });
+  document.getElementById('bpSystolicInput').addEventListener('input', e=>{
+    const v = e.target.value;
+    state.bpSystolic = v===''? null : Number(v);
+    onStateChange();
+  });
+  document.getElementById('bpDiastolicInput').addEventListener('input', e=>{
+    const v = e.target.value;
+    state.bpDiastolic = v===''? null : Number(v);
+    onStateChange();
+  });
+  document.getElementById('pulseInput').addEventListener('input', e=>{
+    const v = e.target.value;
+    state.pulse = v===''? null : Number(v);
+    onStateChange();
+  });
+  document.getElementById('moodChips').addEventListener('click', e=>{
+    const btn = e.target.closest('.mood-chip');
+    if(!btn) return;
+    const val = Number(btn.dataset.value);
+    state.mood = (state.mood===val) ? null : val; // tap again to clear
+    syncFormUI();
+    onStateChange();
+  });
 
   document.getElementById('sleepHours').addEventListener('input', e=>{
     state.sleepHours = Number(e.target.value);
@@ -743,19 +1098,29 @@
     return key===todayKey ? label+' (امروز)' : label;
   }
 
+  function stateFromEntry(entry){
+    return {
+      sleepHours:entry.sleepHours, sleepQuality:entry.sleepQuality,
+      exerciseMinutes:entry.exerciseMinutes, exerciseIntensity:entry.exerciseIntensity,
+      nutritionQuality:entry.nutritionQuality, waterGlasses:entry.waterGlasses,
+      weight: entry.weight!=null ? entry.weight : null,
+      bpSystolic: entry.bpSystolic!=null ? entry.bpSystolic : null,
+      bpDiastolic: entry.bpDiastolic!=null ? entry.bpDiastolic : null,
+      pulse: entry.pulse!=null ? entry.pulse : null,
+      mood: entry.mood!=null ? entry.mood : null
+    };
+  }
+
   function enterEditMode(key){
     const entry = entries[key];
     if(!entry) return;
     editingKey = key;
-    state = {
-      sleepHours:entry.sleepHours, sleepQuality:entry.sleepQuality,
-      exerciseMinutes:entry.exerciseMinutes, exerciseIntensity:entry.exerciseIntensity,
-      nutritionQuality:entry.nutritionQuality, waterGlasses:entry.waterGlasses
-    };
+    state = stateFromEntry(entry);
     savedSnapshot = JSON.stringify(state);
 
     syncFormUI();
     onStateChange();
+    renderAnalysis(entry);
     document.getElementById('gaugeDate').textContent = gaugeDateLabel(key);
 
     const banner = document.getElementById('editBanner');
@@ -771,18 +1136,15 @@
   function exitEditMode(){
     editingKey = todayKey;
     if(entries[todayKey]){
-      const e = entries[todayKey];
-      state = {
-        sleepHours:e.sleepHours, sleepQuality:e.sleepQuality,
-        exerciseMinutes:e.exerciseMinutes, exerciseIntensity:e.exerciseIntensity,
-        nutritionQuality:e.nutritionQuality, waterGlasses:e.waterGlasses
-      };
+      state = stateFromEntry(entries[todayKey]);
       savedSnapshot = JSON.stringify(state);
       saveBtn.textContent = 'به‌روزرسانی امتیاز امروز';
+      renderAnalysis(entries[todayKey]);
     } else {
       state = Object.assign({}, DEFAULT_STATE);
       savedSnapshot = null;
       saveBtn.textContent = 'ثبت امتیاز امروز';
+      renderAnalysis(null);
     }
     syncFormUI();
     onStateChange();
@@ -800,7 +1162,8 @@
     saveBtn.textContent = 'در حال ذخیره...';
     const scores = computeScores(state);
     const wasEditingPastDay = editingKey !== todayKey;
-    entries[editingKey] = Object.assign({}, state, { scores, savedAt: new Date().toISOString() });
+    const savedKey = editingKey;
+    entries[savedKey] = Object.assign({}, state, { scores, savedAt: new Date().toISOString() });
     const ok = await persistEntries(entries);
     saveBtn.disabled = false;
     if(ok){
@@ -809,6 +1172,9 @@
       renderChart();
       renderHistory();
       renderStreak();
+      renderAnalysis(entries[savedKey]);
+      renderCalendar();
+      renderStatsDashboard();
       if(wasEditingPastDay){
         exitEditMode();
       } else {
@@ -870,6 +1236,9 @@
         renderChart();
         renderHistory();
         renderStreak();
+        renderAnalysis(null);
+        renderCalendar();
+        renderStatsDashboard();
         showToast('همه داده‌ها حذف شدند');
       }
     );
@@ -889,6 +1258,8 @@
         renderChart();
         renderHistory();
         renderStreak();
+        renderCalendar();
+        renderStatsDashboard();
         showToast('روز حذف شد');
       }
     );
@@ -1098,6 +1469,234 @@
     }
   }
 
+  /* ===================== Settings modal ===================== */
+  const settingsModalOverlay = document.getElementById('settingsModalOverlay');
+  document.getElementById('settingsBtn').addEventListener('click', ()=>{
+    document.getElementById('settingHeight').value = settings.height;
+    document.getElementById('settingSleepGoal').value = settings.sleepGoal;
+    document.getElementById('settingWaterGoal').value = settings.waterGoal;
+    document.getElementById('settingExerciseGoal').value = settings.exerciseGoal;
+    settingsModalOverlay.classList.add('visible');
+  });
+  document.getElementById('settingsCancel').addEventListener('click', ()=>{
+    settingsModalOverlay.classList.remove('visible');
+  });
+  settingsModalOverlay.addEventListener('click', e=>{ if(e.target===settingsModalOverlay) settingsModalOverlay.classList.remove('visible'); });
+  document.getElementById('settingsSave').addEventListener('click', async ()=>{
+    const h = Number(document.getElementById('settingHeight').value);
+    const sg = Number(document.getElementById('settingSleepGoal').value);
+    const wg = Number(document.getElementById('settingWaterGoal').value);
+    const eg = Number(document.getElementById('settingExerciseGoal').value);
+    settings = {
+      height: h>0 ? h : DEFAULT_SETTINGS.height,
+      sleepGoal: sg>0 ? sg : DEFAULT_SETTINGS.sleepGoal,
+      waterGoal: wg>0 ? wg : DEFAULT_SETTINGS.waterGoal,
+      exerciseGoal: eg>=0 ? eg : DEFAULT_SETTINGS.exerciseGoal
+    };
+    await persistSettings();
+    settingsModalOverlay.classList.remove('visible');
+    updateBmiReadout();
+    renderGoals();
+    showToast('تنظیمات ذخیره شد ✅');
+  });
+
+  /* ===================== Calendar heatmap ===================== */
+  const todayJalali = gregorianToJalali(TODAY);
+  let calViewJY = todayJalali.jy;
+  let calViewJM = todayJalali.jm;
+  const PERSIAN_DOW = ['ش','ی','د','س','چ','پ','ج'];
+
+  function renderCalendar(){
+    const grid = document.getElementById('calGrid');
+    const titleEl = document.getElementById('calTitle');
+    const info = jalaliMonthInfo(calViewJY, calViewJM);
+    if(!info){ grid.innerHTML=''; titleEl.textContent='—'; return; }
+
+    titleEl.textContent = formatJalali(info.firstGregorian, {year:'numeric', month:'long'});
+
+    // JS getDay(): 0=Sun..6=Sat. Week starts Saturday in the Persian calendar.
+    const jsDow = info.firstGregorian.getDay();
+    const leadingBlanks = (jsDow + 1) % 7;
+
+    let html = PERSIAN_DOW.map(d=>`<div class="cal-dow">${d}</div>`).join('');
+    for(let i=0;i<leadingBlanks;i++){ html += '<div class="cal-cell is-empty"></div>'; }
+
+    const todayMidnight = new Date(TODAY.getFullYear(), TODAY.getMonth(), TODAY.getDate());
+
+    for(let day=1; day<=info.daysInMonth; day++){
+      const d = new Date(info.firstGregorian.getFullYear(), info.firstGregorian.getMonth(), info.firstGregorian.getDate()+day-1);
+      const key = getDateKey(d);
+      const entry = entries[key];
+      const isFuture = d.getTime() > todayMidnight.getTime();
+      const isToday = key===todayKey;
+      let cls = 'cal-cell';
+      let style = '';
+      if(isFuture) cls += ' is-future';
+      if(isToday) cls += ' is-today';
+      if(entry){
+        cls += ' has-data';
+        style = `background:${tierDot(entry.scores.total)};`;
+      }
+      html += `<div class="${cls}" style="${style}" data-key="${key}" data-has-data="${entry?'1':'0'}" data-future="${isFuture?'1':'0'}">${toFa(day)}</div>`;
+    }
+
+    grid.innerHTML = html;
+    grid.querySelectorAll('.cal-cell[data-key]').forEach(cell=>{
+      if(cell.dataset.future==='1') return;
+      cell.addEventListener('click', ()=>{
+        const key = cell.dataset.key;
+        if(entries[key]){
+          enterEditMode(key);
+        } else {
+          enterBackfillMode(key);
+        }
+      });
+    });
+  }
+
+  function enterBackfillMode(key){
+    editingKey = key;
+    state = Object.assign({}, DEFAULT_STATE);
+    savedSnapshot = null;
+    syncFormUI();
+    onStateChange();
+    renderAnalysis(null);
+    document.getElementById('gaugeDate').textContent = gaugeDateLabel(key);
+    const banner = document.getElementById('editBanner');
+    banner.style.display = 'flex';
+    document.getElementById('editBannerDate').textContent =
+      formatJalali(parseDateKey(key), {day:'numeric', month:'long'}) + ' (ثبت نشده)';
+    saveBtn.textContent = 'ثبت این روز';
+    document.querySelector('.panel-left').scrollIntoView({behavior:'smooth', block:'start'});
+  }
+
+  document.getElementById('calPrevBtn').addEventListener('click', ()=>{
+    calViewJM -= 1;
+    if(calViewJM < 1){ calViewJM = 12; calViewJY -= 1; }
+    renderCalendar();
+    renderStatsDashboard();
+  });
+  document.getElementById('calNextBtn').addEventListener('click', ()=>{
+    calViewJM += 1;
+    if(calViewJM > 12){ calViewJM = 1; calViewJY += 1; }
+    renderCalendar();
+    renderStatsDashboard();
+  });
+
+  /* ===================== Stats dashboard ===================== */
+  function renderStatsDashboard(){
+    const subtitle = document.getElementById('statsSubtitle');
+    const grid = document.getElementById('statsGrid');
+    const info = jalaliMonthInfo(calViewJY, calViewJM);
+    if(!info){ grid.innerHTML=''; return; }
+    subtitle.textContent = formatJalali(info.firstGregorian, {year:'numeric', month:'long'}) + ' را نشون می‌ده';
+
+    const monthEntries = Object.keys(entries)
+      .filter(k=>{ const j=gregorianToJalali(parseDateKey(k)); return j.jy===calViewJY && j.jm===calViewJM; })
+      .map(k=>({key:k, data:entries[k]}));
+
+    if(monthEntries.length===0){
+      grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1;"><span class="emoji">📊</span>این ماه هنوز داده‌ای ثبت نشده.</div>';
+      return;
+    }
+
+    const avg = (arr)=> arr.reduce((a,b)=>a+b,0)/arr.length;
+    const avgSleep = avg(monthEntries.map(e=>e.data.sleepHours));
+    const avgExercise = avg(monthEntries.map(e=>e.data.exerciseMinutes));
+    const avgScore = Math.round(avg(monthEntries.map(e=>e.data.scores.total)));
+    let best = monthEntries[0], worst = monthEntries[0];
+    monthEntries.forEach(e=>{
+      if(e.data.scores.total > best.data.scores.total) best = e;
+      if(e.data.scores.total < worst.data.scores.total) worst = e;
+    });
+
+    function dayLabel(key){
+      return formatJalali(parseDateKey(key), {day:'numeric', month:'short'});
+    }
+
+    grid.innerHTML = `
+      <div class="stat-tile">
+        <div class="stat-tile-label">میانگین امتیاز</div>
+        <div class="stat-tile-value">${toFa(avgScore)}</div>
+        <div class="stat-tile-sub">${toFa(monthEntries.length)} روز ثبت‌شده</div>
+      </div>
+      <div class="stat-tile">
+        <div class="stat-tile-label">میانگین خواب</div>
+        <div class="stat-tile-value">${toFa(avgSleep.toFixed(1))}</div>
+        <div class="stat-tile-sub">ساعت در شب</div>
+      </div>
+      <div class="stat-tile">
+        <div class="stat-tile-label">میانگین ورزش</div>
+        <div class="stat-tile-value">${toFa(Math.round(avgExercise))}</div>
+        <div class="stat-tile-sub">دقیقه در روز</div>
+      </div>
+      <div class="stat-tile">
+        <div class="stat-tile-label">بهترین روز</div>
+        <div class="stat-tile-value">${toFa(best.data.scores.total)}</div>
+        <div class="stat-tile-sub">${dayLabel(best.key)}</div>
+      </div>
+    `;
+  }
+
+  /* ===================== Backup / Restore ===================== */
+  document.getElementById('exportBtn').addEventListener('click', ()=>{
+    const payload = {
+      app: 'rooznegar-salamat',
+      exportedAt: new Date().toISOString(),
+      entries, todos, settings
+    };
+    const blob = new Blob([JSON.stringify(payload, null, 2)], {type:'application/json'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'rooznegar-salamat-backup-'+todayKey+'.json';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    showToast('فایل پشتیبان دانلود شد ✅');
+  });
+
+  const importFileInput = document.getElementById('importFileInput');
+  document.getElementById('importBtn').addEventListener('click', ()=> importFileInput.click());
+  importFileInput.addEventListener('change', (e)=>{
+    const file = e.target.files[0];
+    if(!file) return;
+    const reader = new FileReader();
+    reader.onload = ()=>{
+      let parsed;
+      try{ parsed = JSON.parse(reader.result); }
+      catch(err){ showToast('فایل معتبر نیست'); importFileInput.value=''; return; }
+      if(!parsed || typeof parsed!=='object' || !parsed.entries){
+        showToast('ساختار فایل پشتیبان شناسایی نشد');
+        importFileInput.value='';
+        return;
+      }
+      openConfirm(
+        'بازیابی از فایل پشتیبان',
+        'داده‌های فعلی با محتوای این فایل جایگزین می‌شن. مطمئنی؟',
+        async ()=>{
+          entries = parsed.entries || {};
+          todos = parsed.todos || [];
+          settings = Object.assign({}, DEFAULT_SETTINGS, parsed.settings || {});
+          await persistEntries(entries);
+          await persistTodos();
+          await persistSettings();
+          exitEditMode();
+          renderChart();
+          renderHistory();
+          renderStreak();
+          renderTodos();
+          renderCalendar();
+          renderStatsDashboard();
+          showToast('بازیابی با موفقیت انجام شد ✅');
+          importFileInput.value='';
+        }
+      );
+    };
+    reader.readAsText(file);
+  });
+
   /* ===================== PWA: install prompt + service worker ===================== */
   let deferredInstallPrompt = null;
   const installBanner = document.getElementById('installBanner');
@@ -1147,14 +1746,10 @@
 
     entries = await loadAllEntries();
     todos = await loadTodos();
+    settings = await loadSettings();
 
     if(entries[todayKey]){
-      const e = entries[todayKey];
-      state = {
-        sleepHours:e.sleepHours, sleepQuality:e.sleepQuality,
-        exerciseMinutes:e.exerciseMinutes, exerciseIntensity:e.exerciseIntensity,
-        nutritionQuality:e.nutritionQuality, waterGlasses:e.waterGlasses
-      };
+      state = stateFromEntry(entries[todayKey]);
       savedSnapshot = JSON.stringify(state);
       saveBtn.textContent = 'به‌روزرسانی امتیاز امروز';
     }
@@ -1163,10 +1758,14 @@
     const scores = computeScores(state);
     renderGauge(scores, true);
     refreshSaveStateBadge();
+    renderGoals();
+    renderAnalysis(entries[todayKey] || null);
     renderChart();
     renderHistory();
     renderStreak();
     renderTodos();
+    renderCalendar();
+    renderStatsDashboard();
   }
 
   init();
