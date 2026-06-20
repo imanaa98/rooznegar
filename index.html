@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>روزنگار سلامت</title>
+<link rel="manifest" href="./manifest.json">
+<meta name="theme-color" content="#1F2347">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="روزنگار سلامت">
+<link rel="apple-touch-icon" href="./icon-192.png">
+<link rel="icon" href="./icon-192.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&family=Lalezar&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --c-ink:#232539;
+    --c-ink-soft:#6B6E85;
+    --c-linen:#FBF8F2;
+    --c-card:#FFFFFF;
+    --c-track:#E9E2D3;
+    --c-line:#E7E2D6;
+    --c-sleep:#1F2347;
+    --c-sleep-soft:#E7E6EF;
+    --c-nutrition:#4F9A68;
+    --c-nutrition-soft:#E3EFE3;
+    --c-exercise:#F07A52;
+    --c-exercise-soft:#FCE6DC;
+    --c-gold:#F2B441;
+    --c-excellent:#3F8F5C;
+    --c-good:#4F9A68;
+    --c-fair:#E08A3C;
+    --c-care:#D9684A;
+    --shadow-1: 0 2px 10px rgba(31,35,71,0.06);
+    --shadow-2: 0 14px 34px rgba(31,35,71,0.10);
+    --radius-lg:22px;
+    --radius-md:16px;
+    --radius-sm:12px;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--c-linen);
+    background-image:
+      radial-gradient(circle at 12% -6%, rgba(242,180,65,0.16), transparent 42%),
+      radial-gradient(circle at 100% 0%, rgba(240,122,82,0.10), transparent 38%);
+    color:var(--c-ink);
+    font-family:'Vazirmatn',Tahoma,sans-serif;
+    min-height:100vh;
+    -webkit-font-smoothing:antialiased;
+  }
+  .display{font-family:'Lalezar','Vazirmatn',sans-serif;}
+  button{font-family:inherit;cursor:pointer;}
+  :focus-visible{outline:2.5px solid var(--c-gold); outline-offset:3px; border-radius:6px;}
+
+  .shell{max-width:1080px;margin:0 auto;padding:18px 16px 60px;}
+
+  /* ---------- Header ---------- */
+  .topbar{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:6px 4px 16px;
+  }
+  .brand{display:flex;align-items:center;gap:10px;}
+  .brand-mark{width:34px;height:34px;flex:none;}
+  .brand-text .title{font-family:'Lalezar',sans-serif;font-size:21px;color:var(--c-sleep);line-height:1;}
+  .brand-text .subtitle{font-size:11.5px;color:var(--c-ink-soft);margin-top:3px;}
+  .streak-pill{
+    display:flex;align-items:center;gap:5px;
+    background:var(--c-card); border:1px solid var(--c-line);
+    border-radius:999px; padding:7px 13px; font-size:13px; font-weight:600;
+    box-shadow:var(--shadow-1); white-space:nowrap;
+  }
+  .horizon-bar{
+    height:4px;border-radius:4px;margin-bottom:18px;
+    background:linear-gradient(90deg, var(--c-sleep), var(--c-nutrition), var(--c-exercise));
+    opacity:0.85;
+  }
+
+  /* ---------- Layout ---------- */
+  .layout{display:grid; grid-template-columns:1fr; gap:18px;}
+  @media (min-width:900px){
+    .layout{grid-template-columns:380px 1fr; align-items:start;}
+    .panel-left{position:sticky; top:18px;}
+  }
+  .panel-left, .panel-right{display:flex; flex-direction:column; gap:18px;}
+
+  .card{
+    background:var(--c-card); border-radius:var(--radius-lg);
+    box-shadow:var(--shadow-2); padding:22px;
+  }
+  .card-title{font-size:15px; font-weight:700; margin:0 0 4px;}
+  .card-subtitle{font-size:12.5px; color:var(--c-ink-soft); margin:0 0 16px;}
+
+  /* ---------- Gauge ---------- */
+  .gauge-card{padding-bottom:14px;}
+  .gauge-wrap{position:relative; max-width:300px; margin:0 auto;}
+  .gauge-wrap svg{width:100%; display:block;}
+  .gauge-icon{font-size:21px; text-anchor:middle; user-select:none;}
+  .gauge-overlay{
+    position:absolute; top:59%; left:50%; transform:translate(-50%,-50%);
+    text-align:center; width:78%;
+  }
+  .score-num{font-weight:800; font-size:52px; line-height:1; letter-spacing:-1px;}
+  .score-label{font-size:12.5px; color:var(--c-ink-soft); font-weight:600; margin-top:2px;}
+  .score-tier{display:inline-block; font-size:12.5px; font-weight:700; margin-top:8px; padding:3px 12px; border-radius:999px;}
+  .gauge-date{text-align:center; font-size:12.5px; color:var(--c-ink-soft); margin-top:2px;}
+  .save-state{
+    text-align:center; font-size:12px; margin-top:10px; font-weight:600;
+    display:flex; align-items:center; justify-content:center; gap:5px;
+  }
+  .save-state.is-saved{color:var(--c-nutrition);}
+  .save-state.is-unsaved{color:var(--c-exercise);}
+
+  /* ---------- Form groups ---------- */
+  .group{padding-top:16px; border-top:1px solid var(--c-line);}
+  .group:first-of-type{padding-top:0; border-top:none;}
+  .group-head{display:flex; align-items:center; gap:8px; margin-bottom:12px;}
+  .group-icon{
+    width:32px;height:32px;border-radius:10px;display:flex;align-items:center;justify-content:center;
+    font-size:16px; flex:none;
+  }
+  .group-title{font-size:14.5px; font-weight:700;}
+  .group[data-cat="sleep"] .group-icon{background:var(--c-sleep-soft); color:var(--c-sleep);}
+  .group[data-cat="nutrition"] .group-icon{background:var(--c-nutrition-soft); color:var(--c-nutrition);}
+  .group[data-cat="exercise"] .group-icon{background:var(--c-exercise-soft); color:var(--c-exercise);}
+
+  .field{margin-bottom:14px;}
+  .field:last-child{margin-bottom:0;}
+  .field-label-row{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:8px;}
+  .field-label{font-size:13px; color:var(--c-ink-soft); font-weight:600;}
+  .field-value{font-size:13px; font-weight:700;}
+
+  input[type="range"]{
+    -webkit-appearance:none; appearance:none; width:100%; height:6px;
+    border-radius:999px; background:var(--c-track); outline:none; margin:0;
+  }
+  input[type="range"]::-webkit-slider-thumb{
+    -webkit-appearance:none; width:24px; height:24px; border-radius:50%;
+    background:var(--accent, var(--c-sleep)); border:3px solid #fff;
+    box-shadow:0 1px 4px rgba(0,0,0,0.25); cursor:pointer; margin-top:0;
+  }
+  input[type="range"]::-moz-range-thumb{
+    width:24px; height:24px; border-radius:50%; border:3px solid #fff;
+    background:var(--accent, var(--c-sleep)); box-shadow:0 1px 4px rgba(0,0,0,0.25); cursor:pointer;
+  }
+  .group[data-cat="sleep"] input[type="range"]{--accent:var(--c-sleep);}
+  .group[data-cat="nutrition"] input[type="range"]{--accent:var(--c-nutrition);}
+  .group[data-cat="exercise"] input[type="range"]{--accent:var(--c-exercise);}
+
+  .chip-group{display:flex; gap:6px; flex-wrap:wrap;}
+  .chip{
+    border:1.5px solid var(--c-line); background:#fff; color:var(--c-ink-soft);
+    border-radius:999px; padding:7px 13px; font-size:12.5px; font-weight:600;
+    transition:all .15s ease; flex:1; text-align:center; min-width:64px;
+  }
+  .group[data-cat="sleep"] .chip.is-selected{background:var(--c-sleep); border-color:var(--c-sleep); color:#fff;}
+  .group[data-cat="nutrition"] .chip.is-selected{background:var(--c-nutrition); border-color:var(--c-nutrition); color:#fff;}
+  .group[data-cat="exercise"] .chip.is-selected{background:var(--c-exercise); border-color:var(--c-exercise); color:#fff;}
+  .chip:hover{border-color:var(--c-ink-soft);}
+
+  .save-btn{
+    width:100%; margin-top:18px; padding:15px; border:none; border-radius:var(--radius-md);
+    background:linear-gradient(90deg, var(--c-sleep), var(--c-exercise));
+    color:#fff; font-size:15px; font-weight:700; box-shadow:var(--shadow-1);
+    transition:transform .12s ease, box-shadow .12s ease;
+  }
+  .save-btn:hover{transform:translateY(-1px); box-shadow:var(--shadow-2);}
+  .save-btn:active{transform:translateY(0);}
+  .save-btn:disabled{opacity:.6; cursor:default; transform:none;}
+
+  /* ---------- Edit banner ---------- */
+  .edit-banner{
+    display:flex; align-items:center; justify-content:space-between; gap:10px;
+    background:var(--c-exercise-soft); border:1.5px solid var(--c-exercise);
+    color:var(--c-exercise); border-radius:var(--radius-sm);
+    padding:10px 12px; font-size:12.5px; font-weight:700; margin-bottom:16px;
+  }
+  .edit-banner-text{display:flex; align-items:center; gap:6px;}
+  .edit-banner-cancel{
+    background:#fff; border:1.5px solid var(--c-exercise); color:var(--c-exercise);
+    border-radius:999px; padding:5px 12px; font-size:12px; font-weight:700; flex:none;
+  }
+  .edit-banner-cancel:hover{background:var(--c-exercise); color:#fff;}
+
+  /* ---------- Install banner ---------- */
+  .install-banner{
+    display:none; align-items:center; gap:12px;
+    background:var(--c-card); border:1.5px solid var(--c-line); border-radius:var(--radius-md);
+    padding:13px 16px; box-shadow:var(--shadow-1); margin-bottom:18px;
+  }
+  .install-banner.visible{display:flex;}
+  .install-banner-icon{width:38px; height:38px; border-radius:10px; flex:none;}
+  .install-banner-text{flex:1 1 auto; min-width:0;}
+  .install-banner-title{font-size:13px; font-weight:700;}
+  .install-banner-sub{font-size:11.5px; color:var(--c-ink-soft); margin-top:1px;}
+  .install-banner-actions{display:flex; align-items:center; gap:6px; flex:none;}
+  .install-btn{
+    background:var(--c-sleep); color:#fff; border:none; border-radius:999px;
+    padding:8px 16px; font-size:12.5px; font-weight:700; white-space:nowrap;
+  }
+  .install-btn:hover{background:var(--c-exercise);}
+  .install-dismiss{
+    background:none; border:none; color:var(--c-ink-soft); font-size:18px; padding:4px 6px; border-radius:6px;
+  }
+  .install-dismiss:hover{color:var(--c-care); background:var(--c-exercise-soft);}
+
+  /* ---------- Chart ---------- */
+  .chart-wrap{position:relative;}
+  .chart-wrap svg{width:100%; height:auto; display:block; overflow:visible;}
+  .chart-point{cursor:pointer;}
+  .chart-tooltip{
+    position:absolute; background:var(--c-ink); color:#fff; font-size:11.5px; font-weight:600;
+    padding:5px 9px; border-radius:8px; transform:translate(-50%,-130%); white-space:nowrap;
+    pointer-events:none; opacity:0; transition:opacity .12s ease;
+  }
+  .chart-tooltip.visible{opacity:1;}
+  .axis-label{font-size:10.5px; fill:var(--c-ink-soft);}
+
+  .empty-state{
+    text-align:center; padding:28px 10px; color:var(--c-ink-soft); font-size:13px;
+    background:var(--c-linen); border-radius:var(--radius-md);
+  }
+  .empty-state .emoji{font-size:26px; display:block; margin-bottom:8px;}
+
+  /* ---------- History ---------- */
+  .history-list{display:flex; flex-direction:column;}
+  .history-row{
+    display:flex; align-items:center; gap:8px; padding:11px 2px;
+    border-bottom:1px solid var(--c-line);
+  }
+  .history-row:last-child{border-bottom:none;}
+  .history-date{flex:1 1 auto; min-width:0; font-size:13px; font-weight:600; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+  .history-dot{width:9px; height:9px; border-radius:50%; flex:none;}
+  .history-score{font-size:14px; font-weight:800; min-width:30px; text-align:left; flex:none;}
+  .history-edit, .history-del{
+    background:none; border:none; color:var(--c-ink-soft); font-size:15px; line-height:1;
+    padding:5px 7px; border-radius:6px; flex:none; display:flex; align-items:center; justify-content:center;
+  }
+  .history-edit:hover{color:var(--c-sleep); background:var(--c-sleep-soft);}
+  .history-del:hover{color:var(--c-care); background:var(--c-exercise-soft);}
+  .history-edit svg{width:15px; height:15px;}
+
+  /* ---------- Todo ---------- */
+  .todo-add-row{display:flex; gap:8px; margin-bottom:6px;}
+  .todo-input{
+    flex:1 1 auto; min-width:0; border:1.5px solid var(--c-line); border-radius:var(--radius-sm);
+    padding:11px 14px; font-size:13.5px; font-family:inherit; outline:none; color:var(--c-ink);
+    background:var(--c-linen);
+  }
+  .todo-input:focus{border-color:var(--c-gold); background:#fff;}
+  .todo-add-btn{
+    flex:none; width:42px; height:42px; border-radius:var(--radius-sm); border:none;
+    background:var(--c-sleep); color:#fff; font-size:20px; line-height:1;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .todo-add-btn:hover{background:var(--c-exercise);}
+  .todo-progress{font-size:12px; color:var(--c-ink-soft); font-weight:600; margin:14px 2px 8px;}
+  .todo-list{display:flex; flex-direction:column;}
+  .todo-row{display:flex; align-items:center; gap:10px; padding:9px 2px; border-bottom:1px solid var(--c-line);}
+  .todo-row:last-child{border-bottom:none;}
+  .todo-checkbox{
+    width:22px; height:22px; border-radius:7px; border:2px solid var(--c-line); flex:none;
+    display:flex; align-items:center; justify-content:center; background:#fff; padding:0;
+    transition:all .15s ease;
+  }
+  .todo-checkbox.is-done{background:var(--c-nutrition); border-color:var(--c-nutrition);}
+  .todo-checkbox svg{width:13px; height:13px; opacity:0; transform:scale(.5); transition:all .15s ease;}
+  .todo-checkbox.is-done svg{opacity:1; transform:scale(1);}
+  .todo-text{flex:1 1 auto; min-width:0; font-size:13.5px; font-weight:600; word-break:break-word;}
+  .todo-text.is-done{color:var(--c-ink-soft); text-decoration:line-through;}
+  .todo-del{
+    background:none; border:none; color:var(--c-ink-soft); font-size:16px; line-height:1;
+    padding:4px 6px; border-radius:6px; flex:none;
+  }
+  .todo-del:hover{color:var(--c-care); background:var(--c-exercise-soft);}
+
+  /* ---------- Toast ---------- */
+  .toast{
+    position:fixed; bottom:22px; left:50%; transform:translateX(-50%) translateY(20px);
+    background:var(--c-ink); color:#fff; padding:12px 22px; border-radius:999px;
+    font-size:13.5px; font-weight:600; box-shadow:var(--shadow-2);
+    opacity:0; pointer-events:none; transition:all .25s ease; z-index:50;
+    display:flex; align-items:center; gap:7px;
+  }
+  .toast.visible{opacity:1; transform:translateX(-50%) translateY(0);}
+
+  /* ---------- Modal ---------- */
+  .modal-overlay{
+    position:fixed; inset:0; background:rgba(35,37,57,0.45); display:flex;
+    align-items:center; justify-content:center; padding:20px; z-index:60;
+    opacity:0; pointer-events:none; transition:opacity .18s ease;
+  }
+  .modal-overlay.visible{opacity:1; pointer-events:auto;}
+  .modal-box{
+    background:#fff; border-radius:var(--radius-lg); padding:24px; max-width:340px;
+    width:100%; box-shadow:var(--shadow-2); transform:scale(.96); transition:transform .18s ease;
+  }
+  .modal-overlay.visible .modal-box{transform:scale(1);}
+  .modal-title{font-size:16px; font-weight:700; margin:0 0 8px;}
+  .modal-text{font-size:13.5px; color:var(--c-ink-soft); margin:0 0 18px; line-height:1.6;}
+  .modal-actions{display:flex; gap:10px;}
+  .modal-actions button{flex:1; padding:11px; border-radius:var(--radius-sm); font-size:13.5px; font-weight:700; border:none;}
+  .btn-cancel{background:var(--c-linen); color:var(--c-ink);}
+  .btn-danger{background:var(--c-care); color:#fff;}
+
+  /* ---------- Footer ---------- */
+  .footer-row{text-align:center; margin-top:8px;}
+  .reset-link{background:none; border:none; color:var(--c-ink-soft); font-size:12px; text-decoration:underline; padding:6px;}
+  .reset-link:hover{color:var(--c-care);}
+
+  .skeleton{background:linear-gradient(90deg, var(--c-line) 25%, #f3efe4 37%, var(--c-line) 63%); background-size:400% 100%; animation:shimmer 1.4s ease infinite; border-radius:var(--radius-sm);}
+  @keyframes shimmer{0%{background-position:100% 0;}100%{background-position:0 0;}}
+
+  @media (prefers-reduced-motion: reduce){
+    *{transition-duration:.01ms !important; animation-duration:.01ms !important;}
+  }
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <div class="topbar">
+    <div class="brand">
+      <svg class="brand-mark" viewBox="0 0 40 40">
+        <path d="M 36 22 A 16 16 0 0 0 4 22" fill="none" stroke="#E9E2D3" stroke-width="5" stroke-linecap="round"/>
+        <path d="M 36 22 A 16 16 0 0 0 20 6" fill="none" stroke="#F07A52" stroke-width="5" stroke-linecap="round"/>
+        <path d="M 14.4 7.6 A 16 16 0 0 0 4 22" fill="none" stroke="#1F2347" stroke-width="5" stroke-linecap="round"/>
+        <circle cx="20" cy="22" r="3" fill="#F2B441"/>
+      </svg>
+      <div class="brand-text">
+        <div class="title">روزنگار سلامت</div>
+        <div class="subtitle">خواب، ورزش و تغذیه‌ی هر روزت</div>
+      </div>
+    </div>
+    <div class="streak-pill" id="streakPill" style="display:none;">
+      <span>🔥</span><span id="streakNum">۰</span>
+    </div>
+  </div>
+  <div class="horizon-bar"></div>
+
+  <div class="install-banner" id="installBanner">
+    <img class="install-banner-icon" src="./icon-192.png" alt="">
+    <div class="install-banner-text">
+      <div class="install-banner-title">روزنگار سلامت رو نصب کن</div>
+      <div class="install-banner-sub">دسترسی سریع از صفحه اصلی گوشی، حتی بدون اینترنت</div>
+    </div>
+    <div class="install-banner-actions">
+      <button class="install-btn" id="installBtn">نصب</button>
+      <button class="install-dismiss" id="installDismiss" aria-label="بستن">×</button>
+    </div>
+  </div>
+
+  <div class="layout">
+    <!-- LEFT PANEL -->
+    <div class="panel-left">
+
+      <div class="card gauge-card">
+        <div class="gauge-wrap">
+          <svg viewBox="0 0 320 196">
+            <path id="gaugeTrack" fill="none" stroke="#E9E2D3" stroke-width="22" stroke-linecap="round"/>
+            <path id="seg-sleep" fill="none" stroke="#1F2347" stroke-width="22" stroke-linecap="round"/>
+            <path id="seg-nutrition" fill="none" stroke="#4F9A68" stroke-width="22" stroke-linecap="round"/>
+            <path id="seg-exercise" fill="none" stroke="#F07A52" stroke-width="22" stroke-linecap="round"/>
+            <text id="icon-sleep" class="gauge-icon">😴</text>
+            <text id="icon-nutrition" class="gauge-icon">🥗</text>
+            <text id="icon-exercise" class="gauge-icon">🏃</text>
+          </svg>
+          <div class="gauge-overlay">
+            <div class="score-num" id="scoreNum">۰</div>
+            <div class="score-label">امتیاز امروز</div>
+            <div class="score-tier" id="scoreTier">—</div>
+          </div>
+        </div>
+        <div class="gauge-date" id="gaugeDate"></div>
+        <div class="save-state" id="saveState"></div>
+      </div>
+
+      <div class="card">
+        <div class="edit-banner" id="editBanner" style="display:none;">
+          <div class="edit-banner-text">✎ <span>در حال ویرایش روز <span id="editBannerDate"></span></span></div>
+          <button class="edit-banner-cancel" id="cancelEditBtn">انصراف</button>
+        </div>
+
+        <div class="group" data-cat="sleep">
+          <div class="group-head">
+            <div class="group-icon">😴</div>
+            <div class="group-title">خواب</div>
+          </div>
+          <div class="field">
+            <div class="field-label-row">
+              <span class="field-label">ساعت خواب شب گذشته</span>
+              <span class="field-value" id="sleepHoursVal">۷ ساعت</span>
+            </div>
+            <input type="range" id="sleepHours" min="0" max="12" step="0.5" value="7">
+          </div>
+          <div class="field">
+            <div class="field-label-row"><span class="field-label">کیفیت خواب</span></div>
+            <div class="chip-group" data-group="sleepQuality" id="sleepQualityChips">
+              <button class="chip" data-value="0">ضعیف</button>
+              <button class="chip" data-value="1">متوسط</button>
+              <button class="chip" data-value="2">خوب</button>
+              <button class="chip" data-value="3">عالی</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="group" data-cat="nutrition">
+          <div class="group-head">
+            <div class="group-icon">🥗</div>
+            <div class="group-title">تغذیه</div>
+          </div>
+          <div class="field">
+            <div class="field-label-row"><span class="field-label">کیفیت تغذیه امروز</span></div>
+            <div class="chip-group" data-group="nutritionQuality" id="nutritionQualityChips">
+              <button class="chip" data-value="0">ضعیف</button>
+              <button class="chip" data-value="1">متوسط</button>
+              <button class="chip" data-value="2">خوب</button>
+              <button class="chip" data-value="3">عالی</button>
+            </div>
+          </div>
+          <div class="field">
+            <div class="field-label-row">
+              <span class="field-label">آب مصرفی</span>
+              <span class="field-value" id="waterVal">۵ لیوان</span>
+            </div>
+            <input type="range" id="waterGlasses" min="0" max="12" step="1" value="5">
+          </div>
+        </div>
+
+        <div class="group" data-cat="exercise">
+          <div class="group-head">
+            <div class="group-icon">🏃</div>
+            <div class="group-title">ورزش</div>
+          </div>
+          <div class="field">
+            <div class="field-label-row">
+              <span class="field-label">مدت فعالیت بدنی امروز</span>
+              <span class="field-value" id="exerciseMinutesVal">۲۰ دقیقه</span>
+            </div>
+            <input type="range" id="exerciseMinutes" min="0" max="120" step="5" value="20">
+          </div>
+          <div class="field">
+            <div class="field-label-row"><span class="field-label">شدت فعالیت</span></div>
+            <div class="chip-group" data-group="exerciseIntensity" id="exerciseIntensityChips">
+              <button class="chip" data-value="0">استراحت</button>
+              <button class="chip" data-value="1">سبک</button>
+              <button class="chip" data-value="2">متوسط</button>
+              <button class="chip" data-value="3">شدید</button>
+            </div>
+          </div>
+        </div>
+
+        <button class="save-btn" id="saveBtn">ثبت امتیاز امروز</button>
+      </div>
+    </div>
+
+    <!-- RIGHT PANEL -->
+    <div class="panel-right">
+      <div class="card">
+        <div class="card-title">کارهای مهم</div>
+        <div class="card-subtitle">کارهایی که می‌خوای امروز انجام بدی</div>
+        <div class="todo-add-row">
+          <input type="text" id="todoInput" class="todo-input" placeholder="یه کار جدید بنویس…" maxlength="120">
+          <button class="todo-add-btn" id="todoAddBtn" aria-label="افزودن کار">+</button>
+        </div>
+        <div class="todo-progress" id="todoProgress" style="display:none;"></div>
+        <div class="todo-list" id="todoList"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">روند روزهای اخیر</div>
+        <div class="card-subtitle">آخرین ۱۴ روزی که امتیاز ثبت کردی</div>
+        <div class="chart-wrap" id="chartWrap"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">تاریخچه</div>
+        <div class="card-subtitle">روزهای ثبت‌شده، از جدید به قدیم — برای ویرایش روی ✎ بزن</div>
+        <div class="history-list" id="historyList"></div>
+      </div>
+
+      <div class="footer-row">
+        <button class="reset-link" id="resetLink">پاک‌کردن همه داده‌ها</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal-box">
+    <div class="modal-title" id="modalTitle">حذف اطلاعات</div>
+    <p class="modal-text" id="modalText">این کار قابل بازگشت نیست.</p>
+    <div class="modal-actions">
+      <button class="btn-cancel" id="modalCancel">انصراف</button>
+      <button class="btn-danger" id="modalConfirm">حذف</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ===================== Helpers ===================== */
+  const FA_DIGITS = ['۰','۱','۲','۳','۴','۵','۶','۷','۸','۹'];
+  function toFa(n){ return String(n).replace(/[0-9]/g, d => FA_DIGITS[d]); }
+  function clamp(v,min,max){ return Math.max(min, Math.min(max,v)); }
+
+  function getDateKey(date){
+    const y=date.getFullYear(), m=String(date.getMonth()+1).padStart(2,'0'), d=String(date.getDate()).padStart(2,'0');
+    return `${y}-${m}-${d}`;
+  }
+  function parseDateKey(key){
+    const [y,m,d]=key.split('-').map(Number);
+    return new Date(y, m-1, d);
+  }
+  function formatJalali(date, opts){
+    try{
+      return new Intl.DateTimeFormat('fa-IR', Object.assign({calendar:'persian'}, opts)).format(date);
+    }catch(e){ return date.toLocaleDateString('fa-IR'); }
+  }
+
+  function polarToCartesian(cx, cy, r, angleDeg){
+    const rad = (angleDeg - 90) * Math.PI / 180;
+    return { x: cx + r*Math.cos(rad), y: cy + r*Math.sin(rad) };
+  }
+  function describeArc(cx, cy, r, startAngle, endAngle){
+    const start = polarToCartesian(cx, cy, r, endAngle);
+    const end = polarToCartesian(cx, cy, r, startAngle);
+    const largeArcFlag = (endAngle-startAngle) <= 180 ? "0" : "1";
+    return ["M", start.x, start.y, "A", r, r, 0, largeArcFlag, 0, end.x, end.y].join(" ");
+  }
+
+  /* ===================== Scoring ===================== */
+  const QUALITY_SCORES = [20,50,75,100];
+  const INTENSITY_SCORES = [10,45,75,100];
+
+  function computeScores(s){
+    const hoursScore = clamp(100 - Math.abs(s.sleepHours-8)*14, 0, 100);
+    const sleep = Math.round((hoursScore + QUALITY_SCORES[s.sleepQuality]) / 2);
+
+    const minutesScore = clamp(Math.round(s.exerciseMinutes/45*100), 0, 100);
+    const exercise = Math.round((minutesScore + INTENSITY_SCORES[s.exerciseIntensity]) / 2);
+
+    const waterScore = clamp(Math.round(s.waterGlasses/8*100), 0, 100);
+    const nutrition = Math.round((QUALITY_SCORES[s.nutritionQuality] + waterScore) / 2);
+
+    const total = Math.round((sleep+exercise+nutrition)/3);
+    return { sleep, exercise, nutrition, total };
+  }
+
+  function tierOf(total){
+    if(total>=85) return {label:'عالی', color:'var(--c-excellent)'};
+    if(total>=70) return {label:'خوب', color:'var(--c-good)'};
+    if(total>=50) return {label:'متوسط', color:'var(--c-fair)'};
+    return {label:'نیاز به مراقبت بیشتر', color:'var(--c-care)'};
+  }
+  function tierDot(total){
+    if(total>=85) return '#3F8F5C';
+    if(total>=70) return '#4F9A68';
+    if(total>=50) return '#E08A3C';
+    return '#D9684A';
+  }
+
+  /* ===================== State ===================== */
+  const STORAGE_KEY = 'daily-entries';
+  const TODO_KEY = 'todo-tasks';
+  let entries = {};
+  let todos = [];
+  const TODAY = new Date();
+  const todayKey = getDateKey(TODAY);
+
+  const DEFAULT_STATE = {
+    sleepHours:7, sleepQuality:1,
+    exerciseMinutes:20, exerciseIntensity:1,
+    nutritionQuality:1, waterGlasses:5
+  };
+  let state = Object.assign({}, DEFAULT_STATE);
+  let savedSnapshot = null;
+  let editingKey = todayKey; // which day's entry the form is currently editing
+
+  /* ===================== Storage ===================== */
+  /* Uses Claude's artifact storage when this runs inside Claude.ai.
+     Falls back to the browser's own localStorage when the file is opened
+     directly (e.g. downloaded and opened in a phone browser), so saving
+     always works either way. */
+  const hasClaudeStorage = !!(window.storage && typeof window.storage.get === 'function' && typeof window.storage.set === 'function');
+
+  async function storageGet(key){
+    if(hasClaudeStorage){
+      try{
+        const res = await window.storage.get(key, false);
+        return (res && res.value!=null) ? res.value : null;
+      }catch(e){
+        return null;
+      }
+    }
+    try{ return localStorage.getItem(key); }catch(e){ return null; }
+  }
+
+  async function storageSet(key, value){
+    if(hasClaudeStorage){
+      try{
+        const res = await window.storage.set(key, value, false);
+        return !!res;
+      }catch(e){
+        console.error('storage error', e);
+        return false;
+      }
+    }
+    try{ localStorage.setItem(key, value); return true; }catch(e){ console.error('storage error', e); return false; }
+  }
+
+  async function loadAllEntries(){
+    const v = await storageGet(STORAGE_KEY);
+    try{ return v ? JSON.parse(v) : {}; }catch(e){ return {}; }
+  }
+  async function persistEntries(obj){
+    return await storageSet(STORAGE_KEY, JSON.stringify(obj));
+  }
+  async function loadTodos(){
+    const v = await storageGet(TODO_KEY);
+    try{ return v ? JSON.parse(v) : []; }catch(e){ return []; }
+  }
+  async function persistTodos(){
+    return await storageSet(TODO_KEY, JSON.stringify(todos));
+  }
+
+  /* ===================== Gauge ===================== */
+  const GAUGE_CX=160, GAUGE_CY=172, GAUGE_R=126;
+  const SEGMENTS = [
+    {key:'sleep', start:34, end:90},
+    {key:'nutrition', start:-28, end:28},
+    {key:'exercise', start:-90, end:-34}
+  ];
+
+  function buildGauge(){
+    document.getElementById('gaugeTrack').setAttribute('d', describeArc(GAUGE_CX,GAUGE_CY,GAUGE_R,-90,90));
+    SEGMENTS.forEach(seg=>{
+      const path = document.getElementById('seg-'+seg.key);
+      path.setAttribute('d', describeArc(GAUGE_CX,GAUGE_CY,GAUGE_R,seg.start,seg.end));
+      const len = path.getTotalLength();
+      path.dataset.len = len;
+      path.style.strokeDasharray = len+' '+len;
+      path.style.strokeDashoffset = len;
+      const mid = (seg.start+seg.end)/2;
+      const pos = polarToCartesian(GAUGE_CX,GAUGE_CY,GAUGE_R+27, mid);
+      const icon = document.getElementById('icon-'+seg.key);
+      icon.setAttribute('x', pos.x);
+      icon.setAttribute('y', pos.y+6);
+    });
+  }
+
+  function renderGauge(scores, animate){
+    SEGMENTS.forEach(seg=>{
+      const path = document.getElementById('seg-'+seg.key);
+      const len = parseFloat(path.dataset.len);
+      const pct = clamp(scores[seg.key],0,100);
+      path.style.transition = animate ? 'stroke-dashoffset 700ms cubic-bezier(.4,0,.2,1)' : 'none';
+      path.style.strokeDashoffset = len*(1-pct/100);
+    });
+    document.getElementById('scoreNum').textContent = toFa(scores.total);
+    const tier = tierOf(scores.total);
+    const tierEl = document.getElementById('scoreTier');
+    tierEl.textContent = tier.label;
+    tierEl.style.color = tier.color;
+    tierEl.style.background = 'color-mix(in srgb, '+tier.color+' 14%, white)';
+  }
+
+  function refreshSaveStateBadge(){
+    const el = document.getElementById('saveState');
+    const currentSig = JSON.stringify(state);
+    if(savedSnapshot === currentSig){
+      el.className = 'save-state is-saved';
+      el.innerHTML = editingKey===todayKey ? '✓ امتیاز امروز ثبت شده' : '✓ این روز ثبت شده';
+    } else {
+      el.className = 'save-state is-unsaved';
+      el.innerHTML = '● تغییرات ذخیره نشده — دکمه زیر رو بزن';
+    }
+  }
+
+  function onStateChange(){
+    const scores = computeScores(state);
+    renderGauge(scores, true);
+    refreshSaveStateBadge();
+  }
+
+  /* ===================== Form wiring ===================== */
+  function syncFormUI(){
+    document.getElementById('sleepHours').value = state.sleepHours;
+    document.getElementById('sleepHoursVal').textContent = toFa(state.sleepHours)+' ساعت';
+    document.getElementById('waterGlasses').value = state.waterGlasses;
+    document.getElementById('waterVal').textContent = toFa(state.waterGlasses)+' لیوان';
+    document.getElementById('exerciseMinutes').value = state.exerciseMinutes;
+    document.getElementById('exerciseMinutesVal').textContent = toFa(state.exerciseMinutes)+' دقیقه';
+
+    setChipSelected('sleepQualityChips', state.sleepQuality);
+    setChipSelected('nutritionQualityChips', state.nutritionQuality);
+    setChipSelected('exerciseIntensityChips', state.exerciseIntensity);
+  }
+  function setChipSelected(groupId, value){
+    const group = document.getElementById(groupId);
+    group.querySelectorAll('.chip').forEach(chip=>{
+      chip.classList.toggle('is-selected', Number(chip.dataset.value)===value);
+    });
+  }
+
+  document.getElementById('sleepHours').addEventListener('input', e=>{
+    state.sleepHours = Number(e.target.value);
+    document.getElementById('sleepHoursVal').textContent = toFa(state.sleepHours)+' ساعت';
+    onStateChange();
+  });
+  document.getElementById('waterGlasses').addEventListener('input', e=>{
+    state.waterGlasses = Number(e.target.value);
+    document.getElementById('waterVal').textContent = toFa(state.waterGlasses)+' لیوان';
+    onStateChange();
+  });
+  document.getElementById('exerciseMinutes').addEventListener('input', e=>{
+    state.exerciseMinutes = Number(e.target.value);
+    document.getElementById('exerciseMinutesVal').textContent = toFa(state.exerciseMinutes)+' دقیقه';
+    onStateChange();
+  });
+  document.querySelectorAll('.chip-group').forEach(group=>{
+    group.addEventListener('click', e=>{
+      const btn = e.target.closest('.chip');
+      if(!btn) return;
+      const key = group.dataset.group;
+      state[key] = Number(btn.dataset.value);
+      setChipSelected(group.id, state[key]);
+      onStateChange();
+    });
+  });
+
+  /* ===================== Edit mode (history) ===================== */
+  function gaugeDateLabel(key){
+    const d = parseDateKey(key);
+    const label = formatJalali(d, {weekday:'long', day:'numeric', month:'long'});
+    return key===todayKey ? label+' (امروز)' : label;
+  }
+
+  function enterEditMode(key){
+    const entry = entries[key];
+    if(!entry) return;
+    editingKey = key;
+    state = {
+      sleepHours:entry.sleepHours, sleepQuality:entry.sleepQuality,
+      exerciseMinutes:entry.exerciseMinutes, exerciseIntensity:entry.exerciseIntensity,
+      nutritionQuality:entry.nutritionQuality, waterGlasses:entry.waterGlasses
+    };
+    savedSnapshot = JSON.stringify(state);
+
+    syncFormUI();
+    onStateChange();
+    document.getElementById('gaugeDate').textContent = gaugeDateLabel(key);
+
+    const banner = document.getElementById('editBanner');
+    banner.style.display = 'flex';
+    document.getElementById('editBannerDate').textContent =
+      formatJalali(parseDateKey(key), {day:'numeric', month:'long'});
+
+    saveBtn.textContent = 'ذخیره تغییرات این روز';
+
+    document.querySelector('.panel-left').scrollIntoView({behavior:'smooth', block:'start'});
+  }
+
+  function exitEditMode(){
+    editingKey = todayKey;
+    if(entries[todayKey]){
+      const e = entries[todayKey];
+      state = {
+        sleepHours:e.sleepHours, sleepQuality:e.sleepQuality,
+        exerciseMinutes:e.exerciseMinutes, exerciseIntensity:e.exerciseIntensity,
+        nutritionQuality:e.nutritionQuality, waterGlasses:e.waterGlasses
+      };
+      savedSnapshot = JSON.stringify(state);
+      saveBtn.textContent = 'به‌روزرسانی امتیاز امروز';
+    } else {
+      state = Object.assign({}, DEFAULT_STATE);
+      savedSnapshot = null;
+      saveBtn.textContent = 'ثبت امتیاز امروز';
+    }
+    syncFormUI();
+    onStateChange();
+    document.getElementById('gaugeDate').textContent = gaugeDateLabel(todayKey);
+    document.getElementById('editBanner').style.display = 'none';
+  }
+
+  document.getElementById('cancelEditBtn').addEventListener('click', exitEditMode);
+
+  /* ===================== Save ===================== */
+  const saveBtn = document.getElementById('saveBtn');
+  saveBtn.addEventListener('click', async ()=>{
+    saveBtn.disabled = true;
+    const prevLabel = saveBtn.textContent;
+    saveBtn.textContent = 'در حال ذخیره...';
+    const scores = computeScores(state);
+    const wasEditingPastDay = editingKey !== todayKey;
+    entries[editingKey] = Object.assign({}, state, { scores, savedAt: new Date().toISOString() });
+    const ok = await persistEntries(entries);
+    saveBtn.disabled = false;
+    if(ok){
+      savedSnapshot = JSON.stringify(state);
+      showToast(wasEditingPastDay ? 'تغییرات این روز ذخیره شد ✅' : 'امتیاز امروز ذخیره شد ✅');
+      renderChart();
+      renderHistory();
+      renderStreak();
+      if(wasEditingPastDay){
+        exitEditMode();
+      } else {
+        saveBtn.textContent = 'به‌روزرسانی امتیاز امروز';
+        refreshSaveStateBadge();
+      }
+    } else {
+      saveBtn.textContent = prevLabel;
+      showToast('ذخیره انجام نشد، دوباره تلاش کن');
+    }
+  });
+
+  /* ===================== Toast ===================== */
+  let toastTimer = null;
+  function showToast(msg){
+    const el = document.getElementById('toast');
+    el.textContent = msg;
+    el.classList.add('visible');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(()=> el.classList.remove('visible'), 2400);
+  }
+
+  /* ===================== Modal (confirm) ===================== */
+  const modalOverlay = document.getElementById('modalOverlay');
+  let modalConfirmAction = null;
+  function openConfirm(title, text, onConfirm){
+    document.getElementById('modalTitle').textContent = title;
+    document.getElementById('modalText').textContent = text;
+    modalConfirmAction = onConfirm;
+    modalOverlay.classList.add('visible');
+  }
+  function closeConfirm(){
+    modalOverlay.classList.remove('visible');
+    modalConfirmAction = null;
+  }
+  document.getElementById('modalCancel').addEventListener('click', closeConfirm);
+  modalOverlay.addEventListener('click', e=>{ if(e.target===modalOverlay) closeConfirm(); });
+  document.getElementById('modalConfirm').addEventListener('click', async ()=>{
+    const action = modalConfirmAction;
+    closeConfirm();
+    if(action) await action();
+  });
+
+  document.getElementById('resetLink').addEventListener('click', ()=>{
+    openConfirm(
+      'پاک‌کردن همه داده‌ها',
+      'تمام روزهای ثبت‌شده برای همیشه حذف می‌شن و این کار قابل بازگشت نیست. مطمئنی؟',
+      async ()=>{
+        entries = {};
+        await persistEntries(entries);
+        editingKey = todayKey;
+        state = Object.assign({}, DEFAULT_STATE);
+        savedSnapshot = null;
+        syncFormUI();
+        onStateChange();
+        document.getElementById('gaugeDate').textContent = gaugeDateLabel(todayKey);
+        document.getElementById('editBanner').style.display = 'none';
+        saveBtn.textContent = 'ثبت امتیاز امروز';
+        renderChart();
+        renderHistory();
+        renderStreak();
+        showToast('همه داده‌ها حذف شدند');
+      }
+    );
+  });
+
+  function requestDeleteEntry(key){
+    const d = parseDateKey(key);
+    openConfirm(
+      'حذف این روز',
+      formatJalali(d,{weekday:'long', day:'numeric', month:'long'}) + ' از تاریخچه حذف می‌شه.',
+      async ()=>{
+        delete entries[key];
+        await persistEntries(entries);
+        if(key===editingKey){
+          exitEditMode();
+        }
+        renderChart();
+        renderHistory();
+        renderStreak();
+        showToast('روز حذف شد');
+      }
+    );
+  }
+
+  /* ===================== Chart ===================== */
+  function sortedEntryList(){
+    return Object.keys(entries).sort().map(k=>({key:k, data:entries[k]}));
+  }
+
+  function renderChart(){
+    const wrap = document.getElementById('chartWrap');
+    const list = sortedEntryList().slice(-14);
+    if(list.length===0){
+      wrap.innerHTML = '<div class="empty-state"><span class="emoji">📈</span>هنوز داده‌ای برای نمایش روند نیست.<br>اولین امتیاز امروزت رو ثبت کن!</div>';
+      return;
+    }
+    const W=600, H=240, padL=18, padR=40, padT=18, padB=30;
+    const plotW = W-padL-padR, plotH = H-padT-padB;
+    const n = list.length;
+    const stepX = n>1 ? plotW/(n-1) : 0;
+
+    function xAt(i){ return n>1 ? padL + (n-1-i)*stepX : padL+plotW/2; }
+    function yAt(score){ return padT + plotH*(1-score/100); }
+    const baseY = padT+plotH;
+
+    let linePts = [], areaPts = [];
+    list.forEach((item,i)=>{
+      const x=xAt(i), y=yAt(item.data.scores.total);
+      linePts.push([x,y]);
+    });
+
+    let linePath = 'M '+linePts.map(p=>p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' L ');
+    let areaPath = 'M '+linePts[0][0].toFixed(1)+' '+baseY+' L '+linePts.map(p=>p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' L ')+' L '+linePts[linePts.length-1][0].toFixed(1)+' '+baseY+' Z';
+
+    const grid = [0,50,100].map(v=>{
+      const y=yAt(v);
+      return `<line x1="${padL}" y1="${y}" x2="${W-padR}" y2="${y}" stroke="#E7E2D6" stroke-width="1"/>
+              <text class="axis-label" x="${W-padR+8}" y="${y+4}">${toFa(v)}</text>`;
+    }).join('');
+
+    const oldestDate = parseDateKey(list[0].key);
+    const newestDate = parseDateKey(list[n-1].key);
+    const newestLabel = list[n-1].key===todayKey ? 'امروز' : formatJalali(newestDate,{day:'numeric',month:'short'});
+    const oldestLabel = formatJalali(oldestDate,{day:'numeric',month:'short'});
+
+    const points = list.map((item,i)=>{
+      const x=xAt(i), y=yAt(item.data.scores.total);
+      return `<circle class="chart-point" cx="${x}" cy="${y}" r="5" fill="#fff" stroke="#F07A52" stroke-width="2.5"
+               data-key="${item.key}" data-score="${item.data.scores.total}"></circle>`;
+    }).join('');
+
+    wrap.innerHTML = `
+      <svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#F07A52" stop-opacity="0.28"/>
+            <stop offset="100%" stop-color="#F07A52" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        ${grid}
+        <path d="${areaPath}" fill="url(#areaGrad)" stroke="none"/>
+        <path d="${linePath}" fill="none" stroke="#F07A52" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+        ${points}
+        <text class="axis-label" x="${xAt(n-1)}" y="${H-6}" text-anchor="middle">${newestLabel}</text>
+        ${n>1 ? `<text class="axis-label" x="${xAt(0)}" y="${H-6}" text-anchor="middle">${oldestLabel}</text>` : ''}
+      </svg>
+      <div class="chart-tooltip" id="chartTooltip"></div>
+    `;
+
+    const tooltip = document.getElementById('chartTooltip');
+    wrap.querySelectorAll('.chart-point').forEach(pt=>{
+      pt.addEventListener('click', (e)=>{
+        const key = pt.dataset.key, score = pt.dataset.score;
+        const d = parseDateKey(key);
+        const label = (key===todayKey?'امروز':formatJalali(d,{day:'numeric',month:'long'})) + ' — ' + toFa(score);
+        tooltip.textContent = label;
+        const svgRect = wrap.querySelector('svg').getBoundingClientRect();
+        const scaleX = svgRect.width/W, scaleY = svgRect.height/H;
+        tooltip.style.left = (parseFloat(pt.getAttribute('cx'))*scaleX)+'px';
+        tooltip.style.top = (parseFloat(pt.getAttribute('cy'))*scaleY)+'px';
+        tooltip.classList.add('visible');
+        clearTimeout(tooltip._t);
+        tooltip._t = setTimeout(()=>tooltip.classList.remove('visible'), 1800);
+      });
+    });
+  }
+
+  /* ===================== History ===================== */
+  const editPencilSvg = '<svg viewBox="0 0 16 16" fill="none"><path d="M11.3 2.3a1.5 1.5 0 0 1 2.1 0l.3.3a1.5 1.5 0 0 1 0 2.1l-7.8 7.8-3 .8.8-3 7.6-7.6Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>';
+
+  function renderHistory(){
+    const el = document.getElementById('historyList');
+    const list = sortedEntryList().reverse();
+    if(list.length===0){
+      el.innerHTML = '<div class="empty-state"><span class="emoji">🗓️</span>هنوز هیچ روزی ثبت نشده.</div>';
+      return;
+    }
+    el.innerHTML = list.map(item=>{
+      const d = parseDateKey(item.key);
+      const label = item.key===todayKey ? 'امروز' : formatJalali(d,{weekday:'short', day:'numeric', month:'short'});
+      return `<div class="history-row">
+        <div class="history-dot" style="background:${tierDot(item.data.scores.total)}"></div>
+        <div class="history-date">${label}</div>
+        <div class="history-score">${toFa(item.data.scores.total)}</div>
+        <button class="history-edit" data-key="${item.key}" aria-label="ویرایش">${editPencilSvg}</button>
+        <button class="history-del" data-key="${item.key}" aria-label="حذف">×</button>
+      </div>`;
+    }).join('');
+    el.querySelectorAll('.history-edit').forEach(btn=>{
+      btn.addEventListener('click', ()=> enterEditMode(btn.dataset.key));
+    });
+    el.querySelectorAll('.history-del').forEach(btn=>{
+      btn.addEventListener('click', ()=> requestDeleteEntry(btn.dataset.key));
+    });
+  }
+
+  /* ===================== Todo ===================== */
+  function escapeHtml(str){
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+  }
+
+  function renderTodos(){
+    const list = document.getElementById('todoList');
+    const progress = document.getElementById('todoProgress');
+    if(todos.length===0){
+      list.innerHTML = '<div class="empty-state"><span class="emoji">✅</span>هنوز کاری اضافه نکردی.</div>';
+      progress.style.display = 'none';
+      return;
+    }
+    const doneCount = todos.filter(t=>t.done).length;
+    progress.style.display = 'block';
+    progress.textContent = toFa(doneCount)+' از '+toFa(todos.length)+' کار انجام شده';
+
+    const checkSvg = '<svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.2 11.5L13 4.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    list.innerHTML = todos.map(t=>`
+      <div class="todo-row">
+        <button class="todo-checkbox ${t.done?'is-done':''}" data-id="${t.id}" aria-label="تکمیل شد">${checkSvg}</button>
+        <div class="todo-text ${t.done?'is-done':''}">${escapeHtml(t.text)}</div>
+        <button class="todo-del" data-id="${t.id}" aria-label="حذف">×</button>
+      </div>
+    `).join('');
+
+    list.querySelectorAll('.todo-checkbox').forEach(btn=>{
+      btn.addEventListener('click', ()=> toggleTodo(btn.dataset.id));
+    });
+    list.querySelectorAll('.todo-del').forEach(btn=>{
+      btn.addEventListener('click', ()=> deleteTodo(btn.dataset.id));
+    });
+  }
+
+  async function addTodo(rawText){
+    const text = rawText.trim();
+    if(!text) return;
+    todos.push({ id: 't'+Date.now()+Math.random().toString(36).slice(2,7), text, done:false });
+    renderTodos();
+    await persistTodos();
+  }
+  async function toggleTodo(id){
+    const t = todos.find(x=>x.id===id);
+    if(!t) return;
+    t.done = !t.done;
+    renderTodos();
+    await persistTodos();
+  }
+  async function deleteTodo(id){
+    todos = todos.filter(x=>x.id!==id);
+    renderTodos();
+    await persistTodos();
+  }
+
+  const todoInput = document.getElementById('todoInput');
+  document.getElementById('todoAddBtn').addEventListener('click', ()=>{
+    addTodo(todoInput.value);
+    todoInput.value = '';
+    todoInput.focus();
+  });
+  todoInput.addEventListener('keydown', e=>{
+    if(e.key==='Enter'){
+      e.preventDefault();
+      addTodo(todoInput.value);
+      todoInput.value = '';
+    }
+  });
+
+  /* ===================== Streak ===================== */
+  function computeStreak(){
+    let streak=0;
+    let d = entries[todayKey] ? new Date(TODAY) : (()=>{ const y=new Date(TODAY); y.setDate(y.getDate()-1); return y; })();
+    while(true){
+      const key = getDateKey(d);
+      if(entries[key]){ streak++; d.setDate(d.getDate()-1); }
+      else break;
+    }
+    return streak;
+  }
+  function renderStreak(){
+    const streak = computeStreak();
+    const pill = document.getElementById('streakPill');
+    if(streak>0){
+      pill.style.display='flex';
+      document.getElementById('streakNum').textContent = toFa(streak)+' روز متوالی';
+    } else {
+      pill.style.display='none';
+    }
+  }
+
+  /* ===================== PWA: install prompt + service worker ===================== */
+  let deferredInstallPrompt = null;
+  const installBanner = document.getElementById('installBanner');
+  const installBtn = document.getElementById('installBtn');
+  const installDismiss = document.getElementById('installDismiss');
+  const INSTALL_DISMISS_KEY = 'pwa-install-dismissed';
+
+  window.addEventListener('beforeinstallprompt', (e)=>{
+    e.preventDefault();
+    deferredInstallPrompt = e;
+    let dismissed = false;
+    try{ dismissed = localStorage.getItem(INSTALL_DISMISS_KEY)==='1'; }catch(err){}
+    const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
+    if(!dismissed && !isStandalone){
+      installBanner.classList.add('visible');
+    }
+  });
+
+  installBtn && installBtn.addEventListener('click', async ()=>{
+    if(!deferredInstallPrompt) return;
+    installBanner.classList.remove('visible');
+    deferredInstallPrompt.prompt();
+    try{ await deferredInstallPrompt.userChoice; }catch(e){}
+    deferredInstallPrompt = null;
+  });
+
+  installDismiss && installDismiss.addEventListener('click', ()=>{
+    installBanner.classList.remove('visible');
+    try{ localStorage.setItem(INSTALL_DISMISS_KEY, '1'); }catch(e){}
+  });
+
+  window.addEventListener('appinstalled', ()=>{
+    installBanner.classList.remove('visible');
+    deferredInstallPrompt = null;
+  });
+
+  if('serviceWorker' in navigator){
+    window.addEventListener('load', ()=>{
+      navigator.serviceWorker.register('./sw.js').catch(()=>{ /* runs fine without it too */ });
+    });
+  }
+
+  /* ===================== Init ===================== */
+  async function init(){
+    buildGauge();
+    document.getElementById('gaugeDate').textContent = gaugeDateLabel(todayKey);
+
+    entries = await loadAllEntries();
+    todos = await loadTodos();
+
+    if(entries[todayKey]){
+      const e = entries[todayKey];
+      state = {
+        sleepHours:e.sleepHours, sleepQuality:e.sleepQuality,
+        exerciseMinutes:e.exerciseMinutes, exerciseIntensity:e.exerciseIntensity,
+        nutritionQuality:e.nutritionQuality, waterGlasses:e.waterGlasses
+      };
+      savedSnapshot = JSON.stringify(state);
+      saveBtn.textContent = 'به‌روزرسانی امتیاز امروز';
+    }
+
+    syncFormUI();
+    const scores = computeScores(state);
+    renderGauge(scores, true);
+    refreshSaveStateBadge();
+    renderChart();
+    renderHistory();
+    renderStreak();
+    renderTodos();
+  }
+
+  init();
+})();
+</script>
+</body>
+</html>
