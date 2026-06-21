@@ -16,393 +16,432 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&family=Lalezar&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --c-ink:#232539;
-    --c-ink-soft:#6B6E85;
-    --c-linen:#FBF8F2;
-    --c-card:#FFFFFF;
-    --c-track:#E9E2D3;
-    --c-line:#E7E2D6;
-    --c-sleep:#1F2347;
-    --c-sleep-soft:#E7E6EF;
-    --c-nutrition:#4F9A68;
-    --c-nutrition-soft:#E3EFE3;
-    --c-exercise:#F07A52;
-    --c-exercise-soft:#FCE6DC;
-    --c-gold:#F2B441;
-    --c-excellent:#3F8F5C;
-    --c-good:#4F9A68;
-    --c-fair:#E08A3C;
-    --c-care:#D9684A;
+  :root {
+    --c-ink: #232539;
+    --c-ink-soft: #6B6E85;
+    --c-linen: #FBF8F2;
+    --c-card: #FFFFFF;
+    --c-track: #E9E2D3;
+    --c-line: #E7E2D6;
+    --c-sleep: #1F2347;
+    --c-sleep-soft: #E7E6EF;
+    --c-nutrition: #4F9A68;
+    --c-nutrition-soft: #E3EFE3;
+    --c-exercise: #F07A52;
+    --c-exercise-soft: #FCE6DC;
+    --c-gold: #F2B441;
+    --c-excellent: #3F8F5C;
+    --c-good: #4F9A68;
+    --c-fair: #E08A3C;
+    --c-care: #D9684A;
     --shadow-1: 0 2px 10px rgba(31,35,71,0.06);
     --shadow-2: 0 14px 34px rgba(31,35,71,0.10);
-    --radius-lg:22px;
-    --radius-md:16px;
-    --radius-sm:12px;
-  }
-  *{box-sizing:border-box;}
-  html,body{margin:0;padding:0;}
-  body{
-    background:var(--c-linen);
-    background-image:
-      radial-gradient(circle at 12% -6%, rgba(242,180,65,0.16), transparent 42%),
-      radial-gradient(circle at 100% 0%, rgba(240,122,82,0.10), transparent 38%);
-    color:var(--c-ink);
-    font-family:'Vazirmatn',Tahoma,sans-serif;
-    min-height:100vh;
-    -webkit-font-smoothing:antialiased;
-  }
-  .display{font-family:'Lalezar','Vazirmatn',sans-serif;}
-  button{font-family:inherit;cursor:pointer;}
-  :focus-visible{outline:2.5px solid var(--c-gold); outline-offset:3px; border-radius:6px;}
-
-  .shell{max-width:1080px;margin:0 auto;padding:18px 16px 60px;}
-
-  /* ---------- Header ---------- */
-  .topbar{
-    display:flex;align-items:center;justify-content:space-between;
-    padding:6px 4px 16px;
-  }
-  .brand{display:flex;align-items:center;gap:10px;}
-  .brand-mark{width:34px;height:34px;flex:none;}
-  .brand-text .title{font-family:'Lalezar',sans-serif;font-size:21px;color:var(--c-sleep);line-height:1;}
-  .brand-text .subtitle{font-size:11.5px;color:var(--c-ink-soft);margin-top:3px;}
-  .streak-pill{
-    display:flex;align-items:center;gap:5px;
-    background:var(--c-card); border:1px solid var(--c-line);
-    border-radius:999px; padding:7px 13px; font-size:13px; font-weight:600;
-    box-shadow:var(--shadow-1); white-space:nowrap;
-  }
-  .horizon-bar{
-    height:4px;border-radius:4px;margin-bottom:18px;
-    background:linear-gradient(90deg, var(--c-sleep), var(--c-nutrition), var(--c-exercise));
-    opacity:0.85;
+    --radius-lg: 22px;
+    --radius-md: 16px;
+    --radius-sm: 12px;
   }
 
-  /* ---------- Layout ---------- */
-  .layout{display:grid; grid-template-columns:1fr; gap:18px;}
-  @media (min-width:900px){
-    .layout{grid-template-columns:380px 1fr; align-items:start;}
-    .panel-left{position:sticky; top:18px;}
+  [data-theme="dark"] {
+    --c-ink: #E8E6E0;
+    --c-ink-soft: #A8A6B0;
+    --c-linen: #1A1C28;
+    --c-card: #262838;
+    --c-track: #3A3C50;
+    --c-line: #3A3C50;
+    --c-sleep: #A8B5E0;
+    --c-sleep-soft: #2E3050;
+    --c-nutrition: #6DB88A;
+    --c-nutrition-soft: #2A4A3A;
+    --c-exercise: #F08A6A;
+    --c-exercise-soft: #4A2E2A;
+    --shadow-1: 0 2px 10px rgba(0,0,0,0.3);
+    --shadow-2: 0 14px 34px rgba(0,0,0,0.4);
   }
-  .panel-left, .panel-right{display:flex; flex-direction:column; gap:18px;}
 
-  .card{
-    background:var(--c-card); border-radius:var(--radius-lg);
-    box-shadow:var(--shadow-2); padding:22px;
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--c-linen);
+    color: var(--c-ink);
+    font-family: 'Vazirmatn', Tahoma, sans-serif;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    transition: background 0.3s, color 0.3s;
   }
-  .card-title{font-size:15px; font-weight:700; margin:0 0 4px;}
-  .card-subtitle{font-size:12.5px; color:var(--c-ink-soft); margin:0 0 16px;}
+  .display { font-family: 'Lalezar', 'Vazirmatn', sans-serif; }
+  button { font-family: inherit; cursor: pointer; }
+  :focus-visible { outline: 2.5px solid var(--c-gold); outline-offset: 3px; border-radius: 6px; }
 
-  /* ---------- Gauge ---------- */
-  .gauge-card{padding-bottom:14px;}
-  .gauge-wrap{position:relative; max-width:300px; margin:0 auto;}
-  .gauge-wrap svg{width:100%; display:block;}
-  .gauge-icon{font-size:21px; text-anchor:middle; user-select:none;}
-  .gauge-overlay{
-    position:absolute; top:59%; left:50%; transform:translate(-50%,-50%);
-    text-align:center; width:78%;
-  }
-  .score-num{font-weight:800; font-size:52px; line-height:1; letter-spacing:-1px;}
-  .score-label{font-size:12.5px; color:var(--c-ink-soft); font-weight:600; margin-top:2px;}
-  .score-tier{display:inline-block; font-size:12.5px; font-weight:700; margin-top:8px; padding:3px 12px; border-radius:999px;}
-  .gauge-date{text-align:center; font-size:12.5px; color:var(--c-ink-soft); margin-top:2px;}
-  .save-state{
-    text-align:center; font-size:12px; margin-top:10px; font-weight:600;
-    display:flex; align-items:center; justify-content:center; gap:5px;
-  }
-  .save-state.is-saved{color:var(--c-nutrition);}
-  .save-state.is-unsaved{color:var(--c-exercise);}
+  .shell { max-width: 1080px; margin: 0 auto; padding: 18px 16px 60px; }
 
-  /* ---------- Form groups ---------- */
-  .group{padding-top:16px; border-top:1px solid var(--c-line);}
-  .group:first-of-type{padding-top:0; border-top:none;}
-  .group-head{display:flex; align-items:center; gap:8px; margin-bottom:12px;}
-  .group-icon{
-    width:32px;height:32px;border-radius:10px;display:flex;align-items:center;justify-content:center;
-    font-size:16px; flex:none;
+  .topbar {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 6px 4px 16px; flex-wrap: wrap; gap: 10px;
   }
-  .group-title{font-size:14.5px; font-weight:700;}
-  .group[data-cat="sleep"] .group-icon{background:var(--c-sleep-soft); color:var(--c-sleep);}
-  .group[data-cat="nutrition"] .group-icon{background:var(--c-nutrition-soft); color:var(--c-nutrition);}
-  .group[data-cat="exercise"] .group-icon{background:var(--c-exercise-soft); color:var(--c-exercise);}
+  .brand { display: flex; align-items: center; gap: 10px; }
+  .brand-mark { width: 34px; height: 34px; flex: none; }
+  .brand-text .title { font-family: 'Lalezar', sans-serif; font-size: 21px; color: var(--c-sleep); line-height: 1; }
+  .brand-text .subtitle { font-size: 11.5px; color: var(--c-ink-soft); margin-top: 3px; }
+  .topbar-actions { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
 
-  .field{margin-bottom:14px;}
-  .field:last-child{margin-bottom:0;}
-  .field-label-row{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:8px;}
-  .field-label{font-size:13px; color:var(--c-ink-soft); font-weight:600;}
-  .field-value{font-size:13px; font-weight:700;}
+  .lang-toggle {
+    background: var(--c-card); border: 1px solid var(--c-line);
+    border-radius: 999px; padding: 6px 12px; font-size: 13px; font-weight: 600;
+    box-shadow: var(--shadow-1); color: var(--c-ink-soft);
+  }
+  .lang-toggle:hover { border-color: var(--c-gold); }
+  .theme-toggle {
+    background: var(--c-card); border: 1px solid var(--c-line);
+    border-radius: 999px; padding: 6px 12px; font-size: 13px; font-weight: 600;
+    box-shadow: var(--shadow-1); color: var(--c-ink-soft);
+  }
+  .theme-toggle:hover { border-color: var(--c-gold); }
 
-  input[type="range"]{
-    -webkit-appearance:none; appearance:none; width:100%; height:6px;
-    border-radius:999px; background:var(--c-track); outline:none; margin:0;
+  .streak-pill {
+    display: flex; align-items: center; gap: 5px;
+    background: var(--c-card); border: 1px solid var(--c-line);
+    border-radius: 999px; padding: 7px 13px; font-size: 13px; font-weight: 600;
+    box-shadow: var(--shadow-1); white-space: nowrap;
   }
-  input[type="range"]::-webkit-slider-thumb{
-    -webkit-appearance:none; width:24px; height:24px; border-radius:50%;
-    background:var(--accent, var(--c-sleep)); border:3px solid #fff;
-    box-shadow:0 1px 4px rgba(0,0,0,0.25); cursor:pointer; margin-top:0;
+  .horizon-bar {
+    height: 4px; border-radius: 4px; margin-bottom: 18px;
+    background: linear-gradient(90deg, var(--c-sleep), var(--c-nutrition), var(--c-exercise));
+    opacity: 0.85;
   }
-  input[type="range"]::-moz-range-thumb{
-    width:24px; height:24px; border-radius:50%; border:3px solid #fff;
-    background:var(--accent, var(--c-sleep)); box-shadow:0 1px 4px rgba(0,0,0,0.25); cursor:pointer;
-  }
-  .group[data-cat="sleep"] input[type="range"]{--accent:var(--c-sleep);}
-  .group[data-cat="nutrition"] input[type="range"]{--accent:var(--c-nutrition);}
-  .group[data-cat="exercise"] input[type="range"]{--accent:var(--c-exercise);}
 
-  .chip-group{display:flex; gap:6px; flex-wrap:wrap;}
-  .chip{
-    border:1.5px solid var(--c-line); background:#fff; color:var(--c-ink-soft);
-    border-radius:999px; padding:7px 13px; font-size:12.5px; font-weight:600;
-    transition:all .15s ease; flex:1; text-align:center; min-width:64px;
+  .layout { display: grid; grid-template-columns: 1fr; gap: 18px; }
+  @media (min-width: 900px) {
+    .layout { grid-template-columns: 380px 1fr; align-items: start; }
+    .panel-left { position: sticky; top: 18px; }
   }
-  .group[data-cat="sleep"] .chip.is-selected{background:var(--c-sleep); border-color:var(--c-sleep); color:#fff;}
-  .group[data-cat="nutrition"] .chip.is-selected{background:var(--c-nutrition); border-color:var(--c-nutrition); color:#fff;}
-  .group[data-cat="exercise"] .chip.is-selected{background:var(--c-exercise); border-color:var(--c-exercise); color:#fff;}
-  .chip:hover{border-color:var(--c-ink-soft);}
+  .panel-left, .panel-right { display: flex; flex-direction: column; gap: 18px; }
 
-  .save-btn{
-    width:100%; margin-top:18px; padding:15px; border:none; border-radius:var(--radius-md);
-    background:linear-gradient(90deg, var(--c-sleep), var(--c-exercise));
-    color:#fff; font-size:15px; font-weight:700; box-shadow:var(--shadow-1);
-    transition:transform .12s ease, box-shadow .12s ease;
+  .card {
+    background: var(--c-card); border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-2); padding: 22px;
+    transition: background 0.3s, box-shadow 0.3s;
   }
-  .save-btn:hover{transform:translateY(-1px); box-shadow:var(--shadow-2);}
-  .save-btn:active{transform:translateY(0);}
-  .save-btn:disabled{opacity:.6; cursor:default; transform:none;}
+  .card-title { font-size: 15px; font-weight: 700; margin: 0 0 4px; }
+  .card-subtitle { font-size: 12.5px; color: var(--c-ink-soft); margin: 0 0 16px; }
 
-  /* ---------- Settings button ---------- */
-  .icon-btn{
-    display:flex; align-items:center; justify-content:center;
-    width:38px; height:38px; border-radius:50%; border:1px solid var(--c-line);
-    background:var(--c-card); color:var(--c-ink-soft); flex:none; box-shadow:var(--shadow-1);
+  .gauge-card { padding-bottom: 14px; }
+  .gauge-wrap { position: relative; max-width: 300px; margin: 0 auto; }
+  .gauge-wrap svg { width: 100%; display: block; }
+  .gauge-icon { font-size: 21px; text-anchor: middle; user-select: none; }
+  .gauge-overlay {
+    position: absolute; top: 59%; left: 50%; transform: translate(-50%, -50%);
+    text-align: center; width: 78%;
   }
-  .icon-btn:hover{color:var(--c-sleep); border-color:var(--c-sleep);}
-  .icon-btn svg{width:18px; height:18px;}
-  .topbar-actions{display:flex; align-items:center; gap:10px;}
+  .score-num { font-weight: 800; font-size: 52px; line-height: 1; letter-spacing: -1px; }
+  .score-label { font-size: 12.5px; color: var(--c-ink-soft); font-weight: 600; margin-top: 2px; }
+  .score-tier {
+    display: inline-block; font-size: 12.5px; font-weight: 700; margin-top: 8px;
+    padding: 3px 12px; border-radius: 999px;
+  }
+  .gauge-date { text-align: center; font-size: 12.5px; color: var(--c-ink-soft); margin-top: 2px; }
+  .save-state {
+    text-align: center; font-size: 12px; margin-top: 10px; font-weight: 600;
+    display: flex; align-items: center; justify-content: center; gap: 5px;
+  }
+  .save-state.is-saved { color: var(--c-nutrition); }
+  .save-state.is-unsaved { color: var(--c-exercise); }
 
-  /* ---------- Optional health group ---------- */
-  .group[data-cat="health"] .group-icon{background:#FBEFE0; color:#C97A1E;}
-  .optional-tag{font-size:10.5px; font-weight:600; color:var(--c-ink-soft); background:var(--c-linen); padding:2px 8px; border-radius:999px; margin-right:6px;}
-  .health-grid{display:grid; grid-template-columns:1fr 1fr; gap:10px;}
-  .health-grid .field-full{grid-column:1 / -1;}
-  .num-input{
-    width:100%; border:1.5px solid var(--c-line); border-radius:var(--radius-sm);
-    padding:10px 12px; font-size:13.5px; font-family:inherit; color:var(--c-ink);
-    background:var(--c-linen); outline:none;
+  .group { padding-top: 16px; border-top: 1px solid var(--c-line); }
+  .group:first-of-type { padding-top: 0; border-top: none; }
+  .group-head { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+  .group-icon {
+    width: 32px; height: 32px; border-radius: 10px; display: flex;
+    align-items: center; justify-content: center; font-size: 16px; flex: none;
   }
-  .num-input:focus{border-color:var(--c-gold); background:#fff;}
-  .mood-row{display:flex; gap:6px; justify-content:space-between;}
-  .mood-chip{
-    flex:1; border:1.5px solid var(--c-line); background:#fff; border-radius:var(--radius-sm);
-    padding:9px 4px; font-size:20px; text-align:center; line-height:1;
-  }
-  .mood-chip.is-selected{border-color:#C97A1E; background:#FBEFE0;}
-  .bmi-readout{font-size:12px; color:var(--c-ink-soft); margin-top:6px; font-weight:600;}
-  .bmi-readout b{color:var(--c-ink); font-weight:700;}
+  .group-title { font-size: 14.5px; font-weight: 700; }
+  .group[data-cat="sleep"] .group-icon { background: var(--c-sleep-soft); color: var(--c-sleep); }
+  .group[data-cat="nutrition"] .group-icon { background: var(--c-nutrition-soft); color: var(--c-nutrition); }
+  .group[data-cat="exercise"] .group-icon { background: var(--c-exercise-soft); color: var(--c-exercise); }
 
-  /* ---------- Goals & Analysis ---------- */
-  .goal-row{margin-bottom:13px;}
-  .goal-row:last-child{margin-bottom:0;}
-  .goal-row-head{display:flex; justify-content:space-between; font-size:12.5px; font-weight:600; margin-bottom:6px;}
-  .goal-row-head .goal-pct{color:var(--c-ink-soft); font-weight:700;}
-  .goal-track{height:8px; border-radius:999px; background:var(--c-track); overflow:hidden;}
-  .goal-fill{height:100%; border-radius:999px; transition:width .4s ease;}
+  .field { margin-bottom: 14px; }
+  .field:last-child { margin-bottom: 0; }
+  .field-label-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+  .field-label { font-size: 13px; color: var(--c-ink-soft); font-weight: 600; }
+  .field-value { font-size: 13px; font-weight: 700; }
 
-  .analysis-box{display:flex; flex-direction:column; gap:10px;}
-  .analysis-item{display:flex; gap:10px; align-items:flex-start; padding:11px 12px; border-radius:var(--radius-sm); font-size:12.5px; line-height:1.7;}
-  .analysis-item b{display:block; font-size:12px; margin-bottom:2px;}
-  .analysis-item.is-strength{background:var(--c-nutrition-soft); color:#2E6B43;}
-  .analysis-item.is-weakness{background:var(--c-exercise-soft); color:#B85A3A;}
-  .analysis-item.is-suggestion{background:var(--c-sleep-soft); color:var(--c-sleep);}
-  .analysis-emoji{font-size:17px; flex:none;}
+  input[type="range"] {
+    -webkit-appearance: none; appearance: none; width: 100%; height: 6px;
+    border-radius: 999px; background: var(--c-track); outline: none; margin: 0;
+  }
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none; width: 24px; height: 24px; border-radius: 50%;
+    background: var(--accent, var(--c-sleep)); border: 3px solid #fff;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.25); cursor: pointer;
+  }
+  input[type="range"]::-moz-range-thumb {
+    width: 24px; height: 24px; border-radius: 50%; border: 3px solid #fff;
+    background: var(--accent, var(--c-sleep)); box-shadow: 0 1px 4px rgba(0,0,0,0.25); cursor: pointer;
+  }
+  .group[data-cat="sleep"] input[type="range"] { --accent: var(--c-sleep); }
+  .group[data-cat="nutrition"] input[type="range"] { --accent: var(--c-nutrition); }
+  .group[data-cat="exercise"] input[type="range"] { --accent: var(--c-exercise); }
 
-  /* ---------- Stats dashboard ---------- */
-  .stats-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:10px;}
-  .stat-tile{background:var(--c-linen); border-radius:var(--radius-sm); padding:12px;}
-  .stat-tile-label{font-size:11.5px; color:var(--c-ink-soft); font-weight:600; margin-bottom:4px;}
-  .stat-tile-value{font-size:17px; font-weight:800;}
-  .stat-tile-sub{font-size:11px; color:var(--c-ink-soft); margin-top:2px;}
+  .chip-group { display: flex; gap: 6px; flex-wrap: wrap; }
+  .chip {
+    border: 1.5px solid var(--c-line); background: var(--c-card); color: var(--c-ink-soft);
+    border-radius: 999px; padding: 7px 13px; font-size: 12.5px; font-weight: 600;
+    transition: all .15s ease; flex: 1; text-align: center; min-width: 64px;
+  }
+  .group[data-cat="sleep"] .chip.is-selected { background: var(--c-sleep); border-color: var(--c-sleep); color: #fff; }
+  .group[data-cat="nutrition"] .chip.is-selected { background: var(--c-nutrition); border-color: var(--c-nutrition); color: #fff; }
+  .group[data-cat="exercise"] .chip.is-selected { background: var(--c-exercise); border-color: var(--c-exercise); color: #fff; }
+  .chip:hover { border-color: var(--c-ink-soft); }
 
-  /* ---------- Calendar heatmap ---------- */
-  .cal-head{display:flex; align-items:center; justify-content:space-between; margin-bottom:12px;}
-  .cal-nav-btn{
-    width:30px; height:30px; border-radius:50%; border:1px solid var(--c-line); background:#fff;
-    color:var(--c-ink-soft); display:flex; align-items:center; justify-content:center; font-size:14px;
+  .save-btn {
+    width: 100%; margin-top: 18px; padding: 15px; border: none; border-radius: var(--radius-md);
+    background: linear-gradient(90deg, var(--c-sleep), var(--c-exercise));
+    color: #fff; font-size: 15px; font-weight: 700; box-shadow: var(--shadow-1);
+    transition: transform .12s ease, box-shadow .12s ease;
   }
-  .cal-nav-btn:hover{color:var(--c-sleep); border-color:var(--c-sleep);}
-  .cal-title{font-size:13.5px; font-weight:700;}
-  .cal-grid{display:grid; grid-template-columns:repeat(7,1fr); gap:5px;}
-  .cal-dow{font-size:10.5px; color:var(--c-ink-soft); text-align:center; font-weight:600; padding-bottom:3px;}
-  .cal-cell{
-    aspect-ratio:1; border-radius:8px; display:flex; align-items:center; justify-content:center;
-    font-size:11px; font-weight:700; color:var(--c-ink-soft); background:var(--c-linen); position:relative;
-    border:1.5px solid transparent;
-  }
-  .cal-cell.has-data{color:#fff; cursor:pointer;}
-  .cal-cell.is-empty{visibility:hidden;}
-  .cal-cell.is-future{opacity:.45;}
-  .cal-cell.is-today{border-color:var(--c-gold);}
-  .cal-legend{display:flex; align-items:center; gap:10px; margin-top:12px; flex-wrap:wrap; font-size:11px; color:var(--c-ink-soft);}
-  .cal-legend-dot{width:9px; height:9px; border-radius:50%; display:inline-block; margin-left:4px;}
+  .save-btn:hover { transform: translateY(-1px); box-shadow: var(--shadow-2); }
+  .save-btn:active { transform: translateY(0); }
+  .save-btn:disabled { opacity: .6; cursor: default; transform: none; }
 
-  /* ---------- Backup / restore ---------- */
-  .backup-row{display:flex; gap:10px; margin-top:10px;}
-  .backup-btn{
-    flex:1; background:var(--c-card); border:1.5px solid var(--c-line); color:var(--c-ink);
-    border-radius:var(--radius-sm); padding:11px; font-size:12.5px; font-weight:700;
+  .icon-btn {
+    display: flex; align-items: center; justify-content: center;
+    width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--c-line);
+    background: var(--c-card); color: var(--c-ink-soft); flex: none; box-shadow: var(--shadow-1);
   }
-  .backup-btn:hover{border-color:var(--c-sleep); color:var(--c-sleep);}
+  .icon-btn:hover { color: var(--c-sleep); border-color: var(--c-sleep); }
+  .icon-btn svg { width: 18px; height: 18px; }
 
-  /* ---------- Settings modal extras ---------- */
-  .settings-field{margin-bottom:14px;}
-  .settings-field label{display:block; font-size:12.5px; font-weight:600; color:var(--c-ink-soft); margin-bottom:6px;}
+  .group[data-cat="health"] .group-icon { background: #FBEFE0; color: #C97A1E; }
+  .optional-tag { font-size: 10.5px; font-weight: 600; color: var(--c-ink-soft); background: var(--c-linen); padding: 2px 8px; border-radius: 999px; margin-right: 6px; }
+  .health-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .health-grid .field-full { grid-column: 1 / -1; }
+  .num-input {
+    width: 100%; border: 1.5px solid var(--c-line); border-radius: var(--radius-sm);
+    padding: 10px 12px; font-size: 13.5px; font-family: inherit; color: var(--c-ink);
+    background: var(--c-linen); outline: none; transition: border 0.2s, background 0.2s;
+  }
+  .num-input:focus { border-color: var(--c-gold); background: var(--c-card); }
+  .mood-row { display: flex; gap: 6px; justify-content: space-between; }
+  .mood-chip {
+    flex: 1; border: 1.5px solid var(--c-line); background: var(--c-card); border-radius: var(--radius-sm);
+    padding: 9px 4px; font-size: 20px; text-align: center; line-height: 1;
+  }
+  .mood-chip.is-selected { border-color: #C97A1E; background: #FBEFE0; }
+  [data-theme="dark"] .mood-chip.is-selected { background: #4A3A2A; border-color: #C97A1E; }
+  .bmi-readout { font-size: 12px; color: var(--c-ink-soft); margin-top: 6px; font-weight: 600; }
+  .bmi-readout b { color: var(--c-ink); font-weight: 700; }
 
-  /* ---------- Edit banner ---------- */
-  .edit-banner{
-    display:flex; align-items:center; justify-content:space-between; gap:10px;
-    background:var(--c-exercise-soft); border:1.5px solid var(--c-exercise);
-    color:var(--c-exercise); border-radius:var(--radius-sm);
-    padding:10px 12px; font-size:12.5px; font-weight:700; margin-bottom:16px;
-  }
-  .edit-banner-text{display:flex; align-items:center; gap:6px;}
-  .edit-banner-cancel{
-    background:#fff; border:1.5px solid var(--c-exercise); color:var(--c-exercise);
-    border-radius:999px; padding:5px 12px; font-size:12px; font-weight:700; flex:none;
-  }
-  .edit-banner-cancel:hover{background:var(--c-exercise); color:#fff;}
+  .goal-row { margin-bottom: 13px; }
+  .goal-row:last-child { margin-bottom: 0; }
+  .goal-row-head { display: flex; justify-content: space-between; font-size: 12.5px; font-weight: 600; margin-bottom: 6px; }
+  .goal-row-head .goal-pct { color: var(--c-ink-soft); font-weight: 700; }
+  .goal-track { height: 8px; border-radius: 999px; background: var(--c-track); overflow: hidden; }
+  .goal-fill { height: 100%; border-radius: 999px; transition: width .4s ease; }
 
-  /* ---------- Install banner ---------- */
-  .install-banner{
-    display:none; align-items:center; gap:12px;
-    background:var(--c-card); border:1.5px solid var(--c-line); border-radius:var(--radius-md);
-    padding:13px 16px; box-shadow:var(--shadow-1); margin-bottom:18px;
+  .analysis-box { display: flex; flex-direction: column; gap: 10px; }
+  .analysis-item {
+    display: flex; gap: 10px; align-items: flex-start; padding: 11px 12px;
+    border-radius: var(--radius-sm); font-size: 12.5px; line-height: 1.7;
   }
-  .install-banner.visible{display:flex;}
-  .install-banner-icon{width:38px; height:38px; border-radius:10px; flex:none;}
-  .install-banner-text{flex:1 1 auto; min-width:0;}
-  .install-banner-title{font-size:13px; font-weight:700;}
-  .install-banner-sub{font-size:11.5px; color:var(--c-ink-soft); margin-top:1px;}
-  .install-banner-actions{display:flex; align-items:center; gap:6px; flex:none;}
-  .install-btn{
-    background:var(--c-sleep); color:#fff; border:none; border-radius:999px;
-    padding:8px 16px; font-size:12.5px; font-weight:700; white-space:nowrap;
-  }
-  .install-btn:hover{background:var(--c-exercise);}
-  .install-dismiss{
-    background:none; border:none; color:var(--c-ink-soft); font-size:18px; padding:4px 6px; border-radius:6px;
-  }
-  .install-dismiss:hover{color:var(--c-care); background:var(--c-exercise-soft);}
+  .analysis-item b { display: block; font-size: 12px; margin-bottom: 2px; }
+  .analysis-item.is-strength { background: var(--c-nutrition-soft); color: #2E6B43; }
+  .analysis-item.is-weakness { background: var(--c-exercise-soft); color: #B85A3A; }
+  .analysis-item.is-suggestion { background: var(--c-sleep-soft); color: var(--c-sleep); }
+  .analysis-emoji { font-size: 17px; flex: none; }
 
-  /* ---------- Chart ---------- */
-  .chart-wrap{position:relative;}
-  .chart-wrap svg{width:100%; height:auto; display:block; overflow:visible;}
-  .chart-point{cursor:pointer;}
-  .chart-tooltip{
-    position:absolute; background:var(--c-ink); color:#fff; font-size:11.5px; font-weight:600;
-    padding:5px 9px; border-radius:8px; transform:translate(-50%,-130%); white-space:nowrap;
-    pointer-events:none; opacity:0; transition:opacity .12s ease;
-  }
-  .chart-tooltip.visible{opacity:1;}
-  .axis-label{font-size:10.5px; fill:var(--c-ink-soft);}
+  .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .stat-tile { background: var(--c-linen); border-radius: var(--radius-sm); padding: 12px; transition: background 0.3s; }
+  .stat-tile-label { font-size: 11.5px; color: var(--c-ink-soft); font-weight: 600; margin-bottom: 4px; }
+  .stat-tile-value { font-size: 17px; font-weight: 800; }
+  .stat-tile-sub { font-size: 11px; color: var(--c-ink-soft); margin-top: 2px; }
 
-  .empty-state{
-    text-align:center; padding:28px 10px; color:var(--c-ink-soft); font-size:13px;
-    background:var(--c-linen); border-radius:var(--radius-md);
+  .cal-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; flex-wrap: wrap; gap: 8px; }
+  .cal-nav-btn {
+    width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--c-line);
+    background: var(--c-card); color: var(--c-ink-soft); display: flex;
+    align-items: center; justify-content: center; font-size: 14px;
   }
-  .empty-state .emoji{font-size:26px; display:block; margin-bottom:8px;}
+  .cal-nav-btn:hover { color: var(--c-sleep); border-color: var(--c-sleep); }
+  .cal-title { font-size: 13.5px; font-weight: 700; }
+  .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+  .cal-dow { font-size: 10.5px; color: var(--c-ink-soft); text-align: center; font-weight: 600; padding-bottom: 3px; }
+  .cal-cell {
+    aspect-ratio: 1; border-radius: 8px; display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700; color: var(--c-ink-soft); background: var(--c-linen); position: relative;
+    border: 1.5px solid transparent; cursor: default; transition: background 0.2s, border 0.2s;
+  }
+  .cal-cell.has-data { color: #fff; cursor: pointer; }
+  .cal-cell.has-data:hover { transform: scale(1.04); }
+  .cal-cell.is-empty { visibility: hidden; }
+  .cal-cell.is-future { opacity: .45; }
+  .cal-cell.is-today { border-color: var(--c-gold); }
+  .cal-legend { display: flex; align-items: center; gap: 10px; margin-top: 12px; flex-wrap: wrap; font-size: 11px; color: var(--c-ink-soft); }
+  .cal-legend-dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; margin-left: 4px; }
 
-  /* ---------- History ---------- */
-  .history-list{display:flex; flex-direction:column;}
-  .history-row{
-    display:flex; align-items:center; gap:8px; padding:11px 2px;
-    border-bottom:1px solid var(--c-line);
+  .cal-search-row { display: flex; gap: 8px; margin-top: 10px; }
+  .cal-search-input {
+    flex: 1; border: 1.5px solid var(--c-line); border-radius: var(--radius-sm);
+    padding: 8px 12px; font-size: 12.5px; font-family: inherit; color: var(--c-ink);
+    background: var(--c-linen); outline: none; min-width: 0;
   }
-  .history-row:last-child{border-bottom:none;}
-  .history-date{flex:1 1 auto; min-width:0; font-size:13px; font-weight:600; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
-  .history-dot{width:9px; height:9px; border-radius:50%; flex:none;}
-  .history-score{font-size:14px; font-weight:800; min-width:30px; text-align:left; flex:none;}
-  .history-edit, .history-del{
-    background:none; border:none; color:var(--c-ink-soft); font-size:15px; line-height:1;
-    padding:5px 7px; border-radius:6px; flex:none; display:flex; align-items:center; justify-content:center;
+  .cal-search-input:focus { border-color: var(--c-gold); }
+  .cal-search-btn {
+    background: var(--c-sleep); color: #fff; border: none;
+    border-radius: var(--radius-sm); padding: 8px 16px; font-size: 12.5px; font-weight: 600;
+    white-space: nowrap;
   }
-  .history-edit:hover{color:var(--c-sleep); background:var(--c-sleep-soft);}
-  .history-del:hover{color:var(--c-care); background:var(--c-exercise-soft);}
-  .history-edit svg{width:15px; height:15px;}
+  .cal-search-btn:hover { background: var(--c-exercise); }
 
-  /* ---------- Todo ---------- */
-  .todo-add-row{display:flex; gap:8px; margin-bottom:6px;}
-  .todo-input{
-    flex:1 1 auto; min-width:0; border:1.5px solid var(--c-line); border-radius:var(--radius-sm);
-    padding:11px 14px; font-size:13.5px; font-family:inherit; outline:none; color:var(--c-ink);
-    background:var(--c-linen);
+  .history-list { display: flex; flex-direction: column; }
+  .history-row {
+    display: flex; align-items: center; gap: 8px; padding: 11px 2px;
+    border-bottom: 1px solid var(--c-line);
   }
-  .todo-input:focus{border-color:var(--c-gold); background:#fff;}
-  .todo-add-btn{
-    flex:none; width:42px; height:42px; border-radius:var(--radius-sm); border:none;
-    background:var(--c-sleep); color:#fff; font-size:20px; line-height:1;
-    display:flex; align-items:center; justify-content:center;
+  .history-row:last-child { border-bottom: none; }
+  .history-date { flex: 1 1 auto; min-width: 0; font-size: 13px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .history-dot { width: 9px; height: 9px; border-radius: 50%; flex: none; }
+  .history-score { font-size: 14px; font-weight: 800; min-width: 30px; text-align: left; flex: none; }
+  .history-edit, .history-del {
+    background: none; border: none; color: var(--c-ink-soft); font-size: 15px; line-height: 1;
+    padding: 5px 7px; border-radius: 6px; flex: none; display: flex; align-items: center; justify-content: center;
   }
-  .todo-add-btn:hover{background:var(--c-exercise);}
-  .todo-progress{font-size:12px; color:var(--c-ink-soft); font-weight:600; margin:14px 2px 8px;}
-  .todo-list{display:flex; flex-direction:column;}
-  .todo-row{display:flex; align-items:center; gap:10px; padding:9px 2px; border-bottom:1px solid var(--c-line);}
-  .todo-row:last-child{border-bottom:none;}
-  .todo-checkbox{
-    width:22px; height:22px; border-radius:7px; border:2px solid var(--c-line); flex:none;
-    display:flex; align-items:center; justify-content:center; background:#fff; padding:0;
-    transition:all .15s ease;
-  }
-  .todo-checkbox.is-done{background:var(--c-nutrition); border-color:var(--c-nutrition);}
-  .todo-checkbox svg{width:13px; height:13px; opacity:0; transform:scale(.5); transition:all .15s ease;}
-  .todo-checkbox.is-done svg{opacity:1; transform:scale(1);}
-  .todo-text{flex:1 1 auto; min-width:0; font-size:13.5px; font-weight:600; word-break:break-word;}
-  .todo-text.is-done{color:var(--c-ink-soft); text-decoration:line-through;}
-  .todo-del{
-    background:none; border:none; color:var(--c-ink-soft); font-size:16px; line-height:1;
-    padding:4px 6px; border-radius:6px; flex:none;
-  }
-  .todo-del:hover{color:var(--c-care); background:var(--c-exercise-soft);}
+  .history-edit:hover { color: var(--c-sleep); background: var(--c-sleep-soft); }
+  .history-del:hover { color: var(--c-care); background: var(--c-exercise-soft); }
+  .history-edit svg { width: 15px; height: 15px; }
 
-  /* ---------- Toast ---------- */
-  .toast{
-    position:fixed; bottom:22px; left:50%; transform:translateX(-50%) translateY(20px);
-    background:var(--c-ink); color:#fff; padding:12px 22px; border-radius:999px;
-    font-size:13.5px; font-weight:600; box-shadow:var(--shadow-2);
-    opacity:0; pointer-events:none; transition:all .25s ease; z-index:50;
-    display:flex; align-items:center; gap:7px;
+  .todo-add-row { display: flex; gap: 8px; margin-bottom: 6px; }
+  .todo-input {
+    flex: 1 1 auto; min-width: 0; border: 1.5px solid var(--c-line); border-radius: var(--radius-sm);
+    padding: 11px 14px; font-size: 13.5px; font-family: inherit; outline: none; color: var(--c-ink);
+    background: var(--c-linen);
   }
-  .toast.visible{opacity:1; transform:translateX(-50%) translateY(0);}
-
-  /* ---------- Modal ---------- */
-  .modal-overlay{
-    position:fixed; inset:0; background:rgba(35,37,57,0.45); display:flex;
-    align-items:center; justify-content:center; padding:20px; z-index:60;
-    opacity:0; pointer-events:none; transition:opacity .18s ease;
+  .todo-input:focus { border-color: var(--c-gold); background: var(--c-card); }
+  .todo-add-btn {
+    flex: none; width: 42px; height: 42px; border-radius: var(--radius-sm); border: none;
+    background: var(--c-sleep); color: #fff; font-size: 20px; line-height: 1;
+    display: flex; align-items: center; justify-content: center;
   }
-  .modal-overlay.visible{opacity:1; pointer-events:auto;}
-  .modal-box{
-    background:#fff; border-radius:var(--radius-lg); padding:24px; max-width:340px;
-    width:100%; box-shadow:var(--shadow-2); transform:scale(.96); transition:transform .18s ease;
+  .todo-add-btn:hover { background: var(--c-exercise); }
+  .todo-progress { font-size: 12px; color: var(--c-ink-soft); font-weight: 600; margin: 14px 2px 8px; }
+  .todo-list { display: flex; flex-direction: column; }
+  .todo-row { display: flex; align-items: center; gap: 10px; padding: 9px 2px; border-bottom: 1px solid var(--c-line); }
+  .todo-row:last-child { border-bottom: none; }
+  .todo-checkbox {
+    width: 22px; height: 22px; border-radius: 7px; border: 2px solid var(--c-line); flex: none;
+    display: flex; align-items: center; justify-content: center; background: var(--c-card); padding: 0;
+    transition: all .15s ease;
   }
-  .modal-overlay.visible .modal-box{transform:scale(1);}
-  .modal-title{font-size:16px; font-weight:700; margin:0 0 8px;}
-  .modal-text{font-size:13.5px; color:var(--c-ink-soft); margin:0 0 18px; line-height:1.6;}
-  .modal-actions{display:flex; gap:10px;}
-  .modal-actions button{flex:1; padding:11px; border-radius:var(--radius-sm); font-size:13.5px; font-weight:700; border:none;}
-  .btn-cancel{background:var(--c-linen); color:var(--c-ink);}
-  .btn-danger{background:var(--c-care); color:#fff;}
+  .todo-checkbox.is-done { background: var(--c-nutrition); border-color: var(--c-nutrition); }
+  .todo-checkbox svg { width: 13px; height: 13px; opacity: 0; transform: scale(.5); transition: all .15s ease; }
+  .todo-checkbox.is-done svg { opacity: 1; transform: scale(1); }
+  .todo-text { flex: 1 1 auto; min-width: 0; font-size: 13.5px; font-weight: 600; word-break: break-word; }
+  .todo-text.is-done { color: var(--c-ink-soft); text-decoration: line-through; }
+  .todo-del {
+    background: none; border: none; color: var(--c-ink-soft); font-size: 16px; line-height: 1;
+    padding: 4px 6px; border-radius: 6px; flex: none;
+  }
+  .todo-del:hover { color: var(--c-care); background: var(--c-exercise-soft); }
 
-  /* ---------- Footer ---------- */
-  .footer-row{text-align:center; margin-top:8px;}
-  .reset-link{background:none; border:none; color:var(--c-ink-soft); font-size:12px; text-decoration:underline; padding:6px;}
-  .reset-link:hover{color:var(--c-care);}
+  .chart-wrap { position: relative; }
+  .chart-wrap svg { width: 100%; height: auto; display: block; overflow: visible; }
+  .chart-point { cursor: pointer; }
+  .chart-tooltip {
+    position: absolute; background: var(--c-ink); color: #fff; font-size: 11.5px; font-weight: 600;
+    padding: 5px 9px; border-radius: 8px; transform: translate(-50%, -130%); white-space: nowrap;
+    pointer-events: none; opacity: 0; transition: opacity .12s ease;
+  }
+  .chart-tooltip.visible { opacity: 1; }
+  .axis-label { font-size: 10.5px; fill: var(--c-ink-soft); }
 
-  .skeleton{background:linear-gradient(90deg, var(--c-line) 25%, #f3efe4 37%, var(--c-line) 63%); background-size:400% 100%; animation:shimmer 1.4s ease infinite; border-radius:var(--radius-sm);}
-  @keyframes shimmer{0%{background-position:100% 0;}100%{background-position:0 0;}}
+  .empty-state {
+    text-align: center; padding: 28px 10px; color: var(--c-ink-soft); font-size: 13px;
+    background: var(--c-linen); border-radius: var(--radius-md);
+  }
+  .empty-state .emoji { font-size: 26px; display: block; margin-bottom: 8px; }
 
-  @media (prefers-reduced-motion: reduce){
-    *{transition-duration:.01ms !important; animation-duration:.01ms !important;}
+  .edit-banner {
+    display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    background: var(--c-exercise-soft); border: 1.5px solid var(--c-exercise);
+    color: var(--c-exercise); border-radius: var(--radius-sm);
+    padding: 10px 12px; font-size: 12.5px; font-weight: 700; margin-bottom: 16px;
+  }
+  .edit-banner-text { display: flex; align-items: center; gap: 6px; }
+  .edit-banner-cancel {
+    background: var(--c-card); border: 1.5px solid var(--c-exercise); color: var(--c-exercise);
+    border-radius: 999px; padding: 5px 12px; font-size: 12px; font-weight: 700; flex: none;
+  }
+  .edit-banner-cancel:hover { background: var(--c-exercise); color: #fff; }
+
+  .install-banner {
+    display: none; align-items: center; gap: 12px;
+    background: var(--c-card); border: 1.5px solid var(--c-line); border-radius: var(--radius-md);
+    padding: 13px 16px; box-shadow: var(--shadow-1); margin-bottom: 18px;
+  }
+  .install-banner.visible { display: flex; }
+  .install-banner-icon { width: 38px; height: 38px; border-radius: 10px; flex: none; }
+  .install-banner-text { flex: 1 1 auto; min-width: 0; }
+  .install-banner-title { font-size: 13px; font-weight: 700; }
+  .install-banner-sub { font-size: 11.5px; color: var(--c-ink-soft); margin-top: 1px; }
+  .install-banner-actions { display: flex; align-items: center; gap: 6px; flex: none; }
+  .install-btn {
+    background: var(--c-sleep); color: #fff; border: none; border-radius: 999px;
+    padding: 8px 16px; font-size: 12.5px; font-weight: 700; white-space: nowrap;
+  }
+  .install-btn:hover { background: var(--c-exercise); }
+  .install-dismiss {
+    background: none; border: none; color: var(--c-ink-soft); font-size: 18px; padding: 4px 6px; border-radius: 6px;
+  }
+  .install-dismiss:hover { color: var(--c-care); background: var(--c-exercise-soft); }
+
+  .backup-row { display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap; }
+  .backup-btn {
+    flex: 1; background: var(--c-card); border: 1.5px solid var(--c-line); color: var(--c-ink);
+    border-radius: var(--radius-sm); padding: 11px; font-size: 12.5px; font-weight: 700;
+    min-width: 100px;
+  }
+  .backup-btn:hover { border-color: var(--c-sleep); color: var(--c-sleep); }
+
+  .reset-link {
+    background: none; border: none; color: var(--c-ink-soft); font-size: 12px;
+    text-decoration: underline; padding: 6px; margin-top: 6px;
+  }
+  .reset-link:hover { color: var(--c-care); }
+
+  .toast {
+    position: fixed; bottom: 22px; left: 50%; transform: translateX(-50%) translateY(20px);
+    background: var(--c-ink); color: #fff; padding: 12px 22px; border-radius: 999px;
+    font-size: 13.5px; font-weight: 600; box-shadow: var(--shadow-2);
+    opacity: 0; pointer-events: none; transition: all .25s ease; z-index: 50;
+    display: flex; align-items: center; gap: 7px;
+  }
+  .toast.visible { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  .modal-overlay {
+    position: fixed; inset: 0; background: rgba(35,37,57,0.45); display: flex;
+    align-items: center; justify-content: center; padding: 20px; z-index: 60;
+    opacity: 0; pointer-events: none; transition: opacity .18s ease;
+  }
+  .modal-overlay.visible { opacity: 1; pointer-events: auto; }
+  .modal-box {
+    background: var(--c-card); border-radius: var(--radius-lg); padding: 24px; max-width: 340px;
+    width: 100%; box-shadow: var(--shadow-2); transform: scale(.96); transition: transform .18s ease;
+  }
+  .modal-overlay.visible .modal-box { transform: scale(1); }
+  .modal-title { font-size: 16px; font-weight: 700; margin: 0 0 8px; }
+  .modal-text { font-size: 13.5px; color: var(--c-ink-soft); margin: 0 0 18px; line-height: 1.6; }
+  .modal-actions { display: flex; gap: 10px; }
+  .modal-actions button { flex: 1; padding: 11px; border-radius: var(--radius-sm); font-size: 13.5px; font-weight: 700; border: none; }
+  .btn-cancel { background: var(--c-linen); color: var(--c-ink); }
+  .btn-danger { background: var(--c-care); color: #fff; }
+
+  .footer-row { text-align: center; margin-top: 8px; }
+
+  .steps-auto-badge {
+    font-size: 11px; color: var(--c-ink-soft); background: var(--c-linen);
+    padding: 4px 10px; border-radius: 999px; display: inline-block; margin-top: 4px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition-duration: .01ms !important; animation-duration: .01ms !important; }
   }
 </style>
 </head>
@@ -418,11 +457,13 @@
         <circle cx="20" cy="22" r="3" fill="#F2B441"/>
       </svg>
       <div class="brand-text">
-        <div class="title">روزنگار سلامت</div>
-        <div class="subtitle">خواب، ورزش و تغذیه‌ی هر روزت</div>
+        <div class="title" id="appTitle">روزنگار سلامت</div>
+        <div class="subtitle" id="brandSubtitle">خواب، ورزش و تغذیه‌ی هر روزت</div>
       </div>
     </div>
     <div class="topbar-actions">
+      <button class="lang-toggle" id="langToggle">🇬🇧 English</button>
+      <button class="theme-toggle" id="themeToggle">🌙</button>
       <button class="icon-btn" id="settingsBtn" aria-label="تنظیمات">
         <svg viewBox="0 0 24 24" fill="none"><path d="M19.4 13a7.97 7.97 0 0 0 0-2l2.1-1.6-2-3.4-2.5 1a8 8 0 0 0-1.7-1L14.9 3h-4l-.4 2.9a8 8 0 0 0-1.7 1l-2.5-1-2 3.4L6.4 11a7.97 7.97 0 0 0 0 2l-2.1 1.6 2 3.4 2.5-1a8 8 0 0 0 1.7 1l.4 3h4l.4-2.9a8 8 0 0 0 1.7-1l2.5 1 2-3.4-2.1-1.6Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.4"/></svg>
       </button>
@@ -436,17 +477,16 @@
   <div class="install-banner" id="installBanner">
     <img class="install-banner-icon" src="./icon-192.png" alt="">
     <div class="install-banner-text">
-      <div class="install-banner-title">روزنگار سلامت رو نصب کن</div>
-      <div class="install-banner-sub">دسترسی سریع از صفحه اصلی گوشی، حتی بدون اینترنت</div>
+      <div class="install-banner-title" id="installTitle">روزنگار سلامت رو نصب کن</div>
+      <div class="install-banner-sub" id="installSub">دسترسی سریع از صفحه اصلی گوشی، حتی بدون اینترنت</div>
     </div>
     <div class="install-banner-actions">
-      <button class="install-btn" id="installBtn">نصب</button>
+      <button class="install-btn" id="installBtn" id="installBtnText">نصب</button>
       <button class="install-dismiss" id="installDismiss" aria-label="بستن">×</button>
     </div>
   </div>
 
   <div class="layout">
-    <!-- LEFT PANEL -->
     <div class="panel-left">
 
       <div class="card gauge-card">
@@ -462,7 +502,7 @@
           </svg>
           <div class="gauge-overlay">
             <div class="score-num" id="scoreNum">۰</div>
-            <div class="score-label">امتیاز امروز</div>
+            <div class="score-label" id="scoreLabel">امتیاز امروز</div>
             <div class="score-tier" id="scoreTier">—</div>
           </div>
         </div>
@@ -472,29 +512,29 @@
 
       <div class="card">
         <div class="edit-banner" id="editBanner" style="display:none;">
-          <div class="edit-banner-text">✎ <span>در حال ویرایش روز <span id="editBannerDate"></span></span></div>
-          <button class="edit-banner-cancel" id="cancelEditBtn">انصراف</button>
+          <div class="edit-banner-text">✎ <span id="editBannerPrefix">در حال ویرایش روز</span> <span id="editBannerDate"></span></div>
+          <button class="edit-banner-cancel" id="cancelEditBtn" id="cancelEditText">انصراف</button>
         </div>
 
         <div class="group" data-cat="sleep">
           <div class="group-head">
             <div class="group-icon">😴</div>
-            <div class="group-title">خواب</div>
+            <div class="group-title" id="sleepTitle">خواب</div>
           </div>
           <div class="field">
             <div class="field-label-row">
-              <span class="field-label">ساعت خواب شب گذشته</span>
+              <span class="field-label" id="sleepHoursLabel">ساعت خواب شب گذشته</span>
               <span class="field-value" id="sleepHoursVal">۷ ساعت</span>
             </div>
             <input type="range" id="sleepHours" min="0" max="12" step="0.5" value="7">
           </div>
           <div class="field">
-            <div class="field-label-row"><span class="field-label">کیفیت خواب</span></div>
+            <div class="field-label-row"><span class="field-label" id="sleepQualityLabel">کیفیت خواب</span></div>
             <div class="chip-group" data-group="sleepQuality" id="sleepQualityChips">
-              <button class="chip" data-value="0">ضعیف</button>
-              <button class="chip" data-value="1">متوسط</button>
-              <button class="chip" data-value="2">خوب</button>
-              <button class="chip" data-value="3">عالی</button>
+              <button class="chip" data-value="0" id="sq0">ضعیف</button>
+              <button class="chip" data-value="1" id="sq1">متوسط</button>
+              <button class="chip" data-value="2" id="sq2">خوب</button>
+              <button class="chip" data-value="3" id="sq3">عالی</button>
             </div>
           </div>
         </div>
@@ -502,56 +542,71 @@
         <div class="group" data-cat="nutrition">
           <div class="group-head">
             <div class="group-icon">🥗</div>
-            <div class="group-title">تغذیه</div>
+            <div class="group-title" id="nutritionTitle">تغذیه</div>
           </div>
           <div class="field">
-            <div class="field-label-row"><span class="field-label">کیفیت تغذیه امروز</span></div>
+            <div class="field-label-row"><span class="field-label" id="nutritionQualityLabel">کیفیت تغذیه امروز</span></div>
             <div class="chip-group" data-group="nutritionQuality" id="nutritionQualityChips">
-              <button class="chip" data-value="0">ضعیف</button>
-              <button class="chip" data-value="1">متوسط</button>
-              <button class="chip" data-value="2">خوب</button>
-              <button class="chip" data-value="3">عالی</button>
+              <button class="chip" data-value="0" id="nq0">ضعیف</button>
+              <button class="chip" data-value="1" id="nq1">متوسط</button>
+              <button class="chip" data-value="2" id="nq2">خوب</button>
+              <button class="chip" data-value="3" id="nq3">عالی</button>
             </div>
           </div>
           <div class="field">
             <div class="field-label-row">
-              <span class="field-label">آب مصرفی</span>
+              <span class="field-label" id="waterLabel">آب مصرفی</span>
               <span class="field-value" id="waterVal">۵ لیوان</span>
             </div>
-            <input type="range" id="waterGlasses" min="0" max="12" step="1" value="5">
+            <input type="range" id="waterGlasses" min="0" max="20" step="1" value="5">
           </div>
         </div>
 
         <div class="group" data-cat="exercise">
           <div class="group-head">
             <div class="group-icon">🏃</div>
-            <div class="group-title">ورزش</div>
+            <div class="group-title" id="exerciseTitle">ورزش</div>
           </div>
           <div class="field">
             <div class="field-label-row">
-              <span class="field-label">مدت فعالیت بدنی امروز</span>
+              <span class="field-label" id="exerciseMinutesLabel">مدت فعالیت بدنی امروز</span>
               <span class="field-value" id="exerciseMinutesVal">۲۰ دقیقه</span>
             </div>
             <input type="range" id="exerciseMinutes" min="0" max="120" step="5" value="20">
           </div>
           <div class="field">
-            <div class="field-label-row"><span class="field-label">شدت فعالیت</span></div>
+            <div class="field-label-row"><span class="field-label" id="intensityLabel">شدت فعالیت</span></div>
             <div class="chip-group" data-group="exerciseIntensity" id="exerciseIntensityChips">
-              <button class="chip" data-value="0">استراحت</button>
-              <button class="chip" data-value="1">سبک</button>
-              <button class="chip" data-value="2">متوسط</button>
-              <button class="chip" data-value="3">شدید</button>
+              <button class="chip" data-value="0" id="ei0">استراحت</button>
+              <button class="chip" data-value="1" id="ei1">سبک</button>
+              <button class="chip" data-value="2" id="ei2">متوسط</button>
+              <button class="chip" data-value="3" id="ei3">شدید</button>
             </div>
+          </div>
+        </div>
+
+        <div class="group" data-cat="exercise">
+          <div class="group-head">
+            <div class="group-icon">🚶</div>
+            <div class="group-title" id="stepsTitle">گام‌شمار <span class="optional-tag" id="optionalTag">اختیاری</span></div>
+          </div>
+          <div class="field">
+            <div class="field-label-row">
+              <span class="field-label" id="stepsLabel">تعداد قدم‌های امروز</span>
+              <span class="field-value" id="stepsVal">۰ قدم</span>
+            </div>
+            <input type="range" id="stepsInput" min="0" max="30000" step="100" value="0">
+            <div class="steps-auto-badge" id="stepsAutoBadge">⏳ در حال دریافت گام‌ها...</div>
           </div>
         </div>
 
         <div class="group" data-cat="health">
           <div class="group-head">
             <div class="group-icon">➕</div>
-            <div class="group-title">سلامت تکمیلی <span class="optional-tag">اختیاری</span></div>
+            <div class="group-title" id="healthTitle">سلامت تکمیلی <span class="optional-tag" id="healthOptional">اختیاری</span></div>
           </div>
           <div class="field">
-            <div class="field-label-row"><span class="field-label">خلق و خو</span></div>
+            <div class="field-label-row"><span class="field-label" id="moodLabel">خلق و خو</span></div>
             <div class="mood-row" id="moodChips">
               <button class="mood-chip" data-value="4" aria-label="عالی">😀</button>
               <button class="mood-chip" data-value="3" aria-label="خوب">🙂</button>
@@ -563,20 +618,20 @@
           <div class="field field-full">
             <div class="health-grid">
               <div class="field-full">
-                <div class="field-label-row"><span class="field-label">وزن (کیلوگرم)</span></div>
+                <div class="field-label-row"><span class="field-label" id="weightLabel">وزن (کیلوگرم)</span></div>
                 <input type="number" class="num-input" id="weightInput" min="20" max="300" step="0.1" placeholder="مثلاً ۷۰">
                 <div class="bmi-readout" id="bmiReadout" style="display:none;"></div>
               </div>
               <div>
-                <div class="field-label-row"><span class="field-label">فشار سیستول</span></div>
+                <div class="field-label-row"><span class="field-label" id="bpSystolicLabel">فشار سیستول</span></div>
                 <input type="number" class="num-input" id="bpSystolicInput" min="60" max="260" placeholder="۱۲۰">
               </div>
               <div>
-                <div class="field-label-row"><span class="field-label">فشار دیاستول</span></div>
+                <div class="field-label-row"><span class="field-label" id="bpDiastolicLabel">فشار دیاستول</span></div>
                 <input type="number" class="num-input" id="bpDiastolicInput" min="40" max="160" placeholder="۸۰">
               </div>
               <div class="field-full">
-                <div class="field-label-row"><span class="field-label">نبض (ضربان در دقیقه)</span></div>
+                <div class="field-label-row"><span class="field-label" id="pulseLabel">نبض (ضربان در دقیقه)</span></div>
                 <input type="number" class="num-input" id="pulseInput" min="30" max="220" placeholder="۷۲">
               </div>
             </div>
@@ -587,38 +642,37 @@
       </div>
     </div>
 
-    <!-- RIGHT PANEL -->
     <div class="panel-right">
       <div class="card">
-        <div class="card-title">اهداف امروز</div>
-        <div class="card-subtitle">پیشرفت نسبت به اهدافی که تنظیم کردی</div>
+        <div class="card-title" id="goalsTitle">اهداف امروز</div>
+        <div class="card-subtitle" id="goalsSub">پیشرفت نسبت به اهدافی که تنظیم کردی</div>
         <div id="goalsBox">
           <div class="goal-row">
-            <div class="goal-row-head"><span>😴 خواب</span><span class="goal-pct" id="goalSleepPct">—</span></div>
+            <div class="goal-row-head"><span>😴 <span id="goalSleepLabel">خواب</span></span><span class="goal-pct" id="goalSleepPct">—</span></div>
             <div class="goal-track"><div class="goal-fill" id="goalSleepFill" style="width:0%; background:var(--c-sleep);"></div></div>
           </div>
           <div class="goal-row">
-            <div class="goal-row-head"><span>🥗 آب</span><span class="goal-pct" id="goalWaterPct">—</span></div>
+            <div class="goal-row-head"><span>🥗 <span id="goalWaterLabel">آب</span></span><span class="goal-pct" id="goalWaterPct">—</span></div>
             <div class="goal-track"><div class="goal-fill" id="goalWaterFill" style="width:0%; background:var(--c-nutrition);"></div></div>
           </div>
           <div class="goal-row">
-            <div class="goal-row-head"><span>🏃 ورزش</span><span class="goal-pct" id="goalExercisePct">—</span></div>
+            <div class="goal-row-head"><span>🏃 <span id="goalExerciseLabel">ورزش</span></span><span class="goal-pct" id="goalExercisePct">—</span></div>
             <div class="goal-track"><div class="goal-fill" id="goalExerciseFill" style="width:0%; background:var(--c-exercise);"></div></div>
           </div>
         </div>
       </div>
 
       <div class="card">
-        <div class="card-title">تحلیل هوشمند روز</div>
-        <div class="card-subtitle">بر اساس امتیاز ثبت‌شده‌ی این روز</div>
+        <div class="card-title" id="analysisTitle">تحلیل هوشمند روز</div>
+        <div class="card-subtitle" id="analysisSub">بر اساس امتیاز ثبت‌شده‌ی این روز</div>
         <div class="analysis-box" id="analysisBox">
-          <div class="empty-state"><span class="emoji">🧠</span>بعد از ثبت امتیاز، تحلیل اینجا نمایش داده می‌شه.</div>
+          <div class="empty-state"><span class="emoji">🧠</span><span id="analysisEmpty">بعد از ثبت امتیاز، تحلیل اینجا نمایش داده می‌شه.</span></div>
         </div>
       </div>
 
       <div class="card">
-        <div class="card-title">کارهای مهم</div>
-        <div class="card-subtitle">کارهایی که می‌خوای امروز انجام بدی</div>
+        <div class="card-title" id="todoTitle">کارهای مهم</div>
+        <div class="card-subtitle" id="todoSub">کارهایی که می‌خوای امروز انجام بدی</div>
         <div class="todo-add-row">
           <input type="text" id="todoInput" class="todo-input" placeholder="یه کار جدید بنویس…" maxlength="120">
           <button class="todo-add-btn" id="todoAddBtn" aria-label="افزودن کار">+</button>
@@ -628,8 +682,8 @@
       </div>
 
       <div class="card">
-        <div class="card-title">روند روزهای اخیر</div>
-        <div class="card-subtitle">آخرین ۱۴ روزی که امتیاز ثبت کردی</div>
+        <div class="card-title" id="chartTitle">روند روزهای اخیر</div>
+        <div class="card-subtitle" id="chartSub">آخرین ۱۴ روزی که امتیاز ثبت کردی</div>
         <div class="chart-wrap" id="chartWrap"></div>
       </div>
 
@@ -640,33 +694,37 @@
           <button class="cal-nav-btn" id="calNextBtn" aria-label="ماه بعد">›</button>
         </div>
         <div class="cal-grid" id="calGrid"></div>
+        <div class="cal-search-row">
+          <input type="text" class="cal-search-input" id="calSearchInput" placeholder="جستجوی تاریخ (مثلاً ۱۴۰۳/۰۱/۱۵ یا 2024/03/15)">
+          <button class="cal-search-btn" id="calSearchBtn">جستجو</button>
+        </div>
         <div class="cal-legend">
-          <span><span class="cal-legend-dot" style="background:#3F8F5C;"></span>عالی</span>
-          <span><span class="cal-legend-dot" style="background:#4F9A68;"></span>خوب</span>
-          <span><span class="cal-legend-dot" style="background:#E08A3C;"></span>متوسط</span>
-          <span><span class="cal-legend-dot" style="background:#D9684A;"></span>نیاز به مراقبت</span>
+          <span><span class="cal-legend-dot" style="background:#3F8F5C;"></span><span id="legendExcellent">عالی</span></span>
+          <span><span class="cal-legend-dot" style="background:#4F9A68;"></span><span id="legendGood">خوب</span></span>
+          <span><span class="cal-legend-dot" style="background:#E08A3C;"></span><span id="legendFair">متوسط</span></span>
+          <span><span class="cal-legend-dot" style="background:#D9684A;"></span><span id="legendCare">نیاز به مراقبت</span></span>
         </div>
       </div>
 
       <div class="card">
-        <div class="card-title">داشبورد آماری ماه</div>
+        <div class="card-title" id="statsTitle">داشبورد آماری ماه</div>
         <div class="card-subtitle" id="statsSubtitle">—</div>
         <div class="stats-grid" id="statsGrid"></div>
       </div>
 
       <div class="card">
-        <div class="card-title">تاریخچه</div>
-        <div class="card-subtitle">روزهای ثبت‌شده، از جدید به قدیم — برای ویرایش روی ✎ بزن</div>
+        <div class="card-title" id="historyTitle">تاریخچه</div>
+        <div class="card-subtitle" id="historySub">روزهای ثبت‌شده، از جدید به قدیم — برای ویرایش روی ✎ بزن</div>
         <div class="history-list" id="historyList"></div>
       </div>
 
       <div class="footer-row">
         <div class="backup-row">
-          <button class="backup-btn" id="exportBtn">📤 خروجی پشتیبان (JSON)</button>
-          <button class="backup-btn" id="importBtn">📥 بازیابی از فایل</button>
+          <button class="backup-btn" id="exportBtn">📤 <span id="exportText">خروجی پشتیبان (JSON)</span></button>
+          <button class="backup-btn" id="importBtn">📥 <span id="importText">بازیابی از فایل</span></button>
         </div>
         <input type="file" id="importFileInput" accept="application/json" style="display:none;">
-        <button class="reset-link" id="resetLink">پاک‌کردن همه داده‌ها</button>
+        <button class="reset-link" id="resetLink" id="resetText">پاک‌کردن همه داده‌ها</button>
       </div>
     </div>
   </div>
@@ -679,35 +737,35 @@
     <div class="modal-title" id="modalTitle">حذف اطلاعات</div>
     <p class="modal-text" id="modalText">این کار قابل بازگشت نیست.</p>
     <div class="modal-actions">
-      <button class="btn-cancel" id="modalCancel">انصراف</button>
-      <button class="btn-danger" id="modalConfirm">حذف</button>
+      <button class="btn-cancel" id="modalCancel" id="modalCancelText">انصراف</button>
+      <button class="btn-danger" id="modalConfirm" id="modalConfirmText">حذف</button>
     </div>
   </div>
 </div>
 
 <div class="modal-overlay" id="settingsModalOverlay">
   <div class="modal-box">
-    <div class="modal-title">تنظیمات و هدف‌گذاری</div>
-    <p class="modal-text">این مقادیر برای محاسبه BMI و درصد تحقق اهداف روزانه استفاده می‌شن.</p>
+    <div class="modal-title" id="settingsModalTitle">تنظیمات و هدف‌گذاری</div>
+    <p class="modal-text" id="settingsModalText">این مقادیر برای محاسبه BMI و درصد تحقق اهداف روزانه استفاده می‌شن.</p>
     <div class="settings-field">
-      <label>قد (سانتی‌متر)</label>
+      <label id="settingHeightLabel">قد (سانتی‌متر)</label>
       <input type="number" class="num-input" id="settingHeight" min="100" max="230" placeholder="مثلاً ۱۷۵">
     </div>
     <div class="settings-field">
-      <label>هدف خواب (ساعت)</label>
+      <label id="settingSleepGoalLabel">هدف خواب (ساعت)</label>
       <input type="number" class="num-input" id="settingSleepGoal" min="4" max="12" step="0.5" placeholder="۸">
     </div>
     <div class="settings-field">
-      <label>هدف آب (لیوان)</label>
+      <label id="settingWaterGoalLabel">هدف آب (لیوان)</label>
       <input type="number" class="num-input" id="settingWaterGoal" min="1" max="15" placeholder="۸">
     </div>
     <div class="settings-field">
-      <label>هدف ورزش (دقیقه)</label>
+      <label id="settingExerciseGoalLabel">هدف ورزش (دقیقه)</label>
       <input type="number" class="num-input" id="settingExerciseGoal" min="0" max="180" placeholder="۴۵">
     </div>
     <div class="modal-actions">
-      <button class="btn-cancel" id="settingsCancel">انصراف</button>
-      <button class="btn-danger" id="settingsSave" style="background:var(--c-sleep);">ذخیره</button>
+      <button class="btn-cancel" id="settingsCancel" id="settingsCancelText">انصراف</button>
+      <button class="btn-danger" id="settingsSave" style="background:var(--c-sleep);" id="settingsSaveText">ذخیره</button>
     </div>
   </div>
 </div>
@@ -716,7 +774,6 @@
 (function(){
   "use strict";
 
-  /* ===================== Helpers ===================== */
   const FA_DIGITS = ['۰','۱','۲','۳','۴','۵','۶','۷','۸','۹'];
   function toFa(n){ return String(n).replace(/[0-9]/g, d => FA_DIGITS[d]); }
   function clamp(v,min,max){ return Math.max(min, Math.min(max,v)); }
@@ -729,23 +786,23 @@
     const [y,m,d]=key.split('-').map(Number);
     return new Date(y, m-1, d);
   }
-  function formatJalali(date, opts){
-    try{
-      return new Intl.DateTimeFormat('fa-IR', Object.assign({calendar:'persian'}, opts)).format(date);
-    }catch(e){ return date.toLocaleDateString('fa-IR'); }
-  }
 
-  /* Reliable Gregorian -> Jalali conversion using Intl's own persian calendar,
-     so the calendar heatmap's grid always agrees with its Persian month title. */
   const jalaliFormatter = new Intl.DateTimeFormat('en-US-u-ca-persian', {year:'numeric', month:'numeric', day:'numeric'});
   function gregorianToJalali(date){
     const parts = jalaliFormatter.formatToParts(date);
     const get = (t)=> Number(parts.find(p=>p.type===t).value);
     return { jy: get('year'), jm: get('month'), jd: get('day') };
   }
+  function formatJalali(date, opts){
+    try{
+      return new Intl.DateTimeFormat('fa-IR', Object.assign({calendar:'persian'}, opts)).format(date);
+    }catch(e){ return date.toLocaleDateString('fa-IR'); }
+  }
+  function formatEnglish(date, opts){
+    return date.toLocaleDateString('en-US', opts);
+  }
+
   function jalaliMonthInfo(jy, jm){
-    // Rough Gregorian anchor near the start of this Jalali month, then scan
-    // a small window to find the exact Gregorian date where Jalali day===1.
     const guess = new Date(jy+621, 2, 21);
     guess.setDate(guess.getDate() + (jm-1)*30);
     let firstGregorian = null;
@@ -766,6 +823,18 @@
     return { firstGregorian, daysInMonth };
   }
 
+  function parseJalaliDate(str){
+    const parts = str.split(/[-\/]/).map(Number);
+    if(parts.length!==3) return null;
+    let [jy, jm, jd] = parts;
+    if(jy<1 || jm<1 || jm>12 || jd<1) return null;
+    const info = jalaliMonthInfo(jy, jm);
+    if(!info || jd>info.daysInMonth) return null;
+    const d = new Date(info.firstGregorian);
+    d.setDate(d.getDate() + jd - 1);
+    return d;
+  }
+
   function polarToCartesian(cx, cy, r, angleDeg){
     const rad = (angleDeg - 90) * Math.PI / 180;
     return { x: cx + r*Math.cos(rad), y: cy + r*Math.sin(rad) };
@@ -777,7 +846,6 @@
     return ["M", start.x, start.y, "A", r, r, 0, largeArcFlag, 0, end.x, end.y].join(" ");
   }
 
-  /* ===================== Scoring ===================== */
   const QUALITY_SCORES = [20,50,75,100];
   const INTENSITY_SCORES = [10,45,75,100];
 
@@ -785,7 +853,8 @@
     const hoursScore = clamp(100 - Math.abs(s.sleepHours-8)*14, 0, 100);
     const sleep = Math.round((hoursScore + QUALITY_SCORES[s.sleepQuality]) / 2);
 
-    const minutesScore = clamp(Math.round(s.exerciseMinutes/45*100), 0, 100);
+    // ورزش: حد بالای امتیاز در ۳۰ دقیقه
+    const minutesScore = clamp(Math.round(s.exerciseMinutes/30*100), 0, 100);
     const exercise = Math.round((minutesScore + INTENSITY_SCORES[s.exerciseIntensity]) / 2);
 
     const waterScore = clamp(Math.round(s.waterGlasses/8*100), 0, 100);
@@ -820,10 +889,11 @@
     return 'چاقی';
   }
 
-  /* ===================== State ===================== */
   const STORAGE_KEY = 'daily-entries';
   const TODO_KEY = 'todo-tasks';
   const SETTINGS_KEY = 'app-settings';
+  const THEME_KEY = 'app-theme';
+  const LANG_KEY = 'app-lang';
   let entries = {};
   let todos = [];
   const TODAY = new Date();
@@ -833,19 +903,189 @@
     sleepHours:7, sleepQuality:1,
     exerciseMinutes:20, exerciseIntensity:1,
     nutritionQuality:1, waterGlasses:5,
-    weight:null, bpSystolic:null, bpDiastolic:null, pulse:null, mood:null
+    weight:null, bpSystolic:null, bpDiastolic:null, pulse:null, mood:null,
+    steps:0
   };
   const DEFAULT_SETTINGS = { height:175, sleepGoal:8, waterGoal:8, exerciseGoal:45 };
   let settings = Object.assign({}, DEFAULT_SETTINGS);
   let state = Object.assign({}, DEFAULT_STATE);
   let savedSnapshot = null;
-  let editingKey = todayKey; // which day's entry the form is currently editing
+  let editingKey = todayKey;
+  let currentLang = 'fa';
 
-  /* ===================== Storage ===================== */
-  /* Uses Claude's artifact storage when this runs inside Claude.ai.
-     Falls back to the browser's own localStorage when the file is opened
-     directly (e.g. downloaded and opened in a phone browser), so saving
-     always works either way. */
+  // ===================== i18n =====================
+  const translations = {
+    fa: {
+      appTitle: 'روزنگار سلامت',
+      appSub: 'خواب، ورزش و تغذیه‌ی هر روزت',
+      scoreLabel: 'امتیاز امروز',
+      sleepTitle: 'خواب',
+      sleepHoursLabel: 'ساعت خواب شب گذشته',
+      sleepQualityLabel: 'کیفیت خواب',
+      sleepBad: 'ضعیف',
+      sleepMed: 'متوسط',
+      sleepGood: 'خوب',
+      sleepExcel: 'عالی',
+      nutritionTitle: 'تغذیه',
+      nutritionQualityLabel: 'کیفیت تغذیه امروز',
+      nutritionBad: 'ضعیف',
+      nutritionMed: 'متوسط',
+      nutritionGood: 'خوب',
+      nutritionExcel: 'عالی',
+      waterLabel: 'آب مصرفی',
+      exerciseTitle: 'ورزش',
+      exerciseMinutesLabel: 'مدت فعالیت بدنی امروز',
+      intensityLabel: 'شدت فعالیت',
+      intensityRest: 'استراحت',
+      intensityLight: 'سبک',
+      intensityMod: 'متوسط',
+      intensityHard: 'شدید',
+      stepsTitle: 'گام‌شمار',
+      optionalTag: 'اختیاری',
+      stepsLabel: 'تعداد قدم‌های امروز',
+      stepsAuto: '⏳ در حال دریافت گام‌ها...',
+      healthTitle: 'سلامت تکمیلی',
+      moodLabel: 'خلق و خو',
+      weightLabel: 'وزن (کیلوگرم)',
+      bpSystolicLabel: 'فشار سیستول',
+      bpDiastolicLabel: 'فشار دیاستول',
+      pulseLabel: 'نبض (ضربان در دقیقه)',
+      goalsTitle: 'اهداف امروز',
+      goalsSub: 'پیشرفت نسبت به اهدافی که تنظیم کردی',
+      goalSleep: 'خواب',
+      goalWater: 'آب',
+      goalExercise: 'ورزش',
+      analysisTitle: 'تحلیل هوشمند روز',
+      analysisSub: 'بر اساس امتیاز ثبت‌شده‌ی این روز',
+      analysisEmpty: 'بعد از ثبت امتیاز، تحلیل اینجا نمایش داده می‌شه.',
+      todoTitle: 'کارهای مهم',
+      todoSub: 'کارهایی که می‌خوای امروز انجام بدی',
+      chartTitle: 'روند روزهای اخیر',
+      chartSub: 'آخرین ۱۴ روزی که امتیاز ثبت کردی',
+      legendExcellent: 'عالی',
+      legendGood: 'خوب',
+      legendFair: 'متوسط',
+      legendCare: 'نیاز به مراقبت',
+      statsTitle: 'داشبورد آماری ماه',
+      historyTitle: 'تاریخچه',
+      historySub: 'روزهای ثبت‌شده، از جدید به قدیم — برای ویرایش روی ✎ بزن',
+      exportText: 'خروجی پشتیبان (JSON)',
+      importText: 'بازیابی از فایل',
+      resetText: 'پاک‌کردن همه داده‌ها',
+      saveBtn: 'ثبت امتیاز امروز',
+      saveUpdate: 'به‌روزرسانی امتیاز امروز',
+      saveEdit: 'ذخیره تغییرات این روز',
+      saveDay: 'ثبت این روز',
+      editingPrefix: 'در حال ویرایش روز',
+      cancelEdit: 'انصراف',
+      installTitle: 'روزنگار سلامت رو نصب کن',
+      installSub: 'دسترسی سریع از صفحه اصلی گوشی، حتی بدون اینترنت',
+      installBtn: 'نصب',
+      modalTitle: 'حذف اطلاعات',
+      modalText: 'این کار قابل بازگشت نیست.',
+      modalCancel: 'انصراف',
+      modalConfirm: 'حذف',
+      settingsTitle: 'تنظیمات و هدف‌گذاری',
+      settingsText: 'این مقادیر برای محاسبه BMI و درصد تحقق اهداف روزانه استفاده می‌شن.',
+      settingHeight: 'قد (سانتی‌متر)',
+      settingSleepGoal: 'هدف خواب (ساعت)',
+      settingWaterGoal: 'هدف آب (لیوان)',
+      settingExerciseGoal: 'هدف ورزش (دقیقه)',
+      settingsSave: 'ذخیره',
+      settingsCancel: 'انصراف',
+      searchPlaceholder: 'جستجوی تاریخ (مثلاً ۱۴۰۳/۰۱/۱۵ یا 2024/03/15)',
+      searchBtn: 'جستجو',
+      today: 'امروز'
+    },
+    en: {
+      appTitle: 'Rooznegar Salamat',
+      appSub: 'Sleep, Exercise & Nutrition Daily',
+      scoreLabel: "Today's Score",
+      sleepTitle: 'Sleep',
+      sleepHoursLabel: 'Hours of sleep last night',
+      sleepQualityLabel: 'Sleep Quality',
+      sleepBad: 'Poor',
+      sleepMed: 'Fair',
+      sleepGood: 'Good',
+      sleepExcel: 'Excellent',
+      nutritionTitle: 'Nutrition',
+      nutritionQualityLabel: "Today's Nutrition Quality",
+      nutritionBad: 'Poor',
+      nutritionMed: 'Fair',
+      nutritionGood: 'Good',
+      nutritionExcel: 'Excellent',
+      waterLabel: 'Water Intake',
+      exerciseTitle: 'Exercise',
+      exerciseMinutesLabel: "Today's Activity Duration",
+      intensityLabel: 'Intensity',
+      intensityRest: 'Rest',
+      intensityLight: 'Light',
+      intensityMod: 'Moderate',
+      intensityHard: 'Intense',
+      stepsTitle: 'Step Counter',
+      optionalTag: 'Optional',
+      stepsLabel: "Today's Steps",
+      stepsAuto: '⏳ Getting steps...',
+      healthTitle: 'Health Extra',
+      moodLabel: 'Mood',
+      weightLabel: 'Weight (kg)',
+      bpSystolicLabel: 'Systolic BP',
+      bpDiastolicLabel: 'Diastolic BP',
+      pulseLabel: 'Pulse (bpm)',
+      goalsTitle: "Today's Goals",
+      goalsSub: 'Progress toward your goals',
+      goalSleep: 'Sleep',
+      goalWater: 'Water',
+      goalExercise: 'Exercise',
+      analysisTitle: "Today's Analysis",
+      analysisSub: 'Based on today\'s recorded score',
+      analysisEmpty: 'After saving your score, analysis will appear here.',
+      todoTitle: 'Tasks',
+      todoSub: 'Things you want to do today',
+      chartTitle: 'Recent Trend',
+      chartSub: 'Last 14 days with scores',
+      legendExcellent: 'Excellent',
+      legendGood: 'Good',
+      legendFair: 'Fair',
+      legendCare: 'Needs Care',
+      statsTitle: 'Monthly Stats',
+      historyTitle: 'History',
+      historySub: 'Recorded days, newest first — click ✎ to edit',
+      exportText: 'Backup Export (JSON)',
+      importText: 'Restore from File',
+      resetText: 'Clear All Data',
+      saveBtn: 'Save Today\'s Score',
+      saveUpdate: 'Update Today\'s Score',
+      saveEdit: 'Save Changes',
+      saveDay: 'Save This Day',
+      editingPrefix: 'Editing',
+      cancelEdit: 'Cancel',
+      installTitle: 'Install Rooznegar Salamat',
+      installSub: 'Quick access from home screen, even offline',
+      installBtn: 'Install',
+      modalTitle: 'Delete Data',
+      modalText: 'This action cannot be undone.',
+      modalCancel: 'Cancel',
+      modalConfirm: 'Delete',
+      settingsTitle: 'Settings & Goals',
+      settingsText: 'These values are used for BMI calculation and daily goal tracking.',
+      settingHeight: 'Height (cm)',
+      settingSleepGoal: 'Sleep Goal (hours)',
+      settingWaterGoal: 'Water Goal (glasses)',
+      settingExerciseGoal: 'Exercise Goal (minutes)',
+      settingsSave: 'Save',
+      settingsCancel: 'Cancel',
+      searchPlaceholder: 'Search date (e.g. 1403/01/15 or 2024/03/15)',
+      searchBtn: 'Search',
+      today: 'Today'
+    }
+  };
+
+  function t(key) {
+    return translations[currentLang]?.[key] || translations.fa[key] || key;
+  }
+
+  // ===================== Storage =====================
   const hasClaudeStorage = !!(window.storage && typeof window.storage.get === 'function' && typeof window.storage.set === 'function');
 
   async function storageGet(key){
@@ -853,22 +1093,16 @@
       try{
         const res = await window.storage.get(key, false);
         return (res && res.value!=null) ? res.value : null;
-      }catch(e){
-        return null;
-      }
+      }catch(e){ return null; }
     }
     try{ return localStorage.getItem(key); }catch(e){ return null; }
   }
-
   async function storageSet(key, value){
     if(hasClaudeStorage){
       try{
         const res = await window.storage.set(key, value, false);
         return !!res;
-      }catch(e){
-        console.error('storage error', e);
-        return false;
-      }
+      }catch(e){ console.error('storage error', e); return false; }
     }
     try{ localStorage.setItem(key, value); return true; }catch(e){ console.error('storage error', e); return false; }
   }
@@ -895,8 +1129,18 @@
   async function persistSettings(){
     return await storageSet(SETTINGS_KEY, JSON.stringify(settings));
   }
+  function loadTheme(){
+    try{ return localStorage.getItem(THEME_KEY) || 'light'; }catch(e){ return 'light'; }
+  }
+  function saveTheme(t){
+    try{ localStorage.setItem(THEME_KEY, t); }catch(e){} }
+  function loadLang(){
+    try{ return localStorage.getItem(LANG_KEY) || 'fa'; }catch(e){ return 'fa'; }
+  }
+  function saveLang(l){
+    try{ localStorage.setItem(LANG_KEY, l); }catch(e){} }
 
-  /* ===================== Gauge ===================== */
+  // ===================== Gauge =====================
   const GAUGE_CX=160, GAUGE_CY=172, GAUGE_R=126;
   const SEGMENTS = [
     {key:'sleep', start:34, end:90},
@@ -942,10 +1186,10 @@
     const currentSig = JSON.stringify(state);
     if(savedSnapshot === currentSig){
       el.className = 'save-state is-saved';
-      el.innerHTML = editingKey===todayKey ? '✓ امتیاز امروز ثبت شده' : '✓ این روز ثبت شده';
+      el.innerHTML = editingKey===todayKey ? '✓ ' + (currentLang === 'fa' ? 'امتیاز امروز ثبت شده' : 'Today\'s score saved') : '✓ ' + (currentLang === 'fa' ? 'این روز ثبت شده' : 'This day is saved');
     } else {
       el.className = 'save-state is-unsaved';
-      el.innerHTML = '● تغییرات ذخیره نشده — دکمه زیر رو بزن';
+      el.innerHTML = '● ' + (currentLang === 'fa' ? 'تغییرات ذخیره نشده — دکمه زیر رو بزن' : 'Unsaved changes — click the button below');
     }
   }
 
@@ -962,48 +1206,56 @@
     const exercisePct = clamp(Math.round(state.exerciseMinutes/Math.max(1,settings.exerciseGoal)*100), 0, 100);
 
     document.getElementById('goalSleepFill').style.width = sleepPct+'%';
-    document.getElementById('goalSleepPct').textContent = toFa(sleepPct)+'٪ از '+toFa(settings.sleepGoal)+' ساعت';
+    document.getElementById('goalSleepPct').textContent = toFa(sleepPct)+'% ' + (currentLang === 'fa' ? 'از' : 'of') + ' ' + toFa(settings.sleepGoal)+' ' + (currentLang === 'fa' ? 'ساعت' : 'hr');
     document.getElementById('goalWaterFill').style.width = waterPct+'%';
-    document.getElementById('goalWaterPct').textContent = toFa(waterPct)+'٪ از '+toFa(settings.waterGoal)+' لیوان';
+    document.getElementById('goalWaterPct').textContent = toFa(waterPct)+'% ' + (currentLang === 'fa' ? 'از' : 'of') + ' ' + toFa(settings.waterGoal)+' ' + (currentLang === 'fa' ? 'لیوان' : 'glasses');
     document.getElementById('goalExerciseFill').style.width = exercisePct+'%';
-    document.getElementById('goalExercisePct').textContent = toFa(exercisePct)+'٪ از '+toFa(settings.exerciseGoal)+' دقیقه';
+    document.getElementById('goalExercisePct').textContent = toFa(exercisePct)+'% ' + (currentLang === 'fa' ? 'از' : 'of') + ' ' + toFa(settings.exerciseGoal)+' ' + (currentLang === 'fa' ? 'دقیقه' : 'min');
   }
 
   function renderAnalysis(entry){
     const box = document.getElementById('analysisBox');
     if(!entry){
-      box.innerHTML = '<div class="empty-state"><span class="emoji">🧠</span>بعد از ثبت امتیاز، تحلیل اینجا نمایش داده می‌شه.</div>';
+      box.innerHTML = '<div class="empty-state"><span class="emoji">🧠</span><span>' + t('analysisEmpty') + '</span></div>';
       return;
     }
     const cats = [
-      {key:'sleep', label:'خواب', emoji:'😴', score:entry.scores.sleep},
-      {key:'nutrition', label:'تغذیه', emoji:'🥗', score:entry.scores.nutrition},
-      {key:'exercise', label:'ورزش', emoji:'🏃', score:entry.scores.exercise}
+      {key:'sleep', label: t('goalSleep'), emoji:'😴', score:entry.scores.sleep},
+      {key:'nutrition', label: t('goalWater'), emoji:'🥗', score:entry.scores.nutrition},
+      {key:'exercise', label: t('goalExercise'), emoji:'🏃', score:entry.scores.exercise}
     ];
     const sorted = cats.slice().sort((a,b)=>b.score-a.score);
     const strongest = sorted[0], weakest = sorted[sorted.length-1];
 
     const suggestions = {
-      sleep: state.sleepHours < settings.sleepGoal ? 'سعی کن امشب کمی زودتر بخوابی تا به '+toFa(settings.sleepGoal)+' ساعت برسی.' : 'کیفیت خوابت رو با ساعت خواب منظم حفظ کن.',
-      nutrition: entry.waterGlasses < settings.waterGoal ? toFa(Math.max(1, settings.waterGoal-entry.waterGlasses))+' لیوان آب بیشتر بنوش.' : 'تغذیه‌ت رو متنوع و کم‌نمک نگه دار.',
-      exercise: entry.exerciseMinutes < settings.exerciseGoal ? 'حتی '+toFa(15)+' دقیقه پیاده‌روی امروز کمک می‌کنه.' : 'همین روند فعالیت رو ادامه بده.'
+      sleep: state.sleepHours < settings.sleepGoal ? 
+        (currentLang === 'fa' ? 'سعی کن امشب کمی زودتر بخوابی تا به '+toFa(settings.sleepGoal)+' ساعت برسی.' : 'Try to sleep earlier tonight to reach '+toFa(settings.sleepGoal)+' hours.') :
+        (currentLang === 'fa' ? 'کیفیت خوابت رو با ساعت خواب منظم حفظ کن.' : 'Keep your sleep quality with a regular schedule.'),
+      nutrition: state.waterGlasses < settings.waterGoal ? 
+        (currentLang === 'fa' ? toFa(Math.max(1, settings.waterGoal-state.waterGlasses))+' لیوان آب بیشتر بنوش.' : 'Drink '+toFa(Math.max(1, settings.waterGoal-state.waterGlasses))+' more glasses of water.') :
+        (currentLang === 'fa' ? 'تغذیه‌ت رو متنوع و کم‌نمک نگه دار.' : 'Keep your nutrition varied and low-salt.'),
+      exercise: state.exerciseMinutes < settings.exerciseGoal ? 
+        (currentLang === 'fa' ? 'حتی '+toFa(15)+' دقیقه پیاده‌روی امروز کمک می‌کنه.' : 'Even '+toFa(15)+' minutes of walking today will help.') :
+        (currentLang === 'fa' ? 'همین روند فعالیت رو ادامه بده.' : 'Keep up this activity level.')
     };
 
     let html = '';
-    html += `<div class="analysis-item is-strength"><span class="analysis-emoji">${strongest.emoji}</span><div><b>نقطه قوت امروز</b>${strongest.label} (${toFa(strongest.score)} امتیاز)</div></div>`;
-    html += `<div class="analysis-item is-weakness"><span class="analysis-emoji">${weakest.emoji}</span><div><b>نقطه ضعف امروز</b>${weakest.label} (${toFa(weakest.score)} امتیاز)</div></div>`;
-    html += `<div class="analysis-item is-suggestion"><span class="analysis-emoji">💡</span><div><b>پیشنهاد</b>${suggestions[weakest.key]}</div></div>`;
+    html += `<div class="analysis-item is-strength"><span class="analysis-emoji">${strongest.emoji}</span><div><b>${currentLang === 'fa' ? 'نقطه قوت امروز' : 'Strength'}</b>${strongest.label} (${toFa(strongest.score)} ${currentLang === 'fa' ? 'امتیاز' : 'pts'})</div></div>`;
+    html += `<div class="analysis-item is-weakness"><span class="analysis-emoji">${weakest.emoji}</span><div><b>${currentLang === 'fa' ? 'نقطه ضعف امروز' : 'Weakness'}</b>${weakest.label} (${toFa(weakest.score)} ${currentLang === 'fa' ? 'امتیاز' : 'pts'})</div></div>`;
+    html += `<div class="analysis-item is-suggestion"><span class="analysis-emoji">💡</span><div><b>${currentLang === 'fa' ? 'پیشنهاد' : 'Suggestion'}</b>${suggestions[weakest.key]}</div></div>`;
     box.innerHTML = html;
   }
 
-  /* ===================== Form wiring ===================== */
+  // ===================== Form =====================
   function syncFormUI(){
     document.getElementById('sleepHours').value = state.sleepHours;
-    document.getElementById('sleepHoursVal').textContent = toFa(state.sleepHours)+' ساعت';
+    document.getElementById('sleepHoursVal').textContent = toFa(state.sleepHours)+' ' + (currentLang === 'fa' ? 'ساعت' : 'hr');
     document.getElementById('waterGlasses').value = state.waterGlasses;
-    document.getElementById('waterVal').textContent = toFa(state.waterGlasses)+' لیوان';
+    document.getElementById('waterVal').textContent = toFa(state.waterGlasses)+' ' + (currentLang === 'fa' ? 'لیوان' : 'glasses');
     document.getElementById('exerciseMinutes').value = state.exerciseMinutes;
-    document.getElementById('exerciseMinutesVal').textContent = toFa(state.exerciseMinutes)+' دقیقه';
+    document.getElementById('exerciseMinutesVal').textContent = toFa(state.exerciseMinutes)+' ' + (currentLang === 'fa' ? 'دقیقه' : 'min');
+    document.getElementById('stepsInput').value = state.steps || 0;
+    document.getElementById('stepsVal').textContent = toFa(state.steps || 0)+' ' + (currentLang === 'fa' ? 'قدم' : 'steps');
 
     setChipSelected('sleepQualityChips', state.sleepQuality);
     setChipSelected('nutritionQualityChips', state.nutritionQuality);
@@ -1029,7 +1281,7 @@
     const bmi = computeBmi(state.weight, settings.height);
     if(bmi){
       el.style.display = 'block';
-      el.innerHTML = 'BMI: <b>'+toFa(bmi.toFixed(1))+'</b> — '+bmiLabel(bmi);
+      el.innerHTML = 'BMI: <b>'+toFa(bmi.toFixed(1))+'</b> — ' + bmiLabel(bmi);
     } else {
       el.style.display = 'none';
     }
@@ -1060,26 +1312,32 @@
     const btn = e.target.closest('.mood-chip');
     if(!btn) return;
     const val = Number(btn.dataset.value);
-    state.mood = (state.mood===val) ? null : val; // tap again to clear
+    state.mood = (state.mood===val) ? null : val;
     syncFormUI();
     onStateChange();
   });
 
   document.getElementById('sleepHours').addEventListener('input', e=>{
     state.sleepHours = Number(e.target.value);
-    document.getElementById('sleepHoursVal').textContent = toFa(state.sleepHours)+' ساعت';
+    document.getElementById('sleepHoursVal').textContent = toFa(state.sleepHours)+' ' + (currentLang === 'fa' ? 'ساعت' : 'hr');
     onStateChange();
   });
   document.getElementById('waterGlasses').addEventListener('input', e=>{
     state.waterGlasses = Number(e.target.value);
-    document.getElementById('waterVal').textContent = toFa(state.waterGlasses)+' لیوان';
+    document.getElementById('waterVal').textContent = toFa(state.waterGlasses)+' ' + (currentLang === 'fa' ? 'لیوان' : 'glasses');
     onStateChange();
   });
   document.getElementById('exerciseMinutes').addEventListener('input', e=>{
     state.exerciseMinutes = Number(e.target.value);
-    document.getElementById('exerciseMinutesVal').textContent = toFa(state.exerciseMinutes)+' دقیقه';
+    document.getElementById('exerciseMinutesVal').textContent = toFa(state.exerciseMinutes)+' ' + (currentLang === 'fa' ? 'دقیقه' : 'min');
     onStateChange();
   });
+  document.getElementById('stepsInput').addEventListener('input', e=>{
+    state.steps = Number(e.target.value);
+    document.getElementById('stepsVal').textContent = toFa(state.steps)+' ' + (currentLang === 'fa' ? 'قدم' : 'steps');
+    onStateChange();
+  });
+
   document.querySelectorAll('.chip-group').forEach(group=>{
     group.addEventListener('click', e=>{
       const btn = e.target.closest('.chip');
@@ -1091,11 +1349,13 @@
     });
   });
 
-  /* ===================== Edit mode (history) ===================== */
+  // ===================== Edit mode =====================
   function gaugeDateLabel(key){
     const d = parseDateKey(key);
-    const label = formatJalali(d, {weekday:'long', day:'numeric', month:'long'});
-    return key===todayKey ? label+' (امروز)' : label;
+    const label = currentLang === 'fa' ? 
+      formatJalali(d, {weekday:'long', day:'numeric', month:'long'}) :
+      formatEnglish(d, {weekday:'long', day:'numeric', month:'long', year:'numeric'});
+    return key===todayKey ? label + ' (' + t('today') + ')' : label;
   }
 
   function stateFromEntry(entry){
@@ -1107,7 +1367,8 @@
       bpSystolic: entry.bpSystolic!=null ? entry.bpSystolic : null,
       bpDiastolic: entry.bpDiastolic!=null ? entry.bpDiastolic : null,
       pulse: entry.pulse!=null ? entry.pulse : null,
-      mood: entry.mood!=null ? entry.mood : null
+      mood: entry.mood!=null ? entry.mood : null,
+      steps: entry.steps || 0
     };
   }
 
@@ -1117,7 +1378,6 @@
     editingKey = key;
     state = stateFromEntry(entry);
     savedSnapshot = JSON.stringify(state);
-
     syncFormUI();
     onStateChange();
     renderAnalysis(entry);
@@ -1125,11 +1385,11 @@
 
     const banner = document.getElementById('editBanner');
     banner.style.display = 'flex';
-    document.getElementById('editBannerDate').textContent =
-      formatJalali(parseDateKey(key), {day:'numeric', month:'long'});
+    document.getElementById('editBannerDate').textContent = currentLang === 'fa' ?
+      formatJalali(parseDateKey(key), {day:'numeric', month:'long'}) :
+      formatEnglish(parseDateKey(key), {day:'numeric', month:'long'});
 
-    saveBtn.textContent = 'ذخیره تغییرات این روز';
-
+    saveBtn.textContent = t('saveEdit');
     document.querySelector('.panel-left').scrollIntoView({behavior:'smooth', block:'start'});
   }
 
@@ -1138,12 +1398,12 @@
     if(entries[todayKey]){
       state = stateFromEntry(entries[todayKey]);
       savedSnapshot = JSON.stringify(state);
-      saveBtn.textContent = 'به‌روزرسانی امتیاز امروز';
+      saveBtn.textContent = t('saveUpdate');
       renderAnalysis(entries[todayKey]);
     } else {
       state = Object.assign({}, DEFAULT_STATE);
       savedSnapshot = null;
-      saveBtn.textContent = 'ثبت امتیاز امروز';
+      saveBtn.textContent = t('saveBtn');
       renderAnalysis(null);
     }
     syncFormUI();
@@ -1154,40 +1414,39 @@
 
   document.getElementById('cancelEditBtn').addEventListener('click', exitEditMode);
 
-  /* ===================== Save ===================== */
+  // ===================== Save =====================
   const saveBtn = document.getElementById('saveBtn');
   saveBtn.addEventListener('click', async ()=>{
     saveBtn.disabled = true;
     const prevLabel = saveBtn.textContent;
-    saveBtn.textContent = 'در حال ذخیره...';
+    saveBtn.textContent = currentLang === 'fa' ? 'در حال ذخیره...' : 'Saving...';
     const scores = computeScores(state);
-    const wasEditingPastDay = editingKey !== todayKey;
     const savedKey = editingKey;
     entries[savedKey] = Object.assign({}, state, { scores, savedAt: new Date().toISOString() });
     const ok = await persistEntries(entries);
     saveBtn.disabled = false;
     if(ok){
       savedSnapshot = JSON.stringify(state);
-      showToast(wasEditingPastDay ? 'تغییرات این روز ذخیره شد ✅' : 'امتیاز امروز ذخیره شد ✅');
+      showToast(currentLang === 'fa' ? 'امتیاز ذخیره شد ✅' : 'Score saved ✅');
       renderChart();
       renderHistory();
       renderStreak();
       renderAnalysis(entries[savedKey]);
       renderCalendar();
       renderStatsDashboard();
-      if(wasEditingPastDay){
+      if(editingKey!==todayKey){
         exitEditMode();
       } else {
-        saveBtn.textContent = 'به‌روزرسانی امتیاز امروز';
+        saveBtn.textContent = t('saveUpdate');
         refreshSaveStateBadge();
       }
     } else {
       saveBtn.textContent = prevLabel;
-      showToast('ذخیره انجام نشد، دوباره تلاش کن');
+      showToast(currentLang === 'fa' ? 'ذخیره انجام نشد، دوباره تلاش کن' : 'Save failed, try again');
     }
   });
 
-  /* ===================== Toast ===================== */
+  // ===================== Toast =====================
   let toastTimer = null;
   function showToast(msg){
     const el = document.getElementById('toast');
@@ -1197,7 +1456,7 @@
     toastTimer = setTimeout(()=> el.classList.remove('visible'), 2400);
   }
 
-  /* ===================== Modal (confirm) ===================== */
+  // ===================== Modal =====================
   const modalOverlay = document.getElementById('modalOverlay');
   let modalConfirmAction = null;
   function openConfirm(title, text, onConfirm){
@@ -1220,8 +1479,8 @@
 
   document.getElementById('resetLink').addEventListener('click', ()=>{
     openConfirm(
-      'پاک‌کردن همه داده‌ها',
-      'تمام روزهای ثبت‌شده برای همیشه حذف می‌شن و این کار قابل بازگشت نیست. مطمئنی؟',
+      t('modalTitle'),
+      t('modalText'),
       async ()=>{
         entries = {};
         await persistEntries(entries);
@@ -1232,40 +1491,41 @@
         onStateChange();
         document.getElementById('gaugeDate').textContent = gaugeDateLabel(todayKey);
         document.getElementById('editBanner').style.display = 'none';
-        saveBtn.textContent = 'ثبت امتیاز امروز';
+        saveBtn.textContent = t('saveBtn');
         renderChart();
         renderHistory();
         renderStreak();
         renderAnalysis(null);
         renderCalendar();
         renderStatsDashboard();
-        showToast('همه داده‌ها حذف شدند');
+        showToast(currentLang === 'fa' ? 'همه داده‌ها حذف شدند' : 'All data cleared');
       }
     );
   });
 
   function requestDeleteEntry(key){
     const d = parseDateKey(key);
+    const label = currentLang === 'fa' ?
+      formatJalali(d,{weekday:'long', day:'numeric', month:'long'}) :
+      formatEnglish(d,{weekday:'long', day:'numeric', month:'long', year:'numeric'});
     openConfirm(
-      'حذف این روز',
-      formatJalali(d,{weekday:'long', day:'numeric', month:'long'}) + ' از تاریخچه حذف می‌شه.',
+      t('modalTitle'),
+      label + ' ' + (currentLang === 'fa' ? 'از تاریخچه حذف می‌شه.' : 'will be removed from history.'),
       async ()=>{
         delete entries[key];
         await persistEntries(entries);
-        if(key===editingKey){
-          exitEditMode();
-        }
+        if(key===editingKey) exitEditMode();
         renderChart();
         renderHistory();
         renderStreak();
         renderCalendar();
         renderStatsDashboard();
-        showToast('روز حذف شد');
+        showToast(currentLang === 'fa' ? 'روز حذف شد' : 'Day deleted');
       }
     );
   }
 
-  /* ===================== Chart ===================== */
+  // ===================== Chart =====================
   function sortedEntryList(){
     return Object.keys(entries).sort().map(k=>({key:k, data:entries[k]}));
   }
@@ -1274,7 +1534,7 @@
     const wrap = document.getElementById('chartWrap');
     const list = sortedEntryList().slice(-14);
     if(list.length===0){
-      wrap.innerHTML = '<div class="empty-state"><span class="emoji">📈</span>هنوز داده‌ای برای نمایش روند نیست.<br>اولین امتیاز امروزت رو ثبت کن!</div>';
+      wrap.innerHTML = '<div class="empty-state"><span class="emoji">📈</span><span>' + (currentLang === 'fa' ? 'هنوز داده‌ای برای نمایش روند نیست. اولین امتیاز امروزت رو ثبت کن!' : 'No data yet. Record your first score today!') + '</span></div>';
       return;
     }
     const W=600, H=240, padL=18, padR=40, padT=18, padB=30;
@@ -1286,7 +1546,7 @@
     function yAt(score){ return padT + plotH*(1-score/100); }
     const baseY = padT+plotH;
 
-    let linePts = [], areaPts = [];
+    let linePts = [];
     list.forEach((item,i)=>{
       const x=xAt(i), y=yAt(item.data.scores.total);
       linePts.push([x,y]);
@@ -1303,12 +1563,12 @@
 
     const oldestDate = parseDateKey(list[0].key);
     const newestDate = parseDateKey(list[n-1].key);
-    const newestLabel = list[n-1].key===todayKey ? 'امروز' : formatJalali(newestDate,{day:'numeric',month:'short'});
-    const oldestLabel = formatJalali(oldestDate,{day:'numeric',month:'short'});
+    const newestLabel = list[n-1].key===todayKey ? t('today') : (currentLang === 'fa' ? formatJalali(newestDate,{day:'numeric',month:'short'}) : formatEnglish(newestDate,{day:'numeric',month:'short'}));
+    const oldestLabel = currentLang === 'fa' ? formatJalali(oldestDate,{day:'numeric',month:'short'}) : formatEnglish(oldestDate,{day:'numeric',month:'short'});
 
     const points = list.map((item,i)=>{
       const x=xAt(i), y=yAt(item.data.scores.total);
-      return `<circle class="chart-point" cx="${x}" cy="${y}" r="5" fill="#fff" stroke="#F07A52" stroke-width="2.5"
+      return `<circle class="chart-point" cx="${x}" cy="${y}" r="5" fill="var(--c-card)" stroke="#F07A52" stroke-width="2.5"
                data-key="${item.key}" data-score="${item.data.scores.total}"></circle>`;
     }).join('');
 
@@ -1335,7 +1595,7 @@
       pt.addEventListener('click', (e)=>{
         const key = pt.dataset.key, score = pt.dataset.score;
         const d = parseDateKey(key);
-        const label = (key===todayKey?'امروز':formatJalali(d,{day:'numeric',month:'long'})) + ' — ' + toFa(score);
+        const label = (key===todayKey?t('today'):(currentLang === 'fa' ? formatJalali(d,{day:'numeric',month:'long'}) : formatEnglish(d,{day:'numeric',month:'long'}))) + ' — ' + toFa(score);
         tooltip.textContent = label;
         const svgRect = wrap.querySelector('svg').getBoundingClientRect();
         const scaleX = svgRect.width/W, scaleY = svgRect.height/H;
@@ -1348,22 +1608,23 @@
     });
   }
 
-  /* ===================== History ===================== */
+  // ===================== History =====================
   const editPencilSvg = '<svg viewBox="0 0 16 16" fill="none"><path d="M11.3 2.3a1.5 1.5 0 0 1 2.1 0l.3.3a1.5 1.5 0 0 1 0 2.1l-7.8 7.8-3 .8.8-3 7.6-7.6Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>';
 
   function renderHistory(){
     const el = document.getElementById('historyList');
     const list = sortedEntryList().reverse();
     if(list.length===0){
-      el.innerHTML = '<div class="empty-state"><span class="emoji">🗓️</span>هنوز هیچ روزی ثبت نشده.</div>';
+      el.innerHTML = '<div class="empty-state"><span class="emoji">🗓️</span><span>' + (currentLang === 'fa' ? 'هنوز هیچ روزی ثبت نشده.' : 'No days recorded yet.') + '</span></div>';
       return;
     }
     el.innerHTML = list.map(item=>{
       const d = parseDateKey(item.key);
-      const label = item.key===todayKey ? 'امروز' : formatJalali(d,{weekday:'short', day:'numeric', month:'short'});
+      const label = item.key===todayKey ? t('today') : (currentLang === 'fa' ? formatJalali(d,{weekday:'short', day:'numeric', month:'short', year:'numeric'}) : formatEnglish(d,{weekday:'short', day:'numeric', month:'short', year:'numeric'}));
+      const fullDate = currentLang === 'fa' ? formatJalali(d, {weekday:'long', day:'numeric', month:'long', year:'numeric'}) : formatEnglish(d, {weekday:'long', day:'numeric', month:'long', year:'numeric'});
       return `<div class="history-row">
         <div class="history-dot" style="background:${tierDot(item.data.scores.total)}"></div>
-        <div class="history-date">${label}</div>
+        <div class="history-date" title="${fullDate}">${label}</div>
         <div class="history-score">${toFa(item.data.scores.total)}</div>
         <button class="history-edit" data-key="${item.key}" aria-label="ویرایش">${editPencilSvg}</button>
         <button class="history-del" data-key="${item.key}" aria-label="حذف">×</button>
@@ -1377,7 +1638,7 @@
     });
   }
 
-  /* ===================== Todo ===================== */
+  // ===================== Todo =====================
   function escapeHtml(str){
     const div = document.createElement('div');
     div.textContent = str;
@@ -1388,13 +1649,13 @@
     const list = document.getElementById('todoList');
     const progress = document.getElementById('todoProgress');
     if(todos.length===0){
-      list.innerHTML = '<div class="empty-state"><span class="emoji">✅</span>هنوز کاری اضافه نکردی.</div>';
+      list.innerHTML = '<div class="empty-state"><span class="emoji">✅</span><span>' + (currentLang === 'fa' ? 'هنوز کاری اضافه نکردی.' : 'No tasks added yet.') + '</span></div>';
       progress.style.display = 'none';
       return;
     }
     const doneCount = todos.filter(t=>t.done).length;
     progress.style.display = 'block';
-    progress.textContent = toFa(doneCount)+' از '+toFa(todos.length)+' کار انجام شده';
+    progress.textContent = toFa(doneCount)+' ' + (currentLang === 'fa' ? 'از' : 'of') + ' ' + toFa(todos.length) + ' ' + (currentLang === 'fa' ? 'کار انجام شده' : 'tasks done');
 
     const checkSvg = '<svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.2 11.5L13 4.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
     list.innerHTML = todos.map(t=>`
@@ -1447,7 +1708,7 @@
     }
   });
 
-  /* ===================== Streak ===================== */
+  // ===================== Streak =====================
   function computeStreak(){
     let streak=0;
     let d = entries[todayKey] ? new Date(TODAY) : (()=>{ const y=new Date(TODAY); y.setDate(y.getDate()-1); return y; })();
@@ -1463,13 +1724,13 @@
     const pill = document.getElementById('streakPill');
     if(streak>0){
       pill.style.display='flex';
-      document.getElementById('streakNum').textContent = toFa(streak)+' روز متوالی';
+      document.getElementById('streakNum').textContent = toFa(streak)+' ' + (currentLang === 'fa' ? 'روز متوالی' : 'day streak');
     } else {
       pill.style.display='none';
     }
   }
 
-  /* ===================== Settings modal ===================== */
+  // ===================== Settings =====================
   const settingsModalOverlay = document.getElementById('settingsModalOverlay');
   document.getElementById('settingsBtn').addEventListener('click', ()=>{
     document.getElementById('settingHeight').value = settings.height;
@@ -1497,14 +1758,141 @@
     settingsModalOverlay.classList.remove('visible');
     updateBmiReadout();
     renderGoals();
-    showToast('تنظیمات ذخیره شد ✅');
+    showToast(currentLang === 'fa' ? 'تنظیمات ذخیره شد ✅' : 'Settings saved ✅');
   });
 
-  /* ===================== Calendar heatmap ===================== */
+  // ===================== Theme =====================
+  function applyTheme(theme){
+    document.documentElement.setAttribute('data-theme', theme);
+    document.getElementById('themeToggle').textContent = theme === 'dark' ? '☀️' : '🌙';
+    saveTheme(theme);
+  }
+  document.getElementById('themeToggle').addEventListener('click', ()=>{
+    const current = document.documentElement.getAttribute('data-theme') || 'light';
+    applyTheme(current === 'light' ? 'dark' : 'light');
+  });
+
+  // ===================== Language =====================
+  function applyLanguage(lang){
+    currentLang = lang;
+    document.documentElement.setAttribute('dir', lang === 'fa' ? 'rtl' : 'ltr');
+    document.documentElement.setAttribute('lang', lang);
+    document.getElementById('langToggle').textContent = lang === 'fa' ? '🇬🇧 English' : '🇮🇷 فارسی';
+    saveLang(lang);
+    updateUI();
+  }
+
+  function updateUI(){
+    // Update all translatable elements
+    document.getElementById('appTitle').textContent = t('appTitle');
+    document.getElementById('brandSubtitle').textContent = t('appSub');
+    document.getElementById('scoreLabel').textContent = t('scoreLabel');
+    document.getElementById('sleepTitle').textContent = t('sleepTitle');
+    document.getElementById('sleepHoursLabel').textContent = t('sleepHoursLabel');
+    document.getElementById('sleepQualityLabel').textContent = t('sleepQualityLabel');
+    document.getElementById('sq0').textContent = t('sleepBad');
+    document.getElementById('sq1').textContent = t('sleepMed');
+    document.getElementById('sq2').textContent = t('sleepGood');
+    document.getElementById('sq3').textContent = t('sleepExcel');
+    document.getElementById('nutritionTitle').textContent = t('nutritionTitle');
+    document.getElementById('nutritionQualityLabel').textContent = t('nutritionQualityLabel');
+    document.getElementById('nq0').textContent = t('nutritionBad');
+    document.getElementById('nq1').textContent = t('nutritionMed');
+    document.getElementById('nq2').textContent = t('nutritionGood');
+    document.getElementById('nq3').textContent = t('nutritionExcel');
+    document.getElementById('waterLabel').textContent = t('waterLabel');
+    document.getElementById('exerciseTitle').textContent = t('exerciseTitle');
+    document.getElementById('exerciseMinutesLabel').textContent = t('exerciseMinutesLabel');
+    document.getElementById('intensityLabel').textContent = t('intensityLabel');
+    document.getElementById('ei0').textContent = t('intensityRest');
+    document.getElementById('ei1').textContent = t('intensityLight');
+    document.getElementById('ei2').textContent = t('intensityMod');
+    document.getElementById('ei3').textContent = t('intensityHard');
+    document.getElementById('stepsTitle').innerHTML = t('stepsTitle') + ' <span class="optional-tag">' + t('optionalTag') + '</span>';
+    document.getElementById('stepsLabel').textContent = t('stepsLabel');
+    document.getElementById('stepsAutoBadge').textContent = t('stepsAuto');
+    document.getElementById('healthTitle').innerHTML = t('healthTitle') + ' <span class="optional-tag">' + t('optionalTag') + '</span>';
+    document.getElementById('moodLabel').textContent = t('moodLabel');
+    document.getElementById('weightLabel').textContent = t('weightLabel');
+    document.getElementById('bpSystolicLabel').textContent = t('bpSystolicLabel');
+    document.getElementById('bpDiastolicLabel').textContent = t('bpDiastolicLabel');
+    document.getElementById('pulseLabel').textContent = t('pulseLabel');
+    document.getElementById('goalsTitle').textContent = t('goalsTitle');
+    document.getElementById('goalsSub').textContent = t('goalsSub');
+    document.getElementById('goalSleepLabel').textContent = t('goalSleep');
+    document.getElementById('goalWaterLabel').textContent = t('goalWater');
+    document.getElementById('goalExerciseLabel').textContent = t('goalExercise');
+    document.getElementById('analysisTitle').textContent = t('analysisTitle');
+    document.getElementById('analysisSub').textContent = t('analysisSub');
+    document.getElementById('todoTitle').textContent = t('todoTitle');
+    document.getElementById('todoSub').textContent = t('todoSub');
+    document.getElementById('chartTitle').textContent = t('chartTitle');
+    document.getElementById('chartSub').textContent = t('chartSub');
+    document.getElementById('legendExcellent').textContent = t('legendExcellent');
+    document.getElementById('legendGood').textContent = t('legendGood');
+    document.getElementById('legendFair').textContent = t('legendFair');
+    document.getElementById('legendCare').textContent = t('legendCare');
+    document.getElementById('statsTitle').textContent = t('statsTitle');
+    document.getElementById('historyTitle').textContent = t('historyTitle');
+    document.getElementById('historySub').textContent = t('historySub');
+    document.getElementById('exportText').textContent = t('exportText');
+    document.getElementById('importText').textContent = t('importText');
+    document.getElementById('resetLink').textContent = t('resetText');
+    document.getElementById('editBannerPrefix').textContent = t('editingPrefix');
+    document.getElementById('cancelEditBtn').textContent = t('cancelEdit');
+    document.getElementById('installTitle').textContent = t('installTitle');
+    document.getElementById('installSub').textContent = t('installSub');
+    document.getElementById('installBtn').textContent = t('installBtn');
+    document.getElementById('settingsModalTitle').textContent = t('settingsTitle');
+    document.getElementById('settingsModalText').textContent = t('settingsText');
+    document.getElementById('settingHeightLabel').textContent = t('settingHeight');
+    document.getElementById('settingSleepGoalLabel').textContent = t('settingSleepGoal');
+    document.getElementById('settingWaterGoalLabel').textContent = t('settingWaterGoal');
+    document.getElementById('settingExerciseGoalLabel').textContent = t('settingExerciseGoal');
+    document.getElementById('settingsSave').textContent = t('settingsSave');
+    document.getElementById('settingsCancel').textContent = t('settingsCancel');
+    document.getElementById('calSearchInput').placeholder = t('searchPlaceholder');
+    document.getElementById('calSearchBtn').textContent = t('searchBtn');
+    document.getElementById('modalTitle').textContent = t('modalTitle');
+    document.getElementById('modalText').textContent = t('modalText');
+    document.getElementById('modalCancel').textContent = t('modalCancel');
+    document.getElementById('modalConfirm').textContent = t('modalConfirm');
+
+    // Save button
+    if(editingKey === todayKey){
+      if(entries[todayKey]){
+        saveBtn.textContent = t('saveUpdate');
+      } else {
+        saveBtn.textContent = t('saveBtn');
+      }
+    } else {
+      saveBtn.textContent = t('saveEdit');
+    }
+
+    // Re-render dynamic content
+    document.getElementById('gaugeDate').textContent = gaugeDateLabel(editingKey);
+    renderGoals();
+    renderAnalysis(entries[editingKey] || null);
+    renderChart();
+    renderHistory();
+    renderStreak();
+    renderTodos();
+    renderCalendar();
+    renderStatsDashboard();
+    syncFormUI();
+  }
+
+  document.getElementById('langToggle').addEventListener('click', ()=>{
+    const nextLang = currentLang === 'fa' ? 'en' : 'fa';
+    applyLanguage(nextLang);
+  });
+
+  // ===================== Calendar =====================
   const todayJalali = gregorianToJalali(TODAY);
   let calViewJY = todayJalali.jy;
   let calViewJM = todayJalali.jm;
   const PERSIAN_DOW = ['ش','ی','د','س','چ','پ','ج'];
+  const ENGLISH_DOW = ['S','M','T','W','T','F','S'];
 
   function renderCalendar(){
     const grid = document.getElementById('calGrid');
@@ -1512,13 +1900,15 @@
     const info = jalaliMonthInfo(calViewJY, calViewJM);
     if(!info){ grid.innerHTML=''; titleEl.textContent='—'; return; }
 
-    titleEl.textContent = formatJalali(info.firstGregorian, {year:'numeric', month:'long'});
+    titleEl.textContent = currentLang === 'fa' ? 
+      formatJalali(info.firstGregorian, {year:'numeric', month:'long'}) :
+      formatEnglish(info.firstGregorian, {year:'numeric', month:'long'});
 
-    // JS getDay(): 0=Sun..6=Sat. Week starts Saturday in the Persian calendar.
     const jsDow = info.firstGregorian.getDay();
     const leadingBlanks = (jsDow + 1) % 7;
+    const dowLabels = currentLang === 'fa' ? PERSIAN_DOW : ENGLISH_DOW;
 
-    let html = PERSIAN_DOW.map(d=>`<div class="cal-dow">${d}</div>`).join('');
+    let html = dowLabels.map(d=>`<div class="cal-dow">${d}</div>`).join('');
     for(let i=0;i<leadingBlanks;i++){ html += '<div class="cal-cell is-empty"></div>'; }
 
     const todayMidnight = new Date(TODAY.getFullYear(), TODAY.getMonth(), TODAY.getDate());
@@ -1545,11 +1935,8 @@
       if(cell.dataset.future==='1') return;
       cell.addEventListener('click', ()=>{
         const key = cell.dataset.key;
-        if(entries[key]){
-          enterEditMode(key);
-        } else {
-          enterBackfillMode(key);
-        }
+        if(entries[key]) enterEditMode(key);
+        else enterBackfillMode(key);
       });
     });
   }
@@ -1564,9 +1951,10 @@
     document.getElementById('gaugeDate').textContent = gaugeDateLabel(key);
     const banner = document.getElementById('editBanner');
     banner.style.display = 'flex';
-    document.getElementById('editBannerDate').textContent =
-      formatJalali(parseDateKey(key), {day:'numeric', month:'long'}) + ' (ثبت نشده)';
-    saveBtn.textContent = 'ثبت این روز';
+    document.getElementById('editBannerDate').textContent = currentLang === 'fa' ?
+      formatJalali(parseDateKey(key), {day:'numeric', month:'long'}) + ' (ثبت نشده)' :
+      formatEnglish(parseDateKey(key), {day:'numeric', month:'long'}) + ' (not recorded)';
+    saveBtn.textContent = t('saveDay');
     document.querySelector('.panel-left').scrollIntoView({behavior:'smooth', block:'start'});
   }
 
@@ -1583,20 +1971,49 @@
     renderStatsDashboard();
   });
 
-  /* ===================== Stats dashboard ===================== */
+  document.getElementById('calSearchBtn').addEventListener('click', ()=>{
+    const query = document.getElementById('calSearchInput').value.trim();
+    if(!query) return;
+    let d = parseJalaliDate(query);
+    if(!d){
+      const parts = query.split(/[-\/]/).map(Number);
+      if(parts.length===3){
+        const [y,m,day] = parts;
+        if(y>0 && m>=1 && m<=12 && day>=1 && day<=31){
+          d = new Date(y, m-1, day);
+        }
+      }
+    }
+    if(!d || isNaN(d.getTime())){
+      showToast(currentLang === 'fa' ? 'تاریخ نامعتبر. مثال: ۱۴۰۳/۰۱/۱۵ یا 2024/03/15' : 'Invalid date. Example: 1403/01/15 or 2024/03/15');
+      return;
+    }
+    const j = gregorianToJalali(d);
+    calViewJY = j.jy;
+    calViewJM = j.jm;
+    renderCalendar();
+    renderStatsDashboard();
+    document.getElementById('calSearchInput').value = '';
+    showToast((currentLang === 'fa' ? 'رفتن به ' : 'Go to ') + (currentLang === 'fa' ? formatJalali(d, {year:'numeric', month:'long'}) : formatEnglish(d, {year:'numeric', month:'long'})));
+  });
+  document.getElementById('calSearchInput').addEventListener('keydown', e=>{
+    if(e.key==='Enter') document.getElementById('calSearchBtn').click();
+  });
+
+  // ===================== Stats dashboard =====================
   function renderStatsDashboard(){
     const subtitle = document.getElementById('statsSubtitle');
     const grid = document.getElementById('statsGrid');
     const info = jalaliMonthInfo(calViewJY, calViewJM);
     if(!info){ grid.innerHTML=''; return; }
-    subtitle.textContent = formatJalali(info.firstGregorian, {year:'numeric', month:'long'}) + ' را نشون می‌ده';
+    subtitle.textContent = (currentLang === 'fa' ? 'آمار ' : 'Stats for ') + (currentLang === 'fa' ? formatJalali(info.firstGregorian, {year:'numeric', month:'long'}) : formatEnglish(info.firstGregorian, {year:'numeric', month:'long'}));
 
     const monthEntries = Object.keys(entries)
       .filter(k=>{ const j=gregorianToJalali(parseDateKey(k)); return j.jy===calViewJY && j.jm===calViewJM; })
       .map(k=>({key:k, data:entries[k]}));
 
     if(monthEntries.length===0){
-      grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1;"><span class="emoji">📊</span>این ماه هنوز داده‌ای ثبت نشده.</div>';
+      grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1;"><span class="emoji">📊</span><span>' + (currentLang === 'fa' ? 'این ماه هنوز داده‌ای ثبت نشده.' : 'No data recorded this month.') + '</span></div>';
       return;
     }
 
@@ -1611,34 +2028,34 @@
     });
 
     function dayLabel(key){
-      return formatJalali(parseDateKey(key), {day:'numeric', month:'short'});
+      return currentLang === 'fa' ? formatJalali(parseDateKey(key), {day:'numeric', month:'short'}) : formatEnglish(parseDateKey(key), {day:'numeric', month:'short'});
     }
 
     grid.innerHTML = `
       <div class="stat-tile">
-        <div class="stat-tile-label">میانگین امتیاز</div>
+        <div class="stat-tile-label">${currentLang === 'fa' ? 'میانگین امتیاز' : 'Avg Score'}</div>
         <div class="stat-tile-value">${toFa(avgScore)}</div>
-        <div class="stat-tile-sub">${toFa(monthEntries.length)} روز ثبت‌شده</div>
+        <div class="stat-tile-sub">${toFa(monthEntries.length)} ${currentLang === 'fa' ? 'روز ثبت‌شده' : 'days recorded'}</div>
       </div>
       <div class="stat-tile">
-        <div class="stat-tile-label">میانگین خواب</div>
+        <div class="stat-tile-label">${currentLang === 'fa' ? 'میانگین خواب' : 'Avg Sleep'}</div>
         <div class="stat-tile-value">${toFa(avgSleep.toFixed(1))}</div>
-        <div class="stat-tile-sub">ساعت در شب</div>
+        <div class="stat-tile-sub">${currentLang === 'fa' ? 'ساعت در شب' : 'hours/night'}</div>
       </div>
       <div class="stat-tile">
-        <div class="stat-tile-label">میانگین ورزش</div>
+        <div class="stat-tile-label">${currentLang === 'fa' ? 'میانگین ورزش' : 'Avg Exercise'}</div>
         <div class="stat-tile-value">${toFa(Math.round(avgExercise))}</div>
-        <div class="stat-tile-sub">دقیقه در روز</div>
+        <div class="stat-tile-sub">${currentLang === 'fa' ? 'دقیقه در روز' : 'min/day'}</div>
       </div>
       <div class="stat-tile">
-        <div class="stat-tile-label">بهترین روز</div>
+        <div class="stat-tile-label">${currentLang === 'fa' ? 'بهترین روز' : 'Best Day'}</div>
         <div class="stat-tile-value">${toFa(best.data.scores.total)}</div>
         <div class="stat-tile-sub">${dayLabel(best.key)}</div>
       </div>
     `;
   }
 
-  /* ===================== Backup / Restore ===================== */
+  // ===================== Backup / Restore =====================
   document.getElementById('exportBtn').addEventListener('click', ()=>{
     const payload = {
       app: 'rooznegar-salamat',
@@ -1654,7 +2071,7 @@
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
-    showToast('فایل پشتیبان دانلود شد ✅');
+    showToast(currentLang === 'fa' ? 'فایل پشتیبان دانلود شد ✅' : 'Backup file downloaded ✅');
   });
 
   const importFileInput = document.getElementById('importFileInput');
@@ -1666,15 +2083,15 @@
     reader.onload = ()=>{
       let parsed;
       try{ parsed = JSON.parse(reader.result); }
-      catch(err){ showToast('فایل معتبر نیست'); importFileInput.value=''; return; }
+      catch(err){ showToast(currentLang === 'fa' ? 'فایل معتبر نیست' : 'Invalid file'); importFileInput.value=''; return; }
       if(!parsed || typeof parsed!=='object' || !parsed.entries){
-        showToast('ساختار فایل پشتیبان شناسایی نشد');
+        showToast(currentLang === 'fa' ? 'ساختار فایل پشتیبان شناسایی نشد' : 'Backup structure not recognized');
         importFileInput.value='';
         return;
       }
       openConfirm(
-        'بازیابی از فایل پشتیبان',
-        'داده‌های فعلی با محتوای این فایل جایگزین می‌شن. مطمئنی؟',
+        t('modalTitle'),
+        currentLang === 'fa' ? 'داده‌های فعلی با محتوای این فایل جایگزین می‌شن. مطمئنی؟' : 'Current data will be replaced. Are you sure?',
         async ()=>{
           entries = parsed.entries || {};
           todos = parsed.todos || [];
@@ -1689,7 +2106,7 @@
           renderTodos();
           renderCalendar();
           renderStatsDashboard();
-          showToast('بازیابی با موفقیت انجام شد ✅');
+          showToast(currentLang === 'fa' ? 'بازیابی با موفقیت انجام شد ✅' : 'Restore successful ✅');
           importFileInput.value='';
         }
       );
@@ -1697,7 +2114,97 @@
     reader.readAsText(file);
   });
 
-  /* ===================== PWA: install prompt + service worker ===================== */
+  // ===================== Step Counter (Auto) =====================
+  let stepCounterActive = false;
+
+  function initStepCounter(){
+    if (!('DeviceMotionEvent' in window) && !('DeviceOrientationEvent' in window)) {
+      document.getElementById('stepsAutoBadge').textContent = currentLang === 'fa' ? '❌ گام‌شمار پشتیبانی نمی‌شود' : '❌ Step counter not supported';
+      return;
+    }
+
+    // Try using the Pedometer API if available
+    if (window.Pedometer) {
+      try {
+        const pedometer = new Pedometer();
+        pedometer.startPedometerUpdates((data) => {
+          state.steps = data.numberOfSteps || 0;
+          document.getElementById('stepsInput').value = state.steps;
+          document.getElementById('stepsVal').textContent = toFa(state.steps) + ' ' + (currentLang === 'fa' ? 'قدم' : 'steps');
+          document.getElementById('stepsAutoBadge').textContent = '✅ ' + (currentLang === 'fa' ? 'گام‌ها به‌روز می‌شوند' : 'Steps updating');
+          onStateChange();
+        }, (error) => {
+          console.warn('Pedometer error:', error);
+          fallbackStepCounter();
+        });
+        return;
+      } catch(e) {
+        console.warn('Pedometer init failed:', e);
+        fallbackStepCounter();
+      }
+    } else {
+      fallbackStepCounter();
+    }
+  }
+
+  function fallbackStepCounter() {
+    // Use acceleration-based step counting (simple)
+    if (!window.DeviceMotionEvent) {
+      document.getElementById('stepsAutoBadge').textContent = currentLang === 'fa' ? '❌ گام‌شمار پشتیبانی نمی‌شود' : '❌ Step counter not supported';
+      return;
+    }
+
+    let lastAccel = {x:0, y:0, z:0};
+    let stepCount = 0;
+    let threshold = 12;
+    let lastStepTime = 0;
+
+    function handleMotion(event) {
+      const accel = event.accelerationIncludingGravity;
+      if (!accel) return;
+
+      const delta = Math.sqrt(
+        Math.pow(accel.x - lastAccel.x, 2) +
+        Math.pow(accel.y - lastAccel.y, 2) +
+        Math.pow(accel.z - lastAccel.z, 2)
+      );
+
+      lastAccel = {x: accel.x, y: accel.y, z: accel.z};
+
+      const now = Date.now();
+      if (delta > threshold && (now - lastStepTime) > 200) {
+        stepCount++;
+        lastStepTime = now;
+        state.steps = stepCount;
+        document.getElementById('stepsInput').value = state.steps;
+        document.getElementById('stepsVal').textContent = toFa(state.steps) + ' ' + (currentLang === 'fa' ? 'قدم' : 'steps');
+        document.getElementById('stepsAutoBadge').textContent = '🚶 ' + (currentLang === 'fa' ? 'در حال شمارش...' : 'Counting...');
+        onStateChange();
+      }
+    }
+
+    if (typeof DeviceMotionEvent.requestPermission === 'function') {
+      // iOS 13+ requires permission
+      DeviceMotionEvent.requestPermission()
+        .then(state => {
+          if (state === 'granted') {
+            window.addEventListener('devicemotion', handleMotion);
+            document.getElementById('stepsAutoBadge').textContent = '✅ ' + (currentLang === 'fa' ? 'گام‌شمار فعال شد' : 'Step counter active');
+          } else {
+            document.getElementById('stepsAutoBadge').textContent = '⚠️ ' + (currentLang === 'fa' ? 'دسترسی به گام‌شمار داده نشد' : 'Permission denied for step counter');
+          }
+        })
+        .catch(err => {
+          console.warn('Permission error:', err);
+          window.addEventListener('devicemotion', handleMotion);
+        });
+    } else {
+      window.addEventListener('devicemotion', handleMotion);
+      document.getElementById('stepsAutoBadge').textContent = '✅ ' + (currentLang === 'fa' ? 'گام‌شمار فعال شد' : 'Step counter active');
+    }
+  }
+
+  // ===================== PWA =====================
   let deferredInstallPrompt = null;
   const installBanner = document.getElementById('installBanner');
   const installBtn = document.getElementById('installBtn');
@@ -1735,12 +2242,18 @@
 
   if('serviceWorker' in navigator){
     window.addEventListener('load', ()=>{
-      navigator.serviceWorker.register('./sw.js').catch(()=>{ /* runs fine without it too */ });
+      navigator.serviceWorker.register('./sw.js').catch(()=>{});
     });
   }
 
-  /* ===================== Init ===================== */
+  // ===================== Init =====================
   async function init(){
+    const theme = loadTheme();
+    applyTheme(theme);
+
+    const lang = loadLang();
+    applyLanguage(lang);
+
     buildGauge();
     document.getElementById('gaugeDate').textContent = gaugeDateLabel(todayKey);
 
@@ -1751,7 +2264,7 @@
     if(entries[todayKey]){
       state = stateFromEntry(entries[todayKey]);
       savedSnapshot = JSON.stringify(state);
-      saveBtn.textContent = 'به‌روزرسانی امتیاز امروز';
+      saveBtn.textContent = t('saveUpdate');
     }
 
     syncFormUI();
@@ -1766,6 +2279,15 @@
     renderTodos();
     renderCalendar();
     renderStatsDashboard();
+
+    // Start step counter
+    initStepCounter();
+
+    // Set today's date in search placeholder
+    const todayStr = currentLang === 'fa' ? 
+      formatJalali(TODAY, {year:'numeric', month:'2-digit', day:'2-digit'}).replace(/\//g, '-') :
+      TODAY.toISOString().split('T')[0];
+    document.getElementById('calSearchInput').placeholder = t('searchPlaceholder');
   }
 
   init();
