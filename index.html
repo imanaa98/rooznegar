@@ -160,9 +160,43 @@
 
   .field { margin-bottom: 14px; }
   .field:last-child { margin-bottom: 0; }
-  .field-label-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+  .field-label-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; gap: 8px; flex-wrap: wrap; }
   .field-label { font-size: 13px; color: var(--c-ink-soft); font-weight: 600; }
   .field-value { font-size: 13px; font-weight: 700; }
+
+  .input-group {
+    display: flex; align-items: center; gap: 8px;
+    background: var(--c-linen); border-radius: var(--radius-sm);
+    padding: 4px 8px;
+    border: 1.5px solid var(--c-line);
+  }
+  .input-group .field-value {
+    min-width: 40px;
+    text-align: center;
+    font-size: 15px;
+  }
+  .input-group .step-btn {
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    border: none;
+    background: var(--c-card);
+    color: var(--c-ink);
+    font-size: 18px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-1);
+    transition: 0.15s;
+  }
+  .input-group .step-btn:hover {
+    background: var(--c-sleep);
+    color: #fff;
+    transform: scale(1.05);
+  }
+  .input-group .step-btn:active {
+    transform: scale(0.95);
+  }
 
   input[type="range"] {
     -webkit-appearance: none; appearance: none; width: 100%; height: 6px;
@@ -323,7 +357,10 @@
   .todo-add-btn:hover { background: var(--c-exercise); }
   .todo-progress { font-size: 12px; color: var(--c-ink-soft); font-weight: 600; margin: 14px 2px 8px; }
   .todo-list { display: flex; flex-direction: column; }
-  .todo-row { display: flex; align-items: center; gap: 10px; padding: 9px 2px; border-bottom: 1px solid var(--c-line); }
+  .todo-row {
+    display: flex; align-items: center; gap: 10px; padding: 9px 2px;
+    border-bottom: 1px solid var(--c-line);
+  }
   .todo-row:last-child { border-bottom: none; }
   .todo-checkbox {
     width: 22px; height: 22px; border-radius: 7px; border: 2px solid var(--c-line); flex: none;
@@ -333,8 +370,15 @@
   .todo-checkbox.is-done { background: var(--c-nutrition); border-color: var(--c-nutrition); }
   .todo-checkbox svg { width: 13px; height: 13px; opacity: 0; transform: scale(.5); transition: all .15s ease; }
   .todo-checkbox.is-done svg { opacity: 1; transform: scale(1); }
-  .todo-text { flex: 1 1 auto; min-width: 0; font-size: 13.5px; font-weight: 600; word-break: break-word; }
+  .todo-text {
+    flex: 1 1 auto; min-width: 0; font-size: 13px; font-weight: 600; word-break: break-word;
+  }
+  .todo-text .todo-time {
+    display: block; font-size: 10.5px; font-weight: 400; color: var(--c-ink-soft);
+    margin-top: 2px;
+  }
   .todo-text.is-done { color: var(--c-ink-soft); text-decoration: line-through; }
+  .todo-text.is-done .todo-time { text-decoration: none; }
   .todo-del {
     background: none; border: none; color: var(--c-ink-soft); font-size: 16px; line-height: 1;
     padding: 4px 6px; border-radius: 6px; flex: none;
@@ -440,6 +484,14 @@
     padding: 4px 10px; border-radius: 999px; display: inline-block; margin-top: 4px;
   }
 
+  .todo-time {
+    font-size: 10.5px;
+    color: var(--c-ink-soft);
+    display: block;
+    margin-top: 2px;
+    font-weight: 400;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     * { transition-duration: .01ms !important; animation-duration: .01ms !important; }
   }
@@ -481,7 +533,7 @@
       <div class="install-banner-sub" id="installSub">دسترسی سریع از صفحه اصلی گوشی، حتی بدون اینترنت</div>
     </div>
     <div class="install-banner-actions">
-      <button class="install-btn" id="installBtn" id="installBtnText">نصب</button>
+      <button class="install-btn" id="installBtn">نصب</button>
       <button class="install-dismiss" id="installDismiss" aria-label="بستن">×</button>
     </div>
   </div>
@@ -513,7 +565,7 @@
       <div class="card">
         <div class="edit-banner" id="editBanner" style="display:none;">
           <div class="edit-banner-text">✎ <span id="editBannerPrefix">در حال ویرایش روز</span> <span id="editBannerDate"></span></div>
-          <button class="edit-banner-cancel" id="cancelEditBtn" id="cancelEditText">انصراف</button>
+          <button class="edit-banner-cancel" id="cancelEditBtn">انصراف</button>
         </div>
 
         <div class="group" data-cat="sleep">
@@ -524,14 +576,18 @@
           <div class="field">
             <div class="field-label-row">
               <span class="field-label" id="sleepHoursLabel">ساعت خواب شب گذشته</span>
-              <span class="field-value" id="sleepHoursVal">۷ ساعت</span>
+              <div class="input-group">
+                <button class="step-btn" id="sleepDec">−</button>
+                <span class="field-value" id="sleepHoursVal">۰ ساعت</span>
+                <button class="step-btn" id="sleepInc">+</button>
+              </div>
             </div>
-            <input type="range" id="sleepHours" min="0" max="12" step="0.5" value="7">
+            <input type="range" id="sleepHours" min="0" max="12" step="0.5" value="0">
           </div>
           <div class="field">
             <div class="field-label-row"><span class="field-label" id="sleepQualityLabel">کیفیت خواب</span></div>
             <div class="chip-group" data-group="sleepQuality" id="sleepQualityChips">
-              <button class="chip" data-value="0" id="sq0">ضعیف</button>
+              <button class="chip is-selected" data-value="0" id="sq0">ضعیف</button>
               <button class="chip" data-value="1" id="sq1">متوسط</button>
               <button class="chip" data-value="2" id="sq2">خوب</button>
               <button class="chip" data-value="3" id="sq3">عالی</button>
@@ -547,7 +603,7 @@
           <div class="field">
             <div class="field-label-row"><span class="field-label" id="nutritionQualityLabel">کیفیت تغذیه امروز</span></div>
             <div class="chip-group" data-group="nutritionQuality" id="nutritionQualityChips">
-              <button class="chip" data-value="0" id="nq0">ضعیف</button>
+              <button class="chip is-selected" data-value="0" id="nq0">ضعیف</button>
               <button class="chip" data-value="1" id="nq1">متوسط</button>
               <button class="chip" data-value="2" id="nq2">خوب</button>
               <button class="chip" data-value="3" id="nq3">عالی</button>
@@ -556,9 +612,13 @@
           <div class="field">
             <div class="field-label-row">
               <span class="field-label" id="waterLabel">آب مصرفی</span>
-              <span class="field-value" id="waterVal">۵ لیوان</span>
+              <div class="input-group">
+                <button class="step-btn" id="waterDec">−</button>
+                <span class="field-value" id="waterVal">۰ لیوان</span>
+                <button class="step-btn" id="waterInc">+</button>
+              </div>
             </div>
-            <input type="range" id="waterGlasses" min="0" max="20" step="1" value="5">
+            <input type="range" id="waterGlasses" min="0" max="20" step="1" value="0">
           </div>
         </div>
 
@@ -570,14 +630,14 @@
           <div class="field">
             <div class="field-label-row">
               <span class="field-label" id="exerciseMinutesLabel">مدت فعالیت بدنی امروز</span>
-              <span class="field-value" id="exerciseMinutesVal">۲۰ دقیقه</span>
+              <span class="field-value" id="exerciseMinutesVal">۰ دقیقه</span>
             </div>
-            <input type="range" id="exerciseMinutes" min="0" max="120" step="5" value="20">
+            <input type="range" id="exerciseMinutes" min="0" max="120" step="5" value="0">
           </div>
           <div class="field">
             <div class="field-label-row"><span class="field-label" id="intensityLabel">شدت فعالیت</span></div>
             <div class="chip-group" data-group="exerciseIntensity" id="exerciseIntensityChips">
-              <button class="chip" data-value="0" id="ei0">استراحت</button>
+              <button class="chip is-selected" data-value="0" id="ei0">استراحت</button>
               <button class="chip" data-value="1" id="ei1">سبک</button>
               <button class="chip" data-value="2" id="ei2">متوسط</button>
               <button class="chip" data-value="3" id="ei3">شدید</button>
@@ -638,7 +698,7 @@
           </div>
         </div>
 
-        <button class="save-btn" id="saveBtn">ثبت امتیاز امروز</button>
+        <button class="save-btn" id="saveBtn" style="display:none;">ثبت</button>
       </div>
     </div>
 
@@ -724,7 +784,7 @@
           <button class="backup-btn" id="importBtn">📥 <span id="importText">بازیابی از فایل</span></button>
         </div>
         <input type="file" id="importFileInput" accept="application/json" style="display:none;">
-        <button class="reset-link" id="resetLink" id="resetText">پاک‌کردن همه داده‌ها</button>
+        <button class="reset-link" id="resetLink">پاک‌کردن همه داده‌ها</button>
       </div>
     </div>
   </div>
@@ -737,8 +797,8 @@
     <div class="modal-title" id="modalTitle">حذف اطلاعات</div>
     <p class="modal-text" id="modalText">این کار قابل بازگشت نیست.</p>
     <div class="modal-actions">
-      <button class="btn-cancel" id="modalCancel" id="modalCancelText">انصراف</button>
-      <button class="btn-danger" id="modalConfirm" id="modalConfirmText">حذف</button>
+      <button class="btn-cancel" id="modalCancel">انصراف</button>
+      <button class="btn-danger" id="modalConfirm">حذف</button>
     </div>
   </div>
 </div>
@@ -764,7 +824,7 @@
       <input type="number" class="num-input" id="settingExerciseGoal" min="0" max="180" placeholder="۴۵">
     </div>
     <div class="modal-actions">
-      <button class="btn-cancel" id="settingsCancel" id="settingsCancelText">انصراف</button>
+      <button class="btn-cancel" id="settingsCancel">انصراف</button>
       <button class="btn-danger" id="settingsSave" style="background:var(--c-sleep);" id="settingsSaveText">ذخیره</button>
     </div>
   </div>
@@ -785,6 +845,13 @@
   function parseDateKey(key){
     const [y,m,d]=key.split('-').map(Number);
     return new Date(y, m-1, d);
+  }
+
+  function formatTime(date){
+    // Use local time with correct timezone
+    const h = String(date.getHours()).padStart(2,'0');
+    const m = String(date.getMinutes()).padStart(2,'0');
+    return `${h}:${m}`;
   }
 
   const jalaliFormatter = new Intl.DateTimeFormat('en-US-u-ca-persian', {year:'numeric', month:'numeric', day:'numeric'});
@@ -853,7 +920,6 @@
     const hoursScore = clamp(100 - Math.abs(s.sleepHours-8)*14, 0, 100);
     const sleep = Math.round((hoursScore + QUALITY_SCORES[s.sleepQuality]) / 2);
 
-    // ورزش: حد بالای امتیاز در ۳۰ دقیقه
     const minutesScore = clamp(Math.round(s.exerciseMinutes/30*100), 0, 100);
     const exercise = Math.round((minutesScore + INTENSITY_SCORES[s.exerciseIntensity]) / 2);
 
@@ -900,9 +966,9 @@
   const todayKey = getDateKey(TODAY);
 
   const DEFAULT_STATE = {
-    sleepHours:7, sleepQuality:1,
-    exerciseMinutes:20, exerciseIntensity:1,
-    nutritionQuality:1, waterGlasses:5,
+    sleepHours:0, sleepQuality:0,
+    exerciseMinutes:0, exerciseIntensity:0,
+    nutritionQuality:0, waterGlasses:0,
     weight:null, bpSystolic:null, bpDiastolic:null, pulse:null, mood:null,
     steps:0
   };
@@ -912,6 +978,7 @@
   let savedSnapshot = null;
   let editingKey = todayKey;
   let currentLang = 'fa';
+  let saveTimeout = null;
 
   // ===================== i18n =====================
   const translations = {
@@ -993,9 +1060,13 @@
       settingExerciseGoal: 'هدف ورزش (دقیقه)',
       settingsSave: 'ذخیره',
       settingsCancel: 'انصراف',
-      searchPlaceholder: 'جستجوی تاریخ (مثلاً ۱۴۰۳/۰۱/۱۵ یا 2024/03/15)',
+	  searchPlaceholder: 'جستجوی تاریخ (مثلاً ۱۴۰۳/۰۱/۱۵ )',
       searchBtn: 'جستجو',
-      today: 'امروز'
+      today: 'امروز',
+      saved: 'ذخیره شد ✅',
+      stepsActive: '🚶 در حال شمارش...',
+      stepsDone: '✅ گام‌ها به‌روز می‌شوند',
+      stepsUnsupported: '❌ گام‌شمار پشتیبانی نمی‌شود'
     },
     en: {
       appTitle: 'Rooznegar Salamat',
@@ -1054,8 +1125,8 @@
       exportText: 'Backup Export (JSON)',
       importText: 'Restore from File',
       resetText: 'Clear All Data',
-      saveBtn: 'Save Today\'s Score',
-      saveUpdate: 'Update Today\'s Score',
+      saveBtn: "Save Today's Score",
+      saveUpdate: "Update Today's Score",
       saveEdit: 'Save Changes',
       saveDay: 'Save This Day',
       editingPrefix: 'Editing',
@@ -1077,7 +1148,11 @@
       settingsCancel: 'Cancel',
       searchPlaceholder: 'Search date (e.g. 1403/01/15 or 2024/03/15)',
       searchBtn: 'Search',
-      today: 'Today'
+      today: 'Today',
+      saved: 'Saved ✅',
+      stepsActive: '🚶 Counting...',
+      stepsDone: '✅ Steps updating',
+      stepsUnsupported: '❌ Step counter not supported'
     }
   };
 
@@ -1140,6 +1215,29 @@
   function saveLang(l){
     try{ localStorage.setItem(LANG_KEY, l); }catch(e){} }
 
+  // ===================== Auto Save =====================
+  async function autoSave(){
+    clearTimeout(saveTimeout);
+    saveTimeout = setTimeout(async () => {
+      const scores = computeScores(state);
+      const savedKey = editingKey;
+      entries[savedKey] = Object.assign({}, state, { scores, savedAt: new Date().toISOString() });
+      await persistEntries(entries);
+      savedSnapshot = JSON.stringify(state);
+      refreshSaveStateBadge();
+      renderAnalysis(entries[savedKey]);
+      renderChart();
+      renderHistory();
+      renderStreak();
+      renderCalendar();
+      renderStatsDashboard();
+      renderGoals();
+      if (window._initialized) {
+        showToast(t('saved'));
+      }
+    }, 300);
+  }
+
   // ===================== Gauge =====================
   const GAUGE_CX=160, GAUGE_CY=172, GAUGE_R=126;
   const SEGMENTS = [
@@ -1186,10 +1284,10 @@
     const currentSig = JSON.stringify(state);
     if(savedSnapshot === currentSig){
       el.className = 'save-state is-saved';
-      el.innerHTML = editingKey===todayKey ? '✓ ' + (currentLang === 'fa' ? 'امتیاز امروز ثبت شده' : 'Today\'s score saved') : '✓ ' + (currentLang === 'fa' ? 'این روز ثبت شده' : 'This day is saved');
+      el.innerHTML = '✓ ' + (currentLang === 'fa' ? 'ذخیره شد' : 'Saved');
     } else {
       el.className = 'save-state is-unsaved';
-      el.innerHTML = '● ' + (currentLang === 'fa' ? 'تغییرات ذخیره نشده — دکمه زیر رو بزن' : 'Unsaved changes — click the button below');
+      el.innerHTML = '● ' + (currentLang === 'fa' ? 'در حال ذخیره...' : 'Saving...');
     }
   }
 
@@ -1198,6 +1296,7 @@
     renderGauge(scores, true);
     refreshSaveStateBadge();
     renderGoals();
+    autoSave();
   }
 
   function renderGoals(){
@@ -1286,6 +1385,35 @@
       el.style.display = 'none';
     }
   }
+
+  function setupStepButtons(decId, incId, valId, inputId, min, max, step, stateKey, labelKey){
+    const dec = document.getElementById(decId);
+    const inc = document.getElementById(incId);
+    const valEl = document.getElementById(valId);
+    const input = document.getElementById(inputId);
+
+    function update(newVal){
+      state[stateKey] = clamp(Math.round(newVal/step)*step, min, max);
+      input.value = state[stateKey];
+      const label = currentLang === 'fa' ? 
+        (stateKey === 'sleepHours' ? 'ساعت' : 'لیوان') :
+        (stateKey === 'sleepHours' ? 'hr' : 'glasses');
+      valEl.textContent = toFa(state[stateKey]) + ' ' + label;
+      onStateChange();
+    }
+
+    dec.addEventListener('click', ()=>{
+      const newVal = state[stateKey] - step;
+      if(newVal >= min) update(newVal);
+    });
+    inc.addEventListener('click', ()=>{
+      const newVal = state[stateKey] + step;
+      if(newVal <= max) update(newVal);
+    });
+  }
+
+  setupStepButtons('sleepDec', 'sleepInc', 'sleepHoursVal', 'sleepHours', 0, 12, 0.5, 'sleepHours');
+  setupStepButtons('waterDec', 'waterInc', 'waterVal', 'waterGlasses', 0, 20, 1, 'waterGlasses');
 
   document.getElementById('weightInput').addEventListener('input', e=>{
     const v = e.target.value;
@@ -1389,7 +1517,6 @@
       formatJalali(parseDateKey(key), {day:'numeric', month:'long'}) :
       formatEnglish(parseDateKey(key), {day:'numeric', month:'long'});
 
-    saveBtn.textContent = t('saveEdit');
     document.querySelector('.panel-left').scrollIntoView({behavior:'smooth', block:'start'});
   }
 
@@ -1398,12 +1525,10 @@
     if(entries[todayKey]){
       state = stateFromEntry(entries[todayKey]);
       savedSnapshot = JSON.stringify(state);
-      saveBtn.textContent = t('saveUpdate');
       renderAnalysis(entries[todayKey]);
     } else {
       state = Object.assign({}, DEFAULT_STATE);
       savedSnapshot = null;
-      saveBtn.textContent = t('saveBtn');
       renderAnalysis(null);
     }
     syncFormUI();
@@ -1413,38 +1538,6 @@
   }
 
   document.getElementById('cancelEditBtn').addEventListener('click', exitEditMode);
-
-  // ===================== Save =====================
-  const saveBtn = document.getElementById('saveBtn');
-  saveBtn.addEventListener('click', async ()=>{
-    saveBtn.disabled = true;
-    const prevLabel = saveBtn.textContent;
-    saveBtn.textContent = currentLang === 'fa' ? 'در حال ذخیره...' : 'Saving...';
-    const scores = computeScores(state);
-    const savedKey = editingKey;
-    entries[savedKey] = Object.assign({}, state, { scores, savedAt: new Date().toISOString() });
-    const ok = await persistEntries(entries);
-    saveBtn.disabled = false;
-    if(ok){
-      savedSnapshot = JSON.stringify(state);
-      showToast(currentLang === 'fa' ? 'امتیاز ذخیره شد ✅' : 'Score saved ✅');
-      renderChart();
-      renderHistory();
-      renderStreak();
-      renderAnalysis(entries[savedKey]);
-      renderCalendar();
-      renderStatsDashboard();
-      if(editingKey!==todayKey){
-        exitEditMode();
-      } else {
-        saveBtn.textContent = t('saveUpdate');
-        refreshSaveStateBadge();
-      }
-    } else {
-      saveBtn.textContent = prevLabel;
-      showToast(currentLang === 'fa' ? 'ذخیره انجام نشد، دوباره تلاش کن' : 'Save failed, try again');
-    }
-  });
 
   // ===================== Toast =====================
   let toastTimer = null;
@@ -1491,7 +1584,6 @@
         onStateChange();
         document.getElementById('gaugeDate').textContent = gaugeDateLabel(todayKey);
         document.getElementById('editBanner').style.display = 'none';
-        saveBtn.textContent = t('saveBtn');
         renderChart();
         renderHistory();
         renderStreak();
@@ -1534,7 +1626,7 @@
     const wrap = document.getElementById('chartWrap');
     const list = sortedEntryList().slice(-14);
     if(list.length===0){
-      wrap.innerHTML = '<div class="empty-state"><span class="emoji">📈</span><span>' + (currentLang === 'fa' ? 'هنوز داده‌ای برای نمایش روند نیست. اولین امتیاز امروزت رو ثبت کن!' : 'No data yet. Record your first score today!') + '</span></div>';
+      wrap.innerHTML = '<div class="empty-state"><span class="emoji">📈</span><span>' + (currentLang === 'fa' ? 'هنوز داده‌ای برای نمایش روند نیست.' : 'No data yet.') + '</span></div>';
       return;
     }
     const W=600, H=240, padL=18, padR=40, padT=18, padB=30;
@@ -1645,6 +1737,17 @@
     return div.innerHTML;
   }
 
+  function getLocalDateTime(dateStr){
+    const d = new Date(dateStr);
+    // Use local timezone
+    const year = d.getFullYear();
+    const month = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+    const hours = String(d.getHours()).padStart(2, '0');
+    const minutes = String(d.getMinutes()).padStart(2, '0');
+    return { year, month, day, hours, minutes, dateObj: d };
+  }
+
   function renderTodos(){
     const list = document.getElementById('todoList');
     const progress = document.getElementById('todoProgress');
@@ -1658,13 +1761,27 @@
     progress.textContent = toFa(doneCount)+' ' + (currentLang === 'fa' ? 'از' : 'of') + ' ' + toFa(todos.length) + ' ' + (currentLang === 'fa' ? 'کار انجام شده' : 'tasks done');
 
     const checkSvg = '<svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.2 11.5L13 4.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-    list.innerHTML = todos.map(t=>`
-      <div class="todo-row">
+    list.innerHTML = todos.map(t=>{
+      let dateLabel = '';
+      if (t.createdAt) {
+        const dt = getLocalDateTime(t.createdAt);
+        const d = dt.dateObj;
+        if (currentLang === 'fa') {
+          const jalali = gregorianToJalali(d);
+          dateLabel = `${toFa(jalali.jy)}/${toFa(String(jalali.jm).padStart(2,'0'))}/${toFa(String(jalali.jd).padStart(2,'0'))} - ${toFa(dt.hours)}:${toFa(dt.minutes)}`;
+        } else {
+          dateLabel = `${dt.year}/${dt.month}/${dt.day} - ${dt.hours}:${dt.minutes}`;
+        }
+      }
+      return `<div class="todo-row">
         <button class="todo-checkbox ${t.done?'is-done':''}" data-id="${t.id}" aria-label="تکمیل شد">${checkSvg}</button>
-        <div class="todo-text ${t.done?'is-done':''}">${escapeHtml(t.text)}</div>
+        <div class="todo-text ${t.done?'is-done':''}">
+          ${escapeHtml(t.text)}
+          <span class="todo-time">${dateLabel}</span>
+        </div>
         <button class="todo-del" data-id="${t.id}" aria-label="حذف">×</button>
-      </div>
-    `).join('');
+      </div>`;
+    }).join('');
 
     list.querySelectorAll('.todo-checkbox').forEach(btn=>{
       btn.addEventListener('click', ()=> toggleTodo(btn.dataset.id));
@@ -1677,7 +1794,12 @@
   async function addTodo(rawText){
     const text = rawText.trim();
     if(!text) return;
-    todos.push({ id: 't'+Date.now()+Math.random().toString(36).slice(2,7), text, done:false });
+    todos.push({ 
+      id: 't'+Date.now()+Math.random().toString(36).slice(2,7), 
+      text, 
+      done: false,
+      createdAt: new Date().toISOString()
+    });
     renderTodos();
     await persistTodos();
   }
@@ -1783,7 +1905,6 @@
   }
 
   function updateUI(){
-    // Update all translatable elements
     document.getElementById('appTitle').textContent = t('appTitle');
     document.getElementById('brandSubtitle').textContent = t('appSub');
     document.getElementById('scoreLabel').textContent = t('scoreLabel');
@@ -1858,18 +1979,6 @@
     document.getElementById('modalCancel').textContent = t('modalCancel');
     document.getElementById('modalConfirm').textContent = t('modalConfirm');
 
-    // Save button
-    if(editingKey === todayKey){
-      if(entries[todayKey]){
-        saveBtn.textContent = t('saveUpdate');
-      } else {
-        saveBtn.textContent = t('saveBtn');
-      }
-    } else {
-      saveBtn.textContent = t('saveEdit');
-    }
-
-    // Re-render dynamic content
     document.getElementById('gaugeDate').textContent = gaugeDateLabel(editingKey);
     renderGoals();
     renderAnalysis(entries[editingKey] || null);
@@ -1954,7 +2063,6 @@
     document.getElementById('editBannerDate').textContent = currentLang === 'fa' ?
       formatJalali(parseDateKey(key), {day:'numeric', month:'long'}) + ' (ثبت نشده)' :
       formatEnglish(parseDateKey(key), {day:'numeric', month:'long'}) + ' (not recorded)';
-    saveBtn.textContent = t('saveDay');
     document.querySelector('.panel-left').scrollIntoView({behavior:'smooth', block:'start'});
   }
 
@@ -2114,50 +2222,22 @@
     reader.readAsText(file);
   });
 
-  // ===================== Step Counter (Auto) =====================
+  // ===================== Step Counter (Auto - High Sensitivity) =====================
   let stepCounterActive = false;
+  let lastAccel = {x:0, y:0, z:0};
+  let stepCount = 0;
+  let lastStepTime = 0;
+  let accelBuffer = [];
+  let isStepCounterReady = false;
 
   function initStepCounter(){
-    if (!('DeviceMotionEvent' in window) && !('DeviceOrientationEvent' in window)) {
-      document.getElementById('stepsAutoBadge').textContent = currentLang === 'fa' ? '❌ گام‌شمار پشتیبانی نمی‌شود' : '❌ Step counter not supported';
-      return;
-    }
-
-    // Try using the Pedometer API if available
-    if (window.Pedometer) {
-      try {
-        const pedometer = new Pedometer();
-        pedometer.startPedometerUpdates((data) => {
-          state.steps = data.numberOfSteps || 0;
-          document.getElementById('stepsInput').value = state.steps;
-          document.getElementById('stepsVal').textContent = toFa(state.steps) + ' ' + (currentLang === 'fa' ? 'قدم' : 'steps');
-          document.getElementById('stepsAutoBadge').textContent = '✅ ' + (currentLang === 'fa' ? 'گام‌ها به‌روز می‌شوند' : 'Steps updating');
-          onStateChange();
-        }, (error) => {
-          console.warn('Pedometer error:', error);
-          fallbackStepCounter();
-        });
-        return;
-      } catch(e) {
-        console.warn('Pedometer init failed:', e);
-        fallbackStepCounter();
-      }
-    } else {
-      fallbackStepCounter();
-    }
-  }
-
-  function fallbackStepCounter() {
-    // Use acceleration-based step counting (simple)
     if (!window.DeviceMotionEvent) {
-      document.getElementById('stepsAutoBadge').textContent = currentLang === 'fa' ? '❌ گام‌شمار پشتیبانی نمی‌شود' : '❌ Step counter not supported';
+      document.getElementById('stepsAutoBadge').textContent = t('stepsUnsupported');
       return;
     }
 
-    let lastAccel = {x:0, y:0, z:0};
-    let stepCount = 0;
-    let threshold = 12;
-    let lastStepTime = 0;
+    let threshold = 5;
+    let stepTimeout = 150;
 
     function handleMotion(event) {
       const accel = event.accelerationIncludingGravity;
@@ -2172,35 +2252,46 @@
       lastAccel = {x: accel.x, y: accel.y, z: accel.z};
 
       const now = Date.now();
-      if (delta > threshold && (now - lastStepTime) > 200) {
-        stepCount++;
-        lastStepTime = now;
-        state.steps = stepCount;
-        document.getElementById('stepsInput').value = state.steps;
-        document.getElementById('stepsVal').textContent = toFa(state.steps) + ' ' + (currentLang === 'fa' ? 'قدم' : 'steps');
-        document.getElementById('stepsAutoBadge').textContent = '🚶 ' + (currentLang === 'fa' ? 'در حال شمارش...' : 'Counting...');
-        onStateChange();
+      if (delta > threshold && (now - lastStepTime) > stepTimeout) {
+        accelBuffer.push(delta);
+        if (accelBuffer.length > 5) accelBuffer.shift();
+        
+        if (accelBuffer.length >= 3) {
+          const avg = accelBuffer.reduce((a,b) => a+b, 0) / accelBuffer.length;
+          if (avg > threshold * 0.6) {
+            stepCount++;
+            lastStepTime = now;
+            state.steps = stepCount;
+            document.getElementById('stepsInput').value = state.steps;
+            document.getElementById('stepsVal').textContent = toFa(state.steps) + ' ' + (currentLang === 'fa' ? 'قدم' : 'steps');
+            document.getElementById('stepsAutoBadge').textContent = t('stepsActive');
+            onStateChange();
+          }
+        }
       }
     }
 
     if (typeof DeviceMotionEvent.requestPermission === 'function') {
-      // iOS 13+ requires permission
       DeviceMotionEvent.requestPermission()
         .then(state => {
           if (state === 'granted') {
             window.addEventListener('devicemotion', handleMotion);
-            document.getElementById('stepsAutoBadge').textContent = '✅ ' + (currentLang === 'fa' ? 'گام‌شمار فعال شد' : 'Step counter active');
+            document.getElementById('stepsAutoBadge').textContent = t('stepsDone');
+            isStepCounterReady = true;
           } else {
-            document.getElementById('stepsAutoBadge').textContent = '⚠️ ' + (currentLang === 'fa' ? 'دسترسی به گام‌شمار داده نشد' : 'Permission denied for step counter');
+            document.getElementById('stepsAutoBadge').textContent = '⚠️ ' + (currentLang === 'fa' ? 'دسترسی به گام‌شمار داده نشد' : 'Permission denied');
           }
         })
         .catch(err => {
           console.warn('Permission error:', err);
           window.addEventListener('devicemotion', handleMotion);
+          document.getElementById('stepsAutoBadge').textContent = t('stepsDone');
+          isStepCounterReady = true;
         });
     } else {
       window.addEventListener('devicemotion', handleMotion);
-      document.getElementById('stepsAutoBadge').textContent = '✅ ' + (currentLang === 'fa' ? 'گام‌شمار فعال شد' : 'Step counter active');
+      document.getElementById('stepsAutoBadge').textContent = t('stepsDone');
+      isStepCounterReady = true;
     }
   }
 
@@ -2264,7 +2355,6 @@
     if(entries[todayKey]){
       state = stateFromEntry(entries[todayKey]);
       savedSnapshot = JSON.stringify(state);
-      saveBtn.textContent = t('saveUpdate');
     }
 
     syncFormUI();
@@ -2280,14 +2370,9 @@
     renderCalendar();
     renderStatsDashboard();
 
-    // Start step counter
     initStepCounter();
 
-    // Set today's date in search placeholder
-    const todayStr = currentLang === 'fa' ? 
-      formatJalali(TODAY, {year:'numeric', month:'2-digit', day:'2-digit'}).replace(/\//g, '-') :
-      TODAY.toISOString().split('T')[0];
-    document.getElementById('calSearchInput').placeholder = t('searchPlaceholder');
+    window._initialized = true;
   }
 
   init();
