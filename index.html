@@ -126,8 +126,7 @@
       color: var(--c-ink-soft);
       margin-bottom: 5px;
     }
-    #onboardingOverlay .field input,
-    #onboardingOverlay .field select {
+    #onboardingOverlay .field input {
       width: 100%;
       padding: 10px 14px;
       border: 1.5px solid var(--c-line);
@@ -138,8 +137,7 @@
       color: var(--c-ink);
       transition: 0.2s;
     }
-    #onboardingOverlay .field input:focus,
-    #onboardingOverlay .field select:focus {
+    #onboardingOverlay .field input:focus {
       border-color: var(--c-gold);
       background: var(--c-card);
       outline: none;
@@ -159,50 +157,38 @@
       transform: translateY(-2px);
       box-shadow: var(--shadow-2);
     }
-    .age-stepper-row {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--c-linen);
-      border: 1.5px solid var(--c-line);
-      border-radius: var(--radius-sm);
-      padding: 4px 8px;
-    }
-    .age-stepper-row input {
-      flex: 1;
-      border: none;
+    #onboardingOverlay .btn-skip {
+      width: 100%;
+      padding: 12px;
       background: transparent;
-      padding: 8px 4px;
-      font-size: 16px;
-      font-weight: 700;
-      font-family: inherit;
-      color: var(--c-ink);
-      outline: none;
-      text-align: center;
-      min-height: 40px;
-      width: 60px;
+      color: var(--c-ink-soft);
+      border: 1.5px solid var(--c-line);
+      border-radius: var(--radius-md);
+      font-size: 14px;
+      font-weight: 600;
+      margin-top: 6px;
+      transition: 0.2s;
     }
-    .age-stepper-row .step-btn-sm {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      border: 1px solid var(--c-line);
-      background: var(--c-card);
+    #onboardingOverlay .btn-skip:hover {
+      border-color: var(--c-gold);
       color: var(--c-ink);
-      font-size: 18px;
-      font-weight: 700;
+    }
+    .onboarding-divider {
       display: flex;
       align-items: center;
-      justify-content: center;
-      flex: none;
-      transition: 0.15s;
+      gap: 12px;
+      margin: 12px 0 8px;
+      color: var(--c-ink-soft);
+      font-size: 12px;
+      font-weight: 600;
     }
-    .age-stepper-row .step-btn-sm:hover {
-      background: var(--c-sleep);
-      color: #fff;
-      border-color: var(--c-sleep);
+    .onboarding-divider::before,
+    .onboarding-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--c-line);
     }
-    .age-stepper-row .step-btn-sm:active { transform: scale(0.92); }
 
     /* ===== Profile Bar ===== */
     .profile-bar {
@@ -260,6 +246,16 @@
       padding: 2px 10px;
       border-radius: 999px;
     }
+    .profile-name .badge-guest {
+      font-size: 11px;
+      font-family: var(--font);
+      font-weight: 600;
+      color: var(--c-ink-soft);
+      background: var(--c-linen);
+      padding: 2px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--c-line);
+    }
     .profile-details {
       display: flex;
       gap: 14px;
@@ -276,6 +272,11 @@
     .profile-details .detail-val {
       font-weight: 700;
       color: var(--c-ink);
+    }
+    .profile-details .detail-missing {
+      color: var(--c-ink-soft);
+      font-style: italic;
+      font-weight: 400;
     }
     .profile-edit-btn {
       background: var(--c-linen);
@@ -320,48 +321,6 @@
       border-color: var(--c-gold);
       background: var(--c-card);
       outline: none;
-    }
-    .profile-modal .age-edit-row {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      background: var(--c-linen);
-      border: 1.5px solid var(--c-line);
-      border-radius: var(--radius-sm);
-      padding: 4px 8px;
-    }
-    .profile-modal .age-edit-row input {
-      flex: 1;
-      border: none;
-      background: transparent;
-      padding: 8px 4px;
-      font-size: 16px;
-      font-weight: 700;
-      font-family: inherit;
-      color: var(--c-ink);
-      outline: none;
-      text-align: center;
-      min-height: 40px;
-    }
-    .profile-modal .age-edit-row .step-btn-sm {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      border: 1px solid var(--c-line);
-      background: var(--c-card);
-      color: var(--c-ink);
-      font-size: 18px;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex: none;
-      transition: 0.15s;
-    }
-    .profile-modal .age-edit-row .step-btn-sm:hover {
-      background: var(--c-sleep);
-      color: #fff;
-      border-color: var(--c-sleep);
     }
 
     /* ===== Topbar ===== */
@@ -699,6 +658,33 @@
       padding: 4px 6px; border-radius: 6px; flex: none;
     }
     .todo-del:hover { color: var(--c-care); background: var(--c-exercise-soft); }
+    .todo-edit {
+      background: none; border: none; color: var(--c-ink-soft); line-height: 1; flex: none;
+      padding: 5px 6px; border-radius: 6px; display: flex; align-items: center; justify-content: center;
+    }
+    .todo-edit:hover { color: var(--c-sleep); background: var(--c-sleep-soft); }
+    .todo-edit svg { width: 14px; height: 14px; }
+    .todo-move { display: flex; flex-direction: column; gap: 1px; flex: none; }
+    .todo-move-btn {
+      background: none; border: none; color: var(--c-ink-soft); font-size: 9px; line-height: 1;
+      padding: 2px 5px; border-radius: 4px; width: 22px;
+    }
+    .todo-move-btn:hover { color: var(--c-sleep); background: var(--c-sleep-soft); }
+    .todo-move-btn:disabled { opacity: .25; }
+    .todo-move-btn:disabled:hover { background: none; color: var(--c-ink-soft); }
+    .todo-edit-row { display: flex; gap: 8px; align-items: center; flex: 1; }
+    .todo-edit-input {
+      flex: 1; min-width: 0; border: 1.5px solid var(--c-gold); border-radius: var(--radius-sm);
+      padding: 8px 11px; font-size: 13px; font-family: inherit; outline: none;
+      background: var(--c-card); color: var(--c-ink);
+    }
+    .todo-edit-save, .todo-edit-cancel {
+      flex: none; width: 30px; height: 30px; border-radius: 8px; border: none;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .todo-edit-save { background: var(--c-nutrition); color: #fff; }
+    .todo-edit-save svg { width: 14px; height: 14px; }
+    .todo-edit-cancel { background: var(--c-linen); color: var(--c-ink-soft); font-size: 16px; }
 
     /* ===== Chart ===== */
     .chart-wrap { position: relative; }
@@ -821,11 +807,7 @@
       </div>
       <div class="field">
         <label>سن شما</label>
-        <div class="age-stepper-row">
-          <button class="step-btn-sm" id="onboardAgeDec">−</button>
-          <input type="number" id="onboardAge" value="25" min="1" max="120">
-          <button class="step-btn-sm" id="onboardAgeInc">+</button>
-        </div>
+        <input type="number" id="onboardAge" placeholder="مثلاً ۲۵" min="1" max="120">
       </div>
       <div class="field">
         <label>قد (سانتی‌متر)</label>
@@ -836,6 +818,11 @@
         <input type="number" id="onboardWeight" placeholder="مثلاً ۷۰">
       </div>
       <button class="btn-primary" id="onboardSubmit">شروع کن 🚀</button>
+      <div class="onboarding-divider">یا</div>
+      <button class="btn-skip" id="onboardSkip">رد کردن و ورود به برنامه</button>
+      <div style="text-align:center;margin-top:8px;font-size:11px;color:var(--c-ink-soft);">
+        بعداً می‌تونی از قسمت پروفایل اطلاعاتت رو کامل کنی
+      </div>
     </div>
   </div>
 
@@ -848,7 +835,7 @@
       <div class="profile-info">
         <div class="profile-name" id="profileName">
           <span id="profileDisplayName">کاربر</span>
-          <span class="badge-gold">⭐</span>
+          <span class="badge-gold" id="profileBadge">⭐</span>
         </div>
         <div class="profile-details" id="profileDetails">
           <span>🎂 <span class="detail-val" id="profileAge">—</span> سال</span>
@@ -1216,11 +1203,7 @@
       </div>
       <div class="settings-field">
         <label id="profileAgeLabel">سن شما</label>
-        <div class="age-edit-row">
-          <button class="step-btn-sm" id="profileAgeDec">−</button>
-          <input type="number" id="profileAgeInput" min="1" max="120">
-          <button class="step-btn-sm" id="profileAgeInc">+</button>
-        </div>
+        <input type="number" class="num-input" id="profileAgeInput" min="1" max="120" placeholder="مثلاً ۲۵">
       </div>
       <div class="settings-field">
         <label id="profileHeightLabel">قد (سانتی‌متر)</label>
@@ -1366,6 +1349,7 @@
     const THEME_KEY = 'app-theme';
     const LANG_KEY = 'app-lang';
     const USER_KEY = 'user-profile';
+    const ONBOARD_DONE_KEY = 'onboard-done';
 
     const hasClaudeStorage = !!(window.storage && typeof window.storage.get === 'function' && typeof window.storage.set === 'function');
 
@@ -1417,6 +1401,13 @@
     async function persistUser(data){
       return await storageSet(USER_KEY, JSON.stringify(data));
     }
+    async function setOnboardDone(){
+      return await storageSet(ONBOARD_DONE_KEY, '1');
+    }
+    async function getOnboardDone(){
+      const v = await storageGet(ONBOARD_DONE_KEY);
+      return v === '1';
+    }
 
     function loadTheme(){
       try{ return localStorage.getItem(THEME_KEY) || 'light'; }catch(e){ return 'light'; }
@@ -1452,6 +1443,7 @@
     let currentLang = 'fa';
     let saveTimeout = null;
     let userProfile = null;
+    let onboardDone = false;
 
     /* ============================================================
        I18N
@@ -1532,7 +1524,8 @@
         saved: 'ذخیره شد ✅',
         stepsActive: '🚶 در حال شمارش...',
         stepsDone: '✅ گام‌ها به‌روز می‌شوند',
-        stepsUnsupported: '❌ گام‌شمار پشتیبانی نمی‌شود'
+        stepsUnsupported: '❌ گام‌شمار پشتیبانی نمی‌شود',
+        guest: 'مهمان'
       },
       en: {
         appTitle: 'Rooznegar Salamat',
@@ -1609,7 +1602,8 @@
         saved: 'Saved ✅',
         stepsActive: '🚶 Counting...',
         stepsDone: '✅ Steps updating',
-        stepsUnsupported: '❌ Step counter not supported'
+        stepsUnsupported: '❌ Step counter not supported',
+        guest: 'Guest'
       }
     };
 
@@ -1620,6 +1614,11 @@
     /* ============================================================
        PROFILE FUNCTIONS
     ============================================================ */
+    function isProfileComplete() {
+      if (!userProfile) return false;
+      return !!(userProfile.name && userProfile.age && userProfile.height && userProfile.weight);
+    }
+
     function updateProfileUI() {
       if (!userProfile) {
         document.getElementById('profileDisplayName').textContent = 'کاربر';
@@ -1627,25 +1626,43 @@
         document.getElementById('profileHeight').textContent = '—';
         document.getElementById('profileWeight').textContent = '—';
         document.getElementById('profileAvatar').textContent = '👤';
+        document.getElementById('profileBadge').textContent = '👤';
+        document.getElementById('profileBadge').className = 'badge-guest';
         return;
       }
 
-      const name = userProfile.name || 'کاربر';
+      const name = userProfile.name || (currentLang === 'fa' ? 'کاربر مهمان' : 'Guest User');
       document.getElementById('profileDisplayName').textContent = name;
       
-      document.getElementById('profileAge').textContent = userProfile.age ? toFa(userProfile.age) : '—';
+      const age = userProfile.age;
+      document.getElementById('profileAge').textContent = age ? toFa(age) : '—';
       document.getElementById('profileHeight').textContent = userProfile.height ? toFa(userProfile.height) : '—';
       document.getElementById('profileWeight').textContent = userProfile.weight ? toFa(userProfile.weight) : '—';
       
       const firstLetter = name.charAt(0).toUpperCase();
       document.getElementById('profileAvatar').textContent = firstLetter || '👤';
+      
+      const isComplete = isProfileComplete();
+      if (isComplete) {
+        document.getElementById('profileBadge').textContent = '⭐';
+        document.getElementById('profileBadge').className = 'badge-gold';
+      } else {
+        document.getElementById('profileBadge').textContent = '👤';
+        document.getElementById('profileBadge').className = 'badge-guest';
+      }
     }
 
     function populateProfileEditForm() {
-      if (!userProfile) return;
+      if (!userProfile) {
+        document.getElementById('profileNameInput').value = '';
+        document.getElementById('profileAgeInput').value = '';
+        document.getElementById('profileHeightInput').value = '';
+        document.getElementById('profileWeightInput').value = '';
+        return;
+      }
       
       document.getElementById('profileNameInput').value = userProfile.name || '';
-      document.getElementById('profileAgeInput').value = userProfile.age || 25;
+      document.getElementById('profileAgeInput').value = userProfile.age || '';
       document.getElementById('profileHeightInput').value = userProfile.height || '';
       document.getElementById('profileWeightInput').value = userProfile.weight || '';
     }
@@ -2189,6 +2206,9 @@
       div.textContent = str;
       return div.innerHTML;
     }
+    function escapeAttr(str){
+      return String(str).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    }
 
     function getLocalDateTime(dateStr){
       const d = new Date(dateStr);
@@ -2199,6 +2219,19 @@
       const minutes = String(d.getMinutes()).padStart(2, '0');
       return { year, month, day, hours, minutes, dateObj: d };
     }
+    function formatTodoDateTime(isoStr){
+      const dt = getLocalDateTime(isoStr);
+      const d = dt.dateObj;
+      if (currentLang === 'fa') {
+        const jalali = gregorianToJalali(d);
+        return `${toFa(jalali.jy)}/${toFa(String(jalali.jm).padStart(2,'0'))}/${toFa(String(jalali.jd).padStart(2,'0'))} - ${toFa(dt.hours)}:${toFa(dt.minutes)}`;
+      }
+      return `${dt.year}/${dt.month}/${dt.day} - ${dt.hours}:${dt.minutes}`;
+    }
+
+    let editingTodoId = null;
+    const editPencilSvgTodo = '<svg viewBox="0 0 16 16" fill="none"><path d="M11.3 2.3a1.5 1.5 0 0 1 2.1 0l.3.3a1.5 1.5 0 0 1 0 2.1l-7.8 7.8-3 .8.8-3 7.6-7.6Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>';
+    const todoCheckSvg = '<svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.2 11.5L13 4.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 
     function renderTodos(){
       const list = document.getElementById('todoList');
@@ -2212,25 +2245,33 @@
       progress.style.display = 'block';
       progress.textContent = toFa(doneCount)+' ' + (currentLang === 'fa' ? 'از' : 'of') + ' ' + toFa(todos.length) + ' ' + (currentLang === 'fa' ? 'کار انجام شده' : 'tasks done');
 
-      const checkSvg = '<svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.2 11.5L13 4.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-      list.innerHTML = todos.map(t=>{
+      list.innerHTML = todos.map((t, idx)=>{
+        if(editingTodoId === t.id){
+          return `<div class="todo-row">
+            <div class="todo-edit-row">
+              <input type="text" class="todo-edit-input" id="todoEditInput-${t.id}" value="${escapeAttr(t.text)}" maxlength="120">
+              <button class="todo-edit-save" data-id="${t.id}" aria-label="${currentLang==='fa'?'ذخیره':'Save'}">${todoCheckSvg}</button>
+              <button class="todo-edit-cancel" data-id="${t.id}" aria-label="${currentLang==='fa'?'انصراف':'Cancel'}">×</button>
+            </div>
+          </div>`;
+        }
         let dateLabel = '';
-        if (t.createdAt) {
-          const dt = getLocalDateTime(t.createdAt);
-          const d = dt.dateObj;
-          if (currentLang === 'fa') {
-            const jalali = gregorianToJalali(d);
-            dateLabel = `${toFa(jalali.jy)}/${toFa(String(jalali.jm).padStart(2,'0'))}/${toFa(String(jalali.jd).padStart(2,'0'))} - ${toFa(dt.hours)}:${toFa(dt.minutes)}`;
-          } else {
-            dateLabel = `${dt.year}/${dt.month}/${dt.day} - ${dt.hours}:${dt.minutes}`;
-          }
+        if(t.done && t.completedAt){
+          dateLabel = (currentLang==='fa' ? '✓ تکمیل: ' : '✓ Done: ') + formatTodoDateTime(t.completedAt);
+        } else if(!t.done && t.createdAt){
+          dateLabel = formatTodoDateTime(t.createdAt);
         }
         return `<div class="todo-row">
-          <button class="todo-checkbox ${t.done?'is-done':''}" data-id="${t.id}" aria-label="تکمیل شد">${checkSvg}</button>
+          <button class="todo-checkbox ${t.done?'is-done':''}" data-id="${t.id}" aria-label="تکمیل شد">${todoCheckSvg}</button>
           <div class="todo-text ${t.done?'is-done':''}">
             ${escapeHtml(t.text)}
-            <span class="todo-time">${dateLabel}</span>
+            ${dateLabel ? `<span class="todo-time">${dateLabel}</span>` : ''}
           </div>
+          <div class="todo-move">
+            <button class="todo-move-btn" data-id="${t.id}" data-dir="up" ${idx===0?'disabled':''} aria-label="${currentLang==='fa'?'انتقال به بالا':'Move up'}">▲</button>
+            <button class="todo-move-btn" data-id="${t.id}" data-dir="down" ${idx===todos.length-1?'disabled':''} aria-label="${currentLang==='fa'?'انتقال به پایین':'Move down'}">▼</button>
+          </div>
+          <button class="todo-edit" data-id="${t.id}" aria-label="${currentLang==='fa'?'ویرایش':'Edit'}">${editPencilSvgTodo}</button>
           <button class="todo-del" data-id="${t.id}" aria-label="حذف">×</button>
         </div>`;
       }).join('');
@@ -2241,6 +2282,30 @@
       list.querySelectorAll('.todo-del').forEach(btn=>{
         btn.addEventListener('click', ()=> deleteTodo(btn.dataset.id));
       });
+      list.querySelectorAll('.todo-move-btn').forEach(btn=>{
+        if(btn.disabled) return;
+        btn.addEventListener('click', ()=> moveTodo(btn.dataset.id, btn.dataset.dir));
+      });
+      list.querySelectorAll('.todo-edit').forEach(btn=>{
+        btn.addEventListener('click', ()=>{
+          editingTodoId = btn.dataset.id;
+          renderTodos();
+          const inp = document.getElementById('todoEditInput-'+btn.dataset.id);
+          if(inp){ inp.focus(); inp.select(); }
+        });
+      });
+      list.querySelectorAll('.todo-edit-save').forEach(btn=>{
+        btn.addEventListener('click', ()=> saveEditTodo(btn.dataset.id));
+      });
+      list.querySelectorAll('.todo-edit-cancel').forEach(btn=>{
+        btn.addEventListener('click', ()=>{ editingTodoId = null; renderTodos(); });
+      });
+      list.querySelectorAll('.todo-edit-input').forEach(inp=>{
+        inp.addEventListener('keydown', e=>{
+          if(e.key==='Enter'){ e.preventDefault(); saveEditTodo(inp.id.replace('todoEditInput-','')); }
+          else if(e.key==='Escape'){ editingTodoId = null; renderTodos(); }
+        });
+      });
     }
 
     async function addTodo(rawText){
@@ -2250,7 +2315,8 @@
         id: 't'+Date.now()+Math.random().toString(36).slice(2,7), 
         text, 
         done: false,
-        createdAt: new Date().toISOString()
+        createdAt: new Date().toISOString(),
+        completedAt: null
       });
       renderTodos();
       await persistTodos();
@@ -2259,11 +2325,36 @@
       const t = todos.find(x=>x.id===id);
       if(!t) return;
       t.done = !t.done;
+      t.completedAt = t.done ? new Date().toISOString() : null;
       renderTodos();
       await persistTodos();
     }
     async function deleteTodo(id){
       todos = todos.filter(x=>x.id!==id);
+      if(editingTodoId === id) editingTodoId = null;
+      renderTodos();
+      await persistTodos();
+    }
+    async function moveTodo(id, dir){
+      const idx = todos.findIndex(x=>x.id===id);
+      if(idx===-1) return;
+      const swapIdx = dir==='up' ? idx-1 : idx+1;
+      if(swapIdx<0 || swapIdx>=todos.length) return;
+      const tmp = todos[idx];
+      todos[idx] = todos[swapIdx];
+      todos[swapIdx] = tmp;
+      renderTodos();
+      await persistTodos();
+    }
+    async function saveEditTodo(id){
+      const inp = document.getElementById('todoEditInput-'+id);
+      if(!inp) return;
+      const newText = inp.value.trim();
+      if(newText){
+        const t = todos.find(x=>x.id===id);
+        if(t) t.text = newText;
+      }
+      editingTodoId = null;
       renderTodos();
       await persistTodos();
     }
@@ -2768,84 +2859,41 @@
     }
 
     /* ============================================================
-       ONBOARDING - Simple Age Input
+       ONBOARDING - Simple Age Input with Skip
     ============================================================ */
-    function setupAgeStepper(inputId, decId, incId, defaultVal) {
-      const input = document.getElementById(inputId);
-      const dec = document.getElementById(decId);
-      const inc = document.getElementById(incId);
-      
-      if (!input) return;
-      
-      // Set default value
-      if (!input.value) input.value = defaultVal || 25;
-      
-      dec.addEventListener('click', () => {
-        let val = parseInt(input.value) || 0;
-        if (val > 1) {
-          input.value = val - 1;
-          input.dispatchEvent(new Event('input'));
-        }
-      });
-      
-      inc.addEventListener('click', () => {
-        let val = parseInt(input.value) || 0;
-        if (val < 120) {
-          input.value = val + 1;
-          input.dispatchEvent(new Event('input'));
-        }
-      });
-      
-      // Ensure value stays within bounds
-      input.addEventListener('blur', () => {
-        let val = parseInt(input.value) || 25;
-        if (val < 1) val = 1;
-        if (val > 120) val = 120;
-        input.value = val;
-      });
-    }
-
     async function checkOnboarding(){
-      userProfile = await loadUser();
-      if (!userProfile) {
-        document.getElementById('onboardingOverlay').classList.add('active');
-        // Setup age stepper for onboarding
-        setupAgeStepper('onboardAge', 'onboardAgeDec', 'onboardAgeInc', 25);
-        return false;
+      onboardDone = await getOnboardDone();
+      
+      // If already done, don't show onboarding again
+      if (onboardDone) {
+        userProfile = await loadUser();
+        if (userProfile) {
+          settings.height = userProfile.height || 175;
+          await persistSettings();
+        }
+        return true;
       }
-      settings.height = userProfile.height || 175;
-      await persistSettings();
-      return true;
+      
+      // Check if user already exists (from previous session without onboard flag)
+      userProfile = await loadUser();
+      if (userProfile) {
+        // User exists but onboard not set - set it and continue
+        await setOnboardDone();
+        settings.height = userProfile.height || 175;
+        await persistSettings();
+        return true;
+      }
+      
+      // Show onboarding
+      document.getElementById('onboardingOverlay').classList.add('active');
+      return false;
     }
 
-    document.getElementById('onboardSubmit').addEventListener('click', async ()=>{
-      const name = document.getElementById('onboardName').value.trim() || 'کاربر';
-      const age = parseInt(document.getElementById('onboardAge').value);
-      const height = Number(document.getElementById('onboardHeight').value);
-      const weight = Number(document.getElementById('onboardWeight').value);
-      
-      if (!age || age < 1 || age > 120) {
-        showToast('سن معتبر وارد کن (۱ تا ۱۲۰ سال).');
-        return;
-      }
-      if (!height || height < 50 || height > 300) {
-        showToast('قد معتبر وارد کن (۵۰ تا ۳۰۰ سانتی‌متر).');
-        return;
-      }
-      if (!weight || weight < 10 || weight > 500) {
-        showToast('وزن معتبر وارد کن (۱۰ تا ۵۰۰ کیلوگرم).');
-        return;
-      }
-
-      userProfile = { 
-        name, 
-        age,
-        height, 
-        weight,
-        joinedAt: new Date().toISOString() 
-      };
+    async function completeOnboarding(data) {
+      userProfile = data;
       await persistUser(userProfile);
-      settings.height = height;
+      await setOnboardDone();
+      settings.height = data.height || 175;
       await persistSettings();
       
       document.getElementById('onboardingOverlay').classList.remove('active');
@@ -2854,8 +2902,61 @@
       updateProfileUI();
       updateBmiReadout();
       renderGoals();
-      showToast('به روزنگار سلامت خوش اومدی ' + name + '! 🎉');
+      showToast('به روزنگار سلامت خوش اومدی' + (data.name ? ' ' + data.name : '') + '! 🎉');
       window._initialized = true;
+    }
+
+    document.getElementById('onboardSubmit').addEventListener('click', async ()=>{
+      const name = document.getElementById('onboardName').value.trim() || '';
+      const age = parseInt(document.getElementById('onboardAge').value);
+      const height = Number(document.getElementById('onboardHeight').value);
+      const weight = Number(document.getElementById('onboardWeight').value);
+      
+      // Validate: at least name or age or height or weight should be provided
+      // But we'll be lenient - if they filled something, use it
+      const hasAnyData = name || age || height || weight;
+      
+      if (!hasAnyData) {
+        showToast('حداقل یک فیلد رو پر کن یا گزینه رد کردن رو بزن.');
+        return;
+      }
+      
+      // Validate individual fields if provided
+      if (age && (age < 1 || age > 120)) {
+        showToast('سن معتبر وارد کن (۱ تا ۱۲۰ سال).');
+        return;
+      }
+      if (height && (height < 50 || height > 300)) {
+        showToast('قد معتبر وارد کن (۵۰ تا ۳۰۰ سانتی‌متر).');
+        return;
+      }
+      if (weight && (weight < 10 || weight > 500)) {
+        showToast('وزن معتبر وارد کن (۱۰ تا ۵۰۰ کیلوگرم).');
+        return;
+      }
+
+      const profileData = { 
+        name: name || null,
+        age: age || null,
+        height: height || null,
+        weight: weight || null,
+        joinedAt: new Date().toISOString() 
+      };
+      
+      await completeOnboarding(profileData);
+    });
+
+    document.getElementById('onboardSkip').addEventListener('click', async ()=>{
+      // Create minimal profile as guest
+      const profileData = { 
+        name: null,
+        age: null,
+        height: null,
+        weight: null,
+        joinedAt: new Date().toISOString(),
+        isGuest: true
+      };
+      await completeOnboarding(profileData);
     });
 
     /* ============================================================
@@ -2879,24 +2980,21 @@
       if (e.target === profileModalOverlay) profileModalOverlay.classList.remove('visible');
     });
 
-    // Setup profile age stepper
-    setupAgeStepper('profileAgeInput', 'profileAgeDec', 'profileAgeInc', 25);
-
     document.getElementById('profileSave').addEventListener('click', async () => {
-      const name = document.getElementById('profileNameInput').value.trim() || 'کاربر';
-      const age = parseInt(document.getElementById('profileAgeInput').value);
-      const height = Number(document.getElementById('profileHeightInput').value);
-      const weight = Number(document.getElementById('profileWeightInput').value);
+      const name = document.getElementById('profileNameInput').value.trim() || null;
+      const age = parseInt(document.getElementById('profileAgeInput').value) || null;
+      const height = Number(document.getElementById('profileHeightInput').value) || null;
+      const weight = Number(document.getElementById('profileWeightInput').value) || null;
 
-      if (!age || age < 1 || age > 120) {
+      if (age && (age < 1 || age > 120)) {
         showToast('سن معتبر وارد کن (۱ تا ۱۲۰ سال).');
         return;
       }
-      if (!height || height < 50 || height > 300) {
+      if (height && (height < 50 || height > 300)) {
         showToast('قد معتبر وارد کن (۵۰ تا ۳۰۰ سانتی‌متر).');
         return;
       }
-      if (!weight || weight < 10 || weight > 500) {
+      if (weight && (weight < 10 || weight > 500)) {
         showToast('وزن معتبر وارد کن (۱۰ تا ۵۰۰ کیلوگرم).');
         return;
       }
@@ -2906,12 +3004,15 @@
         name,
         age,
         height,
-        weight
+        weight,
+        isGuest: false
       };
 
       await persistUser(userProfile);
-      settings.height = height;
-      await persistSettings();
+      if (height) {
+        settings.height = height;
+        await persistSettings();
+      }
 
       profileModalOverlay.classList.remove('visible');
       updateProfileUI();
