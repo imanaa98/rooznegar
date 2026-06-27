@@ -16,7 +16,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&family=Lalezar&display=swap" rel="stylesheet">
   <style>
-    /* ===== CSS Variables & Reset ===== */
     :root {
       --c-ink: #232539;
       --c-ink-soft: #6B6E85;
@@ -75,122 +74,6 @@
     :focus-visible { outline: 2.5px solid var(--c-gold); outline-offset: 3px; border-radius: 6px; }
 
     .shell { max-width: 1080px; margin: 0 auto; padding: 18px 16px 60px; }
-
-    /* ===== Onboarding Modal ===== */
-    #onboardingOverlay {
-      position: fixed; inset: 0; z-index: 1000;
-      background: rgba(31,35,71,0.7);
-      backdrop-filter: blur(6px);
-      display: flex; align-items: center; justify-content: center;
-      padding: 20px;
-      opacity: 0; pointer-events: none;
-      transition: opacity 0.4s ease;
-    }
-    #onboardingOverlay.active {
-      opacity: 1; pointer-events: auto;
-    }
-    #onboardingOverlay .modal-box {
-      background: var(--c-card);
-      border-radius: var(--radius-lg);
-      padding: 32px 28px;
-      max-width: 420px;
-      width: 100%;
-      box-shadow: var(--shadow-2);
-      transform: scale(0.96);
-      transition: transform 0.3s ease;
-    }
-    #onboardingOverlay.active .modal-box {
-      transform: scale(1);
-    }
-    #onboardingOverlay .modal-title {
-      font-size: 22px;
-      font-weight: 800;
-      text-align: center;
-      margin-bottom: 6px;
-      font-family: 'Lalezar', var(--font);
-      color: var(--c-sleep);
-    }
-    #onboardingOverlay .modal-sub {
-      text-align: center;
-      font-size: 13px;
-      color: var(--c-ink-soft);
-      margin-bottom: 22px;
-    }
-    #onboardingOverlay .field {
-      margin-bottom: 16px;
-    }
-    #onboardingOverlay .field label {
-      display: block;
-      font-size: 12.5px;
-      font-weight: 600;
-      color: var(--c-ink-soft);
-      margin-bottom: 5px;
-    }
-    #onboardingOverlay .field input {
-      width: 100%;
-      padding: 10px 14px;
-      border: 1.5px solid var(--c-line);
-      border-radius: var(--radius-sm);
-      font-size: 14px;
-      font-family: inherit;
-      background: var(--c-linen);
-      color: var(--c-ink);
-      transition: 0.2s;
-    }
-    #onboardingOverlay .field input:focus {
-      border-color: var(--c-gold);
-      background: var(--c-card);
-      outline: none;
-    }
-    #onboardingOverlay .btn-primary {
-      width: 100%;
-      padding: 14px;
-      background: linear-gradient(90deg, var(--c-sleep), var(--c-exercise));
-      color: #fff;
-      border-radius: var(--radius-md);
-      font-size: 16px;
-      font-weight: 700;
-      margin-top: 8px;
-      transition: 0.2s;
-    }
-    #onboardingOverlay .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-2);
-    }
-    #onboardingOverlay .btn-skip {
-      width: 100%;
-      padding: 12px;
-      background: transparent;
-      color: var(--c-ink-soft);
-      border: 1.5px solid var(--c-line);
-      border-radius: var(--radius-md);
-      font-size: 14px;
-      font-weight: 600;
-      margin-top: 6px;
-      transition: 0.2s;
-    }
-    #onboardingOverlay .btn-skip:hover {
-      border-color: var(--c-gold);
-      color: var(--c-ink);
-    }
-    .onboarding-divider {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin: 12px 0 8px;
-      color: var(--c-ink-soft);
-      font-size: 12px;
-      font-weight: 600;
-    }
-    .onboarding-divider::before,
-    .onboarding-divider::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--c-line);
-    }
-
-    /* ===== Profile Bar ===== */
     .profile-bar {
       display: flex;
       align-items: center;
@@ -296,7 +179,6 @@
       background: var(--c-card);
     }
 
-    /* ===== Profile Edit Modal ===== */
     .profile-modal .modal-box { max-width: 420px; }
     .profile-modal .settings-field { margin-bottom: 14px; }
     .profile-modal .settings-field label {
@@ -323,7 +205,6 @@
       outline: none;
     }
 
-    /* ===== Topbar ===== */
     .topbar {
       display: flex; align-items: center; justify-content: space-between;
       padding: 6px 4px 12px; flex-wrap: wrap; gap: 10px;
@@ -354,7 +235,6 @@
       opacity: 0.85;
     }
 
-    /* ===== Layout ===== */
     .layout { display: grid; grid-template-columns: 1fr; gap: 18px; }
     @media (min-width: 900px) {
       .layout { grid-template-columns: 380px 1fr; align-items: start; }
@@ -370,7 +250,6 @@
     .card-title { font-size: 15px; font-weight: 700; margin: 0 0 4px; }
     .card-subtitle { font-size: 12.5px; color: var(--c-ink-soft); margin: 0 0 16px; }
 
-    /* ===== Gauge ===== */
     .gauge-card { padding-bottom: 14px; }
     .gauge-wrap { position: relative; max-width: 300px; margin: 0 auto; }
     .gauge-wrap svg { width: 100%; display: block; }
@@ -386,14 +265,7 @@
       padding: 3px 12px; border-radius: 999px;
     }
     .gauge-date { text-align: center; font-size: 12.5px; color: var(--c-ink-soft); margin-top: 2px; }
-    .save-state {
-      text-align: center; font-size: 12px; margin-top: 10px; font-weight: 600;
-      display: flex; align-items: center; justify-content: center; gap: 5px;
-    }
-    .save-state.is-saved { color: var(--c-nutrition); }
-    .save-state.is-unsaved { color: var(--c-exercise); }
 
-    /* ===== Form ===== */
     .group { padding-top: 16px; border-top: 1px solid var(--c-line); }
     .group:first-of-type { padding-top: 0; border-top: none; }
     .group-head { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
@@ -428,7 +300,6 @@
     .input-group .step-btn:hover { background: var(--c-sleep); color: #fff; transform: scale(1.05); }
     .input-group .step-btn:active { transform: scale(0.95); }
 
-    /* ===== Custom Range Slider ===== */
     input[type="range"] {
       -webkit-appearance: none; 
       appearance: none;
@@ -470,17 +341,12 @@
       cursor: grabbing;
       transform: scale(1.12);
     }
-    input[type="range"]::-webkit-slider-runnable-track {
-      pointer-events: none;
-    }
-    input[type="range"]::-moz-range-track {
-      pointer-events: none;
-    }
+    input[type="range"]::-webkit-slider-runnable-track { pointer-events: none; }
+    input[type="range"]::-moz-range-track { pointer-events: none; }
     .group[data-cat="sleep"] input[type="range"] { --accent: var(--c-sleep); }
     .group[data-cat="nutrition"] input[type="range"] { --accent: var(--c-nutrition); }
     .group[data-cat="exercise"] input[type="range"] { --accent: var(--c-exercise); }
 
-    /* ===== Chips ===== */
     .chip-group { display: flex; gap: 6px; flex-wrap: wrap; }
     .chip {
       border: 1.5px solid var(--c-line); background: var(--c-card); color: var(--c-ink-soft);
@@ -492,16 +358,34 @@
     .group[data-cat="exercise"] .chip.is-selected { background: var(--c-exercise); border-color: var(--c-exercise); color: #fff; }
     .chip:hover { border-color: var(--c-ink-soft); }
 
-    /* ===== Buttons ===== */
     .save-btn {
       width: 100%; margin-top: 18px; padding: 15px; border: none; border-radius: var(--radius-md);
       background: linear-gradient(90deg, var(--c-sleep), var(--c-exercise));
       color: #fff; font-size: 15px; font-weight: 700; box-shadow: var(--shadow-1);
       transition: transform .12s ease, box-shadow .12s ease;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
     }
     .save-btn:hover { transform: translateY(-1px); box-shadow: var(--shadow-2); }
     .save-btn:active { transform: translateY(0); }
     .save-btn:disabled { opacity: .6; cursor: default; transform: none; }
+    .save-status {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--c-ink-soft);
+      background: var(--c-linen);
+      padding: 2px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--c-line);
+      transition: 0.2s;
+    }
+    .save-status.saved {
+      color: var(--c-nutrition);
+      border-color: var(--c-nutrition);
+    }
+    .save-status.saving {
+      color: var(--c-exercise);
+      border-color: var(--c-exercise);
+    }
 
     .icon-btn {
       display: flex; align-items: center; justify-content: center;
@@ -511,7 +395,6 @@
     .icon-btn:hover { color: var(--c-sleep); border-color: var(--c-sleep); }
     .icon-btn svg { width: 18px; height: 18px; }
 
-    /* ===== Health Extras ===== */
     .group[data-cat="health"] .group-icon { background: #FBEFE0; color: #C97A1E; }
     .optional-tag { font-size: 10.5px; font-weight: 600; color: var(--c-ink-soft); background: var(--c-linen); padding: 2px 8px; border-radius: 999px; margin-right: 6px; }
     .health-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
@@ -532,7 +415,6 @@
     .bmi-readout { font-size: 12px; color: var(--c-ink-soft); margin-top: 6px; font-weight: 600; }
     .bmi-readout b { color: var(--c-ink); font-weight: 700; }
 
-    /* ===== Goals ===== */
     .goal-row { margin-bottom: 13px; }
     .goal-row:last-child { margin-bottom: 0; }
     .goal-row-head { display: flex; justify-content: space-between; font-size: 12.5px; font-weight: 600; margin-bottom: 6px; }
@@ -540,7 +422,6 @@
     .goal-track { height: 8px; border-radius: 999px; background: var(--c-track); overflow: hidden; }
     .goal-fill { height: 100%; border-radius: 999px; transition: width .4s ease; }
 
-    /* ===== Analysis ===== */
     .analysis-box { display: flex; flex-direction: column; gap: 10px; }
     .analysis-item {
       display: flex; gap: 10px; align-items: flex-start; padding: 11px 12px;
@@ -552,14 +433,12 @@
     .analysis-item.is-suggestion { background: var(--c-sleep-soft); color: var(--c-sleep); }
     .analysis-emoji { font-size: 17px; flex: none; }
 
-    /* ===== Stats ===== */
     .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
     .stat-tile { background: var(--c-linen); border-radius: var(--radius-sm); padding: 12px; transition: background 0.3s; }
     .stat-tile-label { font-size: 11.5px; color: var(--c-ink-soft); font-weight: 600; margin-bottom: 4px; }
     .stat-tile-value { font-size: 17px; font-weight: 800; }
     .stat-tile-sub { font-size: 11px; color: var(--c-ink-soft); margin-top: 2px; }
 
-    /* ===== Calendar ===== */
     .cal-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; flex-wrap: wrap; gap: 8px; }
     .cal-nav-btn {
       width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--c-line);
@@ -597,7 +476,6 @@
     }
     .cal-search-btn:hover { background: var(--c-exercise); }
 
-    /* ===== History ===== */
     .history-list { display: flex; flex-direction: column; }
     .history-row {
       display: flex; align-items: center; gap: 8px; padding: 11px 2px;
@@ -615,7 +493,6 @@
     .history-del:hover { color: var(--c-care); background: var(--c-exercise-soft); }
     .history-edit svg { width: 15px; height: 15px; }
 
-    /* ===== Todo ===== */
     .todo-add-row { display: flex; gap: 8px; margin-bottom: 6px; }
     .todo-input {
       flex: 1; border: 1.5px solid var(--c-line); border-radius: var(--radius-sm);
@@ -686,7 +563,6 @@
     .todo-edit-save svg { width: 14px; height: 14px; }
     .todo-edit-cancel { background: var(--c-linen); color: var(--c-ink-soft); font-size: 16px; }
 
-    /* ===== Chart ===== */
     .chart-wrap { position: relative; }
     .chart-wrap svg { width: 100%; height: auto; display: block; overflow: visible; }
     .chart-point { cursor: pointer; }
@@ -704,7 +580,6 @@
     }
     .empty-state .emoji { font-size: 26px; display: block; margin-bottom: 8px; }
 
-    /* ===== Edit Banner ===== */
     .edit-banner {
       display: flex; align-items: center; justify-content: space-between; gap: 10px;
       background: var(--c-exercise-soft); border: 1.5px solid var(--c-exercise);
@@ -718,7 +593,6 @@
     }
     .edit-banner-cancel:hover { background: var(--c-exercise); color: #fff; }
 
-    /* ===== Install Banner ===== */
     .install-banner {
       display: none; align-items: center; gap: 12px;
       background: var(--c-card); border: 1.5px solid var(--c-line); border-radius: var(--radius-md);
@@ -740,7 +614,6 @@
     }
     .install-dismiss:hover { color: var(--c-care); background: var(--c-exercise-soft); }
 
-    /* ===== Backup / Restore ===== */
     .backup-row { display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap; }
     .backup-btn {
       flex: 1; background: var(--c-card); border: 1.5px solid var(--c-line); color: var(--c-ink);
@@ -754,7 +627,6 @@
     }
     .reset-link:hover { color: var(--c-care); }
 
-    /* ===== Toast ===== */
     .toast {
       position: fixed; bottom: 22px; left: 50%; transform: translateX(-50%) translateY(20px);
       background: var(--c-ink); color: #fff; padding: 12px 22px; border-radius: 999px;
@@ -764,7 +636,6 @@
     }
     .toast.visible { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-    /* ===== Modal ===== */
     .modal-overlay {
       position: fixed; inset: 0; background: rgba(35,37,57,0.45); display: flex;
       align-items: center; justify-content: center; padding: 20px; z-index: 60;
@@ -796,46 +667,14 @@
 </head>
 <body>
 
-  <!-- ===== ONBOARDING OVERLAY ===== -->
-  <div id="onboardingOverlay" class="active">
-    <div class="modal-box">
-      <div class="modal-title">👋 به روزنگار سلامت خوش اومدی</div>
-      <div class="modal-sub">چند تا اطلاعات اولیه رو ازت می‌گیریم تا بتونیم بهتر کمکت کنیم.</div>
-      <div class="field">
-        <label>نام شما</label>
-        <input type="text" id="onboardName" placeholder="مثلاً علی">
-      </div>
-      <div class="field">
-        <label>سن شما</label>
-        <input type="number" id="onboardAge" placeholder="مثلاً ۲۵" min="1" max="120">
-      </div>
-      <div class="field">
-        <label>قد (سانتی‌متر)</label>
-        <input type="number" id="onboardHeight" placeholder="مثلاً ۱۷۵">
-      </div>
-      <div class="field">
-        <label>وزن (کیلوگرم)</label>
-        <input type="number" id="onboardWeight" placeholder="مثلاً ۷۰">
-      </div>
-      <button class="btn-primary" id="onboardSubmit">شروع کن 🚀</button>
-      <div class="onboarding-divider">یا</div>
-      <button class="btn-skip" id="onboardSkip">رد کردن و ورود به برنامه</button>
-      <div style="text-align:center;margin-top:8px;font-size:11px;color:var(--c-ink-soft);">
-        بعداً می‌تونی از قسمت پروفایل اطلاعاتت رو کامل کنی
-      </div>
-    </div>
-  </div>
-
-  <!-- ===== MAIN APP ===== -->
-  <div class="shell" id="appShell" style="display:none;">
+  <div class="shell" id="appShell">
     
-    <!-- ===== PROFILE BAR ===== -->
     <div class="profile-bar" id="profileBar">
       <div class="profile-avatar" id="profileAvatar">👤</div>
       <div class="profile-info">
         <div class="profile-name" id="profileName">
           <span id="profileDisplayName">کاربر</span>
-          <span class="badge-gold" id="profileBadge">⭐</span>
+          <span class="badge-guest" id="profileBadge">👤</span>
         </div>
         <div class="profile-details" id="profileDetails">
           <span>🎂 <span class="detail-val" id="profileAge">—</span> سال</span>
@@ -885,7 +724,6 @@
     </div>
 
     <div class="layout">
-      <!-- LEFT PANEL -->
       <div class="panel-left">
         <div class="card gauge-card">
           <div class="gauge-wrap">
@@ -905,7 +743,6 @@
             </div>
           </div>
           <div class="gauge-date" id="gaugeDate"></div>
-          <div class="save-state" id="saveState"></div>
         </div>
 
         <div class="card">
@@ -914,7 +751,6 @@
             <button class="edit-banner-cancel" id="cancelEditBtn">انصراف</button>
           </div>
 
-          <!-- SLEEP -->
           <div class="group" data-cat="sleep">
             <div class="group-head">
               <div class="group-icon">😴</div>
@@ -942,7 +778,6 @@
             </div>
           </div>
 
-          <!-- NUTRITION -->
           <div class="group" data-cat="nutrition">
             <div class="group-head">
               <div class="group-icon">🥗</div>
@@ -970,7 +805,6 @@
             </div>
           </div>
 
-          <!-- EXERCISE -->
           <div class="group" data-cat="exercise">
             <div class="group-head">
               <div class="group-icon">🏃</div>
@@ -994,7 +828,6 @@
             </div>
           </div>
 
-          <!-- STEPS -->
           <div class="group" data-cat="exercise">
             <div class="group-head">
               <div class="group-icon">🚶</div>
@@ -1010,7 +843,6 @@
             </div>
           </div>
 
-          <!-- HEALTH EXTRAS -->
           <div class="group" data-cat="health">
             <div class="group-head">
               <div class="group-icon">➕</div>
@@ -1048,13 +880,14 @@
               </div>
             </div>
           </div>
-          <button class="save-btn" id="saveBtn" style="display:none;">ثبت</button>
+          <button class="save-btn" id="saveBtn">
+            <span id="saveBtnText">ثبت امتیاز امروز</span>
+            <span class="save-status" id="saveStatus"></span>
+          </button>
         </div>
       </div>
 
-      <!-- RIGHT PANEL -->
       <div class="panel-right">
-        <!-- GOALS -->
         <div class="card">
           <div class="card-title" id="goalsTitle">اهداف امروز</div>
           <div class="card-subtitle" id="goalsSub">پیشرفت نسبت به اهدافی که تنظیم کردی</div>
@@ -1074,7 +907,6 @@
           </div>
         </div>
 
-        <!-- ANALYSIS -->
         <div class="card">
           <div class="card-title" id="analysisTitle">تحلیل هوشمند روز</div>
           <div class="card-subtitle" id="analysisSub">بر اساس امتیاز ثبت‌شده‌ی این روز</div>
@@ -1083,7 +915,6 @@
           </div>
         </div>
 
-        <!-- TODO -->
         <div class="card">
           <div class="card-title" id="todoTitle">کارهای مهم</div>
           <div class="card-subtitle" id="todoSub">کارهایی که می‌خوای امروز انجام بدی</div>
@@ -1095,14 +926,12 @@
           <div class="todo-list" id="todoList"></div>
         </div>
 
-        <!-- CHART -->
         <div class="card">
           <div class="card-title" id="chartTitle">روند روزهای اخیر</div>
           <div class="card-subtitle" id="chartSub">آخرین ۱۴ روزی که امتیاز ثبت کردی</div>
           <div class="chart-wrap" id="chartWrap"></div>
         </div>
 
-        <!-- CALENDAR -->
         <div class="card">
           <div class="cal-head">
             <button class="cal-nav-btn" id="calPrevBtn" aria-label="ماه قبل">‹</button>
@@ -1122,21 +951,18 @@
           </div>
         </div>
 
-        <!-- STATS -->
         <div class="card">
           <div class="card-title" id="statsTitle">داشبورد آماری ماه</div>
           <div class="card-subtitle" id="statsSubtitle">—</div>
           <div class="stats-grid" id="statsGrid"></div>
         </div>
 
-        <!-- HISTORY -->
         <div class="card">
           <div class="card-title" id="historyTitle">تاریخچه</div>
           <div class="card-subtitle" id="historySub">روزهای ثبت‌شده، از جدید به قدیم — برای ویرایش روی ✎ بزن</div>
           <div class="history-list" id="historyList"></div>
         </div>
 
-        <!-- FOOTER -->
         <div class="footer-row">
           <div class="backup-row">
             <button class="backup-btn" id="exportBtn">📤 <span id="exportText">خروجی پشتیبان (JSON)</span></button>
@@ -1149,10 +975,8 @@
     </div>
   </div>
 
-  <!-- ===== TOAST ===== -->
   <div class="toast" id="toast"></div>
 
-  <!-- ===== MODAL ===== -->
   <div class="modal-overlay" id="modalOverlay">
     <div class="modal-box">
       <div class="modal-title" id="modalTitle">حذف اطلاعات</div>
@@ -1164,7 +988,6 @@
     </div>
   </div>
 
-  <!-- ===== SETTINGS MODAL ===== -->
   <div class="modal-overlay" id="settingsModalOverlay">
     <div class="modal-box">
       <div class="modal-title" id="settingsModalTitle">تنظیمات و هدف‌گذاری</div>
@@ -1192,7 +1015,6 @@
     </div>
   </div>
 
-  <!-- ===== PROFILE EDIT MODAL ===== -->
   <div class="modal-overlay profile-modal" id="profileModalOverlay">
     <div class="modal-box">
       <div class="modal-title" id="profileModalTitle">✎ ویرایش پروفایل</div>
@@ -1224,9 +1046,6 @@
   (function(){
     "use strict";
 
-    /* ============================================================
-       HELPERS & UTILITIES
-    ============================================================ */
     const FA_DIGITS = ['۰','۱','۲','۳','۴','۵','۶','۷','۸','۹'];
     function toFa(n){ return String(n).replace(/[0-9]/g, d => FA_DIGITS[d]); }
     function clamp(v,min,max){ return Math.max(min, Math.min(max,v)); }
@@ -1240,7 +1059,6 @@
       return new Date(y, m-1, d);
     }
 
-    // Jalali functions
     const jalaliFormatter = new Intl.DateTimeFormat('en-US-u-ca-persian', {year:'numeric', month:'numeric', day:'numeric'});
     function gregorianToJalali(date){
       const parts = jalaliFormatter.formatToParts(date);
@@ -1340,16 +1158,12 @@
       return 'چاقی';
     }
 
-    /* ============================================================
-       STORAGE
-    ============================================================ */
     const STORAGE_KEY = 'daily-entries';
     const TODO_KEY = 'todo-tasks';
     const SETTINGS_KEY = 'app-settings';
     const THEME_KEY = 'app-theme';
     const LANG_KEY = 'app-lang';
     const USER_KEY = 'user-profile';
-    const ONBOARD_DONE_KEY = 'onboard-done';
 
     const hasClaudeStorage = !!(window.storage && typeof window.storage.get === 'function' && typeof window.storage.set === 'function');
 
@@ -1401,13 +1215,6 @@
     async function persistUser(data){
       return await storageSet(USER_KEY, JSON.stringify(data));
     }
-    async function setOnboardDone(){
-      return await storageSet(ONBOARD_DONE_KEY, '1');
-    }
-    async function getOnboardDone(){
-      const v = await storageGet(ONBOARD_DONE_KEY);
-      return v === '1';
-    }
 
     function loadTheme(){
       try{ return localStorage.getItem(THEME_KEY) || 'light'; }catch(e){ return 'light'; }
@@ -1420,9 +1227,6 @@
     function saveLang(l){
       try{ localStorage.setItem(LANG_KEY, l); }catch(e){} }
 
-    /* ============================================================
-       STATE
-    ============================================================ */
     let entries = {};
     let todos = [];
     const TODAY = new Date();
@@ -1443,11 +1247,7 @@
     let currentLang = 'fa';
     let saveTimeout = null;
     let userProfile = null;
-    let onboardDone = false;
 
-    /* ============================================================
-       I18N
-    ============================================================ */
     const translations = {
       fa: {
         appTitle: 'روزنگار سلامت',
@@ -1525,7 +1325,16 @@
         stepsActive: '🚶 در حال شمارش...',
         stepsDone: '✅ گام‌ها به‌روز می‌شوند',
         stepsUnsupported: '❌ گام‌شمار پشتیبانی نمی‌شود',
-        guest: 'مهمان'
+        guest: 'مهمان',
+        saving: 'در حال ذخیره...',
+        profileTitle: '✎ ویرایش پروفایل',
+        profileText: 'اطلاعات شخصی خودت رو به‌روز کن.',
+        profileName: 'نام شما',
+        profileAge: 'سن شما',
+        profileHeight: 'قد (سانتی‌متر)',
+        profileWeight: 'وزن (کیلوگرم)',
+        profileSave: 'ذخیره',
+        profileCancel: 'انصراف',
       },
       en: {
         appTitle: 'Rooznegar Salamat',
@@ -1603,7 +1412,16 @@
         stepsActive: '🚶 Counting...',
         stepsDone: '✅ Steps updating',
         stepsUnsupported: '❌ Step counter not supported',
-        guest: 'Guest'
+        guest: 'Guest',
+        saving: 'Saving...',
+        profileTitle: '✎ Edit Profile',
+        profileText: 'Update your personal info.',
+        profileName: 'Your Name',
+        profileAge: 'Your Age',
+        profileHeight: 'Height (cm)',
+        profileWeight: 'Weight (kg)',
+        profileSave: 'Save',
+        profileCancel: 'Cancel',
       }
     };
 
@@ -1611,9 +1429,6 @@
       return translations[currentLang]?.[key] || translations.fa[key] || key;
     }
 
-    /* ============================================================
-       PROFILE FUNCTIONS
-    ============================================================ */
     function isProfileComplete() {
       if (!userProfile) return false;
       return !!(userProfile.name && userProfile.age && userProfile.height && userProfile.weight);
@@ -1621,7 +1436,7 @@
 
     function updateProfileUI() {
       if (!userProfile) {
-        document.getElementById('profileDisplayName').textContent = 'کاربر';
+        document.getElementById('profileDisplayName').textContent = currentLang === 'fa' ? 'کاربر' : 'User';
         document.getElementById('profileAge').textContent = '—';
         document.getElementById('profileHeight').textContent = '—';
         document.getElementById('profileWeight').textContent = '—';
@@ -1667,9 +1482,6 @@
       document.getElementById('profileWeightInput').value = userProfile.weight || '';
     }
 
-    /* ============================================================
-       AUTO SAVE
-    ============================================================ */
     async function autoSave(){
       clearTimeout(saveTimeout);
       saveTimeout = setTimeout(async () => {
@@ -1678,7 +1490,7 @@
         entries[savedKey] = Object.assign({}, state, { scores, savedAt: new Date().toISOString() });
         await persistEntries(entries);
         savedSnapshot = JSON.stringify(state);
-        refreshSaveStateBadge();
+        refreshSaveStatus();
         renderAnalysis(entries[savedKey]);
         renderChart();
         renderHistory();
@@ -1692,9 +1504,6 @@
       }, 500);
     }
 
-    /* ============================================================
-       GAUGE
-    ============================================================ */
     const GAUGE_CX=160, GAUGE_CY=172, GAUGE_R=126;
     const SEGMENTS = [
       {key:'sleep', start:34, end:90},
@@ -1735,22 +1544,22 @@
       tierEl.style.background = 'color-mix(in srgb, '+tier.color+' 14%, white)';
     }
 
-    function refreshSaveStateBadge(){
-      const el = document.getElementById('saveState');
+    function refreshSaveStatus(){
+      const el = document.getElementById('saveStatus');
       const currentSig = JSON.stringify(state);
       if(savedSnapshot === currentSig){
-        el.className = 'save-state is-saved';
-        el.innerHTML = '✓ ' + (currentLang === 'fa' ? 'ذخیره شد' : 'Saved');
+        el.className = 'save-status saved';
+        el.textContent = '✓ ' + (currentLang === 'fa' ? 'ذخیره شد' : 'Saved');
       } else {
-        el.className = 'save-state is-unsaved';
-        el.innerHTML = '● ' + (currentLang === 'fa' ? 'در حال ذخیره...' : 'Saving...');
+        el.className = 'save-status saving';
+        el.textContent = '● ' + (currentLang === 'fa' ? 'در حال ذخیره...' : 'Saving...');
       }
     }
 
     function onStateChange(){
       const scores = computeScores(state);
       renderGauge(scores, true);
-      refreshSaveStateBadge();
+      refreshSaveStatus();
       renderGoals();
       autoSave();
     }
@@ -1801,9 +1610,6 @@
       box.innerHTML = html;
     }
 
-    /* ============================================================
-       FORM
-    ============================================================ */
     function syncFormUI(){
       document.getElementById('sleepHours').value = state.sleepHours;
       document.getElementById('sleepHoursVal').textContent = toFa(state.sleepHours)+' ' + (currentLang === 'fa' ? 'ساعت' : 'hr');
@@ -1873,7 +1679,6 @@
     setupStepButtons('sleepDec', 'sleepInc', 'sleepHoursVal', 'sleepHours', 0, 12, 0.5, 'sleepHours');
     setupStepButtons('waterDec', 'waterInc', 'waterVal', 'waterGlasses', 0, 20, 1, 'waterGlasses');
 
-    // --- Event Listeners for Form ---
     document.getElementById('weightInput').addEventListener('input', e=>{
       const v = e.target.value;
       state.weight = v===''? null : Number(v);
@@ -1936,9 +1741,6 @@
       });
     });
 
-    /* ============================================================
-       EDIT MODE
-    ============================================================ */
     function gaugeDateLabel(key){
       const d = parseDateKey(key);
       const label = currentLang === 'fa' ? 
@@ -1999,9 +1801,6 @@
     }
     document.getElementById('cancelEditBtn').addEventListener('click', exitEditMode);
 
-    /* ============================================================
-       TOAST
-    ============================================================ */
     let toastTimer = null;
     function showToast(msg){
       const el = document.getElementById('toast');
@@ -2011,9 +1810,6 @@
       toastTimer = setTimeout(()=> el.classList.remove('visible'), 2400);
     }
 
-    /* ============================================================
-       MODAL
-    ============================================================ */
     const modalOverlay = document.getElementById('modalOverlay');
     let modalConfirmAction = null;
     function openConfirm(title, text, onConfirm){
@@ -2081,9 +1877,6 @@
       );
     }
 
-    /* ============================================================
-       CHART
-    ============================================================ */
     function sortedEntryList(){
       return Object.keys(entries).sort().map(k=>({key:k, data:entries[k]}));
     }
@@ -2166,9 +1959,6 @@
       });
     }
 
-    /* ============================================================
-       HISTORY
-    ============================================================ */
     const editPencilSvg = '<svg viewBox="0 0 16 16" fill="none"><path d="M11.3 2.3a1.5 1.5 0 0 1 2.1 0l.3.3a1.5 1.5 0 0 1 0 2.1l-7.8 7.8-3 .8.8-3 7.6-7.6Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>';
 
     function renderHistory(){
@@ -2198,9 +1988,6 @@
       });
     }
 
-    /* ============================================================
-       TODO
-    ============================================================ */
     function escapeHtml(str){
       const div = document.createElement('div');
       div.textContent = str;
@@ -2371,9 +2158,6 @@
       }
     });
 
-    /* ============================================================
-       STREAK
-    ============================================================ */
     function computeStreak(){
       let streak=0;
       let d = entries[todayKey] ? new Date(TODAY) : (()=>{ const y=new Date(TODAY); y.setDate(y.getDate()-1); return y; })();
@@ -2395,9 +2179,6 @@
       }
     }
 
-    /* ============================================================
-       SETTINGS
-    ============================================================ */
     const settingsModalOverlay = document.getElementById('settingsModalOverlay');
     document.getElementById('settingsBtn').addEventListener('click', ()=>{
       document.getElementById('settingHeight').value = settings.height;
@@ -2428,9 +2209,6 @@
       showToast(currentLang === 'fa' ? 'تنظیمات ذخیره شد ✅' : 'Settings saved ✅');
     });
 
-    /* ============================================================
-       THEME / LANGUAGE
-    ============================================================ */
     function applyTheme(theme){
       document.documentElement.setAttribute('data-theme', theme);
       document.getElementById('themeToggle').textContent = theme === 'dark' ? '☀️' : '🌙';
@@ -2529,6 +2307,22 @@
       document.getElementById('modalCancel').textContent = t('modalCancel');
       document.getElementById('modalConfirm').textContent = t('modalConfirm');
 
+      document.getElementById('profileModalTitle').textContent = t('profileTitle');
+      document.getElementById('profileModalText').textContent = t('profileText');
+      document.getElementById('profileNameLabel').textContent = t('profileName');
+      document.getElementById('profileAgeLabel').textContent = t('profileAge');
+      document.getElementById('profileHeightLabel').textContent = t('profileHeight');
+      document.getElementById('profileWeightLabel').textContent = t('profileWeight');
+      document.getElementById('profileSave').textContent = t('profileSave');
+      document.getElementById('profileCancel').textContent = t('profileCancel');
+
+      const saveBtnText = document.getElementById('saveBtnText');
+      if (editingKey === todayKey) {
+        saveBtnText.textContent = entries[todayKey] ? t('saveUpdate') : t('saveBtn');
+      } else {
+        saveBtnText.textContent = t('saveEdit');
+      }
+
       document.getElementById('gaugeDate').textContent = gaugeDateLabel(editingKey);
       renderGoals();
       renderAnalysis(entries[editingKey] || null);
@@ -2542,9 +2336,6 @@
       updateProfileUI();
     }
 
-    /* ============================================================
-       CALENDAR
-    ============================================================ */
     const todayJalali = gregorianToJalali(TODAY);
     let calViewJY = todayJalali.jy;
     let calViewJM = todayJalali.jm;
@@ -2656,9 +2447,6 @@
       if(e.key==='Enter') document.getElementById('calSearchBtn').click();
     });
 
-    /* ============================================================
-       STATS
-    ============================================================ */
     function renderStatsDashboard(){
       const subtitle = document.getElementById('statsSubtitle');
       const grid = document.getElementById('statsGrid');
@@ -2713,9 +2501,6 @@
       `;
     }
 
-    /* ============================================================
-       BACKUP / RESTORE
-    ============================================================ */
     document.getElementById('exportBtn').addEventListener('click', ()=>{
       const payload = {
         app: 'rooznegar-salamat',
@@ -2777,9 +2562,6 @@
       reader.readAsText(file);
     });
 
-    /* ============================================================
-       STEP COUNTER (Enhanced Sensitivity)
-    ============================================================ */
     let lastAccel = {x:0, y:0, z:0};
     let stepCount = 0;
     let lastStepTime = 0;
@@ -2792,7 +2574,6 @@
         return;
       }
 
-      // Load saved steps for today
       if (entries[todayKey] && entries[todayKey].steps) {
         stepCount = entries[todayKey].steps;
         state.steps = stepCount;
@@ -2858,110 +2639,6 @@
       }
     }
 
-    /* ============================================================
-       ONBOARDING - Simple Age Input with Skip
-    ============================================================ */
-    async function checkOnboarding(){
-      onboardDone = await getOnboardDone();
-      
-      // If already done, don't show onboarding again
-      if (onboardDone) {
-        userProfile = await loadUser();
-        if (userProfile) {
-          settings.height = userProfile.height || 175;
-          await persistSettings();
-        }
-        return true;
-      }
-      
-      // Check if user already exists (from previous session without onboard flag)
-      userProfile = await loadUser();
-      if (userProfile) {
-        // User exists but onboard not set - set it and continue
-        await setOnboardDone();
-        settings.height = userProfile.height || 175;
-        await persistSettings();
-        return true;
-      }
-      
-      // Show onboarding
-      document.getElementById('onboardingOverlay').classList.add('active');
-      return false;
-    }
-
-    async function completeOnboarding(data) {
-      userProfile = data;
-      await persistUser(userProfile);
-      await setOnboardDone();
-      settings.height = data.height || 175;
-      await persistSettings();
-      
-      document.getElementById('onboardingOverlay').classList.remove('active');
-      document.getElementById('appShell').style.display = 'block';
-      
-      updateProfileUI();
-      updateBmiReadout();
-      renderGoals();
-      showToast('به روزنگار سلامت خوش اومدی' + (data.name ? ' ' + data.name : '') + '! 🎉');
-      window._initialized = true;
-    }
-
-    document.getElementById('onboardSubmit').addEventListener('click', async ()=>{
-      const name = document.getElementById('onboardName').value.trim() || '';
-      const age = parseInt(document.getElementById('onboardAge').value);
-      const height = Number(document.getElementById('onboardHeight').value);
-      const weight = Number(document.getElementById('onboardWeight').value);
-      
-      // Validate: at least name or age or height or weight should be provided
-      // But we'll be lenient - if they filled something, use it
-      const hasAnyData = name || age || height || weight;
-      
-      if (!hasAnyData) {
-        showToast('حداقل یک فیلد رو پر کن یا گزینه رد کردن رو بزن.');
-        return;
-      }
-      
-      // Validate individual fields if provided
-      if (age && (age < 1 || age > 120)) {
-        showToast('سن معتبر وارد کن (۱ تا ۱۲۰ سال).');
-        return;
-      }
-      if (height && (height < 50 || height > 300)) {
-        showToast('قد معتبر وارد کن (۵۰ تا ۳۰۰ سانتی‌متر).');
-        return;
-      }
-      if (weight && (weight < 10 || weight > 500)) {
-        showToast('وزن معتبر وارد کن (۱۰ تا ۵۰۰ کیلوگرم).');
-        return;
-      }
-
-      const profileData = { 
-        name: name || null,
-        age: age || null,
-        height: height || null,
-        weight: weight || null,
-        joinedAt: new Date().toISOString() 
-      };
-      
-      await completeOnboarding(profileData);
-    });
-
-    document.getElementById('onboardSkip').addEventListener('click', async ()=>{
-      // Create minimal profile as guest
-      const profileData = { 
-        name: null,
-        age: null,
-        height: null,
-        weight: null,
-        joinedAt: new Date().toISOString(),
-        isGuest: true
-      };
-      await completeOnboarding(profileData);
-    });
-
-    /* ============================================================
-       PROFILE EDIT MODAL
-    ============================================================ */
     const profileModalOverlay = document.getElementById('profileModalOverlay');
 
     document.getElementById('profileEditBtn').addEventListener('click', () => {
@@ -2987,15 +2664,15 @@
       const weight = Number(document.getElementById('profileWeightInput').value) || null;
 
       if (age && (age < 1 || age > 120)) {
-        showToast('سن معتبر وارد کن (۱ تا ۱۲۰ سال).');
+        showToast(currentLang === 'fa' ? 'سن معتبر وارد کن (۱ تا ۱۲۰ سال).' : 'Enter a valid age (1-120).');
         return;
       }
       if (height && (height < 50 || height > 300)) {
-        showToast('قد معتبر وارد کن (۵۰ تا ۳۰۰ سانتی‌متر).');
+        showToast(currentLang === 'fa' ? 'قد معتبر وارد کن (۵۰ تا ۳۰۰ سانتی‌متر).' : 'Enter a valid height (50-300 cm).');
         return;
       }
       if (weight && (weight < 10 || weight > 500)) {
-        showToast('وزن معتبر وارد کن (۱۰ تا ۵۰۰ کیلوگرم).');
+        showToast(currentLang === 'fa' ? 'وزن معتبر وارد کن (۱۰ تا ۵۰۰ کیلوگرم).' : 'Enter a valid weight (10-500 kg).');
         return;
       }
 
@@ -3018,12 +2695,9 @@
       updateProfileUI();
       updateBmiReadout();
       renderGoals();
-      showToast('پروفایل با موفقیت به‌روز شد ✅');
+      showToast(currentLang === 'fa' ? 'پروفایل با موفقیت به‌روز شد ✅' : 'Profile updated successfully ✅');
     });
 
-    /* ============================================================
-       PWA
-    ============================================================ */
     let deferredInstallPrompt = null;
     const installBanner = document.getElementById('installBanner');
     const installBtn = document.getElementById('installBtn');
@@ -3065,9 +2739,6 @@
       });
     }
 
-    /* ============================================================
-       INIT
-    ============================================================ */
     async function init(){
       const theme = loadTheme();
       applyTheme(theme);
@@ -3081,12 +2752,7 @@
       entries = await loadAllEntries();
       todos = await loadTodos();
       settings = await loadSettings();
-
-      const hasUser = await checkOnboarding();
-      if (!hasUser) {
-        document.getElementById('appShell').style.display = 'none';
-        return;
-      }
+      userProfile = await loadUser();
 
       document.getElementById('appShell').style.display = 'block';
       updateProfileUI();
@@ -3099,7 +2765,7 @@
       syncFormUI();
       const scores = computeScores(state);
       renderGauge(scores, true);
-      refreshSaveStateBadge();
+      refreshSaveStatus();
       renderGoals();
       renderAnalysis(entries[todayKey] || null);
       renderChart();
