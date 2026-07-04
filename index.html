@@ -917,7 +917,7 @@
               <span id="saveBtnText">ثبت امتیاز امروز</span>
               <span class="save-status" id="saveStatus"></span>
             </button>
-            <button class="voice-btn" id="voiceBtn" aria-label="فعال‌سازی ورود صوتی" title="ورود صوتی">🎤</button>
+            <button class="voice-btn" id="voiceBtn" aria-label="فعال‌سازی ورود صوتی" title="ورود صوتی (فارسی)">🎤</button>
           </div>
           <div class="voice-status" id="voiceStatus"></div>
         </div>
@@ -1371,12 +1371,12 @@
         profileWeight: 'وزن (کیلوگرم)',
         profileSave: 'ذخیره',
         profileCancel: 'انصراف',
-        voiceHint: 'برای ورود صوتی کلیک کن و بگو: «خواب ۸ ساعت، آب ۶ لیوان، ورزش ۳۰ دقیقه، تغذیه خوب»',
-        voiceListening: '🎙️ گوش می‌کنم...',
+        voiceHint: 'برای ورود صوتی کلیک کن و به فارسی بگو: «خواب ۸ ساعت، آب ۶ لیوان، ورزش ۳۰ دقیقه، تغذیه خوب»',
+        voiceListening: '🎙️ گوش می‌کنم... (فارسی)',
         voiceSuccess: '✅ اطلاعات از روی صدا دریافت شد.',
         voiceError: '❌ متوجه نشدم، دوباره سعی کن.',
         voiceUnsupported: 'مرورگر از ورود صوتی پشتیبانی نمی‌کند.',
-        voiceIntro: 'سلام! لطفاً اطلاعات امروزت رو بگو: خواب چند ساعت، آب چند لیوان، ورزش چند دقیقه و کیفیت تغذیه (ضعیف، متوسط، خوب، عالی).',
+        voiceIntro: 'سلام! لطفاً اطلاعات امروزت رو به فارسی بگو: خواب چند ساعت، آب چند لیوان، ورزش چند دقیقه و کیفیت تغذیه (ضعیف، متوسط، خوب، عالی).',
         voiceConfirm: 'اطلاعات ثبت شد.',
         voicePermissionDenied: 'دسترسی به میکروفون داده نشد. لطفاً در تنظیمات مرورگر مجوز را فعال کنید.',
       },
@@ -1466,12 +1466,12 @@
         profileWeight: 'Weight (kg)',
         profileSave: 'Save',
         profileCancel: 'Cancel',
-        voiceHint: 'Click to speak: "sleep 8 hours, water 6 glasses, exercise 30 minutes, nutrition good"',
-        voiceListening: '🎙️ Listening...',
+        voiceHint: 'Click to speak in Persian (e.g., "خواب ۸ ساعت، آب ۶ لیوان، ورزش ۳۰ دقیقه")',
+        voiceListening: '🎙️ Listening... (Persian)',
         voiceSuccess: '✅ Voice input processed.',
         voiceError: '❌ Could not understand, try again.',
         voiceUnsupported: 'Voice input not supported in this browser.',
-        voiceIntro: 'Hello! Please tell me today\'s info: sleep hours, water glasses, exercise minutes, and nutrition quality (poor, fair, good, excellent).',
+        voiceIntro: 'Hello! Please speak in Persian: sleep hours, water glasses, exercise minutes, and nutrition quality.',
         voiceConfirm: 'Info saved.',
         voicePermissionDenied: 'Microphone access denied. Please enable it in browser settings.',
       }
@@ -1481,7 +1481,7 @@
       return translations[currentLang]?.[key] || translations.fa[key] || key;
     }
 
-    // --- Voice Assistant with explicit permission request ---
+    // --- Voice Assistant (ALWAYS Persian) ---
     let recognition = null;
     let isListening = false;
 
@@ -1506,7 +1506,8 @@
       }
       const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
       recognition = new SpeechRecognition();
-      recognition.lang = currentLang === 'fa' ? 'fa-IR' : 'en-US';
+      // ALWAYS Persian — this makes it understand Persian regardless of UI language
+      recognition.lang = 'fa-IR';
       recognition.continuous = false;
       recognition.interimResults = false;
       recognition.maxAlternatives = 1;
@@ -1539,7 +1540,7 @@
 
       recognition.onresult = (event) => {
         const transcript = event.results[0][0].transcript.trim();
-        console.log('Voice transcript:', transcript);
+        console.log('Voice transcript (Persian):', transcript);
         processVoiceCommand(transcript);
       };
       return true;
@@ -1572,12 +1573,12 @@
         if (!ok) return;
       }
 
-      // Update language if changed
-      recognition.lang = currentLang === 'fa' ? 'fa-IR' : 'en-US';
+      // Ensure it's always Persian
+      recognition.lang = 'fa-IR';
 
       try {
         recognition.start();
-        // Speak a greeting
+        // Speak a greeting in Persian
         speakText(t('voiceIntro'));
       } catch(e) {
         console.warn('Voice start error:', e);
@@ -1589,6 +1590,7 @@
     function processVoiceCommand(text) {
       const lower = text.toLowerCase();
       let sleep = null, water = null, exercise = null, quality = null;
+      // Persian quality words
       let qualityMap = {'ضعیف':0, 'متوسط':1, 'خوب':2, 'عالی':3, 'poor':0, 'fair':1, 'good':2, 'excellent':3, 'bad':0, 'average':1};
 
       // Extract numbers
@@ -1715,7 +1717,7 @@
     function speakText(text) {
       if (!('speechSynthesis' in window)) return;
       const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = currentLang === 'fa' ? 'fa-IR' : 'en-US';
+      utterance.lang = 'fa-IR'; // always Persian
       utterance.rate = 0.9;
       window.speechSynthesis.speak(utterance);
     }
@@ -2521,10 +2523,7 @@
       document.getElementById('langToggle').textContent = lang === 'fa' ? '🇬🇧 English' : '🇮🇷 فارسی';
       saveLang(lang);
       updateUI();
-      // Update voice recognition language if already initialized
-      if (recognition) {
-        recognition.lang = lang === 'fa' ? 'fa-IR' : 'en-US';
-      }
+      // Voice recognition stays Persian — no change needed
     }
     document.getElementById('langToggle').addEventListener('click', ()=>{
       const nextLang = currentLang === 'fa' ? 'en' : 'fa';
@@ -3077,7 +3076,6 @@
       renderStatsDashboard();
 
       initStepCounter();
-      // Voice will be initialized on first click
       window._initialized = true;
     }
 
