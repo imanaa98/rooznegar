@@ -686,11 +686,23 @@
       color: var(--c-ink-soft);
       margin-top: 6px;
       text-align: center;
-      min-height: 20px;
+      min-height: 40px;
       transition: 0.2s;
+      line-height: 1.6;
+      word-break: break-word;
     }
     .voice-status.success { color: var(--c-nutrition); }
     .voice-status.error { color: var(--c-care); }
+    .voice-status .transcript {
+      font-weight: 600;
+      color: var(--c-ink);
+      background: var(--c-linen);
+      padding: 2px 10px;
+      border-radius: 999px;
+      display: inline-block;
+      margin-top: 2px;
+      font-size: 11px;
+    }
 
     @media (prefers-reduced-motion: reduce) {
       * { transition-duration: .01ms !important; animation-duration: .01ms !important; }
@@ -1379,6 +1391,7 @@
         voiceIntro: 'سلام! لطفاً اطلاعات امروزت رو به فارسی بگو: خواب چند ساعت، آب چند لیوان، ورزش چند دقیقه و کیفیت تغذیه (ضعیف، متوسط، خوب، عالی).',
         voiceConfirm: 'اطلاعات ثبت شد.',
         voicePermissionDenied: 'دسترسی به میکروفون داده نشد. لطفاً در تنظیمات مرورگر مجوز را فعال کنید.',
+        voiceNoMatch: 'متن تشخیص داده شد:',
       },
       en: {
         appTitle: 'Rooznegar Salamat',
@@ -1474,6 +1487,7 @@
         voiceIntro: 'Hello! Please speak in Persian: sleep hours, water glasses, exercise minutes, and nutrition quality.',
         voiceConfirm: 'Info saved.',
         voicePermissionDenied: 'Microphone access denied. Please enable it in browser settings.',
+        voiceNoMatch: 'Heard:',
       }
     };
 
@@ -1541,6 +1555,10 @@
       recognition.onresult = (event) => {
         const transcript = event.results[0][0].transcript.trim();
         console.log('Voice transcript (Persian):', transcript);
+        // Show the transcript in the status for debugging
+        const statusEl = document.getElementById('voiceStatus');
+        statusEl.innerHTML = t('voiceNoMatch') + ' <span class="transcript">"' + transcript + '"</span>';
+        statusEl.className = 'voice-status';
         processVoiceCommand(transcript);
       };
       return true;
@@ -1699,17 +1717,24 @@
       if (updated) {
         syncFormUI();
         onStateChange();
-        document.getElementById('voiceStatus').textContent = t('voiceSuccess');
-        document.getElementById('voiceStatus').className = 'voice-status success';
+        const statusEl = document.getElementById('voiceStatus');
+        statusEl.textContent = t('voiceSuccess');
+        statusEl.className = 'voice-status success';
         speakText(t('voiceConfirm'));
-        // Auto-save after a short delay
         clearTimeout(saveTimeout);
         saveTimeout = setTimeout(() => {
           autoSave();
         }, 300);
       } else {
-        document.getElementById('voiceStatus').textContent = t('voiceError');
-        document.getElementById('voiceStatus').className = 'voice-status error';
+        // Keep the transcript visible but show error
+        const statusEl = document.getElementById('voiceStatus');
+        if (statusEl.innerHTML.indexOf('transcript') === -1) {
+          // If transcript not shown yet (shouldn't happen), show it
+          statusEl.innerHTML = t('voiceNoMatch') + ' <span class="transcript">"' + text + '"</span>';
+        }
+        statusEl.className = 'voice-status error';
+        // Append error message
+        statusEl.innerHTML += '<br>❌ ' + t('voiceError');
         speakText(t('voiceError'));
       }
     }
