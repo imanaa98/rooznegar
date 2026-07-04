@@ -660,6 +660,38 @@
       padding: 4px 10px; border-radius: 999px; display: inline-block; margin-top: 4px;
     }
 
+    /* Voice button */
+    .voice-btn {
+      background: var(--c-card);
+      border: 1.5px solid var(--c-line);
+      border-radius: 50%;
+      width: 42px;
+      height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      color: var(--c-ink-soft);
+      transition: 0.15s;
+      box-shadow: var(--shadow-1);
+      flex: none;
+    }
+    .voice-btn:hover { border-color: var(--c-gold); color: var(--c-sleep); }
+    .voice-btn.listening { border-color: #E74C3C; color: #E74C3C; box-shadow: 0 0 0 3px rgba(231,76,60,0.3); animation: pulse 1s infinite; }
+    .voice-btn:disabled { opacity: 0.5; pointer-events: none; }
+    @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(231,76,60,0.4); } 70% { box-shadow: 0 0 0 8px rgba(231,76,60,0); } 100% { box-shadow: 0 0 0 0 rgba(231,76,60,0); } }
+
+    .voice-status {
+      font-size: 12px;
+      color: var(--c-ink-soft);
+      margin-top: 6px;
+      text-align: center;
+      min-height: 20px;
+      transition: 0.2s;
+    }
+    .voice-status.success { color: var(--c-nutrition); }
+    .voice-status.error { color: var(--c-care); }
+
     @media (prefers-reduced-motion: reduce) {
       * { transition-duration: .01ms !important; animation-duration: .01ms !important; }
     }
@@ -880,10 +912,14 @@
               </div>
             </div>
           </div>
-          <button class="save-btn" id="saveBtn">
-            <span id="saveBtnText">ثبت امتیاز امروز</span>
-            <span class="save-status" id="saveStatus"></span>
-          </button>
+          <div style="display:flex; gap:8px; margin-top:12px; align-items:center; flex-wrap:wrap;">
+            <button class="save-btn" id="saveBtn" style="flex:1; margin-top:0;">
+              <span id="saveBtnText">ثبت امتیاز امروز</span>
+              <span class="save-status" id="saveStatus"></span>
+            </button>
+            <button class="voice-btn" id="voiceBtn" aria-label="فعال‌سازی ورود صوتی" title="ورود صوتی">🎤</button>
+          </div>
+          <div class="voice-status" id="voiceStatus"></div>
         </div>
       </div>
 
@@ -1335,6 +1371,14 @@
         profileWeight: 'وزن (کیلوگرم)',
         profileSave: 'ذخیره',
         profileCancel: 'انصراف',
+        voiceHint: 'برای ورود صوتی کلیک کن و بگو: «خواب ۸ ساعت، آب ۶ لیوان، ورزش ۳۰ دقیقه، تغذیه خوب»',
+        voiceListening: '🎙️ گوش می‌کنم...',
+        voiceSuccess: '✅ اطلاعات از روی صدا دریافت شد.',
+        voiceError: '❌ متوجه نشدم، دوباره سعی کن.',
+        voiceUnsupported: 'مرورگر از ورود صوتی پشتیبانی نمی‌کند.',
+        voiceIntro: 'سلام! لطفاً اطلاعات امروزت رو بگو: خواب چند ساعت، آب چند لیوان، ورزش چند دقیقه و کیفیت تغذیه (ضعیف، متوسط، خوب، عالی).',
+        voiceConfirm: 'اطلاعات ثبت شد.',
+        voicePermissionDenied: 'دسترسی به میکروفون داده نشد. لطفاً در تنظیمات مرورگر مجوز را فعال کنید.',
       },
       en: {
         appTitle: 'Rooznegar Salamat',
@@ -1422,12 +1466,263 @@
         profileWeight: 'Weight (kg)',
         profileSave: 'Save',
         profileCancel: 'Cancel',
+        voiceHint: 'Click to speak: "sleep 8 hours, water 6 glasses, exercise 30 minutes, nutrition good"',
+        voiceListening: '🎙️ Listening...',
+        voiceSuccess: '✅ Voice input processed.',
+        voiceError: '❌ Could not understand, try again.',
+        voiceUnsupported: 'Voice input not supported in this browser.',
+        voiceIntro: 'Hello! Please tell me today\'s info: sleep hours, water glasses, exercise minutes, and nutrition quality (poor, fair, good, excellent).',
+        voiceConfirm: 'Info saved.',
+        voicePermissionDenied: 'Microphone access denied. Please enable it in browser settings.',
       }
     };
 
     function t(key) {
       return translations[currentLang]?.[key] || translations.fa[key] || key;
     }
+
+    // --- Voice Assistant with explicit permission request ---
+    let recognition = null;
+    let isListening = false;
+
+    // Request microphone permission explicitly using getUserMedia
+    async function requestMicrophonePermission() {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
+        // Stop all tracks immediately, we only needed permission
+        stream.getTracks().forEach(track => track.stop());
+        return true;
+      } catch (err) {
+        console.warn('Microphone permission error:', err);
+        return false;
+      }
+    }
+
+    function initVoice() {
+      if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+        document.getElementById('voiceStatus').textContent = t('voiceUnsupported');
+        document.getElementById('voiceBtn').disabled = true;
+        return false;
+      }
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      recognition = new SpeechRecognition();
+      recognition.lang = currentLang === 'fa' ? 'fa-IR' : 'en-US';
+      recognition.continuous = false;
+      recognition.interimResults = false;
+      recognition.maxAlternatives = 1;
+
+      recognition.onstart = () => {
+        isListening = true;
+        document.getElementById('voiceBtn').classList.add('listening');
+        document.getElementById('voiceStatus').textContent = t('voiceListening');
+        document.getElementById('voiceStatus').className = 'voice-status';
+      };
+
+      recognition.onerror = (event) => {
+        console.warn('Voice error:', event.error);
+        stopListening();
+        if (event.error === 'not-allowed') {
+          document.getElementById('voiceStatus').textContent = t('voicePermissionDenied');
+          document.getElementById('voiceStatus').className = 'voice-status error';
+        } else if (event.error === 'no-speech') {
+          document.getElementById('voiceStatus').textContent = t('voiceError');
+          document.getElementById('voiceStatus').className = 'voice-status error';
+        } else {
+          document.getElementById('voiceStatus').textContent = t('voiceError');
+          document.getElementById('voiceStatus').className = 'voice-status error';
+        }
+      };
+
+      recognition.onend = () => {
+        stopListening();
+      };
+
+      recognition.onresult = (event) => {
+        const transcript = event.results[0][0].transcript.trim();
+        console.log('Voice transcript:', transcript);
+        processVoiceCommand(transcript);
+      };
+      return true;
+    }
+
+    function stopListening() {
+      if (recognition) {
+        try { recognition.stop(); } catch(e) {}
+      }
+      isListening = false;
+      document.getElementById('voiceBtn').classList.remove('listening');
+    }
+
+    async function toggleVoice() {
+      if (isListening) {
+        stopListening();
+        return;
+      }
+
+      // First, request microphone permission
+      const hasPermission = await requestMicrophonePermission();
+      if (!hasPermission) {
+        document.getElementById('voiceStatus').textContent = t('voicePermissionDenied');
+        document.getElementById('voiceStatus').className = 'voice-status error';
+        return;
+      }
+
+      if (!recognition) {
+        const ok = initVoice();
+        if (!ok) return;
+      }
+
+      // Update language if changed
+      recognition.lang = currentLang === 'fa' ? 'fa-IR' : 'en-US';
+
+      try {
+        recognition.start();
+        // Speak a greeting
+        speakText(t('voiceIntro'));
+      } catch(e) {
+        console.warn('Voice start error:', e);
+        document.getElementById('voiceStatus').textContent = t('voiceError');
+        document.getElementById('voiceStatus').className = 'voice-status error';
+      }
+    }
+
+    function processVoiceCommand(text) {
+      const lower = text.toLowerCase();
+      let sleep = null, water = null, exercise = null, quality = null;
+      let qualityMap = {'ضعیف':0, 'متوسط':1, 'خوب':2, 'عالی':3, 'poor':0, 'fair':1, 'good':2, 'excellent':3, 'bad':0, 'average':1};
+
+      // Extract numbers
+      const numbers = text.match(/\d+(\.\d+)?/g) || [];
+      let numIdx = 0;
+
+      // Detect sleep: "خواب ۸ ساعت", "۸ ساعت خواب"
+      if (lower.includes('خواب') || lower.includes('sleep')) {
+        for (let n of numbers) {
+          let val = parseFloat(n);
+          if (val >= 0 && val <= 24) {
+            sleep = val;
+            numIdx++;
+            break;
+          }
+        }
+        if (sleep === null) {
+          // try to find a number near "ساعت"
+          const parts = text.split(/[\s،,]+/);
+          for (let i=0; i<parts.length; i++) {
+            if (parts[i].includes('ساعت') || parts[i].includes('hr') || parts[i].includes('hour')) {
+              let prev = parseFloat(parts[i-1]);
+              if (!isNaN(prev) && prev >=0 && prev <=24) { sleep = prev; break; }
+              let next = parseFloat(parts[i+1]);
+              if (!isNaN(next) && next >=0 && next <=24) { sleep = next; break; }
+            }
+          }
+        }
+      }
+
+      // Water: "آب ۶ لیوان", "۶ لیوان آب"
+      if (lower.includes('آب') || lower.includes('water')) {
+        for (let n of numbers) {
+          let val = parseFloat(n);
+          if (val >= 0 && val <= 30) {
+            if (sleep !== null && val === sleep) { continue; } // avoid reusing same number
+            water = val;
+            numIdx++;
+            break;
+          }
+        }
+        if (water === null) {
+          const parts = text.split(/[\s،,]+/);
+          for (let i=0; i<parts.length; i++) {
+            if (parts[i].includes('لیوان') || parts[i].includes('glass') || parts[i].includes('glasses')) {
+              let prev = parseFloat(parts[i-1]);
+              if (!isNaN(prev) && prev >=0 && prev <=30) { water = prev; break; }
+              let next = parseFloat(parts[i+1]);
+              if (!isNaN(next) && next >=0 && next <=30) { water = next; break; }
+            }
+          }
+        }
+      }
+
+      // Exercise: "ورزش ۳۰ دقیقه", "۳۰ دقیقه ورزش"
+      if (lower.includes('ورزش') || lower.includes('exercise') || lower.includes('فعالیت')) {
+        for (let n of numbers) {
+          let val = parseFloat(n);
+          if (val >= 0 && val <= 300) {
+            if ((sleep !== null && val === sleep) || (water !== null && val === water)) continue;
+            exercise = val;
+            numIdx++;
+            break;
+          }
+        }
+        if (exercise === null) {
+          const parts = text.split(/[\s،,]+/);
+          for (let i=0; i<parts.length; i++) {
+            if (parts[i].includes('دقیقه') || parts[i].includes('min') || parts[i].includes('minute')) {
+              let prev = parseFloat(parts[i-1]);
+              if (!isNaN(prev) && prev >=0 && prev <=300) { exercise = prev; break; }
+              let next = parseFloat(parts[i+1]);
+              if (!isNaN(next) && next >=0 && next <=300) { exercise = next; break; }
+            }
+          }
+        }
+      }
+
+      // Nutrition quality
+      for (let key in qualityMap) {
+        if (lower.includes(key)) {
+          quality = qualityMap[key];
+          break;
+        }
+      }
+
+      // Update state if any value found
+      let updated = false;
+      if (sleep !== null) {
+        state.sleepHours = clamp(sleep, 0, 12);
+        updated = true;
+      }
+      if (water !== null) {
+        state.waterGlasses = clamp(Math.round(water), 0, 20);
+        updated = true;
+      }
+      if (exercise !== null) {
+        state.exerciseMinutes = clamp(Math.round(exercise/5)*5, 0, 120);
+        updated = true;
+      }
+      if (quality !== null) {
+        state.nutritionQuality = quality;
+        updated = true;
+      }
+
+      if (updated) {
+        syncFormUI();
+        onStateChange();
+        document.getElementById('voiceStatus').textContent = t('voiceSuccess');
+        document.getElementById('voiceStatus').className = 'voice-status success';
+        speakText(t('voiceConfirm'));
+        // Auto-save after a short delay
+        clearTimeout(saveTimeout);
+        saveTimeout = setTimeout(() => {
+          autoSave();
+        }, 300);
+      } else {
+        document.getElementById('voiceStatus').textContent = t('voiceError');
+        document.getElementById('voiceStatus').className = 'voice-status error';
+        speakText(t('voiceError'));
+      }
+    }
+
+    function speakText(text) {
+      if (!('speechSynthesis' in window)) return;
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = currentLang === 'fa' ? 'fa-IR' : 'en-US';
+      utterance.rate = 0.9;
+      window.speechSynthesis.speak(utterance);
+    }
+
+    document.getElementById('voiceBtn').addEventListener('click', toggleVoice);
+
+    // --- End Voice Assistant ---
 
     function isProfileComplete() {
       if (!userProfile) return false;
@@ -2226,6 +2521,10 @@
       document.getElementById('langToggle').textContent = lang === 'fa' ? '🇬🇧 English' : '🇮🇷 فارسی';
       saveLang(lang);
       updateUI();
+      // Update voice recognition language if already initialized
+      if (recognition) {
+        recognition.lang = lang === 'fa' ? 'fa-IR' : 'en-US';
+      }
     }
     document.getElementById('langToggle').addEventListener('click', ()=>{
       const nextLang = currentLang === 'fa' ? 'en' : 'fa';
@@ -2315,6 +2614,8 @@
       document.getElementById('profileWeightLabel').textContent = t('profileWeight');
       document.getElementById('profileSave').textContent = t('profileSave');
       document.getElementById('profileCancel').textContent = t('profileCancel');
+
+      document.getElementById('voiceBtn').title = t('voiceHint');
 
       const saveBtnText = document.getElementById('saveBtnText');
       if (editingKey === todayKey) {
@@ -2776,6 +3077,7 @@
       renderStatsDashboard();
 
       initStepCounter();
+      // Voice will be initialized on first click
       window._initialized = true;
     }
 
