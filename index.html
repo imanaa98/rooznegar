@@ -1499,11 +1499,9 @@
     let recognition = null;
     let isListening = false;
 
-    // Request microphone permission explicitly using getUserMedia
     async function requestMicrophonePermission() {
       try {
         const stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
-        // Stop all tracks immediately, we only needed permission
         stream.getTracks().forEach(track => track.stop());
         return true;
       } catch (err) {
@@ -1520,7 +1518,6 @@
       }
       const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
       recognition = new SpeechRecognition();
-      // ALWAYS Persian — this makes it understand Persian regardless of UI language
       recognition.lang = 'fa-IR';
       recognition.continuous = false;
       recognition.interimResults = false;
@@ -1555,7 +1552,6 @@
       recognition.onresult = (event) => {
         const transcript = event.results[0][0].transcript.trim();
         console.log('Voice transcript (Persian):', transcript);
-        // Show the transcript in the status for debugging
         const statusEl = document.getElementById('voiceStatus');
         statusEl.innerHTML = t('voiceNoMatch') + ' <span class="transcript">"' + transcript + '"</span>';
         statusEl.className = 'voice-status';
@@ -1578,7 +1574,6 @@
         return;
       }
 
-      // First, request microphone permission
       const hasPermission = await requestMicrophonePermission();
       if (!hasPermission) {
         document.getElementById('voiceStatus').textContent = t('voicePermissionDenied');
@@ -1591,12 +1586,10 @@
         if (!ok) return;
       }
 
-      // Ensure it's always Persian
       recognition.lang = 'fa-IR';
 
       try {
         recognition.start();
-        // Speak a greeting in Persian
         speakText(t('voiceIntro'));
       } catch(e) {
         console.warn('Voice start error:', e);
@@ -1608,14 +1601,11 @@
     function processVoiceCommand(text) {
       const lower = text.toLowerCase();
       let sleep = null, water = null, exercise = null, quality = null;
-      // Persian quality words
       let qualityMap = {'ضعیف':0, 'متوسط':1, 'خوب':2, 'عالی':3, 'poor':0, 'fair':1, 'good':2, 'excellent':3, 'bad':0, 'average':1};
 
-      // Extract numbers
       const numbers = text.match(/\d+(\.\d+)?/g) || [];
       let numIdx = 0;
 
-      // Detect sleep: "خواب ۸ ساعت", "۸ ساعت خواب"
       if (lower.includes('خواب') || lower.includes('sleep')) {
         for (let n of numbers) {
           let val = parseFloat(n);
@@ -1626,7 +1616,6 @@
           }
         }
         if (sleep === null) {
-          // try to find a number near "ساعت"
           const parts = text.split(/[\s،,]+/);
           for (let i=0; i<parts.length; i++) {
             if (parts[i].includes('ساعت') || parts[i].includes('hr') || parts[i].includes('hour')) {
@@ -1639,12 +1628,11 @@
         }
       }
 
-      // Water: "آب ۶ لیوان", "۶ لیوان آب"
       if (lower.includes('آب') || lower.includes('water')) {
         for (let n of numbers) {
           let val = parseFloat(n);
           if (val >= 0 && val <= 30) {
-            if (sleep !== null && val === sleep) { continue; } // avoid reusing same number
+            if (sleep !== null && val === sleep) { continue; }
             water = val;
             numIdx++;
             break;
@@ -1663,7 +1651,6 @@
         }
       }
 
-      // Exercise: "ورزش ۳۰ دقیقه", "۳۰ دقیقه ورزش"
       if (lower.includes('ورزش') || lower.includes('exercise') || lower.includes('فعالیت')) {
         for (let n of numbers) {
           let val = parseFloat(n);
@@ -1687,7 +1674,6 @@
         }
       }
 
-      // Nutrition quality
       for (let key in qualityMap) {
         if (lower.includes(key)) {
           quality = qualityMap[key];
@@ -1695,7 +1681,6 @@
         }
       }
 
-      // Update state if any value found
       let updated = false;
       if (sleep !== null) {
         state.sleepHours = clamp(sleep, 0, 12);
@@ -1716,6 +1701,14 @@
 
       if (updated) {
         syncFormUI();
+        // Force UI update: dispatch input events to all range sliders so they refresh visually
+        ['sleepHours', 'waterGlasses', 'exerciseMinutes', 'stepsInput'].forEach(id => {
+          const el = document.getElementById(id);
+          if (el) {
+            const evt = new Event('input', { bubbles: true });
+            el.dispatchEvent(evt);
+          }
+        });
         onStateChange();
         const statusEl = document.getElementById('voiceStatus');
         statusEl.textContent = t('voiceSuccess');
@@ -1726,14 +1719,11 @@
           autoSave();
         }, 300);
       } else {
-        // Keep the transcript visible but show error
         const statusEl = document.getElementById('voiceStatus');
         if (statusEl.innerHTML.indexOf('transcript') === -1) {
-          // If transcript not shown yet (shouldn't happen), show it
           statusEl.innerHTML = t('voiceNoMatch') + ' <span class="transcript">"' + text + '"</span>';
         }
         statusEl.className = 'voice-status error';
-        // Append error message
         statusEl.innerHTML += '<br>❌ ' + t('voiceError');
         speakText(t('voiceError'));
       }
@@ -1742,7 +1732,7 @@
     function speakText(text) {
       if (!('speechSynthesis' in window)) return;
       const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = 'fa-IR'; // always Persian
+      utterance.lang = 'fa-IR';
       utterance.rate = 0.9;
       window.speechSynthesis.speak(utterance);
     }
@@ -2548,7 +2538,6 @@
       document.getElementById('langToggle').textContent = lang === 'fa' ? '🇬🇧 English' : '🇮🇷 فارسی';
       saveLang(lang);
       updateUI();
-      // Voice recognition stays Persian — no change needed
     }
     document.getElementById('langToggle').addEventListener('click', ()=>{
       const nextLang = currentLang === 'fa' ? 'en' : 'fa';
