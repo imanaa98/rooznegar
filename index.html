@@ -41,7 +41,6 @@
       --radius-sm: 12px;
       --font: 'Vazirmatn', Tahoma, sans-serif;
     }
-
     [data-theme="dark"] {
       --c-ink: #E8E6E0;
       --c-ink-soft: #A8A6B0;
@@ -58,7 +57,6 @@
       --shadow-1: 0 2px 10px rgba(0,0,0,0.3);
       --shadow-2: 0 14px 34px rgba(0,0,0,0.4);
     }
-
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html, body { height: 100%; }
     body {
@@ -102,13 +100,8 @@
       transition: transform 0.2s;
       box-shadow: 0 4px 12px rgba(31,35,71,0.15);
     }
-    .profile-avatar:hover {
-      transform: scale(1.05);
-    }
-    .profile-info {
-      flex: 1;
-      min-width: 0;
-    }
+    .profile-avatar:hover { transform: scale(1.05); }
+    .profile-info { flex: 1; min-width: 0; }
     .profile-name {
       font-family: 'Lalezar', var(--font);
       font-size: 20px;
@@ -120,47 +113,12 @@
       gap: 8px;
       flex-wrap: wrap;
     }
-    .profile-name .badge-gold {
-      font-size: 11px;
-      font-family: var(--font);
-      font-weight: 700;
-      color: #fff;
-      background: var(--c-gold);
-      padding: 2px 10px;
-      border-radius: 999px;
-    }
-    .profile-name .badge-guest {
-      font-size: 11px;
-      font-family: var(--font);
-      font-weight: 600;
-      color: var(--c-ink-soft);
-      background: var(--c-linen);
-      padding: 2px 10px;
-      border-radius: 999px;
-      border: 1px solid var(--c-line);
-    }
-    .profile-details {
-      display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
-      font-size: 12.5px;
-      color: var(--c-ink-soft);
-      margin-top: 2px;
-    }
-    .profile-details span {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-    .profile-details .detail-val {
-      font-weight: 700;
-      color: var(--c-ink);
-    }
-    .profile-details .detail-missing {
-      color: var(--c-ink-soft);
-      font-style: italic;
-      font-weight: 400;
-    }
+    .profile-name .badge-gold { font-size: 11px; font-family: var(--font); font-weight: 700; color: #fff; background: var(--c-gold); padding: 2px 10px; border-radius: 999px; }
+    .profile-name .badge-guest { font-size: 11px; font-family: var(--font); font-weight: 600; color: var(--c-ink-soft); background: var(--c-linen); padding: 2px 10px; border-radius: 999px; border: 1px solid var(--c-line); }
+    .profile-details { display: flex; gap: 14px; flex-wrap: wrap; font-size: 12.5px; color: var(--c-ink-soft); margin-top: 2px; }
+    .profile-details span { display: flex; align-items: center; gap: 4px; }
+    .profile-details .detail-val { font-weight: 700; color: var(--c-ink); }
+    .profile-details .detail-missing { color: var(--c-ink-soft); font-style: italic; font-weight: 400; }
     .profile-edit-btn {
       background: var(--c-linen);
       border: 1px solid var(--c-line);
@@ -173,48 +131,19 @@
       flex: none;
       white-space: nowrap;
     }
-    .profile-edit-btn:hover {
-      border-color: var(--c-gold);
-      color: var(--c-ink);
-      background: var(--c-card);
-    }
-
+    .profile-edit-btn:hover { border-color: var(--c-gold); color: var(--c-ink); background: var(--c-card); }
     .profile-modal .modal-box { max-width: 420px; }
     .profile-modal .settings-field { margin-bottom: 14px; }
-    .profile-modal .settings-field label {
-      display: block;
-      font-size: 12.5px;
-      font-weight: 600;
-      color: var(--c-ink-soft);
-      margin-bottom: 4px;
-    }
-    .profile-modal .settings-field input {
-      width: 100%;
-      padding: 10px 14px;
-      border: 1.5px solid var(--c-line);
-      border-radius: var(--radius-sm);
-      font-size: 14px;
-      font-family: inherit;
-      background: var(--c-linen);
-      color: var(--c-ink);
-      transition: 0.2s;
-    }
-    .profile-modal .settings-field input:focus {
-      border-color: var(--c-gold);
-      background: var(--c-card);
-      outline: none;
-    }
+    .profile-modal .settings-field label { display: block; font-size: 12.5px; font-weight: 600; color: var(--c-ink-soft); margin-bottom: 4px; }
+    .profile-modal .settings-field input { width: 100%; padding: 10px 14px; border: 1.5px solid var(--c-line); border-radius: var(--radius-sm); font-size: 14px; font-family: inherit; background: var(--c-linen); color: var(--c-ink); transition: 0.2s; }
+    .profile-modal .settings-field input:focus { border-color: var(--c-gold); background: var(--c-card); outline: none; }
 
-    .topbar {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 6px 4px 12px; flex-wrap: wrap; gap: 10px;
-    }
+    .topbar { display: flex; align-items: center; justify-content: space-between; padding: 6px 4px 12px; flex-wrap: wrap; gap: 10px; }
     .brand { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
     .brand-mark { width: 34px; height: 34px; flex: none; }
     .brand-text .title { font-family: 'Lalezar', sans-serif; font-size: 21px; color: var(--c-sleep); line-height: 1; }
     .brand-text .subtitle { font-size: 11.5px; color: var(--c-ink-soft); margin-top: 3px; }
     .topbar-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-
     .lang-toggle, .theme-toggle {
       background: var(--c-card); border: 1px solid var(--c-line);
       border-radius: 999px; padding: 6px 12px; font-size: 13px; font-weight: 600;
@@ -222,31 +151,19 @@
       transition: 0.15s;
     }
     .lang-toggle:hover, .theme-toggle:hover { border-color: var(--c-gold); }
-
     .streak-pill {
       display: flex; align-items: center; gap: 5px;
       background: var(--c-card); border: 1px solid var(--c-line);
       border-radius: 999px; padding: 7px 13px; font-size: 13px; font-weight: 600;
       box-shadow: var(--shadow-1); white-space: nowrap;
     }
-    .horizon-bar {
-      height: 4px; border-radius: 4px; margin-bottom: 18px;
-      background: linear-gradient(90deg, var(--c-sleep), var(--c-nutrition), var(--c-exercise));
-      opacity: 0.85;
-    }
+    .horizon-bar { height: 4px; border-radius: 4px; margin-bottom: 18px; background: linear-gradient(90deg, var(--c-sleep), var(--c-nutrition), var(--c-exercise)); opacity: 0.85; }
 
     .layout { display: grid; grid-template-columns: 1fr; gap: 18px; }
-    @media (min-width: 900px) {
-      .layout { grid-template-columns: 380px 1fr; align-items: start; }
-      .panel-left { position: sticky; top: 18px; }
-    }
+    @media (min-width: 900px) { .layout { grid-template-columns: 380px 1fr; align-items: start; } .panel-left { position: sticky; top: 18px; } }
     .panel-left, .panel-right { display: flex; flex-direction: column; gap: 18px; }
 
-    .card {
-      background: var(--c-card); border-radius: var(--radius-lg);
-      box-shadow: var(--shadow-2); padding: 22px;
-      transition: background 0.3s, box-shadow 0.3s;
-    }
+    .card { background: var(--c-card); border-radius: var(--radius-lg); box-shadow: var(--shadow-2); padding: 22px; transition: background 0.3s, box-shadow 0.3s; }
     .card-title { font-size: 15px; font-weight: 700; margin: 0 0 4px; }
     .card-subtitle { font-size: 12.5px; color: var(--c-ink-soft); margin: 0 0 16px; }
 
@@ -254,25 +171,16 @@
     .gauge-wrap { position: relative; max-width: 300px; margin: 0 auto; }
     .gauge-wrap svg { width: 100%; display: block; }
     .gauge-icon { font-size: 21px; text-anchor: middle; user-select: none; }
-    .gauge-overlay {
-      position: absolute; top: 59%; left: 50%; transform: translate(-50%, -50%);
-      text-align: center; width: 78%;
-    }
+    .gauge-overlay { position: absolute; top: 59%; left: 50%; transform: translate(-50%, -50%); text-align: center; width: 78%; }
     .score-num { font-weight: 800; font-size: 52px; line-height: 1; letter-spacing: -1px; }
     .score-label { font-size: 12.5px; color: var(--c-ink-soft); font-weight: 600; margin-top: 2px; }
-    .score-tier {
-      display: inline-block; font-size: 12.5px; font-weight: 700; margin-top: 8px;
-      padding: 3px 12px; border-radius: 999px;
-    }
+    .score-tier { display: inline-block; font-size: 12.5px; font-weight: 700; margin-top: 8px; padding: 3px 12px; border-radius: 999px; }
     .gauge-date { text-align: center; font-size: 12.5px; color: var(--c-ink-soft); margin-top: 2px; }
 
     .group { padding-top: 16px; border-top: 1px solid var(--c-line); }
     .group:first-of-type { padding-top: 0; border-top: none; }
     .group-head { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
-    .group-icon {
-      width: 32px; height: 32px; border-radius: 10px; display: flex;
-      align-items: center; justify-content: center; font-size: 16px; flex: none;
-    }
+    .group-icon { width: 32px; height: 32px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 16px; flex: none; }
     .group-title { font-size: 14.5px; font-weight: 700; }
     .group[data-cat="sleep"] .group-icon { background: var(--c-sleep-soft); color: var(--c-sleep); }
     .group[data-cat="nutrition"] .group-icon { background: var(--c-nutrition-soft); color: var(--c-nutrition); }
@@ -301,10 +209,8 @@
     .input-group .step-btn:active { transform: scale(0.95); }
 
     input[type="range"] {
-      -webkit-appearance: none; 
-      appearance: none;
-      width: 100%; 
-      height: 6px;
+      -webkit-appearance: none; appearance: none;
+      width: 100%; height: 6px;
       border-radius: 999px;
       background: var(--c-track);
       outline: none;
@@ -323,10 +229,7 @@
       touch-action: none;
       transition: 0.1s;
     }
-    input[type="range"]::-webkit-slider-thumb:active {
-      cursor: grabbing;
-      transform: scale(1.12);
-    }
+    input[type="range"]::-webkit-slider-thumb:active { cursor: grabbing; transform: scale(1.12); }
     input[type="range"]::-moz-range-thumb {
       width: 26px; height: 26px;
       border-radius: 50%;
@@ -337,10 +240,7 @@
       pointer-events: auto;
       touch-action: none;
     }
-    input[type="range"]::-moz-range-thumb:active {
-      cursor: grabbing;
-      transform: scale(1.12);
-    }
+    input[type="range"]::-moz-range-thumb:active { cursor: grabbing; transform: scale(1.12); }
     input[type="range"]::-webkit-slider-runnable-track { pointer-events: none; }
     input[type="range"]::-moz-range-track { pointer-events: none; }
     .group[data-cat="sleep"] input[type="range"] { --accent: var(--c-sleep); }
@@ -368,30 +268,11 @@
     .save-btn:hover { transform: translateY(-1px); box-shadow: var(--shadow-2); }
     .save-btn:active { transform: translateY(0); }
     .save-btn:disabled { opacity: .6; cursor: default; transform: none; }
-    .save-status {
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--c-ink-soft);
-      background: var(--c-linen);
-      padding: 2px 10px;
-      border-radius: 999px;
-      border: 1px solid var(--c-line);
-      transition: 0.2s;
-    }
-    .save-status.saved {
-      color: var(--c-nutrition);
-      border-color: var(--c-nutrition);
-    }
-    .save-status.saving {
-      color: var(--c-exercise);
-      border-color: var(--c-exercise);
-    }
+    .save-status { font-size: 12px; font-weight: 600; color: var(--c-ink-soft); background: var(--c-linen); padding: 2px 10px; border-radius: 999px; border: 1px solid var(--c-line); transition: 0.2s; }
+    .save-status.saved { color: var(--c-nutrition); border-color: var(--c-nutrition); }
+    .save-status.saving { color: var(--c-exercise); border-color: var(--c-exercise); }
 
-    .icon-btn {
-      display: flex; align-items: center; justify-content: center;
-      width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--c-line);
-      background: var(--c-card); color: var(--c-ink-soft); flex: none; box-shadow: var(--shadow-1);
-    }
+    .icon-btn { display: flex; align-items: center; justify-content: center; width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--c-line); background: var(--c-card); color: var(--c-ink-soft); flex: none; box-shadow: var(--shadow-1); }
     .icon-btn:hover { color: var(--c-sleep); border-color: var(--c-sleep); }
     .icon-btn svg { width: 18px; height: 18px; }
 
@@ -399,17 +280,10 @@
     .optional-tag { font-size: 10.5px; font-weight: 600; color: var(--c-ink-soft); background: var(--c-linen); padding: 2px 8px; border-radius: 999px; margin-right: 6px; }
     .health-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
     .health-grid .field-full { grid-column: 1 / -1; }
-    .num-input {
-      width: 100%; border: 1.5px solid var(--c-line); border-radius: var(--radius-sm);
-      padding: 10px 12px; font-size: 13.5px; font-family: inherit; color: var(--c-ink);
-      background: var(--c-linen); outline: none; transition: border 0.2s, background 0.2s;
-    }
+    .num-input { width: 100%; border: 1.5px solid var(--c-line); border-radius: var(--radius-sm); padding: 10px 12px; font-size: 13.5px; font-family: inherit; color: var(--c-ink); background: var(--c-linen); outline: none; transition: border 0.2s, background 0.2s; }
     .num-input:focus { border-color: var(--c-gold); background: var(--c-card); }
     .mood-row { display: flex; gap: 6px; justify-content: space-between; }
-    .mood-chip {
-      flex: 1; border: 1.5px solid var(--c-line); background: var(--c-card); border-radius: var(--radius-sm);
-      padding: 9px 4px; font-size: 20px; text-align: center; line-height: 1;
-    }
+    .mood-chip { flex: 1; border: 1.5px solid var(--c-line); background: var(--c-card); border-radius: var(--radius-sm); padding: 9px 4px; font-size: 20px; text-align: center; line-height: 1; }
     .mood-chip.is-selected { border-color: #C97A1E; background: #FBEFE0; }
     [data-theme="dark"] .mood-chip.is-selected { background: #4A3A2A; border-color: #C97A1E; }
     .bmi-readout { font-size: 12px; color: var(--c-ink-soft); margin-top: 6px; font-weight: 600; }
@@ -423,10 +297,7 @@
     .goal-fill { height: 100%; border-radius: 999px; transition: width .4s ease; }
 
     .analysis-box { display: flex; flex-direction: column; gap: 10px; }
-    .analysis-item {
-      display: flex; gap: 10px; align-items: flex-start; padding: 11px 12px;
-      border-radius: var(--radius-sm); font-size: 12.5px; line-height: 1.7;
-    }
+    .analysis-item { display: flex; gap: 10px; align-items: flex-start; padding: 11px 12px; border-radius: var(--radius-sm); font-size: 12.5px; line-height: 1.7; }
     .analysis-item b { display: block; font-size: 12px; margin-bottom: 2px; }
     .analysis-item.is-strength { background: var(--c-nutrition-soft); color: #2E6B43; }
     .analysis-item.is-weakness { background: var(--c-exercise-soft); color: #B85A3A; }
@@ -440,20 +311,12 @@
     .stat-tile-sub { font-size: 11px; color: var(--c-ink-soft); margin-top: 2px; }
 
     .cal-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; flex-wrap: wrap; gap: 8px; }
-    .cal-nav-btn {
-      width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--c-line);
-      background: var(--c-card); color: var(--c-ink-soft); display: flex;
-      align-items: center; justify-content: center; font-size: 14px;
-    }
+    .cal-nav-btn { width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--c-line); background: var(--c-card); color: var(--c-ink-soft); display: flex; align-items: center; justify-content: center; font-size: 14px; }
     .cal-nav-btn:hover { color: var(--c-sleep); border-color: var(--c-sleep); }
     .cal-title { font-size: 13.5px; font-weight: 700; }
     .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
     .cal-dow { font-size: 10.5px; color: var(--c-ink-soft); text-align: center; font-weight: 600; padding-bottom: 3px; }
-    .cal-cell {
-      aspect-ratio: 1; border-radius: 8px; display: flex; align-items: center; justify-content: center;
-      font-size: 11px; font-weight: 700; color: var(--c-ink-soft); background: var(--c-linen); position: relative;
-      border: 1.5px solid transparent; cursor: default; transition: background 0.2s, border 0.2s;
-    }
+    .cal-cell { aspect-ratio: 1; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: var(--c-ink-soft); background: var(--c-linen); position: relative; border: 1.5px solid transparent; cursor: default; transition: background 0.2s, border 0.2s; }
     .cal-cell.has-data { color: #fff; cursor: pointer; }
     .cal-cell.has-data:hover { transform: scale(1.04); }
     .cal-cell.is-empty { visibility: hidden; }
@@ -463,102 +326,52 @@
     .cal-legend-dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; margin-left: 4px; }
 
     .cal-search-row { display: flex; gap: 8px; margin-top: 10px; }
-    .cal-search-input {
-      flex: 1; border: 1.5px solid var(--c-line); border-radius: var(--radius-sm);
-      padding: 8px 12px; font-size: 12.5px; font-family: inherit; color: var(--c-ink);
-      background: var(--c-linen); outline: none; min-width: 0;
-    }
+    .cal-search-input { flex: 1; border: 1.5px solid var(--c-line); border-radius: var(--radius-sm); padding: 8px 12px; font-size: 12.5px; font-family: inherit; color: var(--c-ink); background: var(--c-linen); outline: none; min-width: 0; }
     .cal-search-input:focus { border-color: var(--c-gold); }
-    .cal-search-btn {
-      background: var(--c-sleep); color: #fff; border: none;
-      border-radius: var(--radius-sm); padding: 8px 16px; font-size: 12.5px; font-weight: 600;
-      white-space: nowrap;
-    }
+    .cal-search-btn { background: var(--c-sleep); color: #fff; border: none; border-radius: var(--radius-sm); padding: 8px 16px; font-size: 12.5px; font-weight: 600; white-space: nowrap; }
     .cal-search-btn:hover { background: var(--c-exercise); }
 
     .history-list { display: flex; flex-direction: column; }
-    .history-row {
-      display: flex; align-items: center; gap: 8px; padding: 11px 2px;
-      border-bottom: 1px solid var(--c-line);
-    }
+    .history-row { display: flex; align-items: center; gap: 8px; padding: 11px 2px; border-bottom: 1px solid var(--c-line); }
     .history-row:last-child { border-bottom: none; }
     .history-date { flex: 1 1 auto; min-width: 0; font-size: 13px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
     .history-dot { width: 9px; height: 9px; border-radius: 50%; flex: none; }
     .history-score { font-size: 14px; font-weight: 800; min-width: 30px; text-align: left; flex: none; }
-    .history-edit, .history-del {
-      background: none; border: none; color: var(--c-ink-soft); font-size: 15px; line-height: 1;
-      padding: 5px 7px; border-radius: 6px; flex: none; display: flex; align-items: center; justify-content: center;
-    }
+    .history-edit, .history-del { background: none; border: none; color: var(--c-ink-soft); font-size: 15px; line-height: 1; padding: 5px 7px; border-radius: 6px; flex: none; display: flex; align-items: center; justify-content: center; }
     .history-edit:hover { color: var(--c-sleep); background: var(--c-sleep-soft); }
     .history-del:hover { color: var(--c-care); background: var(--c-exercise-soft); }
     .history-edit svg { width: 15px; height: 15px; }
 
     .todo-add-row { display: flex; gap: 8px; margin-bottom: 6px; }
-    .todo-input {
-      flex: 1; border: 1.5px solid var(--c-line); border-radius: var(--radius-sm);
-      padding: 11px 14px; font-size: 13.5px; font-family: inherit; outline: none; color: var(--c-ink);
-      background: var(--c-linen);
-    }
+    .todo-input { flex: 1; border: 1.5px solid var(--c-line); border-radius: var(--radius-sm); padding: 11px 14px; font-size: 13.5px; font-family: inherit; outline: none; color: var(--c-ink); background: var(--c-linen); }
     .todo-input:focus { border-color: var(--c-gold); background: var(--c-card); }
-    .todo-add-btn {
-      flex: none; width: 42px; height: 42px; border-radius: var(--radius-sm); border: none;
-      background: var(--c-sleep); color: #fff; font-size: 20px; line-height: 1;
-      display: flex; align-items: center; justify-content: center;
-    }
+    .todo-add-btn { flex: none; width: 42px; height: 42px; border-radius: var(--radius-sm); border: none; background: var(--c-sleep); color: #fff; font-size: 20px; line-height: 1; display: flex; align-items: center; justify-content: center; }
     .todo-add-btn:hover { background: var(--c-exercise); }
     .todo-progress { font-size: 12px; color: var(--c-ink-soft); font-weight: 600; margin: 14px 2px 8px; }
     .todo-list { display: flex; flex-direction: column; }
-    .todo-row {
-      display: flex; align-items: center; gap: 10px; padding: 9px 2px;
-      border-bottom: 1px solid var(--c-line);
-    }
+    .todo-row { display: flex; align-items: center; gap: 10px; padding: 9px 2px; border-bottom: 1px solid var(--c-line); }
     .todo-row:last-child { border-bottom: none; }
-    .todo-checkbox {
-      width: 22px; height: 22px; border-radius: 7px; border: 2px solid var(--c-line); flex: none;
-      display: flex; align-items: center; justify-content: center; background: var(--c-card); padding: 0;
-      transition: all .15s ease;
-    }
+    .todo-checkbox { width: 22px; height: 22px; border-radius: 7px; border: 2px solid var(--c-line); flex: none; display: flex; align-items: center; justify-content: center; background: var(--c-card); padding: 0; transition: all .15s ease; }
     .todo-checkbox.is-done { background: var(--c-nutrition); border-color: var(--c-nutrition); }
     .todo-checkbox svg { width: 13px; height: 13px; opacity: 0; transform: scale(.5); transition: all .15s ease; }
     .todo-checkbox.is-done svg { opacity: 1; transform: scale(1); }
-    .todo-text {
-      flex: 1; font-size: 13px; font-weight: 600; word-break: break-word;
-    }
-    .todo-text .todo-time {
-      display: block; font-size: 10.5px; font-weight: 400; color: var(--c-ink-soft);
-      margin-top: 2px;
-    }
+    .todo-text { flex: 1; font-size: 13px; font-weight: 600; word-break: break-word; }
+    .todo-text .todo-time { display: block; font-size: 10.5px; font-weight: 400; color: var(--c-ink-soft); margin-top: 2px; }
     .todo-text.is-done { color: var(--c-ink-soft); text-decoration: line-through; }
     .todo-text.is-done .todo-time { text-decoration: none; }
-    .todo-del {
-      background: none; border: none; color: var(--c-ink-soft); font-size: 16px; line-height: 1;
-      padding: 4px 6px; border-radius: 6px; flex: none;
-    }
+    .todo-del { background: none; border: none; color: var(--c-ink-soft); font-size: 16px; line-height: 1; padding: 4px 6px; border-radius: 6px; flex: none; }
     .todo-del:hover { color: var(--c-care); background: var(--c-exercise-soft); }
-    .todo-edit {
-      background: none; border: none; color: var(--c-ink-soft); line-height: 1; flex: none;
-      padding: 5px 6px; border-radius: 6px; display: flex; align-items: center; justify-content: center;
-    }
+    .todo-edit { background: none; border: none; color: var(--c-ink-soft); line-height: 1; flex: none; padding: 5px 6px; border-radius: 6px; display: flex; align-items: center; justify-content: center; }
     .todo-edit:hover { color: var(--c-sleep); background: var(--c-sleep-soft); }
     .todo-edit svg { width: 14px; height: 14px; }
     .todo-move { display: flex; flex-direction: column; gap: 1px; flex: none; }
-    .todo-move-btn {
-      background: none; border: none; color: var(--c-ink-soft); font-size: 9px; line-height: 1;
-      padding: 2px 5px; border-radius: 4px; width: 22px;
-    }
+    .todo-move-btn { background: none; border: none; color: var(--c-ink-soft); font-size: 9px; line-height: 1; padding: 2px 5px; border-radius: 4px; width: 22px; }
     .todo-move-btn:hover { color: var(--c-sleep); background: var(--c-sleep-soft); }
     .todo-move-btn:disabled { opacity: .25; }
     .todo-move-btn:disabled:hover { background: none; color: var(--c-ink-soft); }
     .todo-edit-row { display: flex; gap: 8px; align-items: center; flex: 1; }
-    .todo-edit-input {
-      flex: 1; min-width: 0; border: 1.5px solid var(--c-gold); border-radius: var(--radius-sm);
-      padding: 8px 11px; font-size: 13px; font-family: inherit; outline: none;
-      background: var(--c-card); color: var(--c-ink);
-    }
-    .todo-edit-save, .todo-edit-cancel {
-      flex: none; width: 30px; height: 30px; border-radius: 8px; border: none;
-      display: flex; align-items: center; justify-content: center;
-    }
+    .todo-edit-input { flex: 1; min-width: 0; border: 1.5px solid var(--c-gold); border-radius: var(--radius-sm); padding: 8px 11px; font-size: 13px; font-family: inherit; outline: none; background: var(--c-card); color: var(--c-ink); }
+    .todo-edit-save, .todo-edit-cancel { flex: none; width: 30px; height: 30px; border-radius: 8px; border: none; display: flex; align-items: center; justify-content: center; }
     .todo-edit-save { background: var(--c-nutrition); color: #fff; }
     .todo-edit-save svg { width: 14px; height: 14px; }
     .todo-edit-cancel { background: var(--c-linen); color: var(--c-ink-soft); font-size: 16px; }
@@ -566,86 +379,42 @@
     .chart-wrap { position: relative; }
     .chart-wrap svg { width: 100%; height: auto; display: block; overflow: visible; }
     .chart-point { cursor: pointer; }
-    .chart-tooltip {
-      position: absolute; background: var(--c-ink); color: #fff; font-size: 11.5px; font-weight: 600;
-      padding: 5px 9px; border-radius: 8px; transform: translate(-50%, -130%); white-space: nowrap;
-      pointer-events: none; opacity: 0; transition: opacity .12s ease;
-    }
+    .chart-tooltip { position: absolute; background: var(--c-ink); color: #fff; font-size: 11.5px; font-weight: 600; padding: 5px 9px; border-radius: 8px; transform: translate(-50%, -130%); white-space: nowrap; pointer-events: none; opacity: 0; transition: opacity .12s ease; }
     .chart-tooltip.visible { opacity: 1; }
     .axis-label { font-size: 10.5px; fill: var(--c-ink-soft); }
 
-    .empty-state {
-      text-align: center; padding: 28px 10px; color: var(--c-ink-soft); font-size: 13px;
-      background: var(--c-linen); border-radius: var(--radius-md);
-    }
+    .empty-state { text-align: center; padding: 28px 10px; color: var(--c-ink-soft); font-size: 13px; background: var(--c-linen); border-radius: var(--radius-md); }
     .empty-state .emoji { font-size: 26px; display: block; margin-bottom: 8px; }
 
-    .edit-banner {
-      display: flex; align-items: center; justify-content: space-between; gap: 10px;
-      background: var(--c-exercise-soft); border: 1.5px solid var(--c-exercise);
-      color: var(--c-exercise); border-radius: var(--radius-sm);
-      padding: 10px 12px; font-size: 12.5px; font-weight: 700; margin-bottom: 16px;
-    }
+    .edit-banner { display: flex; align-items: center; justify-content: space-between; gap: 10px; background: var(--c-exercise-soft); border: 1.5px solid var(--c-exercise); color: var(--c-exercise); border-radius: var(--radius-sm); padding: 10px 12px; font-size: 12.5px; font-weight: 700; margin-bottom: 16px; }
     .edit-banner-text { display: flex; align-items: center; gap: 6px; }
-    .edit-banner-cancel {
-      background: var(--c-card); border: 1.5px solid var(--c-exercise); color: var(--c-exercise);
-      border-radius: 999px; padding: 5px 12px; font-size: 12px; font-weight: 700; flex: none;
-    }
+    .edit-banner-cancel { background: var(--c-card); border: 1.5px solid var(--c-exercise); color: var(--c-exercise); border-radius: 999px; padding: 5px 12px; font-size: 12px; font-weight: 700; flex: none; }
     .edit-banner-cancel:hover { background: var(--c-exercise); color: #fff; }
 
-    .install-banner {
-      display: none; align-items: center; gap: 12px;
-      background: var(--c-card); border: 1.5px solid var(--c-line); border-radius: var(--radius-md);
-      padding: 13px 16px; box-shadow: var(--shadow-1); margin-bottom: 18px;
-    }
+    .install-banner { display: none; align-items: center; gap: 12px; background: var(--c-card); border: 1.5px solid var(--c-line); border-radius: var(--radius-md); padding: 13px 16px; box-shadow: var(--shadow-1); margin-bottom: 18px; }
     .install-banner.visible { display: flex; }
     .install-banner-icon { width: 38px; height: 38px; border-radius: 10px; flex: none; }
     .install-banner-text { flex: 1; min-width: 0; }
     .install-banner-title { font-size: 13px; font-weight: 700; }
     .install-banner-sub { font-size: 11.5px; color: var(--c-ink-soft); margin-top: 1px; }
     .install-banner-actions { display: flex; align-items: center; gap: 6px; flex: none; }
-    .install-btn {
-      background: var(--c-sleep); color: #fff; border: none; border-radius: 999px;
-      padding: 8px 16px; font-size: 12.5px; font-weight: 700; white-space: nowrap;
-    }
+    .install-btn { background: var(--c-sleep); color: #fff; border: none; border-radius: 999px; padding: 8px 16px; font-size: 12.5px; font-weight: 700; white-space: nowrap; }
     .install-btn:hover { background: var(--c-exercise); }
-    .install-dismiss {
-      background: none; border: none; color: var(--c-ink-soft); font-size: 18px; padding: 4px 6px; border-radius: 6px;
-    }
+    .install-dismiss { background: none; border: none; color: var(--c-ink-soft); font-size: 18px; padding: 4px 6px; border-radius: 6px; }
     .install-dismiss:hover { color: var(--c-care); background: var(--c-exercise-soft); }
 
     .backup-row { display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap; }
-    .backup-btn {
-      flex: 1; background: var(--c-card); border: 1.5px solid var(--c-line); color: var(--c-ink);
-      border-radius: var(--radius-sm); padding: 11px; font-size: 12.5px; font-weight: 700;
-      min-width: 100px;
-    }
+    .backup-btn { flex: 1; background: var(--c-card); border: 1.5px solid var(--c-line); color: var(--c-ink); border-radius: var(--radius-sm); padding: 11px; font-size: 12.5px; font-weight: 700; min-width: 100px; }
     .backup-btn:hover { border-color: var(--c-sleep); color: var(--c-sleep); }
-    .reset-link {
-      background: none; border: none; color: var(--c-ink-soft); font-size: 12px;
-      text-decoration: underline; padding: 6px; margin-top: 6px;
-    }
+    .reset-link { background: none; border: none; color: var(--c-ink-soft); font-size: 12px; text-decoration: underline; padding: 6px; margin-top: 6px; }
     .reset-link:hover { color: var(--c-care); }
 
-    .toast {
-      position: fixed; bottom: 22px; left: 50%; transform: translateX(-50%) translateY(20px);
-      background: var(--c-ink); color: #fff; padding: 12px 22px; border-radius: 999px;
-      font-size: 13.5px; font-weight: 600; box-shadow: var(--shadow-2);
-      opacity: 0; pointer-events: none; transition: all .25s ease; z-index: 50;
-      display: flex; align-items: center; gap: 7px;
-    }
+    .toast { position: fixed; bottom: 22px; left: 50%; transform: translateX(-50%) translateY(20px); background: var(--c-ink); color: #fff; padding: 12px 22px; border-radius: 999px; font-size: 13.5px; font-weight: 600; box-shadow: var(--shadow-2); opacity: 0; pointer-events: none; transition: all .25s ease; z-index: 50; display: flex; align-items: center; gap: 7px; }
     .toast.visible { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-    .modal-overlay {
-      position: fixed; inset: 0; background: rgba(35,37,57,0.45); display: flex;
-      align-items: center; justify-content: center; padding: 20px; z-index: 60;
-      opacity: 0; pointer-events: none; transition: opacity .18s ease;
-    }
+    .modal-overlay { position: fixed; inset: 0; background: rgba(35,37,57,0.45); display: flex; align-items: center; justify-content: center; padding: 20px; z-index: 60; opacity: 0; pointer-events: none; transition: opacity .18s ease; }
     .modal-overlay.visible { opacity: 1; pointer-events: auto; }
-    .modal-box {
-      background: var(--c-card); border-radius: var(--radius-lg); padding: 24px; max-width: 340px;
-      width: 100%; box-shadow: var(--shadow-2); transform: scale(.96); transition: transform .18s ease;
-    }
+    .modal-box { background: var(--c-card); border-radius: var(--radius-lg); padding: 24px; max-width: 340px; width: 100%; box-shadow: var(--shadow-2); transform: scale(.96); transition: transform .18s ease; }
     .modal-overlay.visible .modal-box { transform: scale(1); }
     .modal-title { font-size: 16px; font-weight: 700; margin: 0 0 8px; }
     .modal-text { font-size: 13.5px; color: var(--c-ink-soft); margin: 0 0 18px; line-height: 1.6; }
@@ -655,12 +424,8 @@
     .btn-danger { background: var(--c-care); color: #fff; }
 
     .footer-row { text-align: center; margin-top: 8px; }
-    .steps-auto-badge {
-      font-size: 11px; color: var(--c-ink-soft); background: var(--c-linen);
-      padding: 4px 10px; border-radius: 999px; display: inline-block; margin-top: 4px;
-    }
+    .steps-auto-badge { font-size: 11px; color: var(--c-ink-soft); background: var(--c-linen); padding: 4px 10px; border-radius: 999px; display: inline-block; margin-top: 4px; }
 
-    /* Voice button */
     .voice-btn {
       background: var(--c-card);
       border: 1.5px solid var(--c-line);
@@ -686,33 +451,22 @@
       color: var(--c-ink-soft);
       margin-top: 6px;
       text-align: center;
-      min-height: 40px;
+      min-height: 50px;
       transition: 0.2s;
-      line-height: 1.6;
+      line-height: 1.8;
       word-break: break-word;
     }
     .voice-status.success { color: var(--c-nutrition); }
     .voice-status.error { color: var(--c-care); }
-    .voice-status .transcript {
-      font-weight: 600;
-      color: var(--c-ink);
-      background: var(--c-linen);
-      padding: 2px 10px;
-      border-radius: 999px;
-      display: inline-block;
-      margin-top: 2px;
-      font-size: 11px;
-    }
+    .voice-status .transcript { font-weight: 600; color: var(--c-ink); background: var(--c-linen); padding: 2px 10px; border-radius: 999px; display: inline-block; margin-top: 2px; font-size: 11px; }
+    .voice-status .samples { font-size: 11px; color: var(--c-ink-soft); display: block; margin-top: 4px; opacity: 0.7; }
 
-    @media (prefers-reduced-motion: reduce) {
-      * { transition-duration: .01ms !important; animation-duration: .01ms !important; }
-    }
+    @media (prefers-reduced-motion: reduce) { * { transition-duration: .01ms !important; animation-duration: .01ms !important; } }
   </style>
 </head>
 <body>
 
   <div class="shell" id="appShell">
-    
     <div class="profile-bar" id="profileBar">
       <div class="profile-avatar" id="profileAvatar">👤</div>
       <div class="profile-info">
@@ -796,10 +550,7 @@
           </div>
 
           <div class="group" data-cat="sleep">
-            <div class="group-head">
-              <div class="group-icon">😴</div>
-              <div class="group-title" id="sleepTitle">خواب</div>
-            </div>
+            <div class="group-head"><div class="group-icon">😴</div><div class="group-title" id="sleepTitle">خواب</div></div>
             <div class="field">
               <div class="field-label-row">
                 <span class="field-label" id="sleepHoursLabel">ساعت خواب شب گذشته</span>
@@ -823,10 +574,7 @@
           </div>
 
           <div class="group" data-cat="nutrition">
-            <div class="group-head">
-              <div class="group-icon">🥗</div>
-              <div class="group-title" id="nutritionTitle">تغذیه</div>
-            </div>
+            <div class="group-head"><div class="group-icon">🥗</div><div class="group-title" id="nutritionTitle">تغذیه</div></div>
             <div class="field">
               <div class="field-label-row"><span class="field-label" id="nutritionQualityLabel">کیفیت تغذیه امروز</span></div>
               <div class="chip-group" data-group="nutritionQuality" id="nutritionQualityChips">
@@ -850,10 +598,7 @@
           </div>
 
           <div class="group" data-cat="exercise">
-            <div class="group-head">
-              <div class="group-icon">🏃</div>
-              <div class="group-title" id="exerciseTitle">ورزش</div>
-            </div>
+            <div class="group-head"><div class="group-icon">🏃</div><div class="group-title" id="exerciseTitle">ورزش</div></div>
             <div class="field">
               <div class="field-label-row">
                 <span class="field-label" id="exerciseMinutesLabel">مدت فعالیت بدنی امروز</span>
@@ -873,10 +618,7 @@
           </div>
 
           <div class="group" data-cat="exercise">
-            <div class="group-head">
-              <div class="group-icon">🚶</div>
-              <div class="group-title" id="stepsTitle">گام‌شمار <span class="optional-tag" id="optionalTag">اختیاری</span></div>
-            </div>
+            <div class="group-head"><div class="group-icon">🚶</div><div class="group-title" id="stepsTitle">گام‌شمار <span class="optional-tag" id="optionalTag">اختیاری</span></div></div>
             <div class="field">
               <div class="field-label-row">
                 <span class="field-label" id="stepsLabel">تعداد قدم‌های امروز</span>
@@ -888,18 +630,15 @@
           </div>
 
           <div class="group" data-cat="health">
-            <div class="group-head">
-              <div class="group-icon">➕</div>
-              <div class="group-title" id="healthTitle">سلامت تکمیلی <span class="optional-tag" id="healthOptional">اختیاری</span></div>
-            </div>
+            <div class="group-head"><div class="group-icon">➕</div><div class="group-title" id="healthTitle">سلامت تکمیلی <span class="optional-tag" id="healthOptional">اختیاری</span></div></div>
             <div class="field">
               <div class="field-label-row"><span class="field-label" id="moodLabel">خلق و خو</span></div>
               <div class="mood-row" id="moodChips">
-                <button class="mood-chip" data-value="4" aria-label="عالی">😀</button>
-                <button class="mood-chip" data-value="3" aria-label="خوب">🙂</button>
-                <button class="mood-chip" data-value="2" aria-label="معمولی">😐</button>
-                <button class="mood-chip" data-value="1" aria-label="بد">😔</button>
-                <button class="mood-chip" data-value="0" aria-label="خیلی بد">😣</button>
+                <button class="mood-chip" data-value="4">😀</button>
+                <button class="mood-chip" data-value="3">🙂</button>
+                <button class="mood-chip" data-value="2">😐</button>
+                <button class="mood-chip" data-value="1">😔</button>
+                <button class="mood-chip" data-value="0">😣</button>
               </div>
             </div>
             <div class="field field-full">
@@ -924,6 +663,7 @@
               </div>
             </div>
           </div>
+
           <div style="display:flex; gap:8px; margin-top:12px; align-items:center; flex-wrap:wrap;">
             <button class="save-btn" id="saveBtn" style="flex:1; margin-top:0;">
               <span id="saveBtnText">ثبت امتیاز امروز</span>
@@ -931,66 +671,37 @@
             </button>
             <button class="voice-btn" id="voiceBtn" aria-label="فعال‌سازی ورود صوتی" title="ورود صوتی (فارسی)">🎤</button>
           </div>
-          <div class="voice-status" id="voiceStatus"></div>
+          <div class="voice-status" id="voiceStatus">
+            <span class="samples">📢 نمونه‌ها: «خواب ۸ ساعت، آب ۶ لیوان، ورزش ۳۰ دقیقه، تغذیه خوب»</span>
+          </div>
         </div>
       </div>
 
       <div class="panel-right">
-        <div class="card">
-          <div class="card-title" id="goalsTitle">اهداف امروز</div>
-          <div class="card-subtitle" id="goalsSub">پیشرفت نسبت به اهدافی که تنظیم کردی</div>
+        <div class="card"><div class="card-title" id="goalsTitle">اهداف امروز</div><div class="card-subtitle" id="goalsSub">پیشرفت نسبت به اهدافی که تنظیم کردی</div>
           <div id="goalsBox">
-            <div class="goal-row">
-              <div class="goal-row-head"><span>😴 <span id="goalSleepLabel">خواب</span></span><span class="goal-pct" id="goalSleepPct">—</span></div>
-              <div class="goal-track"><div class="goal-fill" id="goalSleepFill" style="width:0%; background:var(--c-sleep);"></div></div>
-            </div>
-            <div class="goal-row">
-              <div class="goal-row-head"><span>🥗 <span id="goalWaterLabel">آب</span></span><span class="goal-pct" id="goalWaterPct">—</span></div>
-              <div class="goal-track"><div class="goal-fill" id="goalWaterFill" style="width:0%; background:var(--c-nutrition);"></div></div>
-            </div>
-            <div class="goal-row">
-              <div class="goal-row-head"><span>🏃 <span id="goalExerciseLabel">ورزش</span></span><span class="goal-pct" id="goalExercisePct">—</span></div>
-              <div class="goal-track"><div class="goal-fill" id="goalExerciseFill" style="width:0%; background:var(--c-exercise);"></div></div>
-            </div>
+            <div class="goal-row"><div class="goal-row-head"><span>😴 <span id="goalSleepLabel">خواب</span></span><span class="goal-pct" id="goalSleepPct">—</span></div><div class="goal-track"><div class="goal-fill" id="goalSleepFill" style="width:0%; background:var(--c-sleep);"></div></div></div>
+            <div class="goal-row"><div class="goal-row-head"><span>🥗 <span id="goalWaterLabel">آب</span></span><span class="goal-pct" id="goalWaterPct">—</span></div><div class="goal-track"><div class="goal-fill" id="goalWaterFill" style="width:0%; background:var(--c-nutrition);"></div></div></div>
+            <div class="goal-row"><div class="goal-row-head"><span>🏃 <span id="goalExerciseLabel">ورزش</span></span><span class="goal-pct" id="goalExercisePct">—</span></div><div class="goal-track"><div class="goal-fill" id="goalExerciseFill" style="width:0%; background:var(--c-exercise);"></div></div></div>
           </div>
         </div>
 
-        <div class="card">
-          <div class="card-title" id="analysisTitle">تحلیل هوشمند روز</div>
-          <div class="card-subtitle" id="analysisSub">بر اساس امتیاز ثبت‌شده‌ی این روز</div>
-          <div class="analysis-box" id="analysisBox">
-            <div class="empty-state"><span class="emoji">🧠</span><span id="analysisEmpty">بعد از ثبت امتیاز، تحلیل اینجا نمایش داده می‌شه.</span></div>
-          </div>
+        <div class="card"><div class="card-title" id="analysisTitle">تحلیل هوشمند روز</div><div class="card-subtitle" id="analysisSub">بر اساس امتیاز ثبت‌شده‌ی این روز</div>
+          <div class="analysis-box" id="analysisBox"><div class="empty-state"><span class="emoji">🧠</span><span id="analysisEmpty">بعد از ثبت امتیاز، تحلیل اینجا نمایش داده می‌شه.</span></div></div>
         </div>
 
-        <div class="card">
-          <div class="card-title" id="todoTitle">کارهای مهم</div>
-          <div class="card-subtitle" id="todoSub">کارهایی که می‌خوای امروز انجام بدی</div>
-          <div class="todo-add-row">
-            <input type="text" id="todoInput" class="todo-input" placeholder="یه کار جدید بنویس…" maxlength="120">
-            <button class="todo-add-btn" id="todoAddBtn" aria-label="افزودن کار">+</button>
-          </div>
+        <div class="card"><div class="card-title" id="todoTitle">کارهای مهم</div><div class="card-subtitle" id="todoSub">کارهایی که می‌خوای امروز انجام بدی</div>
+          <div class="todo-add-row"><input type="text" id="todoInput" class="todo-input" placeholder="یه کار جدید بنویس…" maxlength="120"><button class="todo-add-btn" id="todoAddBtn">+</button></div>
           <div class="todo-progress" id="todoProgress" style="display:none;"></div>
           <div class="todo-list" id="todoList"></div>
         </div>
 
-        <div class="card">
-          <div class="card-title" id="chartTitle">روند روزهای اخیر</div>
-          <div class="card-subtitle" id="chartSub">آخرین ۱۴ روزی که امتیاز ثبت کردی</div>
-          <div class="chart-wrap" id="chartWrap"></div>
-        </div>
+        <div class="card"><div class="card-title" id="chartTitle">روند روزهای اخیر</div><div class="card-subtitle" id="chartSub">آخرین ۱۴ روزی که امتیاز ثبت کردی</div><div class="chart-wrap" id="chartWrap"></div></div>
 
         <div class="card">
-          <div class="cal-head">
-            <button class="cal-nav-btn" id="calPrevBtn" aria-label="ماه قبل">‹</button>
-            <div class="cal-title" id="calTitle">—</div>
-            <button class="cal-nav-btn" id="calNextBtn" aria-label="ماه بعد">›</button>
-          </div>
+          <div class="cal-head"><button class="cal-nav-btn" id="calPrevBtn">‹</button><div class="cal-title" id="calTitle">—</div><button class="cal-nav-btn" id="calNextBtn">›</button></div>
           <div class="cal-grid" id="calGrid"></div>
-          <div class="cal-search-row">
-            <input type="text" class="cal-search-input" id="calSearchInput" placeholder="جستجوی تاریخ (مثلاً ۱۴۰۳/۰۱/۱۵ )">
-            <button class="cal-search-btn" id="calSearchBtn">جستجو</button>
-          </div>
+          <div class="cal-search-row"><input type="text" class="cal-search-input" id="calSearchInput" placeholder="جستجوی تاریخ (مثلاً ۱۴۰۳/۰۱/۱۵ )"><button class="cal-search-btn" id="calSearchBtn">جستجو</button></div>
           <div class="cal-legend">
             <span><span class="cal-legend-dot" style="background:#3F8F5C;"></span><span id="legendExcellent">عالی</span></span>
             <span><span class="cal-legend-dot" style="background:#4F9A68;"></span><span id="legendGood">خوب</span></span>
@@ -999,23 +710,12 @@
           </div>
         </div>
 
-        <div class="card">
-          <div class="card-title" id="statsTitle">داشبورد آماری ماه</div>
-          <div class="card-subtitle" id="statsSubtitle">—</div>
-          <div class="stats-grid" id="statsGrid"></div>
-        </div>
+        <div class="card"><div class="card-title" id="statsTitle">داشبورد آماری ماه</div><div class="card-subtitle" id="statsSubtitle">—</div><div class="stats-grid" id="statsGrid"></div></div>
 
-        <div class="card">
-          <div class="card-title" id="historyTitle">تاریخچه</div>
-          <div class="card-subtitle" id="historySub">روزهای ثبت‌شده، از جدید به قدیم — برای ویرایش روی ✎ بزن</div>
-          <div class="history-list" id="historyList"></div>
-        </div>
+        <div class="card"><div class="card-title" id="historyTitle">تاریخچه</div><div class="card-subtitle" id="historySub">روزهای ثبت‌شده، از جدید به قدیم — برای ویرایش روی ✎ بزن</div><div class="history-list" id="historyList"></div></div>
 
         <div class="footer-row">
-          <div class="backup-row">
-            <button class="backup-btn" id="exportBtn">📤 <span id="exportText">خروجی پشتیبان (JSON)</span></button>
-            <button class="backup-btn" id="importBtn">📥 <span id="importText">بازیابی از فایل</span></button>
-          </div>
+          <div class="backup-row"><button class="backup-btn" id="exportBtn">📤 <span id="exportText">خروجی پشتیبان (JSON)</span></button><button class="backup-btn" id="importBtn">📥 <span id="importText">بازیابی از فایل</span></button></div>
           <input type="file" id="importFileInput" accept="application/json" style="display:none;">
           <button class="reset-link" id="resetLink">پاک‌کردن همه داده‌ها</button>
         </div>
@@ -1024,71 +724,21 @@
   </div>
 
   <div class="toast" id="toast"></div>
-
-  <div class="modal-overlay" id="modalOverlay">
-    <div class="modal-box">
-      <div class="modal-title" id="modalTitle">حذف اطلاعات</div>
-      <p class="modal-text" id="modalText">این کار قابل بازگشت نیست.</p>
-      <div class="modal-actions">
-        <button class="btn-cancel" id="modalCancel">انصراف</button>
-        <button class="btn-danger" id="modalConfirm">حذف</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal-overlay" id="settingsModalOverlay">
-    <div class="modal-box">
-      <div class="modal-title" id="settingsModalTitle">تنظیمات و هدف‌گذاری</div>
-      <p class="modal-text" id="settingsModalText">این مقادیر برای محاسبه BMI و درصد تحقق اهداف روزانه استفاده می‌شن.</p>
-      <div class="settings-field">
-        <label id="settingHeightLabel">قد (سانتی‌متر)</label>
-        <input type="number" class="num-input" id="settingHeight" min="100" max="230">
-      </div>
-      <div class="settings-field">
-        <label id="settingSleepGoalLabel">هدف خواب (ساعت)</label>
-        <input type="number" class="num-input" id="settingSleepGoal" min="4" max="12" step="0.5">
-      </div>
-      <div class="settings-field">
-        <label id="settingWaterGoalLabel">هدف آب (لیوان)</label>
-        <input type="number" class="num-input" id="settingWaterGoal" min="1" max="15">
-      </div>
-      <div class="settings-field">
-        <label id="settingExerciseGoalLabel">هدف ورزش (دقیقه)</label>
-        <input type="number" class="num-input" id="settingExerciseGoal" min="0" max="180">
-      </div>
-      <div class="modal-actions">
-        <button class="btn-cancel" id="settingsCancel">انصراف</button>
-        <button class="btn-danger" id="settingsSave" style="background:var(--c-sleep);" id="settingsSaveText">ذخیره</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal-overlay profile-modal" id="profileModalOverlay">
-    <div class="modal-box">
-      <div class="modal-title" id="profileModalTitle">✎ ویرایش پروفایل</div>
-      <p class="modal-text" id="profileModalText">اطلاعات شخصی خودت رو به‌روز کن.</p>
-      <div class="settings-field">
-        <label id="profileNameLabel">نام شما</label>
-        <input type="text" class="num-input" id="profileNameInput" placeholder="نام خود را وارد کنید">
-      </div>
-      <div class="settings-field">
-        <label id="profileAgeLabel">سن شما</label>
-        <input type="number" class="num-input" id="profileAgeInput" min="1" max="120" placeholder="مثلاً ۲۵">
-      </div>
-      <div class="settings-field">
-        <label id="profileHeightLabel">قد (سانتی‌متر)</label>
-        <input type="number" class="num-input" id="profileHeightInput" min="100" max="230" placeholder="مثلاً ۱۷۵">
-      </div>
-      <div class="settings-field">
-        <label id="profileWeightLabel">وزن (کیلوگرم)</label>
-        <input type="number" class="num-input" id="profileWeightInput" min="20" max="300" step="0.1" placeholder="مثلاً ۷۰">
-      </div>
-      <div class="modal-actions">
-        <button class="btn-cancel" id="profileCancel">انصراف</button>
-        <button class="btn-danger" id="profileSave" style="background:var(--c-sleep);">ذخیره</button>
-      </div>
-    </div>
-  </div>
+  <div class="modal-overlay" id="modalOverlay"><div class="modal-box"><div class="modal-title" id="modalTitle">حذف اطلاعات</div><p class="modal-text" id="modalText">این کار قابل بازگشت نیست.</p><div class="modal-actions"><button class="btn-cancel" id="modalCancel">انصراف</button><button class="btn-danger" id="modalConfirm">حذف</button></div></div></div>
+  <div class="modal-overlay" id="settingsModalOverlay"><div class="modal-box"><div class="modal-title" id="settingsModalTitle">تنظیمات و هدف‌گذاری</div><p class="modal-text" id="settingsModalText">این مقادیر برای محاسبه BMI و درصد تحقق اهداف روزانه استفاده می‌شن.</p>
+    <div class="settings-field"><label id="settingHeightLabel">قد (سانتی‌متر)</label><input type="number" class="num-input" id="settingHeight" min="100" max="230"></div>
+    <div class="settings-field"><label id="settingSleepGoalLabel">هدف خواب (ساعت)</label><input type="number" class="num-input" id="settingSleepGoal" min="4" max="12" step="0.5"></div>
+    <div class="settings-field"><label id="settingWaterGoalLabel">هدف آب (لیوان)</label><input type="number" class="num-input" id="settingWaterGoal" min="1" max="15"></div>
+    <div class="settings-field"><label id="settingExerciseGoalLabel">هدف ورزش (دقیقه)</label><input type="number" class="num-input" id="settingExerciseGoal" min="0" max="180"></div>
+    <div class="modal-actions"><button class="btn-cancel" id="settingsCancel">انصراف</button><button class="btn-danger" id="settingsSave" style="background:var(--c-sleep);">ذخیره</button></div>
+  </div></div>
+  <div class="modal-overlay profile-modal" id="profileModalOverlay"><div class="modal-box"><div class="modal-title" id="profileModalTitle">✎ ویرایش پروفایل</div><p class="modal-text" id="profileModalText">اطلاعات شخصی خودت رو به‌روز کن.</p>
+    <div class="settings-field"><label id="profileNameLabel">نام شما</label><input type="text" class="num-input" id="profileNameInput" placeholder="نام خود را وارد کنید"></div>
+    <div class="settings-field"><label id="profileAgeLabel">سن شما</label><input type="number" class="num-input" id="profileAgeInput" min="1" max="120" placeholder="مثلاً ۲۵"></div>
+    <div class="settings-field"><label id="profileHeightLabel">قد (سانتی‌متر)</label><input type="number" class="num-input" id="profileHeightInput" min="100" max="230" placeholder="مثلاً ۱۷۵"></div>
+    <div class="settings-field"><label id="profileWeightLabel">وزن (کیلوگرم)</label><input type="number" class="num-input" id="profileWeightInput" min="20" max="300" step="0.1" placeholder="مثلاً ۷۰"></div>
+    <div class="modal-actions"><button class="btn-cancel" id="profileCancel">انصراف</button><button class="btn-danger" id="profileSave" style="background:var(--c-sleep);">ذخیره</button></div>
+  </div></div>
 
   <script>
   (function(){
@@ -1098,74 +748,28 @@
     function toFa(n){ return String(n).replace(/[0-9]/g, d => FA_DIGITS[d]); }
     function clamp(v,min,max){ return Math.max(min, Math.min(max,v)); }
 
-    function getDateKey(date){
-      const y=date.getFullYear(), m=String(date.getMonth()+1).padStart(2,'0'), d=String(date.getDate()).padStart(2,'0');
-      return `${y}-${m}-${d}`;
-    }
-    function parseDateKey(key){
-      const [y,m,d]=key.split('-').map(Number);
-      return new Date(y, m-1, d);
-    }
+    function getDateKey(date){ const y=date.getFullYear(), m=String(date.getMonth()+1).padStart(2,'0'), d=String(date.getDate()).padStart(2,'0'); return `${y}-${m}-${d}`; }
+    function parseDateKey(key){ const [y,m,d]=key.split('-').map(Number); return new Date(y, m-1, d); }
 
     const jalaliFormatter = new Intl.DateTimeFormat('en-US-u-ca-persian', {year:'numeric', month:'numeric', day:'numeric'});
-    function gregorianToJalali(date){
-      const parts = jalaliFormatter.formatToParts(date);
-      const get = (t)=> Number(parts.find(p=>p.type===t).value);
-      return { jy: get('year'), jm: get('month'), jd: get('day') };
-    }
-
-    function formatJalali(date, opts){
-      try{
-        return new Intl.DateTimeFormat('fa-IR', Object.assign({calendar:'persian'}, opts)).format(date);
-      }catch(e){ return date.toLocaleDateString('fa-IR'); }
-    }
-    function formatEnglish(date, opts){
-      return date.toLocaleDateString('en-US', opts);
-    }
+    function gregorianToJalali(date){ const parts = jalaliFormatter.formatToParts(date); const get = (t)=> Number(parts.find(p=>p.type===t).value); return { jy: get('year'), jm: get('month'), jd: get('day') }; }
+    function formatJalali(date, opts){ try{ return new Intl.DateTimeFormat('fa-IR', Object.assign({calendar:'persian'}, opts)).format(date); }catch(e){ return date.toLocaleDateString('fa-IR'); } }
+    function formatEnglish(date, opts){ return date.toLocaleDateString('en-US', opts); }
 
     function jalaliMonthInfo(jy, jm){
-      const guess = new Date(jy+621, 2, 21);
-      guess.setDate(guess.getDate() + (jm-1)*30);
+      const guess = new Date(jy+621, 2, 21); guess.setDate(guess.getDate() + (jm-1)*30);
       let firstGregorian = null;
-      for(let offset=-40; offset<=40; offset++){
-        const d = new Date(guess.getFullYear(), guess.getMonth(), guess.getDate()+offset);
-        const j = gregorianToJalali(d);
-        if(j.jy===jy && j.jm===jm && j.jd===1){ firstGregorian = d; break; }
-      }
+      for(let offset=-40; offset<=40; offset++){ const d = new Date(guess.getFullYear(), guess.getMonth(), guess.getDate()+offset); const j = gregorianToJalali(d); if(j.jy===jy && j.jm===jm && j.jd===1){ firstGregorian = d; break; } }
       if(!firstGregorian) return null;
-      let daysInMonth = 0;
-      let cursor = new Date(firstGregorian);
-      while(true){
-        const j = gregorianToJalali(cursor);
-        if(j.jy!==jy || j.jm!==jm) break;
-        daysInMonth++;
-        cursor = new Date(cursor.getFullYear(), cursor.getMonth(), cursor.getDate()+1);
-      }
+      let daysInMonth = 0; let cursor = new Date(firstGregorian);
+      while(true){ const j = gregorianToJalali(cursor); if(j.jy!==jy || j.jm!==jm) break; daysInMonth++; cursor = new Date(cursor.getFullYear(), cursor.getMonth(), cursor.getDate()+1); }
       return { firstGregorian, daysInMonth };
     }
 
-    function parseJalaliDate(str){
-      const parts = str.split(/[-\/]/).map(Number);
-      if(parts.length!==3) return null;
-      let [jy, jm, jd] = parts;
-      if(jy<1 || jm<1 || jm>12 || jd<1) return null;
-      const info = jalaliMonthInfo(jy, jm);
-      if(!info || jd>info.daysInMonth) return null;
-      const d = new Date(info.firstGregorian);
-      d.setDate(d.getDate() + jd - 1);
-      return d;
-    }
+    function parseJalaliDate(str){ const parts = str.split(/[-\/]/).map(Number); if(parts.length!==3) return null; let [jy, jm, jd] = parts; if(jy<1 || jm<1 || jm>12 || jd<1) return null; const info = jalaliMonthInfo(jy, jm); if(!info || jd>info.daysInMonth) return null; const d = new Date(info.firstGregorian); d.setDate(d.getDate() + jd - 1); return d; }
 
-    function polarToCartesian(cx, cy, r, angleDeg){
-      const rad = (angleDeg - 90) * Math.PI / 180;
-      return { x: cx + r*Math.cos(rad), y: cy + r*Math.sin(rad) };
-    }
-    function describeArc(cx, cy, r, startAngle, endAngle){
-      const start = polarToCartesian(cx, cy, r, endAngle);
-      const end = polarToCartesian(cx, cy, r, startAngle);
-      const largeArcFlag = (endAngle-startAngle) <= 180 ? "0" : "1";
-      return ["M", start.x, start.y, "A", r, r, 0, largeArcFlag, 0, end.x, end.y].join(" ");
-    }
+    function polarToCartesian(cx, cy, r, angleDeg){ const rad = (angleDeg - 90) * Math.PI / 180; return { x: cx + r*Math.cos(rad), y: cy + r*Math.sin(rad) }; }
+    function describeArc(cx, cy, r, startAngle, endAngle){ const start = polarToCartesian(cx, cy, r, endAngle); const end = polarToCartesian(cx, cy, r, startAngle); const largeArcFlag = (endAngle-startAngle) <= 180 ? "0" : "1"; return ["M", start.x, start.y, "A", r, r, 0, largeArcFlag, 0, end.x, end.y].join(" "); }
 
     const QUALITY_SCORES = [20,50,75,100];
     const INTENSITY_SCORES = [10,45,75,100];
@@ -1181,208 +785,75 @@
       return { sleep, exercise, nutrition, total };
     }
 
-    function tierOf(total){
-      if(total>=85) return {label:'عالی', color:'var(--c-excellent)'};
-      if(total>=70) return {label:'خوب', color:'var(--c-good)'};
-      if(total>=50) return {label:'متوسط', color:'var(--c-fair)'};
-      return {label:'نیاز به مراقبت بیشتر', color:'var(--c-care)'};
-    }
-    function tierDot(total){
-      if(total>=85) return '#3F8F5C';
-      if(total>=70) return '#4F9A68';
-      if(total>=50) return '#E08A3C';
-      return '#D9684A';
-    }
+    function tierOf(total){ if(total>=85) return {label:'عالی', color:'var(--c-excellent)'}; if(total>=70) return {label:'خوب', color:'var(--c-good)'}; if(total>=50) return {label:'متوسط', color:'var(--c-fair)'}; return {label:'نیاز به مراقبت بیشتر', color:'var(--c-care)'}; }
+    function tierDot(total){ if(total>=85) return '#3F8F5C'; if(total>=70) return '#4F9A68'; if(total>=50) return '#E08A3C'; return '#D9684A'; }
 
-    function computeBmi(weightKg, heightCm){
-      if(!weightKg || !heightCm) return null;
-      const h = heightCm/100;
-      return weightKg / (h*h);
-    }
-    function bmiLabel(bmi){
-      if(bmi<18.5) return 'کمبود وزن';
-      if(bmi<25) return 'طبیعی';
-      if(bmi<30) return 'اضافه وزن';
-      return 'چاقی';
-    }
+    function computeBmi(weightKg, heightCm){ if(!weightKg || !heightCm) return null; const h = heightCm/100; return weightKg / (h*h); }
+    function bmiLabel(bmi){ if(bmi<18.5) return 'کمبود وزن'; if(bmi<25) return 'طبیعی'; if(bmi<30) return 'اضافه وزن'; return 'چاقی'; }
 
-    const STORAGE_KEY = 'daily-entries';
-    const TODO_KEY = 'todo-tasks';
-    const SETTINGS_KEY = 'app-settings';
-    const THEME_KEY = 'app-theme';
-    const LANG_KEY = 'app-lang';
-    const USER_KEY = 'user-profile';
-
+    const STORAGE_KEY = 'daily-entries'; const TODO_KEY = 'todo-tasks'; const SETTINGS_KEY = 'app-settings'; const THEME_KEY = 'app-theme'; const LANG_KEY = 'app-lang'; const USER_KEY = 'user-profile';
     const hasClaudeStorage = !!(window.storage && typeof window.storage.get === 'function' && typeof window.storage.set === 'function');
 
-    async function storageGet(key){
-      if(hasClaudeStorage){
-        try{
-          const res = await window.storage.get(key, false);
-          return (res && res.value!=null) ? res.value : null;
-        }catch(e){ return null; }
-      }
-      try{ return localStorage.getItem(key); }catch(e){ return null; }
-    }
-    async function storageSet(key, value){
-      if(hasClaudeStorage){
-        try{
-          const res = await window.storage.set(key, value, false);
-          return !!res;
-        }catch(e){ console.error('storage error', e); return false; }
-      }
-      try{ localStorage.setItem(key, value); return true; }catch(e){ console.error('storage error', e); return false; }
-    }
+    async function storageGet(key){ if(hasClaudeStorage){ try{ const res = await window.storage.get(key, false); return (res && res.value!=null) ? res.value : null; }catch(e){ return null; } } try{ return localStorage.getItem(key); }catch(e){ return null; } }
+    async function storageSet(key, value){ if(hasClaudeStorage){ try{ const res = await window.storage.set(key, value, false); return !!res; }catch(e){ console.error('storage error', e); return false; } } try{ localStorage.setItem(key, value); return true; }catch(e){ console.error('storage error', e); return false; } }
 
-    async function loadAllEntries(){
-      const v = await storageGet(STORAGE_KEY);
-      try{ return v ? JSON.parse(v) : {}; }catch(e){ return {}; }
-    }
-    async function persistEntries(obj){
-      return await storageSet(STORAGE_KEY, JSON.stringify(obj));
-    }
-    async function loadTodos(){
-      const v = await storageGet(TODO_KEY);
-      try{ return v ? JSON.parse(v) : []; }catch(e){ return []; }
-    }
-    async function persistTodos(){
-      return await storageSet(TODO_KEY, JSON.stringify(todos));
-    }
-    async function loadSettings(){
-      const v = await storageGet(SETTINGS_KEY);
-      try{ return v ? Object.assign({}, DEFAULT_SETTINGS, JSON.parse(v)) : Object.assign({}, DEFAULT_SETTINGS); }
-      catch(e){ return Object.assign({}, DEFAULT_SETTINGS); }
-    }
-    async function persistSettings(){
-      return await storageSet(SETTINGS_KEY, JSON.stringify(settings));
-    }
-    async function loadUser(){
-      const v = await storageGet(USER_KEY);
-      try{ return v ? JSON.parse(v) : null; }catch(e){ return null; }
-    }
-    async function persistUser(data){
-      return await storageSet(USER_KEY, JSON.stringify(data));
-    }
+    async function loadAllEntries(){ const v = await storageGet(STORAGE_KEY); try{ return v ? JSON.parse(v) : {}; }catch(e){ return {}; } }
+    async function persistEntries(obj){ return await storageSet(STORAGE_KEY, JSON.stringify(obj)); }
+    async function loadTodos(){ const v = await storageGet(TODO_KEY); try{ return v ? JSON.parse(v) : []; }catch(e){ return []; } }
+    async function persistTodos(){ return await storageSet(TODO_KEY, JSON.stringify(todos)); }
+    async function loadSettings(){ const v = await storageGet(SETTINGS_KEY); try{ return v ? Object.assign({}, DEFAULT_SETTINGS, JSON.parse(v)) : Object.assign({}, DEFAULT_SETTINGS); }catch(e){ return Object.assign({}, DEFAULT_SETTINGS); } }
+    async function persistSettings(){ return await storageSet(SETTINGS_KEY, JSON.stringify(settings)); }
+    async function loadUser(){ const v = await storageGet(USER_KEY); try{ return v ? JSON.parse(v) : null; }catch(e){ return null; } }
+    async function persistUser(data){ return await storageSet(USER_KEY, JSON.stringify(data)); }
 
-    function loadTheme(){
-      try{ return localStorage.getItem(THEME_KEY) || 'light'; }catch(e){ return 'light'; }
-    }
-    function saveTheme(t){
-      try{ localStorage.setItem(THEME_KEY, t); }catch(e){} }
-    function loadLang(){
-      try{ return localStorage.getItem(LANG_KEY) || 'fa'; }catch(e){ return 'fa'; }
-    }
-    function saveLang(l){
-      try{ localStorage.setItem(LANG_KEY, l); }catch(e){} }
+    function loadTheme(){ try{ return localStorage.getItem(THEME_KEY) || 'light'; }catch(e){ return 'light'; } }
+    function saveTheme(t){ try{ localStorage.setItem(THEME_KEY, t); }catch(e){} }
+    function loadLang(){ try{ return localStorage.getItem(LANG_KEY) || 'fa'; }catch(e){ return 'fa'; } }
+    function saveLang(l){ try{ localStorage.setItem(LANG_KEY, l); }catch(e){} }
 
-    let entries = {};
-    let todos = [];
-    const TODAY = new Date();
-    const todayKey = getDateKey(TODAY);
+    let entries = {}; let todos = [];
+    const TODAY = new Date(); const todayKey = getDateKey(TODAY);
 
-    const DEFAULT_STATE = {
-      sleepHours:0, sleepQuality:0,
-      exerciseMinutes:0, exerciseIntensity:0,
-      nutritionQuality:0, waterGlasses:0,
-      weight:null, bpSystolic:null, bpDiastolic:null, pulse:null, mood:null,
-      steps:0
-    };
+    const DEFAULT_STATE = { sleepHours:0, sleepQuality:0, exerciseMinutes:0, exerciseIntensity:0, nutritionQuality:0, waterGlasses:0, weight:null, bpSystolic:null, bpDiastolic:null, pulse:null, mood:null, steps:0 };
     const DEFAULT_SETTINGS = { height:175, sleepGoal:8, waterGoal:8, exerciseGoal:45 };
     let settings = Object.assign({}, DEFAULT_SETTINGS);
     let state = Object.assign({}, DEFAULT_STATE);
-    let savedSnapshot = null;
-    let editingKey = todayKey;
-    let currentLang = 'fa';
-    let saveTimeout = null;
-    let userProfile = null;
+    let savedSnapshot = null; let editingKey = todayKey; let currentLang = 'fa'; let saveTimeout = null; let userProfile = null;
 
     const translations = {
       fa: {
-        appTitle: 'روزنگار سلامت',
-        appSub: 'خواب، ورزش و تغذیه‌ی هر روزت',
-        scoreLabel: 'امتیاز امروز',
-        sleepTitle: 'خواب',
-        sleepHoursLabel: 'ساعت خواب شب گذشته',
-        sleepQualityLabel: 'کیفیت خواب',
+        appTitle: 'روزنگار سلامت', appSub: 'خواب، ورزش و تغذیه‌ی هر روزت', scoreLabel: 'امتیاز امروز',
+        sleepTitle: 'خواب', sleepHoursLabel: 'ساعت خواب شب گذشته', sleepQualityLabel: 'کیفیت خواب',
         sleepBad: 'ضعیف', sleepMed: 'متوسط', sleepGood: 'خوب', sleepExcel: 'عالی',
-        nutritionTitle: 'تغذیه',
-        nutritionQualityLabel: 'کیفیت تغذیه امروز',
+        nutritionTitle: 'تغذیه', nutritionQualityLabel: 'کیفیت تغذیه امروز',
         nutritionBad: 'ضعیف', nutritionMed: 'متوسط', nutritionGood: 'خوب', nutritionExcel: 'عالی',
         waterLabel: 'آب مصرفی',
-        exerciseTitle: 'ورزش',
-        exerciseMinutesLabel: 'مدت فعالیت بدنی امروز',
-        intensityLabel: 'شدت فعالیت',
+        exerciseTitle: 'ورزش', exerciseMinutesLabel: 'مدت فعالیت بدنی امروز', intensityLabel: 'شدت فعالیت',
         intensityRest: 'استراحت', intensityLight: 'سبک', intensityMod: 'متوسط', intensityHard: 'شدید',
-        stepsTitle: 'گام‌شمار',
-        optionalTag: 'اختیاری',
-        stepsLabel: 'تعداد قدم‌های امروز',
-        stepsAuto: '⏳ در حال دریافت گام‌ها...',
-        healthTitle: 'سلامت تکمیلی',
-        moodLabel: 'خلق و خو',
-        weightLabel: 'وزن (کیلوگرم)',
-        bpSystolicLabel: 'فشار سیستول',
-        bpDiastolicLabel: 'فشار دیاستول',
-        pulseLabel: 'نبض (ضربان در دقیقه)',
-        goalsTitle: 'اهداف امروز',
-        goalsSub: 'پیشرفت نسبت به اهدافی که تنظیم کردی',
-        goalSleep: 'خواب',
-        goalWater: 'آب',
-        goalExercise: 'ورزش',
-        analysisTitle: 'تحلیل هوشمند روز',
-        analysisSub: 'بر اساس امتیاز ثبت‌شده‌ی این روز',
-        analysisEmpty: 'بعد از ثبت امتیاز، تحلیل اینجا نمایش داده می‌شه.',
-        todoTitle: 'کارهای مهم',
-        todoSub: 'کارهایی که می‌خوای امروز انجام بدی',
-        chartTitle: 'روند روزهای اخیر',
-        chartSub: 'آخرین ۱۴ روزی که امتیاز ثبت کردی',
-        legendExcellent: 'عالی',
-        legendGood: 'خوب',
-        legendFair: 'متوسط',
-        legendCare: 'نیاز به مراقبت',
-        statsTitle: 'داشبورد آماری ماه',
-        historyTitle: 'تاریخچه',
-        historySub: 'روزهای ثبت‌شده، از جدید به قدیم — برای ویرایش روی ✎ بزن',
-        exportText: 'خروجی پشتیبان (JSON)',
-        importText: 'بازیابی از فایل',
-        resetText: 'پاک‌کردن همه داده‌ها',
-        saveBtn: 'ثبت امتیاز امروز',
-        saveUpdate: 'به‌روزرسانی امتیاز امروز',
-        saveEdit: 'ذخیره تغییرات این روز',
-        saveDay: 'ثبت این روز',
-        editingPrefix: 'در حال ویرایش روز',
-        cancelEdit: 'انصراف',
-        installTitle: 'روزنگار سلامت رو نصب کن',
-        installSub: 'دسترسی سریع از صفحه اصلی گوشی، حتی بدون اینترنت',
-        installBtn: 'نصب',
-        modalTitle: 'حذف اطلاعات',
-        modalText: 'این کار قابل بازگشت نیست.',
-        modalCancel: 'انصراف',
-        modalConfirm: 'حذف',
-        settingsTitle: 'تنظیمات و هدف‌گذاری',
-        settingsText: 'این مقادیر برای محاسبه BMI و درصد تحقق اهداف روزانه استفاده می‌شن.',
-        settingHeight: 'قد (سانتی‌متر)',
-        settingSleepGoal: 'هدف خواب (ساعت)',
-        settingWaterGoal: 'هدف آب (لیوان)',
-        settingExerciseGoal: 'هدف ورزش (دقیقه)',
-        settingsSave: 'ذخیره',
-        settingsCancel: 'انصراف',
-        searchPlaceholder: 'جستجوی تاریخ (مثلاً ۱۴۰۳/۰۱/۱۵ )',
-        searchBtn: 'جستجو',
-        today: 'امروز',
-        saved: 'ذخیره شد ✅',
-        stepsActive: '🚶 در حال شمارش...',
-        stepsDone: '✅ گام‌ها به‌روز می‌شوند',
-        stepsUnsupported: '❌ گام‌شمار پشتیبانی نمی‌شود',
-        guest: 'مهمان',
-        saving: 'در حال ذخیره...',
-        profileTitle: '✎ ویرایش پروفایل',
-        profileText: 'اطلاعات شخصی خودت رو به‌روز کن.',
-        profileName: 'نام شما',
-        profileAge: 'سن شما',
-        profileHeight: 'قد (سانتی‌متر)',
-        profileWeight: 'وزن (کیلوگرم)',
-        profileSave: 'ذخیره',
-        profileCancel: 'انصراف',
+        stepsTitle: 'گام‌شمار', optionalTag: 'اختیاری', stepsLabel: 'تعداد قدم‌های امروز', stepsAuto: '⏳ در حال دریافت گام‌ها...',
+        healthTitle: 'سلامت تکمیلی', moodLabel: 'خلق و خو', weightLabel: 'وزن (کیلوگرم)', bpSystolicLabel: 'فشار سیستول', bpDiastolicLabel: 'فشار دیاستول', pulseLabel: 'نبض (ضربان در دقیقه)',
+        goalsTitle: 'اهداف امروز', goalsSub: 'پیشرفت نسبت به اهدافی که تنظیم کردی',
+        goalSleep: 'خواب', goalWater: 'آب', goalExercise: 'ورزش',
+        analysisTitle: 'تحلیل هوشمند روز', analysisSub: 'بر اساس امتیاز ثبت‌شده‌ی این روز', analysisEmpty: 'بعد از ثبت امتیاز، تحلیل اینجا نمایش داده می‌شه.',
+        todoTitle: 'کارهای مهم', todoSub: 'کارهایی که می‌خوای امروز انجام بدی',
+        chartTitle: 'روند روزهای اخیر', chartSub: 'آخرین ۱۴ روزی که امتیاز ثبت کردی',
+        legendExcellent: 'عالی', legendGood: 'خوب', legendFair: 'متوسط', legendCare: 'نیاز به مراقبت',
+        statsTitle: 'داشبورد آماری ماه', historyTitle: 'تاریخچه', historySub: 'روزهای ثبت‌شده، از جدید به قدیم — برای ویرایش روی ✎ بزن',
+        exportText: 'خروجی پشتیبان (JSON)', importText: 'بازیابی از فایل', resetText: 'پاک‌کردن همه داده‌ها',
+        saveBtn: 'ثبت امتیاز امروز', saveUpdate: 'به‌روزرسانی امتیاز امروز', saveEdit: 'ذخیره تغییرات این روز', saveDay: 'ثبت این روز',
+        editingPrefix: 'در حال ویرایش روز', cancelEdit: 'انصراف',
+        installTitle: 'روزنگار سلامت رو نصب کن', installSub: 'دسترسی سریع از صفحه اصلی گوشی، حتی بدون اینترنت', installBtn: 'نصب',
+        modalTitle: 'حذف اطلاعات', modalText: 'این کار قابل بازگشت نیست.', modalCancel: 'انصراف', modalConfirm: 'حذف',
+        settingsTitle: 'تنظیمات و هدف‌گذاری', settingsText: 'این مقادیر برای محاسبه BMI و درصد تحقق اهداف روزانه استفاده می‌شن.',
+        settingHeight: 'قد (سانتی‌متر)', settingSleepGoal: 'هدف خواب (ساعت)', settingWaterGoal: 'هدف آب (لیوان)', settingExerciseGoal: 'هدف ورزش (دقیقه)',
+        settingsSave: 'ذخیره', settingsCancel: 'انصراف',
+        searchPlaceholder: 'جستجوی تاریخ (مثلاً ۱۴۰۳/۰۱/۱۵ )', searchBtn: 'جستجو',
+        today: 'امروز', saved: 'ذخیره شد ✅',
+        stepsActive: '🚶 در حال شمارش...', stepsDone: '✅ گام‌ها به‌روز می‌شوند', stepsUnsupported: '❌ گام‌شمار پشتیبانی نمی‌شود',
+        guest: 'مهمان', saving: 'در حال ذخیره...',
+        profileTitle: '✎ ویرایش پروفایل', profileText: 'اطلاعات شخصی خودت رو به‌روز کن.',
+        profileName: 'نام شما', profileAge: 'سن شما', profileHeight: 'قد (سانتی‌متر)', profileWeight: 'وزن (کیلوگرم)',
+        profileSave: 'ذخیره', profileCancel: 'انصراف',
         voiceHint: 'برای ورود صوتی کلیک کن و به فارسی بگو: «خواب ۸ ساعت، آب ۶ لیوان، ورزش ۳۰ دقیقه، تغذیه خوب»',
         voiceListening: '🎙️ گوش می‌کنم... (فارسی)',
         voiceSuccess: '✅ اطلاعات از روی صدا دریافت شد.',
@@ -1392,93 +863,42 @@
         voiceConfirm: 'اطلاعات ثبت شد.',
         voicePermissionDenied: 'دسترسی به میکروفون داده نشد. لطفاً در تنظیمات مرورگر مجوز را فعال کنید.',
         voiceNoMatch: 'متن تشخیص داده شد:',
+        voiceSamples: '📢 نمونه‌ها: «خواب ۸ ساعت، آب ۶ لیوان، ورزش ۳۰ دقیقه، تغذیه خوب»',
+        voiceDetectedSleep: 'خواب', voiceDetectedWater: 'آب', voiceDetectedExercise: 'ورزش', voiceDetectedQuality: 'کیفیت تغذیه'
       },
       en: {
-        appTitle: 'Rooznegar Salamat',
-        appSub: 'Sleep, Exercise & Nutrition Daily',
-        scoreLabel: "Today's Score",
-        sleepTitle: 'Sleep',
-        sleepHoursLabel: 'Hours of sleep last night',
-        sleepQualityLabel: 'Sleep Quality',
+        appTitle: 'Rooznegar Salamat', appSub: 'Sleep, Exercise & Nutrition Daily', scoreLabel: "Today's Score",
+        sleepTitle: 'Sleep', sleepHoursLabel: 'Hours of sleep last night', sleepQualityLabel: 'Sleep Quality',
         sleepBad: 'Poor', sleepMed: 'Fair', sleepGood: 'Good', sleepExcel: 'Excellent',
-        nutritionTitle: 'Nutrition',
-        nutritionQualityLabel: "Today's Nutrition Quality",
+        nutritionTitle: 'Nutrition', nutritionQualityLabel: "Today's Nutrition Quality",
         nutritionBad: 'Poor', nutritionMed: 'Fair', nutritionGood: 'Good', nutritionExcel: 'Excellent',
         waterLabel: 'Water Intake',
-        exerciseTitle: 'Exercise',
-        exerciseMinutesLabel: "Today's Activity Duration",
-        intensityLabel: 'Intensity',
+        exerciseTitle: 'Exercise', exerciseMinutesLabel: "Today's Activity Duration", intensityLabel: 'Intensity',
         intensityRest: 'Rest', intensityLight: 'Light', intensityMod: 'Moderate', intensityHard: 'Intense',
-        stepsTitle: 'Step Counter',
-        optionalTag: 'Optional',
-        stepsLabel: "Today's Steps",
-        stepsAuto: '⏳ Getting steps...',
-        healthTitle: 'Health Extra',
-        moodLabel: 'Mood',
-        weightLabel: 'Weight (kg)',
-        bpSystolicLabel: 'Systolic BP',
-        bpDiastolicLabel: 'Diastolic BP',
-        pulseLabel: 'Pulse (bpm)',
-        goalsTitle: "Today's Goals",
-        goalsSub: 'Progress toward your goals',
-        goalSleep: 'Sleep',
-        goalWater: 'Water',
-        goalExercise: 'Exercise',
-        analysisTitle: "Today's Analysis",
-        analysisSub: 'Based on today\'s recorded score',
-        analysisEmpty: 'After saving your score, analysis will appear here.',
-        todoTitle: 'Tasks',
-        todoSub: 'Things you want to do today',
-        chartTitle: 'Recent Trend',
-        chartSub: 'Last 14 days with scores',
-        legendExcellent: 'Excellent',
-        legendGood: 'Good',
-        legendFair: 'Fair',
-        legendCare: 'Needs Care',
-        statsTitle: 'Monthly Stats',
-        historyTitle: 'History',
-        historySub: 'Recorded days, newest first — click ✎ to edit',
-        exportText: 'Backup Export (JSON)',
-        importText: 'Restore from File',
-        resetText: 'Clear All Data',
-        saveBtn: "Save Today's Score",
-        saveUpdate: "Update Today's Score",
-        saveEdit: 'Save Changes',
-        saveDay: 'Save This Day',
-        editingPrefix: 'Editing',
-        cancelEdit: 'Cancel',
-        installTitle: 'Install Rooznegar Salamat',
-        installSub: 'Quick access from home screen, even offline',
-        installBtn: 'Install',
-        modalTitle: 'Delete Data',
-        modalText: 'This action cannot be undone.',
-        modalCancel: 'Cancel',
-        modalConfirm: 'Delete',
-        settingsTitle: 'Settings & Goals',
-        settingsText: 'These values are used for BMI calculation and daily goal tracking.',
-        settingHeight: 'Height (cm)',
-        settingSleepGoal: 'Sleep Goal (hours)',
-        settingWaterGoal: 'Water Goal (glasses)',
-        settingExerciseGoal: 'Exercise Goal (minutes)',
-        settingsSave: 'Save',
-        settingsCancel: 'Cancel',
-        searchPlaceholder: 'Search date (e.g. 1403/01/15 or 2024/03/15)',
-        searchBtn: 'Search',
-        today: 'Today',
-        saved: 'Saved ✅',
-        stepsActive: '🚶 Counting...',
-        stepsDone: '✅ Steps updating',
-        stepsUnsupported: '❌ Step counter not supported',
-        guest: 'Guest',
-        saving: 'Saving...',
-        profileTitle: '✎ Edit Profile',
-        profileText: 'Update your personal info.',
-        profileName: 'Your Name',
-        profileAge: 'Your Age',
-        profileHeight: 'Height (cm)',
-        profileWeight: 'Weight (kg)',
-        profileSave: 'Save',
-        profileCancel: 'Cancel',
+        stepsTitle: 'Step Counter', optionalTag: 'Optional', stepsLabel: "Today's Steps", stepsAuto: '⏳ Getting steps...',
+        healthTitle: 'Health Extra', moodLabel: 'Mood', weightLabel: 'Weight (kg)', bpSystolicLabel: 'Systolic BP', bpDiastolicLabel: 'Diastolic BP', pulseLabel: 'Pulse (bpm)',
+        goalsTitle: "Today's Goals", goalsSub: 'Progress toward your goals',
+        goalSleep: 'Sleep', goalWater: 'Water', goalExercise: 'Exercise',
+        analysisTitle: "Today's Analysis", analysisSub: 'Based on today\'s recorded score', analysisEmpty: 'After saving your score, analysis will appear here.',
+        todoTitle: 'Tasks', todoSub: 'Things you want to do today',
+        chartTitle: 'Recent Trend', chartSub: 'Last 14 days with scores',
+        legendExcellent: 'Excellent', legendGood: 'Good', legendFair: 'Fair', legendCare: 'Needs Care',
+        statsTitle: 'Monthly Stats', historyTitle: 'History', historySub: 'Recorded days, newest first — click ✎ to edit',
+        exportText: 'Backup Export (JSON)', importText: 'Restore from File', resetText: 'Clear All Data',
+        saveBtn: "Save Today's Score", saveUpdate: "Update Today's Score", saveEdit: 'Save Changes', saveDay: 'Save This Day',
+        editingPrefix: 'Editing', cancelEdit: 'Cancel',
+        installTitle: 'Install Rooznegar Salamat', installSub: 'Quick access from home screen, even offline', installBtn: 'Install',
+        modalTitle: 'Delete Data', modalText: 'This action cannot be undone.', modalCancel: 'Cancel', modalConfirm: 'Delete',
+        settingsTitle: 'Settings & Goals', settingsText: 'These values are used for BMI calculation and daily goal tracking.',
+        settingHeight: 'Height (cm)', settingSleepGoal: 'Sleep Goal (hours)', settingWaterGoal: 'Water Goal (glasses)', settingExerciseGoal: 'Exercise Goal (minutes)',
+        settingsSave: 'Save', settingsCancel: 'Cancel',
+        searchPlaceholder: 'Search date (e.g. 1403/01/15 or 2024/03/15)', searchBtn: 'Search',
+        today: 'Today', saved: 'Saved ✅',
+        stepsActive: '🚶 Counting...', stepsDone: '✅ Steps updating', stepsUnsupported: '❌ Step counter not supported',
+        guest: 'Guest', saving: 'Saving...',
+        profileTitle: '✎ Edit Profile', profileText: 'Update your personal info.',
+        profileName: 'Your Name', profileAge: 'Your Age', profileHeight: 'Height (cm)', profileWeight: 'Weight (kg)',
+        profileSave: 'Save', profileCancel: 'Cancel',
         voiceHint: 'Click to speak in Persian (e.g., "خواب ۸ ساعت، آب ۶ لیوان، ورزش ۳۰ دقیقه")',
         voiceListening: '🎙️ Listening... (Persian)',
         voiceSuccess: '✅ Voice input processed.',
@@ -1488,12 +908,12 @@
         voiceConfirm: 'Info saved.',
         voicePermissionDenied: 'Microphone access denied. Please enable it in browser settings.',
         voiceNoMatch: 'Heard:',
+        voiceSamples: '📢 Samples: "sleep 8 hours, water 6 glasses, exercise 30 minutes, nutrition good"',
+        voiceDetectedSleep: 'Sleep', voiceDetectedWater: 'Water', voiceDetectedExercise: 'Exercise', voiceDetectedQuality: 'Nutrition'
       }
     };
 
-    function t(key) {
-      return translations[currentLang]?.[key] || translations.fa[key] || key;
-    }
+    function t(key) { return translations[currentLang]?.[key] || translations.fa[key] || key; }
 
     // --- Voice Assistant (ALWAYS Persian) ---
     let recognition = null;
@@ -1512,7 +932,7 @@
 
     function initVoice() {
       if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
-        document.getElementById('voiceStatus').textContent = t('voiceUnsupported');
+        document.getElementById('voiceStatus').innerHTML = t('voiceUnsupported') + ' <span class="samples">' + t('voiceSamples') + '</span>';
         document.getElementById('voiceBtn').disabled = true;
         return false;
       }
@@ -1543,17 +963,24 @@
           document.getElementById('voiceStatus').textContent = t('voiceError');
           document.getElementById('voiceStatus').className = 'voice-status error';
         }
+        // Add samples back
+        document.getElementById('voiceStatus').innerHTML += ' <span class="samples">' + t('voiceSamples') + '</span>';
       };
 
       recognition.onend = () => {
         stopListening();
+        // If status is still showing listening, keep it, but add samples if empty
+        const statusEl = document.getElementById('voiceStatus');
+        if (statusEl.textContent === t('voiceListening')) {
+          // Keep it
+        }
       };
 
       recognition.onresult = (event) => {
         const transcript = event.results[0][0].transcript.trim();
         console.log('Voice transcript (Persian):', transcript);
         const statusEl = document.getElementById('voiceStatus');
-        statusEl.innerHTML = t('voiceNoMatch') + ' <span class="transcript">"' + transcript + '"</span>';
+        statusEl.innerHTML = t('voiceNoMatch') + ' <span class="transcript">"' + transcript + '"</span><br><span class="samples">' + t('voiceSamples') + '</span>';
         statusEl.className = 'voice-status';
         processVoiceCommand(transcript);
       };
@@ -1578,6 +1005,7 @@
       if (!hasPermission) {
         document.getElementById('voiceStatus').textContent = t('voicePermissionDenied');
         document.getElementById('voiceStatus').className = 'voice-status error';
+        document.getElementById('voiceStatus').innerHTML += ' <span class="samples">' + t('voiceSamples') + '</span>';
         return;
       }
 
@@ -1595,137 +1023,7 @@
         console.warn('Voice start error:', e);
         document.getElementById('voiceStatus').textContent = t('voiceError');
         document.getElementById('voiceStatus').className = 'voice-status error';
-      }
-    }
-
-    function processVoiceCommand(text) {
-      const lower = text.toLowerCase();
-      let sleep = null, water = null, exercise = null, quality = null;
-      let qualityMap = {'ضعیف':0, 'متوسط':1, 'خوب':2, 'عالی':3, 'poor':0, 'fair':1, 'good':2, 'excellent':3, 'bad':0, 'average':1};
-
-      const numbers = text.match(/\d+(\.\d+)?/g) || [];
-      let numIdx = 0;
-
-      if (lower.includes('خواب') || lower.includes('sleep')) {
-        for (let n of numbers) {
-          let val = parseFloat(n);
-          if (val >= 0 && val <= 24) {
-            sleep = val;
-            numIdx++;
-            break;
-          }
-        }
-        if (sleep === null) {
-          const parts = text.split(/[\s،,]+/);
-          for (let i=0; i<parts.length; i++) {
-            if (parts[i].includes('ساعت') || parts[i].includes('hr') || parts[i].includes('hour')) {
-              let prev = parseFloat(parts[i-1]);
-              if (!isNaN(prev) && prev >=0 && prev <=24) { sleep = prev; break; }
-              let next = parseFloat(parts[i+1]);
-              if (!isNaN(next) && next >=0 && next <=24) { sleep = next; break; }
-            }
-          }
-        }
-      }
-
-      if (lower.includes('آب') || lower.includes('water')) {
-        for (let n of numbers) {
-          let val = parseFloat(n);
-          if (val >= 0 && val <= 30) {
-            if (sleep !== null && val === sleep) { continue; }
-            water = val;
-            numIdx++;
-            break;
-          }
-        }
-        if (water === null) {
-          const parts = text.split(/[\s،,]+/);
-          for (let i=0; i<parts.length; i++) {
-            if (parts[i].includes('لیوان') || parts[i].includes('glass') || parts[i].includes('glasses')) {
-              let prev = parseFloat(parts[i-1]);
-              if (!isNaN(prev) && prev >=0 && prev <=30) { water = prev; break; }
-              let next = parseFloat(parts[i+1]);
-              if (!isNaN(next) && next >=0 && next <=30) { water = next; break; }
-            }
-          }
-        }
-      }
-
-      if (lower.includes('ورزش') || lower.includes('exercise') || lower.includes('فعالیت')) {
-        for (let n of numbers) {
-          let val = parseFloat(n);
-          if (val >= 0 && val <= 300) {
-            if ((sleep !== null && val === sleep) || (water !== null && val === water)) continue;
-            exercise = val;
-            numIdx++;
-            break;
-          }
-        }
-        if (exercise === null) {
-          const parts = text.split(/[\s،,]+/);
-          for (let i=0; i<parts.length; i++) {
-            if (parts[i].includes('دقیقه') || parts[i].includes('min') || parts[i].includes('minute')) {
-              let prev = parseFloat(parts[i-1]);
-              if (!isNaN(prev) && prev >=0 && prev <=300) { exercise = prev; break; }
-              let next = parseFloat(parts[i+1]);
-              if (!isNaN(next) && next >=0 && next <=300) { exercise = next; break; }
-            }
-          }
-        }
-      }
-
-      for (let key in qualityMap) {
-        if (lower.includes(key)) {
-          quality = qualityMap[key];
-          break;
-        }
-      }
-
-      let updated = false;
-      if (sleep !== null) {
-        state.sleepHours = clamp(sleep, 0, 12);
-        updated = true;
-      }
-      if (water !== null) {
-        state.waterGlasses = clamp(Math.round(water), 0, 20);
-        updated = true;
-      }
-      if (exercise !== null) {
-        state.exerciseMinutes = clamp(Math.round(exercise/5)*5, 0, 120);
-        updated = true;
-      }
-      if (quality !== null) {
-        state.nutritionQuality = quality;
-        updated = true;
-      }
-
-      if (updated) {
-        syncFormUI();
-        // Force UI update: dispatch input events to all range sliders so they refresh visually
-        ['sleepHours', 'waterGlasses', 'exerciseMinutes', 'stepsInput'].forEach(id => {
-          const el = document.getElementById(id);
-          if (el) {
-            const evt = new Event('input', { bubbles: true });
-            el.dispatchEvent(evt);
-          }
-        });
-        onStateChange();
-        const statusEl = document.getElementById('voiceStatus');
-        statusEl.textContent = t('voiceSuccess');
-        statusEl.className = 'voice-status success';
-        speakText(t('voiceConfirm'));
-        clearTimeout(saveTimeout);
-        saveTimeout = setTimeout(() => {
-          autoSave();
-        }, 300);
-      } else {
-        const statusEl = document.getElementById('voiceStatus');
-        if (statusEl.innerHTML.indexOf('transcript') === -1) {
-          statusEl.innerHTML = t('voiceNoMatch') + ' <span class="transcript">"' + text + '"</span>';
-        }
-        statusEl.className = 'voice-status error';
-        statusEl.innerHTML += '<br>❌ ' + t('voiceError');
-        speakText(t('voiceError'));
+        document.getElementById('voiceStatus').innerHTML += ' <span class="samples">' + t('voiceSamples') + '</span>';
       }
     }
 
@@ -1737,9 +1035,199 @@
       window.speechSynthesis.speak(utterance);
     }
 
+    // --- Enhanced voice command processing ---
+    function processVoiceCommand(text) {
+      const lower = text.toLowerCase();
+      // Normalize Persian digits to English
+      const persianDigits = /[۰-۹]/g;
+      const normalized = text.replace(persianDigits, d => String.fromCharCode(d.charCodeAt(0) - 1728));
+      
+      // Extract all numbers
+      const numbers = normalized.match(/\d+(\.\d+)?/g) || [];
+      const numValues = numbers.map(Number);
+
+      let sleep = null, water = null, exercise = null, quality = null;
+
+      // Quality detection (always try first)
+      const qualityMap = {
+        'ضعیف':0, 'متوسط':1, 'خوب':2, 'عالی':3,
+        'بد':0, 'پور':0, 'فیر':1, 'گود':2, 'عال':3, 'اکسلنت':3,
+        'poor':0, 'fair':1, 'good':2, 'excellent':3, 'bad':0, 'average':1
+      };
+      for (let key in qualityMap) {
+        if (lower.includes(key)) {
+          quality = qualityMap[key];
+          break;
+        }
+      }
+
+      // --- Sleep detection ---
+      const sleepKeywords = ['خواب', 'ساعت خواب', 'خوابیدم', 'ساعت'];
+      let sleepFound = false;
+      for (let k of sleepKeywords) {
+        if (lower.includes(k)) { sleepFound = true; break; }
+      }
+      if (sleepFound) {
+        // Try to find a number near "ساعت"
+        const hourIdx = lower.indexOf('ساعت');
+        if (hourIdx !== -1) {
+          // Look for number before or after
+          for (let i = 0; i < numValues.length; i++) {
+            const val = numValues[i];
+            if (val >= 0 && val <= 24) {
+              sleep = val;
+              break;
+            }
+          }
+        } else {
+          // Just take first reasonable number
+          for (let i = 0; i < numValues.length; i++) {
+            const val = numValues[i];
+            if (val >= 0 && val <= 24) {
+              sleep = val;
+              break;
+            }
+          }
+        }
+      }
+
+      // --- Water detection ---
+      const waterKeywords = ['آب', 'لیوان', 'مصرف آب'];
+      let waterFound = false;
+      for (let k of waterKeywords) {
+        if (lower.includes(k)) { waterFound = true; break; }
+      }
+      if (waterFound) {
+        const glassIdx = lower.indexOf('لیوان');
+        let candidate = null;
+        for (let i = 0; i < numValues.length; i++) {
+          const val = numValues[i];
+          if (val >= 0 && val <= 30) {
+            if (sleep !== null && val === sleep) continue;
+            candidate = val;
+            break;
+          }
+        }
+        if (candidate !== null) water = candidate;
+      }
+
+      // --- Exercise detection ---
+      const exerciseKeywords = ['ورزش', 'فعالیت', 'تمرین', 'دقیقه', 'پیاده', 'دویدن', 'قدم'];
+      let exerciseFound = false;
+      for (let k of exerciseKeywords) {
+        if (lower.includes(k)) { exerciseFound = true; break; }
+      }
+      if (exerciseFound) {
+        let candidate = null;
+        for (let i = 0; i < numValues.length; i++) {
+          const val = numValues[i];
+          if (val >= 0 && val <= 300) {
+            if ((sleep !== null && val === sleep) || (water !== null && val === water)) continue;
+            candidate = val;
+            break;
+          }
+        }
+        if (candidate !== null) exercise = candidate;
+      }
+
+      // --- Fallback: if we still have numbers left, assign them intelligently ---
+      // If sleep is null but we have a number <= 12, assign as sleep
+      if (sleep === null) {
+        for (let i = 0; i < numValues.length; i++) {
+          const val = numValues[i];
+          if (val >= 0 && val <= 12) {
+            // Check if not used by water or exercise
+            if ((water !== null && val === water) || (exercise !== null && val === exercise)) continue;
+            sleep = val;
+            break;
+          }
+        }
+      }
+
+      // If water is null and we have a number <= 20, assign as water
+      if (water === null) {
+        for (let i = 0; i < numValues.length; i++) {
+          const val = numValues[i];
+          if (val >= 0 && val <= 20) {
+            if ((sleep !== null && val === sleep) || (exercise !== null && val === exercise)) continue;
+            water = val;
+            break;
+          }
+        }
+      }
+
+      // If exercise is null and we have a number <= 120, assign as exercise
+      if (exercise === null) {
+        for (let i = 0; i < numValues.length; i++) {
+          const val = numValues[i];
+          if (val >= 0 && val <= 120) {
+            if ((sleep !== null && val === sleep) || (water !== null && val === water)) continue;
+            exercise = val;
+            break;
+          }
+        }
+      }
+
+      // Update state
+      let updated = false;
+      let detectedParts = [];
+
+      if (sleep !== null) {
+        state.sleepHours = clamp(sleep, 0, 12);
+        updated = true;
+        detectedParts.push(t('voiceDetectedSleep') + ': ' + toFa(Math.round(state.sleepHours)) + 'h');
+      }
+      if (water !== null) {
+        state.waterGlasses = clamp(Math.round(water), 0, 20);
+        updated = true;
+        detectedParts.push(t('voiceDetectedWater') + ': ' + toFa(state.waterGlasses));
+      }
+      if (exercise !== null) {
+        state.exerciseMinutes = clamp(Math.round(exercise/5)*5, 0, 120);
+        updated = true;
+        detectedParts.push(t('voiceDetectedExercise') + ': ' + toFa(state.exerciseMinutes) + 'min');
+      }
+      if (quality !== null) {
+        state.nutritionQuality = quality;
+        updated = true;
+        const qLabels = ['ضعیف', 'متوسط', 'خوب', 'عالی'];
+        detectedParts.push(t('voiceDetectedQuality') + ': ' + qLabels[quality]);
+      }
+
+      if (updated) {
+        syncFormUI();
+        // Force UI update: dispatch input events to all range sliders
+        ['sleepHours', 'waterGlasses', 'exerciseMinutes', 'stepsInput'].forEach(id => {
+          const el = document.getElementById(id);
+          if (el) {
+            const evt = new Event('input', { bubbles: true });
+            el.dispatchEvent(evt);
+          }
+        });
+        // Also update chip selections
+        setChipSelected('sleepQualityChips', state.sleepQuality);
+        setChipSelected('nutritionQualityChips', state.nutritionQuality);
+        setChipSelected('exerciseIntensityChips', state.exerciseIntensity);
+        onStateChange();
+        const statusEl = document.getElementById('voiceStatus');
+        statusEl.innerHTML = '✅ ' + t('voiceSuccess') + ' — ' + detectedParts.join('، ') + ' <span class="samples">' + t('voiceSamples') + '</span>';
+        statusEl.className = 'voice-status success';
+        speakText(t('voiceConfirm'));
+        clearTimeout(saveTimeout);
+        saveTimeout = setTimeout(() => {
+          autoSave();
+        }, 300);
+      } else {
+        const statusEl = document.getElementById('voiceStatus');
+        statusEl.innerHTML = t('voiceNoMatch') + ' <span class="transcript">"' + text + '"</span><br>❌ ' + t('voiceError') + ' <span class="samples">' + t('voiceSamples') + '</span>';
+        statusEl.className = 'voice-status error';
+        speakText(t('voiceError'));
+      }
+    }
+
     document.getElementById('voiceBtn').addEventListener('click', toggleVoice);
 
-    // --- End Voice Assistant ---
+    // --- Rest of the application ---
 
     function isProfileComplete() {
       if (!userProfile) return false;
@@ -1757,18 +1245,14 @@
         document.getElementById('profileBadge').className = 'badge-guest';
         return;
       }
-
       const name = userProfile.name || (currentLang === 'fa' ? 'کاربر مهمان' : 'Guest User');
       document.getElementById('profileDisplayName').textContent = name;
-      
       const age = userProfile.age;
       document.getElementById('profileAge').textContent = age ? toFa(age) : '—';
       document.getElementById('profileHeight').textContent = userProfile.height ? toFa(userProfile.height) : '—';
       document.getElementById('profileWeight').textContent = userProfile.weight ? toFa(userProfile.weight) : '—';
-      
       const firstLetter = name.charAt(0).toUpperCase();
       document.getElementById('profileAvatar').textContent = firstLetter || '👤';
-      
       const isComplete = isProfileComplete();
       if (isComplete) {
         document.getElementById('profileBadge').textContent = '⭐';
@@ -1787,7 +1271,6 @@
         document.getElementById('profileWeightInput').value = '';
         return;
       }
-      
       document.getElementById('profileNameInput').value = userProfile.name || '';
       document.getElementById('profileAgeInput').value = userProfile.age || '';
       document.getElementById('profileHeightInput').value = userProfile.height || '';
@@ -1810,18 +1293,12 @@
         renderCalendar();
         renderStatsDashboard();
         renderGoals();
-        if (window._initialized) {
-          showToast(t('saved'));
-        }
+        if (window._initialized) { showToast(t('saved')); }
       }, 500);
     }
 
     const GAUGE_CX=160, GAUGE_CY=172, GAUGE_R=126;
-    const SEGMENTS = [
-      {key:'sleep', start:34, end:90},
-      {key:'nutrition', start:-28, end:28},
-      {key:'exercise', start:-90, end:-34}
-    ];
+    const SEGMENTS = [{key:'sleep', start:34, end:90}, {key:'nutrition', start:-28, end:28}, {key:'exercise', start:-90, end:-34}];
 
     function buildGauge(){
       document.getElementById('gaugeTrack').setAttribute('d', describeArc(GAUGE_CX,GAUGE_CY,GAUGE_R,-90,90));
@@ -1880,7 +1357,6 @@
       const sleepPct = clamp(Math.round(state.sleepHours/settings.sleepGoal*100), 0, 100);
       const waterPct = clamp(Math.round(state.waterGlasses/settings.waterGoal*100), 0, 100);
       const exercisePct = clamp(Math.round(state.exerciseMinutes/Math.max(1,settings.exerciseGoal)*100), 0, 100);
-
       document.getElementById('goalSleepFill').style.width = sleepPct+'%';
       document.getElementById('goalSleepPct').textContent = toFa(sleepPct)+'% ' + (currentLang === 'fa' ? 'از' : 'of') + ' ' + toFa(settings.sleepGoal)+' ' + (currentLang === 'fa' ? 'ساعت' : 'hr');
       document.getElementById('goalWaterFill').style.width = waterPct+'%';
@@ -1891,30 +1367,15 @@
 
     function renderAnalysis(entry){
       const box = document.getElementById('analysisBox');
-      if(!entry){
-        box.innerHTML = '<div class="empty-state"><span class="emoji">🧠</span><span>' + t('analysisEmpty') + '</span></div>';
-        return;
-      }
-      const cats = [
-        {key:'sleep', label: t('goalSleep'), emoji:'😴', score:entry.scores.sleep},
-        {key:'nutrition', label: t('goalWater'), emoji:'🥗', score:entry.scores.nutrition},
-        {key:'exercise', label: t('goalExercise'), emoji:'🏃', score:entry.scores.exercise}
-      ];
+      if(!entry){ box.innerHTML = '<div class="empty-state"><span class="emoji">🧠</span><span>' + t('analysisEmpty') + '</span></div>'; return; }
+      const cats = [{key:'sleep', label: t('goalSleep'), emoji:'😴', score:entry.scores.sleep}, {key:'nutrition', label: t('goalWater'), emoji:'🥗', score:entry.scores.nutrition}, {key:'exercise', label: t('goalExercise'), emoji:'🏃', score:entry.scores.exercise}];
       const sorted = cats.slice().sort((a,b)=>b.score-a.score);
       const strongest = sorted[0], weakest = sorted[sorted.length-1];
-
       const suggestions = {
-        sleep: state.sleepHours < settings.sleepGoal ? 
-          (currentLang === 'fa' ? 'سعی کن امشب کمی زودتر بخوابی تا به '+toFa(settings.sleepGoal)+' ساعت برسی.' : 'Try to sleep earlier tonight to reach '+toFa(settings.sleepGoal)+' hours.') :
-          (currentLang === 'fa' ? 'کیفیت خوابت رو با ساعت خواب منظم حفظ کن.' : 'Keep your sleep quality with a regular schedule.'),
-        nutrition: state.waterGlasses < settings.waterGoal ? 
-          (currentLang === 'fa' ? toFa(Math.max(1, settings.waterGoal-state.waterGlasses))+' لیوان آب بیشتر بنوش.' : 'Drink '+toFa(Math.max(1, settings.waterGoal-state.waterGlasses))+' more glasses of water.') :
-          (currentLang === 'fa' ? 'تغذیه‌ت رو متنوع و کم‌نمک نگه دار.' : 'Keep your nutrition varied and low-salt.'),
-        exercise: state.exerciseMinutes < settings.exerciseGoal ? 
-          (currentLang === 'fa' ? 'حتی '+toFa(15)+' دقیقه پیاده‌روی امروز کمک می‌کنه.' : 'Even '+toFa(15)+' minutes of walking today will help.') :
-          (currentLang === 'fa' ? 'همین روند فعالیت رو ادامه بده.' : 'Keep up this activity level.')
+        sleep: state.sleepHours < settings.sleepGoal ? (currentLang === 'fa' ? 'سعی کن امشب کمی زودتر بخوابی تا به '+toFa(settings.sleepGoal)+' ساعت برسی.' : 'Try to sleep earlier tonight to reach '+toFa(settings.sleepGoal)+' hours.') : (currentLang === 'fa' ? 'کیفیت خوابت رو با ساعت خواب منظم حفظ کن.' : 'Keep your sleep quality with a regular schedule.'),
+        nutrition: state.waterGlasses < settings.waterGoal ? (currentLang === 'fa' ? toFa(Math.max(1, settings.waterGoal-state.waterGlasses))+' لیوان آب بیشتر بنوش.' : 'Drink '+toFa(Math.max(1, settings.waterGoal-state.waterGlasses))+' more glasses of water.') : (currentLang === 'fa' ? 'تغذیه‌ت رو متنوع و کم‌نمک نگه دار.' : 'Keep your nutrition varied and low-salt.'),
+        exercise: state.exerciseMinutes < settings.exerciseGoal ? (currentLang === 'fa' ? 'حتی '+toFa(15)+' دقیقه پیاده‌روی امروز کمک می‌کنه.' : 'Even '+toFa(15)+' minutes of walking today will help.') : (currentLang === 'fa' ? 'همین روند فعالیت رو ادامه بده.' : 'Keep up this activity level.')
       };
-
       let html = '';
       html += `<div class="analysis-item is-strength"><span class="analysis-emoji">${strongest.emoji}</span><div><b>${currentLang === 'fa' ? 'نقطه قوت امروز' : 'Strength'}</b>${strongest.label} (${toFa(strongest.score)} ${currentLang === 'fa' ? 'امتیاز' : 'pts'})</div></div>`;
       html += `<div class="analysis-item is-weakness"><span class="analysis-emoji">${weakest.emoji}</span><div><b>${currentLang === 'fa' ? 'نقطه ضعف امروز' : 'Weakness'}</b>${weakest.label} (${toFa(weakest.score)} ${currentLang === 'fa' ? 'امتیاز' : 'pts'})</div></div>`;
@@ -1931,35 +1392,28 @@
       document.getElementById('exerciseMinutesVal').textContent = toFa(state.exerciseMinutes)+' ' + (currentLang === 'fa' ? 'دقیقه' : 'min');
       document.getElementById('stepsInput').value = state.steps || 0;
       document.getElementById('stepsVal').textContent = toFa(state.steps || 0)+' ' + (currentLang === 'fa' ? 'قدم' : 'steps');
-
       setChipSelected('sleepQualityChips', state.sleepQuality);
       setChipSelected('nutritionQualityChips', state.nutritionQuality);
       setChipSelected('exerciseIntensityChips', state.exerciseIntensity);
-
       document.getElementById('weightInput').value = state.weight!=null ? state.weight : '';
       document.getElementById('bpSystolicInput').value = state.bpSystolic!=null ? state.bpSystolic : '';
       document.getElementById('bpDiastolicInput').value = state.bpDiastolic!=null ? state.bpDiastolic : '';
       document.getElementById('pulseInput').value = state.pulse!=null ? state.pulse : '';
-      document.querySelectorAll('#moodChips .mood-chip').forEach(chip=>{
-        chip.classList.toggle('is-selected', state.mood!=null && Number(chip.dataset.value)===state.mood);
-      });
+      document.querySelectorAll('#moodChips .mood-chip').forEach(chip=>{ chip.classList.toggle('is-selected', state.mood!=null && Number(chip.dataset.value)===state.mood); });
       updateBmiReadout();
     }
+
     function setChipSelected(groupId, value){
       const group = document.getElementById(groupId);
-      group.querySelectorAll('.chip').forEach(chip=>{
-        chip.classList.toggle('is-selected', Number(chip.dataset.value)===value);
-      });
+      if(!group) return;
+      group.querySelectorAll('.chip').forEach(chip=>{ chip.classList.toggle('is-selected', Number(chip.dataset.value)===value); });
     }
+
     function updateBmiReadout(){
       const el = document.getElementById('bmiReadout');
       const bmi = computeBmi(state.weight, settings.height);
-      if(bmi){
-        el.style.display = 'block';
-        el.innerHTML = 'BMI: <b>'+toFa(bmi.toFixed(1))+'</b> — ' + bmiLabel(bmi);
-      } else {
-        el.style.display = 'none';
-      }
+      if(bmi){ el.style.display = 'block'; el.innerHTML = 'BMI: <b>'+toFa(bmi.toFixed(1))+'</b> — ' + bmiLabel(bmi); }
+      else { el.style.display = 'none'; }
     }
 
     function setupStepButtons(decId, incId, valId, inputId, min, max, step, stateKey){
@@ -1967,112 +1421,39 @@
       const inc = document.getElementById(incId);
       const valEl = document.getElementById(valId);
       const input = document.getElementById(inputId);
-
       function update(newVal){
         state[stateKey] = clamp(Math.round(newVal/step)*step, min, max);
         input.value = state[stateKey];
-        const label = currentLang === 'fa' ? 
-          (stateKey === 'sleepHours' ? 'ساعت' : 'لیوان') :
-          (stateKey === 'sleepHours' ? 'hr' : 'glasses');
+        const label = currentLang === 'fa' ? (stateKey === 'sleepHours' ? 'ساعت' : 'لیوان') : (stateKey === 'sleepHours' ? 'hr' : 'glasses');
         valEl.textContent = toFa(state[stateKey]) + ' ' + label;
         onStateChange();
       }
-
-      dec.addEventListener('click', ()=>{
-        const newVal = state[stateKey] - step;
-        if(newVal >= min) update(newVal);
-      });
-      inc.addEventListener('click', ()=>{
-        const newVal = state[stateKey] + step;
-        if(newVal <= max) update(newVal);
-      });
+      dec.addEventListener('click', ()=>{ const newVal = state[stateKey] - step; if(newVal >= min) update(newVal); });
+      inc.addEventListener('click', ()=>{ const newVal = state[stateKey] + step; if(newVal <= max) update(newVal); });
     }
 
     setupStepButtons('sleepDec', 'sleepInc', 'sleepHoursVal', 'sleepHours', 0, 12, 0.5, 'sleepHours');
     setupStepButtons('waterDec', 'waterInc', 'waterVal', 'waterGlasses', 0, 20, 1, 'waterGlasses');
 
-    document.getElementById('weightInput').addEventListener('input', e=>{
-      const v = e.target.value;
-      state.weight = v===''? null : Number(v);
-      updateBmiReadout();
-      onStateChange();
-    });
-    document.getElementById('bpSystolicInput').addEventListener('input', e=>{
-      const v = e.target.value;
-      state.bpSystolic = v===''? null : Number(v);
-      onStateChange();
-    });
-    document.getElementById('bpDiastolicInput').addEventListener('input', e=>{
-      const v = e.target.value;
-      state.bpDiastolic = v===''? null : Number(v);
-      onStateChange();
-    });
-    document.getElementById('pulseInput').addEventListener('input', e=>{
-      const v = e.target.value;
-      state.pulse = v===''? null : Number(v);
-      onStateChange();
-    });
-    document.getElementById('moodChips').addEventListener('click', e=>{
-      const btn = e.target.closest('.mood-chip');
-      if(!btn) return;
-      const val = Number(btn.dataset.value);
-      state.mood = (state.mood===val) ? null : val;
-      syncFormUI();
-      onStateChange();
-    });
+    document.getElementById('weightInput').addEventListener('input', e=>{ const v = e.target.value; state.weight = v===''? null : Number(v); updateBmiReadout(); onStateChange(); });
+    document.getElementById('bpSystolicInput').addEventListener('input', e=>{ const v = e.target.value; state.bpSystolic = v===''? null : Number(v); onStateChange(); });
+    document.getElementById('bpDiastolicInput').addEventListener('input', e=>{ const v = e.target.value; state.bpDiastolic = v===''? null : Number(v); onStateChange(); });
+    document.getElementById('pulseInput').addEventListener('input', e=>{ const v = e.target.value; state.pulse = v===''? null : Number(v); onStateChange(); });
+    document.getElementById('moodChips').addEventListener('click', e=>{ const btn = e.target.closest('.mood-chip'); if(!btn) return; const val = Number(btn.dataset.value); state.mood = (state.mood===val) ? null : val; syncFormUI(); onStateChange(); });
 
-    document.getElementById('sleepHours').addEventListener('input', e=>{
-      state.sleepHours = Number(e.target.value);
-      document.getElementById('sleepHoursVal').textContent = toFa(state.sleepHours)+' ' + (currentLang === 'fa' ? 'ساعت' : 'hr');
-      onStateChange();
-    });
-    document.getElementById('waterGlasses').addEventListener('input', e=>{
-      state.waterGlasses = Number(e.target.value);
-      document.getElementById('waterVal').textContent = toFa(state.waterGlasses)+' ' + (currentLang === 'fa' ? 'لیوان' : 'glasses');
-      onStateChange();
-    });
-    document.getElementById('exerciseMinutes').addEventListener('input', e=>{
-      state.exerciseMinutes = Number(e.target.value);
-      document.getElementById('exerciseMinutesVal').textContent = toFa(state.exerciseMinutes)+' ' + (currentLang === 'fa' ? 'دقیقه' : 'min');
-      onStateChange();
-    });
-    document.getElementById('stepsInput').addEventListener('input', e=>{
-      state.steps = Number(e.target.value);
-      document.getElementById('stepsVal').textContent = toFa(state.steps)+' ' + (currentLang === 'fa' ? 'قدم' : 'steps');
-      onStateChange();
-    });
+    document.getElementById('sleepHours').addEventListener('input', e=>{ state.sleepHours = Number(e.target.value); document.getElementById('sleepHoursVal').textContent = toFa(state.sleepHours)+' ' + (currentLang === 'fa' ? 'ساعت' : 'hr'); onStateChange(); });
+    document.getElementById('waterGlasses').addEventListener('input', e=>{ state.waterGlasses = Number(e.target.value); document.getElementById('waterVal').textContent = toFa(state.waterGlasses)+' ' + (currentLang === 'fa' ? 'لیوان' : 'glasses'); onStateChange(); });
+    document.getElementById('exerciseMinutes').addEventListener('input', e=>{ state.exerciseMinutes = Number(e.target.value); document.getElementById('exerciseMinutesVal').textContent = toFa(state.exerciseMinutes)+' ' + (currentLang === 'fa' ? 'دقیقه' : 'min'); onStateChange(); });
+    document.getElementById('stepsInput').addEventListener('input', e=>{ state.steps = Number(e.target.value); document.getElementById('stepsVal').textContent = toFa(state.steps)+' ' + (currentLang === 'fa' ? 'قدم' : 'steps'); onStateChange(); });
 
     document.querySelectorAll('.chip-group').forEach(group=>{
-      group.addEventListener('click', e=>{
-        const btn = e.target.closest('.chip');
-        if(!btn) return;
-        const key = group.dataset.group;
-        state[key] = Number(btn.dataset.value);
-        setChipSelected(group.id, state[key]);
-        onStateChange();
-      });
+      group.addEventListener('click', e=>{ const btn = e.target.closest('.chip'); if(!btn) return; const key = group.dataset.group; state[key] = Number(btn.dataset.value); setChipSelected(group.id, state[key]); onStateChange(); });
     });
 
-    function gaugeDateLabel(key){
-      const d = parseDateKey(key);
-      const label = currentLang === 'fa' ? 
-        formatJalali(d, {weekday:'long', day:'numeric', month:'long'}) :
-        formatEnglish(d, {weekday:'long', day:'numeric', month:'long', year:'numeric'});
-      return key===todayKey ? label + ' (' + t('today') + ')' : label;
-    }
+    function gaugeDateLabel(key){ const d = parseDateKey(key); const label = currentLang === 'fa' ? formatJalali(d, {weekday:'long', day:'numeric', month:'long'}) : formatEnglish(d, {weekday:'long', day:'numeric', month:'long', year:'numeric'}); return key===todayKey ? label + ' (' + t('today') + ')' : label; }
 
     function stateFromEntry(entry){
-      return {
-        sleepHours:entry.sleepHours, sleepQuality:entry.sleepQuality,
-        exerciseMinutes:entry.exerciseMinutes, exerciseIntensity:entry.exerciseIntensity,
-        nutritionQuality:entry.nutritionQuality, waterGlasses:entry.waterGlasses,
-        weight: entry.weight!=null ? entry.weight : null,
-        bpSystolic: entry.bpSystolic!=null ? entry.bpSystolic : null,
-        bpDiastolic: entry.bpDiastolic!=null ? entry.bpDiastolic : null,
-        pulse: entry.pulse!=null ? entry.pulse : null,
-        mood: entry.mood!=null ? entry.mood : null,
-        steps: entry.steps || 0
-      };
+      return { sleepHours:entry.sleepHours, sleepQuality:entry.sleepQuality, exerciseMinutes:entry.exerciseMinutes, exerciseIntensity:entry.exerciseIntensity, nutritionQuality:entry.nutritionQuality, waterGlasses:entry.waterGlasses, weight: entry.weight!=null ? entry.weight : null, bpSystolic: entry.bpSystolic!=null ? entry.bpSystolic : null, bpDiastolic: entry.bpDiastolic!=null ? entry.bpDiastolic : null, pulse: entry.pulse!=null ? entry.pulse : null, mood: entry.mood!=null ? entry.mood : null, steps: entry.steps || 0 };
     }
 
     function enterEditMode(key){
@@ -2085,27 +1466,16 @@
       onStateChange();
       renderAnalysis(entry);
       document.getElementById('gaugeDate').textContent = gaugeDateLabel(key);
-
       const banner = document.getElementById('editBanner');
       banner.style.display = 'flex';
-      document.getElementById('editBannerDate').textContent = currentLang === 'fa' ?
-        formatJalali(parseDateKey(key), {day:'numeric', month:'long'}) :
-        formatEnglish(parseDateKey(key), {day:'numeric', month:'long'});
-
+      document.getElementById('editBannerDate').textContent = currentLang === 'fa' ? formatJalali(parseDateKey(key), {day:'numeric', month:'long'}) : formatEnglish(parseDateKey(key), {day:'numeric', month:'long'});
       document.querySelector('.panel-left').scrollIntoView({behavior:'smooth', block:'start'});
     }
 
     function exitEditMode(){
       editingKey = todayKey;
-      if(entries[todayKey]){
-        state = stateFromEntry(entries[todayKey]);
-        savedSnapshot = JSON.stringify(state);
-        renderAnalysis(entries[todayKey]);
-      } else {
-        state = Object.assign({}, DEFAULT_STATE);
-        savedSnapshot = null;
-        renderAnalysis(null);
-      }
+      if(entries[todayKey]){ state = stateFromEntry(entries[todayKey]); savedSnapshot = JSON.stringify(state); renderAnalysis(entries[todayKey]); }
+      else { state = Object.assign({}, DEFAULT_STATE); savedSnapshot = null; renderAnalysis(null); }
       syncFormUI();
       onStateChange();
       document.getElementById('gaugeDate').textContent = gaugeDateLabel(todayKey);
@@ -2114,160 +1484,66 @@
     document.getElementById('cancelEditBtn').addEventListener('click', exitEditMode);
 
     let toastTimer = null;
-    function showToast(msg){
-      const el = document.getElementById('toast');
-      el.textContent = msg;
-      el.classList.add('visible');
-      clearTimeout(toastTimer);
-      toastTimer = setTimeout(()=> el.classList.remove('visible'), 2400);
-    }
+    function showToast(msg){ const el = document.getElementById('toast'); el.textContent = msg; el.classList.add('visible'); clearTimeout(toastTimer); toastTimer = setTimeout(()=> el.classList.remove('visible'), 2400); }
 
     const modalOverlay = document.getElementById('modalOverlay');
     let modalConfirmAction = null;
-    function openConfirm(title, text, onConfirm){
-      document.getElementById('modalTitle').textContent = title;
-      document.getElementById('modalText').textContent = text;
-      modalConfirmAction = onConfirm;
-      modalOverlay.classList.add('visible');
-    }
-    function closeConfirm(){
-      modalOverlay.classList.remove('visible');
-      modalConfirmAction = null;
-    }
+    function openConfirm(title, text, onConfirm){ document.getElementById('modalTitle').textContent = title; document.getElementById('modalText').textContent = text; modalConfirmAction = onConfirm; modalOverlay.classList.add('visible'); }
+    function closeConfirm(){ modalOverlay.classList.remove('visible'); modalConfirmAction = null; }
     document.getElementById('modalCancel').addEventListener('click', closeConfirm);
     modalOverlay.addEventListener('click', e=>{ if(e.target===modalOverlay) closeConfirm(); });
-    document.getElementById('modalConfirm').addEventListener('click', async ()=>{
-      const action = modalConfirmAction;
-      closeConfirm();
-      if(action) await action();
-    });
+    document.getElementById('modalConfirm').addEventListener('click', async ()=>{ const action = modalConfirmAction; closeConfirm(); if(action) await action(); });
 
     document.getElementById('resetLink').addEventListener('click', ()=>{
-      openConfirm(
-        t('modalTitle'),
-        t('modalText'),
-        async ()=>{
-          entries = {};
-          await persistEntries(entries);
-          editingKey = todayKey;
-          state = Object.assign({}, DEFAULT_STATE);
-          savedSnapshot = null;
-          syncFormUI();
-          onStateChange();
-          document.getElementById('gaugeDate').textContent = gaugeDateLabel(todayKey);
-          document.getElementById('editBanner').style.display = 'none';
-          renderChart();
-          renderHistory();
-          renderStreak();
-          renderAnalysis(null);
-          renderCalendar();
-          renderStatsDashboard();
-          showToast(currentLang === 'fa' ? 'همه داده‌ها حذف شدند' : 'All data cleared');
-        }
-      );
+      openConfirm(t('modalTitle'), t('modalText'), async ()=>{
+        entries = {}; await persistEntries(entries);
+        editingKey = todayKey; state = Object.assign({}, DEFAULT_STATE); savedSnapshot = null;
+        syncFormUI(); onStateChange();
+        document.getElementById('gaugeDate').textContent = gaugeDateLabel(todayKey);
+        document.getElementById('editBanner').style.display = 'none';
+        renderChart(); renderHistory(); renderStreak(); renderAnalysis(null); renderCalendar(); renderStatsDashboard();
+        showToast(currentLang === 'fa' ? 'همه داده‌ها حذف شدند' : 'All data cleared');
+      });
     });
 
     function requestDeleteEntry(key){
       const d = parseDateKey(key);
-      const label = currentLang === 'fa' ?
-        formatJalali(d,{weekday:'long', day:'numeric', month:'long'}) :
-        formatEnglish(d,{weekday:'long', day:'numeric', month:'long', year:'numeric'});
-      openConfirm(
-        t('modalTitle'),
-        label + ' ' + (currentLang === 'fa' ? 'از تاریخچه حذف می‌شه.' : 'will be removed from history.'),
-        async ()=>{
-          delete entries[key];
-          await persistEntries(entries);
-          if(key===editingKey) exitEditMode();
-          renderChart();
-          renderHistory();
-          renderStreak();
-          renderCalendar();
-          renderStatsDashboard();
-          showToast(currentLang === 'fa' ? 'روز حذف شد' : 'Day deleted');
-        }
-      );
+      const label = currentLang === 'fa' ? formatJalali(d,{weekday:'long', day:'numeric', month:'long'}) : formatEnglish(d,{weekday:'long', day:'numeric', month:'long', year:'numeric'});
+      openConfirm(t('modalTitle'), label + ' ' + (currentLang === 'fa' ? 'از تاریخچه حذف می‌شه.' : 'will be removed from history.'), async ()=>{
+        delete entries[key]; await persistEntries(entries);
+        if(key===editingKey) exitEditMode();
+        renderChart(); renderHistory(); renderStreak(); renderCalendar(); renderStatsDashboard();
+        showToast(currentLang === 'fa' ? 'روز حذف شد' : 'Day deleted');
+      });
     }
 
-    function sortedEntryList(){
-      return Object.keys(entries).sort().map(k=>({key:k, data:entries[k]}));
-    }
+    function sortedEntryList(){ return Object.keys(entries).sort().map(k=>({key:k, data:entries[k]})); }
 
     function renderChart(){
       const wrap = document.getElementById('chartWrap');
       const list = sortedEntryList().slice(-14);
-      if(list.length===0){
-        wrap.innerHTML = '<div class="empty-state"><span class="emoji">📈</span><span>' + (currentLang === 'fa' ? 'هنوز داده‌ای برای نمایش روند نیست.' : 'No data yet.') + '</span></div>';
-        return;
-      }
+      if(list.length===0){ wrap.innerHTML = '<div class="empty-state"><span class="emoji">📈</span><span>' + (currentLang === 'fa' ? 'هنوز داده‌ای برای نمایش روند نیست.' : 'No data yet.') + '</span></div>'; return; }
       const W=600, H=240, padL=18, padR=40, padT=18, padB=30;
       const plotW = W-padL-padR, plotH = H-padT-padB;
       const n = list.length;
       const stepX = n>1 ? plotW/(n-1) : 0;
-
       function xAt(i){ return n>1 ? padL + (n-1-i)*stepX : padL+plotW/2; }
       function yAt(score){ return padT + plotH*(1-score/100); }
       const baseY = padT+plotH;
-
       let linePts = [];
-      list.forEach((item,i)=>{
-        const x=xAt(i), y=yAt(item.data.scores.total);
-        linePts.push([x,y]);
-      });
-
+      list.forEach((item,i)=>{ const x=xAt(i), y=yAt(item.data.scores.total); linePts.push([x,y]); });
       let linePath = 'M '+linePts.map(p=>p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' L ');
       let areaPath = 'M '+linePts[0][0].toFixed(1)+' '+baseY+' L '+linePts.map(p=>p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' L ')+' L '+linePts[linePts.length-1][0].toFixed(1)+' '+baseY+' Z';
-
-      const grid = [0,50,100].map(v=>{
-        const y=yAt(v);
-        return `<line x1="${padL}" y1="${y}" x2="${W-padR}" y2="${y}" stroke="#E7E2D6" stroke-width="1"/>
-                <text class="axis-label" x="${W-padR+8}" y="${y+4}">${toFa(v)}</text>`;
-      }).join('');
-
+      const grid = [0,50,100].map(v=>{ const y=yAt(v); return `<line x1="${padL}" y1="${y}" x2="${W-padR}" y2="${y}" stroke="#E7E2D6" stroke-width="1"/><text class="axis-label" x="${W-padR+8}" y="${y+4}">${toFa(v)}</text>`; }).join('');
       const oldestDate = parseDateKey(list[0].key);
       const newestDate = parseDateKey(list[n-1].key);
       const newestLabel = list[n-1].key===todayKey ? t('today') : (currentLang === 'fa' ? formatJalali(newestDate,{day:'numeric',month:'short'}) : formatEnglish(newestDate,{day:'numeric',month:'short'}));
       const oldestLabel = currentLang === 'fa' ? formatJalali(oldestDate,{day:'numeric',month:'short'}) : formatEnglish(oldestDate,{day:'numeric',month:'short'});
-
-      const points = list.map((item,i)=>{
-        const x=xAt(i), y=yAt(item.data.scores.total);
-        return `<circle class="chart-point" cx="${x}" cy="${y}" r="5" fill="var(--c-card)" stroke="#F07A52" stroke-width="2.5"
-                 data-key="${item.key}" data-score="${item.data.scores.total}"></circle>`;
-      }).join('');
-
-      wrap.innerHTML = `
-        <svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none">
-          <defs>
-            <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#F07A52" stop-opacity="0.28"/>
-              <stop offset="100%" stop-color="#F07A52" stop-opacity="0"/>
-            </linearGradient>
-          </defs>
-          ${grid}
-          <path d="${areaPath}" fill="url(#areaGrad)" stroke="none"/>
-          <path d="${linePath}" fill="none" stroke="#F07A52" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
-          ${points}
-          <text class="axis-label" x="${xAt(n-1)}" y="${H-6}" text-anchor="middle">${newestLabel}</text>
-          ${n>1 ? `<text class="axis-label" x="${xAt(0)}" y="${H-6}" text-anchor="middle">${oldestLabel}</text>` : ''}
-        </svg>
-        <div class="chart-tooltip" id="chartTooltip"></div>
-      `;
-
+      const points = list.map((item,i)=>{ const x=xAt(i), y=yAt(item.data.scores.total); return `<circle class="chart-point" cx="${x}" cy="${y}" r="5" fill="var(--c-card)" stroke="#F07A52" stroke-width="2.5" data-key="${item.key}" data-score="${item.data.scores.total}"></circle>`; }).join('');
+      wrap.innerHTML = `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none"><defs><linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#F07A52" stop-opacity="0.28"/><stop offset="100%" stop-color="#F07A52" stop-opacity="0"/></linearGradient></defs>${grid}<path d="${areaPath}" fill="url(#areaGrad)" stroke="none"/><path d="${linePath}" fill="none" stroke="#F07A52" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>${points}<text class="axis-label" x="${xAt(n-1)}" y="${H-6}" text-anchor="middle">${newestLabel}</text>${n>1 ? `<text class="axis-label" x="${xAt(0)}" y="${H-6}" text-anchor="middle">${oldestLabel}</text>` : ''}</svg><div class="chart-tooltip" id="chartTooltip"></div>`;
       const tooltip = document.getElementById('chartTooltip');
       wrap.querySelectorAll('.chart-point').forEach(pt=>{
-        pt.addEventListener('click', (e)=>{
-          const key = pt.dataset.key, score = pt.dataset.score;
-          const d = parseDateKey(key);
-          const label = (key===todayKey?t('today'):(currentLang === 'fa' ? formatJalali(d,{day:'numeric',month:'long'}) : formatEnglish(d,{day:'numeric',month:'long'}))) + ' — ' + toFa(score);
-          tooltip.textContent = label;
-          const svgRect = wrap.querySelector('svg').getBoundingClientRect();
-          const scaleX = svgRect.width/W, scaleY = svgRect.height/H;
-          tooltip.style.left = (parseFloat(pt.getAttribute('cx'))*scaleX)+'px';
-          tooltip.style.top = (parseFloat(pt.getAttribute('cy'))*scaleY)+'px';
-          tooltip.classList.add('visible');
-          clearTimeout(tooltip._t);
-          tooltip._t = setTimeout(()=>tooltip.classList.remove('visible'), 1800);
-        });
+        pt.addEventListener('click', (e)=>{ const key = pt.dataset.key, score = pt.dataset.score; const d = parseDateKey(key); const label = (key===todayKey?t('today'):(currentLang === 'fa' ? formatJalali(d,{day:'numeric',month:'long'}) : formatEnglish(d,{day:'numeric',month:'long'}))) + ' — ' + toFa(score); tooltip.textContent = label; const svgRect = wrap.querySelector('svg').getBoundingClientRect(); const scaleX = svgRect.width/W, scaleY = svgRect.height/H; tooltip.style.left = (parseFloat(pt.getAttribute('cx'))*scaleX)+'px'; tooltip.style.top = (parseFloat(pt.getAttribute('cy'))*scaleY)+'px'; tooltip.classList.add('visible'); clearTimeout(tooltip._t); tooltip._t = setTimeout(()=>tooltip.classList.remove('visible'), 1800); });
       });
     }
 
@@ -2276,57 +1552,22 @@
     function renderHistory(){
       const el = document.getElementById('historyList');
       const list = sortedEntryList().reverse();
-      if(list.length===0){
-        el.innerHTML = '<div class="empty-state"><span class="emoji">🗓️</span><span>' + (currentLang === 'fa' ? 'هنوز هیچ روزی ثبت نشده.' : 'No days recorded yet.') + '</span></div>';
-        return;
-      }
+      if(list.length===0){ el.innerHTML = '<div class="empty-state"><span class="emoji">🗓️</span><span>' + (currentLang === 'fa' ? 'هنوز هیچ روزی ثبت نشده.' : 'No days recorded yet.') + '</span></div>'; return; }
       el.innerHTML = list.map(item=>{
         const d = parseDateKey(item.key);
         const label = item.key===todayKey ? t('today') : (currentLang === 'fa' ? formatJalali(d,{weekday:'short', day:'numeric', month:'short', year:'numeric'}) : formatEnglish(d,{weekday:'short', day:'numeric', month:'short', year:'numeric'}));
         const fullDate = currentLang === 'fa' ? formatJalali(d, {weekday:'long', day:'numeric', month:'long', year:'numeric'}) : formatEnglish(d, {weekday:'long', day:'numeric', month:'long', year:'numeric'});
-        return `<div class="history-row">
-          <div class="history-dot" style="background:${tierDot(item.data.scores.total)}"></div>
-          <div class="history-date" title="${fullDate}">${label}</div>
-          <div class="history-score">${toFa(item.data.scores.total)}</div>
-          <button class="history-edit" data-key="${item.key}" aria-label="ویرایش">${editPencilSvg}</button>
-          <button class="history-del" data-key="${item.key}" aria-label="حذف">×</button>
-        </div>`;
+        return `<div class="history-row"><div class="history-dot" style="background:${tierDot(item.data.scores.total)}"></div><div class="history-date" title="${fullDate}">${label}</div><div class="history-score">${toFa(item.data.scores.total)}</div><button class="history-edit" data-key="${item.key}" aria-label="ویرایش">${editPencilSvg}</button><button class="history-del" data-key="${item.key}" aria-label="حذف">×</button></div>`;
       }).join('');
-      el.querySelectorAll('.history-edit').forEach(btn=>{
-        btn.addEventListener('click', ()=> enterEditMode(btn.dataset.key));
-      });
-      el.querySelectorAll('.history-del').forEach(btn=>{
-        btn.addEventListener('click', ()=> requestDeleteEntry(btn.dataset.key));
-      });
+      el.querySelectorAll('.history-edit').forEach(btn=>{ btn.addEventListener('click', ()=> enterEditMode(btn.dataset.key)); });
+      el.querySelectorAll('.history-del').forEach(btn=>{ btn.addEventListener('click', ()=> requestDeleteEntry(btn.dataset.key)); });
     }
 
-    function escapeHtml(str){
-      const div = document.createElement('div');
-      div.textContent = str;
-      return div.innerHTML;
-    }
-    function escapeAttr(str){
-      return String(str).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-    }
+    function escapeHtml(str){ const div = document.createElement('div'); div.textContent = str; return div.innerHTML; }
+    function escapeAttr(str){ return String(str).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
-    function getLocalDateTime(dateStr){
-      const d = new Date(dateStr);
-      const year = d.getFullYear();
-      const month = String(d.getMonth() + 1).padStart(2, '0');
-      const day = String(d.getDate()).padStart(2, '0');
-      const hours = String(d.getHours()).padStart(2, '0');
-      const minutes = String(d.getMinutes()).padStart(2, '0');
-      return { year, month, day, hours, minutes, dateObj: d };
-    }
-    function formatTodoDateTime(isoStr){
-      const dt = getLocalDateTime(isoStr);
-      const d = dt.dateObj;
-      if (currentLang === 'fa') {
-        const jalali = gregorianToJalali(d);
-        return `${toFa(jalali.jy)}/${toFa(String(jalali.jm).padStart(2,'0'))}/${toFa(String(jalali.jd).padStart(2,'0'))} - ${toFa(dt.hours)}:${toFa(dt.minutes)}`;
-      }
-      return `${dt.year}/${dt.month}/${dt.day} - ${dt.hours}:${dt.minutes}`;
-    }
+    function getLocalDateTime(dateStr){ const d = new Date(dateStr); const year = d.getFullYear(); const month = String(d.getMonth() + 1).padStart(2, '0'); const day = String(d.getDate()).padStart(2, '0'); const hours = String(d.getHours()).padStart(2, '0'); const minutes = String(d.getMinutes()).padStart(2, '0'); return { year, month, day, hours, minutes, dateObj: d }; }
+    function formatTodoDateTime(isoStr){ const dt = getLocalDateTime(isoStr); const d = dt.dateObj; if (currentLang === 'fa') { const jalali = gregorianToJalali(d); return `${toFa(jalali.jy)}/${toFa(String(jalali.jm).padStart(2,'0'))}/${toFa(String(jalali.jd).padStart(2,'0'))} - ${toFa(dt.hours)}:${toFa(dt.minutes)}`; } return `${dt.year}/${dt.month}/${dt.day} - ${dt.hours}:${dt.minutes}`; }
 
     let editingTodoId = null;
     const editPencilSvgTodo = '<svg viewBox="0 0 16 16" fill="none"><path d="M11.3 2.3a1.5 1.5 0 0 1 2.1 0l.3.3a1.5 1.5 0 0 1 0 2.1l-7.8 7.8-3 .8.8-3 7.6-7.6Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>';
@@ -2335,161 +1576,44 @@
     function renderTodos(){
       const list = document.getElementById('todoList');
       const progress = document.getElementById('todoProgress');
-      if(todos.length===0){
-        list.innerHTML = '<div class="empty-state"><span class="emoji">✅</span><span>' + (currentLang === 'fa' ? 'هنوز کاری اضافه نکردی.' : 'No tasks added yet.') + '</span></div>';
-        progress.style.display = 'none';
-        return;
-      }
+      if(todos.length===0){ list.innerHTML = '<div class="empty-state"><span class="emoji">✅</span><span>' + (currentLang === 'fa' ? 'هنوز کاری اضافه نکردی.' : 'No tasks added yet.') + '</span></div>'; progress.style.display = 'none'; return; }
       const doneCount = todos.filter(t=>t.done).length;
       progress.style.display = 'block';
       progress.textContent = toFa(doneCount)+' ' + (currentLang === 'fa' ? 'از' : 'of') + ' ' + toFa(todos.length) + ' ' + (currentLang === 'fa' ? 'کار انجام شده' : 'tasks done');
-
       list.innerHTML = todos.map((t, idx)=>{
         if(editingTodoId === t.id){
-          return `<div class="todo-row">
-            <div class="todo-edit-row">
-              <input type="text" class="todo-edit-input" id="todoEditInput-${t.id}" value="${escapeAttr(t.text)}" maxlength="120">
-              <button class="todo-edit-save" data-id="${t.id}" aria-label="${currentLang==='fa'?'ذخیره':'Save'}">${todoCheckSvg}</button>
-              <button class="todo-edit-cancel" data-id="${t.id}" aria-label="${currentLang==='fa'?'انصراف':'Cancel'}">×</button>
-            </div>
-          </div>`;
+          return `<div class="todo-row"><div class="todo-edit-row"><input type="text" class="todo-edit-input" id="todoEditInput-${t.id}" value="${escapeAttr(t.text)}" maxlength="120"><button class="todo-edit-save" data-id="${t.id}" aria-label="${currentLang==='fa'?'ذخیره':'Save'}">${todoCheckSvg}</button><button class="todo-edit-cancel" data-id="${t.id}" aria-label="${currentLang==='fa'?'انصراف':'Cancel'}">×</button></div></div>`;
         }
         let dateLabel = '';
-        if(t.done && t.completedAt){
-          dateLabel = (currentLang==='fa' ? '✓ تکمیل: ' : '✓ Done: ') + formatTodoDateTime(t.completedAt);
-        } else if(!t.done && t.createdAt){
-          dateLabel = formatTodoDateTime(t.createdAt);
-        }
-        return `<div class="todo-row">
-          <button class="todo-checkbox ${t.done?'is-done':''}" data-id="${t.id}" aria-label="تکمیل شد">${todoCheckSvg}</button>
-          <div class="todo-text ${t.done?'is-done':''}">
-            ${escapeHtml(t.text)}
-            ${dateLabel ? `<span class="todo-time">${dateLabel}</span>` : ''}
-          </div>
-          <div class="todo-move">
-            <button class="todo-move-btn" data-id="${t.id}" data-dir="up" ${idx===0?'disabled':''} aria-label="${currentLang==='fa'?'انتقال به بالا':'Move up'}">▲</button>
-            <button class="todo-move-btn" data-id="${t.id}" data-dir="down" ${idx===todos.length-1?'disabled':''} aria-label="${currentLang==='fa'?'انتقال به پایین':'Move down'}">▼</button>
-          </div>
-          <button class="todo-edit" data-id="${t.id}" aria-label="${currentLang==='fa'?'ویرایش':'Edit'}">${editPencilSvgTodo}</button>
-          <button class="todo-del" data-id="${t.id}" aria-label="حذف">×</button>
-        </div>`;
+        if(t.done && t.completedAt){ dateLabel = (currentLang==='fa' ? '✓ تکمیل: ' : '✓ Done: ') + formatTodoDateTime(t.completedAt); }
+        else if(!t.done && t.createdAt){ dateLabel = formatTodoDateTime(t.createdAt); }
+        return `<div class="todo-row"><button class="todo-checkbox ${t.done?'is-done':''}" data-id="${t.id}" aria-label="تکمیل شد">${todoCheckSvg}</button><div class="todo-text ${t.done?'is-done':''}">${escapeHtml(t.text)}${dateLabel ? `<span class="todo-time">${dateLabel}</span>` : ''}</div><div class="todo-move"><button class="todo-move-btn" data-id="${t.id}" data-dir="up" ${idx===0?'disabled':''} aria-label="${currentLang==='fa'?'انتقال به بالا':'Move up'}">▲</button><button class="todo-move-btn" data-id="${t.id}" data-dir="down" ${idx===todos.length-1?'disabled':''} aria-label="${currentLang==='fa'?'انتقال به پایین':'Move down'}">▼</button></div><button class="todo-edit" data-id="${t.id}" aria-label="${currentLang==='fa'?'ویرایش':'Edit'}">${editPencilSvgTodo}</button><button class="todo-del" data-id="${t.id}" aria-label="حذف">×</button></div>`;
       }).join('');
-
-      list.querySelectorAll('.todo-checkbox').forEach(btn=>{
-        btn.addEventListener('click', ()=> toggleTodo(btn.dataset.id));
-      });
-      list.querySelectorAll('.todo-del').forEach(btn=>{
-        btn.addEventListener('click', ()=> deleteTodo(btn.dataset.id));
-      });
-      list.querySelectorAll('.todo-move-btn').forEach(btn=>{
-        if(btn.disabled) return;
-        btn.addEventListener('click', ()=> moveTodo(btn.dataset.id, btn.dataset.dir));
-      });
-      list.querySelectorAll('.todo-edit').forEach(btn=>{
-        btn.addEventListener('click', ()=>{
-          editingTodoId = btn.dataset.id;
-          renderTodos();
-          const inp = document.getElementById('todoEditInput-'+btn.dataset.id);
-          if(inp){ inp.focus(); inp.select(); }
-        });
-      });
-      list.querySelectorAll('.todo-edit-save').forEach(btn=>{
-        btn.addEventListener('click', ()=> saveEditTodo(btn.dataset.id));
-      });
-      list.querySelectorAll('.todo-edit-cancel').forEach(btn=>{
-        btn.addEventListener('click', ()=>{ editingTodoId = null; renderTodos(); });
-      });
-      list.querySelectorAll('.todo-edit-input').forEach(inp=>{
-        inp.addEventListener('keydown', e=>{
-          if(e.key==='Enter'){ e.preventDefault(); saveEditTodo(inp.id.replace('todoEditInput-','')); }
-          else if(e.key==='Escape'){ editingTodoId = null; renderTodos(); }
-        });
-      });
+      list.querySelectorAll('.todo-checkbox').forEach(btn=>{ btn.addEventListener('click', ()=> toggleTodo(btn.dataset.id)); });
+      list.querySelectorAll('.todo-del').forEach(btn=>{ btn.addEventListener('click', ()=> deleteTodo(btn.dataset.id)); });
+      list.querySelectorAll('.todo-move-btn').forEach(btn=>{ if(btn.disabled) return; btn.addEventListener('click', ()=> moveTodo(btn.dataset.id, btn.dataset.dir)); });
+      list.querySelectorAll('.todo-edit').forEach(btn=>{ btn.addEventListener('click', ()=>{ editingTodoId = btn.dataset.id; renderTodos(); const inp = document.getElementById('todoEditInput-'+btn.dataset.id); if(inp){ inp.focus(); inp.select(); } }); });
+      list.querySelectorAll('.todo-edit-save').forEach(btn=>{ btn.addEventListener('click', ()=> saveEditTodo(btn.dataset.id)); });
+      list.querySelectorAll('.todo-edit-cancel').forEach(btn=>{ btn.addEventListener('click', ()=>{ editingTodoId = null; renderTodos(); }); });
+      list.querySelectorAll('.todo-edit-input').forEach(inp=>{ inp.addEventListener('keydown', e=>{ if(e.key==='Enter'){ e.preventDefault(); saveEditTodo(inp.id.replace('todoEditInput-','')); } else if(e.key==='Escape'){ editingTodoId = null; renderTodos(); } }); });
     }
 
-    async function addTodo(rawText){
-      const text = rawText.trim();
-      if(!text) return;
-      todos.push({ 
-        id: 't'+Date.now()+Math.random().toString(36).slice(2,7), 
-        text, 
-        done: false,
-        createdAt: new Date().toISOString(),
-        completedAt: null
-      });
-      renderTodos();
-      await persistTodos();
-    }
-    async function toggleTodo(id){
-      const t = todos.find(x=>x.id===id);
-      if(!t) return;
-      t.done = !t.done;
-      t.completedAt = t.done ? new Date().toISOString() : null;
-      renderTodos();
-      await persistTodos();
-    }
-    async function deleteTodo(id){
-      todos = todos.filter(x=>x.id!==id);
-      if(editingTodoId === id) editingTodoId = null;
-      renderTodos();
-      await persistTodos();
-    }
-    async function moveTodo(id, dir){
-      const idx = todos.findIndex(x=>x.id===id);
-      if(idx===-1) return;
-      const swapIdx = dir==='up' ? idx-1 : idx+1;
-      if(swapIdx<0 || swapIdx>=todos.length) return;
-      const tmp = todos[idx];
-      todos[idx] = todos[swapIdx];
-      todos[swapIdx] = tmp;
-      renderTodos();
-      await persistTodos();
-    }
-    async function saveEditTodo(id){
-      const inp = document.getElementById('todoEditInput-'+id);
-      if(!inp) return;
-      const newText = inp.value.trim();
-      if(newText){
-        const t = todos.find(x=>x.id===id);
-        if(t) t.text = newText;
-      }
-      editingTodoId = null;
-      renderTodos();
-      await persistTodos();
-    }
+    async function addTodo(rawText){ const text = rawText.trim(); if(!text) return; todos.push({ id: 't'+Date.now()+Math.random().toString(36).slice(2,7), text, done: false, createdAt: new Date().toISOString(), completedAt: null }); renderTodos(); await persistTodos(); }
+    async function toggleTodo(id){ const t = todos.find(x=>x.id===id); if(!t) return; t.done = !t.done; t.completedAt = t.done ? new Date().toISOString() : null; renderTodos(); await persistTodos(); }
+    async function deleteTodo(id){ todos = todos.filter(x=>x.id!==id); if(editingTodoId === id) editingTodoId = null; renderTodos(); await persistTodos(); }
+    async function moveTodo(id, dir){ const idx = todos.findIndex(x=>x.id===id); if(idx===-1) return; const swapIdx = dir==='up' ? idx-1 : idx+1; if(swapIdx<0 || swapIdx>=todos.length) return; const tmp = todos[idx]; todos[idx] = todos[swapIdx]; todos[swapIdx] = tmp; renderTodos(); await persistTodos(); }
+    async function saveEditTodo(id){ const inp = document.getElementById('todoEditInput-'+id); if(!inp) return; const newText = inp.value.trim(); if(newText){ const t = todos.find(x=>x.id===id); if(t) t.text = newText; } editingTodoId = null; renderTodos(); await persistTodos(); }
 
-    document.getElementById('todoAddBtn').addEventListener('click', ()=>{
-      addTodo(document.getElementById('todoInput').value);
-      document.getElementById('todoInput').value = '';
-    });
-    document.getElementById('todoInput').addEventListener('keydown', e=>{
-      if(e.key==='Enter'){
-        e.preventDefault();
-        addTodo(e.target.value);
-        e.target.value = '';
-      }
-    });
+    document.getElementById('todoAddBtn').addEventListener('click', ()=>{ addTodo(document.getElementById('todoInput').value); document.getElementById('todoInput').value = ''; });
+    document.getElementById('todoInput').addEventListener('keydown', e=>{ if(e.key==='Enter'){ e.preventDefault(); addTodo(e.target.value); e.target.value = ''; } });
 
     function computeStreak(){
       let streak=0;
       let d = entries[todayKey] ? new Date(TODAY) : (()=>{ const y=new Date(TODAY); y.setDate(y.getDate()-1); return y; })();
-      while(true){
-        const key = getDateKey(d);
-        if(entries[key]){ streak++; d.setDate(d.getDate()-1); }
-        else break;
-      }
+      while(true){ const key = getDateKey(d); if(entries[key]){ streak++; d.setDate(d.getDate()-1); } else break; }
       return streak;
     }
-    function renderStreak(){
-      const streak = computeStreak();
-      const pill = document.getElementById('streakPill');
-      if(streak>0){
-        pill.style.display='flex';
-        document.getElementById('streakNum').textContent = toFa(streak)+' ' + (currentLang === 'fa' ? 'روز متوالی' : 'day streak');
-      } else {
-        pill.style.display='none';
-      }
-    }
+    function renderStreak(){ const streak = computeStreak(); const pill = document.getElementById('streakPill'); if(streak>0){ pill.style.display='flex'; document.getElementById('streakNum').textContent = toFa(streak)+' ' + (currentLang === 'fa' ? 'روز متوالی' : 'day streak'); } else { pill.style.display='none'; } }
 
     const settingsModalOverlay = document.getElementById('settingsModalOverlay');
     document.getElementById('settingsBtn').addEventListener('click', ()=>{
@@ -2499,21 +1623,14 @@
       document.getElementById('settingExerciseGoal').value = settings.exerciseGoal;
       settingsModalOverlay.classList.add('visible');
     });
-    document.getElementById('settingsCancel').addEventListener('click', ()=>{
-      settingsModalOverlay.classList.remove('visible');
-    });
+    document.getElementById('settingsCancel').addEventListener('click', ()=>{ settingsModalOverlay.classList.remove('visible'); });
     settingsModalOverlay.addEventListener('click', e=>{ if(e.target===settingsModalOverlay) settingsModalOverlay.classList.remove('visible'); });
     document.getElementById('settingsSave').addEventListener('click', async ()=>{
       const h = Number(document.getElementById('settingHeight').value);
       const sg = Number(document.getElementById('settingSleepGoal').value);
       const wg = Number(document.getElementById('settingWaterGoal').value);
       const eg = Number(document.getElementById('settingExerciseGoal').value);
-      settings = {
-        height: h>0 ? h : DEFAULT_SETTINGS.height,
-        sleepGoal: sg>0 ? sg : DEFAULT_SETTINGS.sleepGoal,
-        waterGoal: wg>0 ? wg : DEFAULT_SETTINGS.waterGoal,
-        exerciseGoal: eg>=0 ? eg : DEFAULT_SETTINGS.exerciseGoal
-      };
+      settings = { height: h>0 ? h : DEFAULT_SETTINGS.height, sleepGoal: sg>0 ? sg : DEFAULT_SETTINGS.sleepGoal, waterGoal: wg>0 ? wg : DEFAULT_SETTINGS.waterGoal, exerciseGoal: eg>=0 ? eg : DEFAULT_SETTINGS.exerciseGoal };
       await persistSettings();
       settingsModalOverlay.classList.remove('visible');
       updateBmiReadout();
@@ -2521,15 +1638,8 @@
       showToast(currentLang === 'fa' ? 'تنظیمات ذخیره شد ✅' : 'Settings saved ✅');
     });
 
-    function applyTheme(theme){
-      document.documentElement.setAttribute('data-theme', theme);
-      document.getElementById('themeToggle').textContent = theme === 'dark' ? '☀️' : '🌙';
-      saveTheme(theme);
-    }
-    document.getElementById('themeToggle').addEventListener('click', ()=>{
-      const current = document.documentElement.getAttribute('data-theme') || 'light';
-      applyTheme(current === 'light' ? 'dark' : 'light');
-    });
+    function applyTheme(theme){ document.documentElement.setAttribute('data-theme', theme); document.getElementById('themeToggle').textContent = theme === 'dark' ? '☀️' : '🌙'; saveTheme(theme); }
+    document.getElementById('themeToggle').addEventListener('click', ()=>{ const current = document.documentElement.getAttribute('data-theme') || 'light'; applyTheme(current === 'light' ? 'dark' : 'light'); });
 
     function applyLanguage(lang){
       currentLang = lang;
@@ -2539,10 +1649,7 @@
       saveLang(lang);
       updateUI();
     }
-    document.getElementById('langToggle').addEventListener('click', ()=>{
-      const nextLang = currentLang === 'fa' ? 'en' : 'fa';
-      applyLanguage(nextLang);
-    });
+    document.getElementById('langToggle').addEventListener('click', ()=>{ const nextLang = currentLang === 'fa' ? 'en' : 'fa'; applyLanguage(nextLang); });
 
     function updateUI(){
       document.getElementById('appTitle').textContent = t('appTitle');
@@ -2618,7 +1725,6 @@
       document.getElementById('modalText').textContent = t('modalText');
       document.getElementById('modalCancel').textContent = t('modalCancel');
       document.getElementById('modalConfirm').textContent = t('modalConfirm');
-
       document.getElementById('profileModalTitle').textContent = t('profileTitle');
       document.getElementById('profileModalText').textContent = t('profileText');
       document.getElementById('profileNameLabel').textContent = t('profileName');
@@ -2627,32 +1733,21 @@
       document.getElementById('profileWeightLabel').textContent = t('profileWeight');
       document.getElementById('profileSave').textContent = t('profileSave');
       document.getElementById('profileCancel').textContent = t('profileCancel');
-
       document.getElementById('voiceBtn').title = t('voiceHint');
-
-      const saveBtnText = document.getElementById('saveBtnText');
-      if (editingKey === todayKey) {
-        saveBtnText.textContent = entries[todayKey] ? t('saveUpdate') : t('saveBtn');
-      } else {
-        saveBtnText.textContent = t('saveEdit');
+      // Update voice samples
+      const vStatus = document.getElementById('voiceStatus');
+      if (vStatus && !vStatus.classList.contains('success') && !vStatus.classList.contains('error')) {
+        vStatus.innerHTML = '<span class="samples">' + t('voiceSamples') + '</span>';
       }
-
+      const saveBtnText = document.getElementById('saveBtnText');
+      if (editingKey === todayKey) { saveBtnText.textContent = entries[todayKey] ? t('saveUpdate') : t('saveBtn'); }
+      else { saveBtnText.textContent = t('saveEdit'); }
       document.getElementById('gaugeDate').textContent = gaugeDateLabel(editingKey);
-      renderGoals();
-      renderAnalysis(entries[editingKey] || null);
-      renderChart();
-      renderHistory();
-      renderStreak();
-      renderTodos();
-      renderCalendar();
-      renderStatsDashboard();
-      syncFormUI();
-      updateProfileUI();
+      renderGoals(); renderAnalysis(entries[editingKey] || null); renderChart(); renderHistory(); renderStreak(); renderTodos(); renderCalendar(); renderStatsDashboard(); syncFormUI(); updateProfileUI();
     }
 
     const todayJalali = gregorianToJalali(TODAY);
-    let calViewJY = todayJalali.jy;
-    let calViewJM = todayJalali.jm;
+    let calViewJY = todayJalali.jy, calViewJM = todayJalali.jm;
     const PERSIAN_DOW = ['ش','ی','د','س','چ','پ','ج'];
     const ENGLISH_DOW = ['S','M','T','W','T','F','S'];
 
@@ -2661,45 +1756,29 @@
       const titleEl = document.getElementById('calTitle');
       const info = jalaliMonthInfo(calViewJY, calViewJM);
       if(!info){ grid.innerHTML=''; titleEl.textContent='—'; return; }
-
-      titleEl.textContent = currentLang === 'fa' ? 
-        formatJalali(info.firstGregorian, {year:'numeric', month:'long'}) :
-        formatEnglish(info.firstGregorian, {year:'numeric', month:'long'});
-
+      titleEl.textContent = currentLang === 'fa' ? formatJalali(info.firstGregorian, {year:'numeric', month:'long'}) : formatEnglish(info.firstGregorian, {year:'numeric', month:'long'});
       const jsDow = info.firstGregorian.getDay();
       const leadingBlanks = (jsDow + 1) % 7;
       const dowLabels = currentLang === 'fa' ? PERSIAN_DOW : ENGLISH_DOW;
-
       let html = dowLabels.map(d=>`<div class="cal-dow">${d}</div>`).join('');
       for(let i=0;i<leadingBlanks;i++){ html += '<div class="cal-cell is-empty"></div>'; }
-
       const todayMidnight = new Date(TODAY.getFullYear(), TODAY.getMonth(), TODAY.getDate());
-
       for(let day=1; day<=info.daysInMonth; day++){
         const d = new Date(info.firstGregorian.getFullYear(), info.firstGregorian.getMonth(), info.firstGregorian.getDate()+day-1);
         const key = getDateKey(d);
         const entry = entries[key];
         const isFuture = d.getTime() > todayMidnight.getTime();
         const isToday = key===todayKey;
-        let cls = 'cal-cell';
-        let style = '';
+        let cls = 'cal-cell'; let style = '';
         if(isFuture) cls += ' is-future';
         if(isToday) cls += ' is-today';
-        if(entry){
-          cls += ' has-data';
-          style = `background:${tierDot(entry.scores.total)};`;
-        }
+        if(entry){ cls += ' has-data'; style = `background:${tierDot(entry.scores.total)};`; }
         html += `<div class="${cls}" style="${style}" data-key="${key}" data-has-data="${entry?'1':'0'}" data-future="${isFuture?'1':'0'}">${toFa(day)}</div>`;
       }
-
       grid.innerHTML = html;
       grid.querySelectorAll('.cal-cell[data-key]').forEach(cell=>{
         if(cell.dataset.future==='1') return;
-        cell.addEventListener('click', ()=>{
-          const key = cell.dataset.key;
-          if(entries[key]) enterEditMode(key);
-          else enterBackfillMode(key);
-        });
+        cell.addEventListener('click', ()=>{ const key = cell.dataset.key; if(entries[key]) enterEditMode(key); else enterBackfillMode(key); });
       });
     }
 
@@ -2713,53 +1792,22 @@
       document.getElementById('gaugeDate').textContent = gaugeDateLabel(key);
       const banner = document.getElementById('editBanner');
       banner.style.display = 'flex';
-      document.getElementById('editBannerDate').textContent = currentLang === 'fa' ?
-        formatJalali(parseDateKey(key), {day:'numeric', month:'long'}) + ' (ثبت نشده)' :
-        formatEnglish(parseDateKey(key), {day:'numeric', month:'long'}) + ' (not recorded)';
+      document.getElementById('editBannerDate').textContent = currentLang === 'fa' ? formatJalali(parseDateKey(key), {day:'numeric', month:'long'}) + ' (ثبت نشده)' : formatEnglish(parseDateKey(key), {day:'numeric', month:'long'}) + ' (not recorded)';
       document.querySelector('.panel-left').scrollIntoView({behavior:'smooth', block:'start'});
     }
 
-    document.getElementById('calPrevBtn').addEventListener('click', ()=>{
-      calViewJM -= 1;
-      if(calViewJM < 1){ calViewJM = 12; calViewJY -= 1; }
-      renderCalendar();
-      renderStatsDashboard();
-    });
-    document.getElementById('calNextBtn').addEventListener('click', ()=>{
-      calViewJM += 1;
-      if(calViewJM > 12){ calViewJM = 1; calViewJY += 1; }
-      renderCalendar();
-      renderStatsDashboard();
-    });
+    document.getElementById('calPrevBtn').addEventListener('click', ()=>{ calViewJM -= 1; if(calViewJM < 1){ calViewJM = 12; calViewJY -= 1; } renderCalendar(); renderStatsDashboard(); });
+    document.getElementById('calNextBtn').addEventListener('click', ()=>{ calViewJM += 1; if(calViewJM > 12){ calViewJM = 1; calViewJY += 1; } renderCalendar(); renderStatsDashboard(); });
 
     document.getElementById('calSearchBtn').addEventListener('click', ()=>{
       const query = document.getElementById('calSearchInput').value.trim();
       if(!query) return;
       let d = parseJalaliDate(query);
-      if(!d){
-        const parts = query.split(/[-\/]/).map(Number);
-        if(parts.length===3){
-          const [y,m,day] = parts;
-          if(y>0 && m>=1 && m<=12 && day>=1 && day<=31){
-            d = new Date(y, m-1, day);
-          }
-        }
-      }
-      if(!d || isNaN(d.getTime())){
-        showToast(currentLang === 'fa' ? 'تاریخ نامعتبر. مثال: ۱۴۰۳/۰۱/۱۵ یا 2024/03/15' : 'Invalid date. Example: 1403/01/15 or 2024/03/15');
-        return;
-      }
-      const j = gregorianToJalali(d);
-      calViewJY = j.jy;
-      calViewJM = j.jm;
-      renderCalendar();
-      renderStatsDashboard();
-      document.getElementById('calSearchInput').value = '';
-      showToast((currentLang === 'fa' ? 'رفتن به ' : 'Go to ') + (currentLang === 'fa' ? formatJalali(d, {year:'numeric', month:'long'}) : formatEnglish(d, {year:'numeric', month:'long'})));
+      if(!d){ const parts = query.split(/[-\/]/).map(Number); if(parts.length===3){ const [y,m,day] = parts; if(y>0 && m>=1 && m<=12 && day>=1 && day<=31){ d = new Date(y, m-1, day); } } }
+      if(!d || isNaN(d.getTime())){ showToast(currentLang === 'fa' ? 'تاریخ نامعتبر. مثال: ۱۴۰۳/۰۱/۱۵ یا 2024/03/15' : 'Invalid date. Example: 1403/01/15 or 2024/03/15'); return; }
+      const j = gregorianToJalali(d); calViewJY = j.jy; calViewJM = j.jm; renderCalendar(); renderStatsDashboard(); document.getElementById('calSearchInput').value = ''; showToast((currentLang === 'fa' ? 'رفتن به ' : 'Go to ') + (currentLang === 'fa' ? formatJalali(d, {year:'numeric', month:'long'}) : formatEnglish(d, {year:'numeric', month:'long'})));
     });
-    document.getElementById('calSearchInput').addEventListener('keydown', e=>{
-      if(e.key==='Enter') document.getElementById('calSearchBtn').click();
-    });
+    document.getElementById('calSearchInput').addEventListener('keydown', e=>{ if(e.key==='Enter') document.getElementById('calSearchBtn').click(); });
 
     function renderStatsDashboard(){
       const subtitle = document.getElementById('statsSubtitle');
@@ -2767,69 +1815,26 @@
       const info = jalaliMonthInfo(calViewJY, calViewJM);
       if(!info){ grid.innerHTML=''; return; }
       subtitle.textContent = (currentLang === 'fa' ? 'آمار ' : 'Stats for ') + (currentLang === 'fa' ? formatJalali(info.firstGregorian, {year:'numeric', month:'long'}) : formatEnglish(info.firstGregorian, {year:'numeric', month:'long'}));
-
-      const monthEntries = Object.keys(entries)
-        .filter(k=>{ const j=gregorianToJalali(parseDateKey(k)); return j.jy===calViewJY && j.jm===calViewJM; })
-        .map(k=>({key:k, data:entries[k]}));
-
-      if(monthEntries.length===0){
-        grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1;"><span class="emoji">📊</span><span>' + (currentLang === 'fa' ? 'این ماه هنوز داده‌ای ثبت نشده.' : 'No data recorded this month.') + '</span></div>';
-        return;
-      }
-
+      const monthEntries = Object.keys(entries).filter(k=>{ const j=gregorianToJalali(parseDateKey(k)); return j.jy===calViewJY && j.jm===calViewJM; }).map(k=>({key:k, data:entries[k]}));
+      if(monthEntries.length===0){ grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1;"><span class="emoji">📊</span><span>' + (currentLang === 'fa' ? 'این ماه هنوز داده‌ای ثبت نشده.' : 'No data recorded this month.') + '</span></div>'; return; }
       const avg = (arr)=> arr.reduce((a,b)=>a+b,0)/arr.length;
       const avgSleep = avg(monthEntries.map(e=>e.data.sleepHours));
       const avgExercise = avg(monthEntries.map(e=>e.data.exerciseMinutes));
       const avgScore = Math.round(avg(monthEntries.map(e=>e.data.scores.total)));
       let best = monthEntries[0], worst = monthEntries[0];
-      monthEntries.forEach(e=>{
-        if(e.data.scores.total > best.data.scores.total) best = e;
-        if(e.data.scores.total < worst.data.scores.total) worst = e;
-      });
-
-      function dayLabel(key){
-        return currentLang === 'fa' ? formatJalali(parseDateKey(key), {day:'numeric', month:'short'}) : formatEnglish(parseDateKey(key), {day:'numeric', month:'short'});
-      }
-
-      grid.innerHTML = `
-        <div class="stat-tile">
-          <div class="stat-tile-label">${currentLang === 'fa' ? 'میانگین امتیاز' : 'Avg Score'}</div>
-          <div class="stat-tile-value">${toFa(avgScore)}</div>
-          <div class="stat-tile-sub">${toFa(monthEntries.length)} ${currentLang === 'fa' ? 'روز ثبت‌شده' : 'days recorded'}</div>
-        </div>
-        <div class="stat-tile">
-          <div class="stat-tile-label">${currentLang === 'fa' ? 'میانگین خواب' : 'Avg Sleep'}</div>
-          <div class="stat-tile-value">${toFa(avgSleep.toFixed(1))}</div>
-          <div class="stat-tile-sub">${currentLang === 'fa' ? 'ساعت در شب' : 'hours/night'}</div>
-        </div>
-        <div class="stat-tile">
-          <div class="stat-tile-label">${currentLang === 'fa' ? 'میانگین ورزش' : 'Avg Exercise'}</div>
-          <div class="stat-tile-value">${toFa(Math.round(avgExercise))}</div>
-          <div class="stat-tile-sub">${currentLang === 'fa' ? 'دقیقه در روز' : 'min/day'}</div>
-        </div>
-        <div class="stat-tile">
-          <div class="stat-tile-label">${currentLang === 'fa' ? 'بهترین روز' : 'Best Day'}</div>
-          <div class="stat-tile-value">${toFa(best.data.scores.total)}</div>
-          <div class="stat-tile-sub">${dayLabel(best.key)}</div>
-        </div>
-      `;
+      monthEntries.forEach(e=>{ if(e.data.scores.total > best.data.scores.total) best = e; if(e.data.scores.total < worst.data.scores.total) worst = e; });
+      function dayLabel(key){ return currentLang === 'fa' ? formatJalali(parseDateKey(key), {day:'numeric', month:'short'}) : formatEnglish(parseDateKey(key), {day:'numeric', month:'short'}); }
+      grid.innerHTML = `<div class="stat-tile"><div class="stat-tile-label">${currentLang === 'fa' ? 'میانگین امتیاز' : 'Avg Score'}</div><div class="stat-tile-value">${toFa(avgScore)}</div><div class="stat-tile-sub">${toFa(monthEntries.length)} ${currentLang === 'fa' ? 'روز ثبت‌شده' : 'days recorded'}</div></div><div class="stat-tile"><div class="stat-tile-label">${currentLang === 'fa' ? 'میانگین خواب' : 'Avg Sleep'}</div><div class="stat-tile-value">${toFa(avgSleep.toFixed(1))}</div><div class="stat-tile-sub">${currentLang === 'fa' ? 'ساعت در شب' : 'hours/night'}</div></div><div class="stat-tile"><div class="stat-tile-label">${currentLang === 'fa' ? 'میانگین ورزش' : 'Avg Exercise'}</div><div class="stat-tile-value">${toFa(Math.round(avgExercise))}</div><div class="stat-tile-sub">${currentLang === 'fa' ? 'دقیقه در روز' : 'min/day'}</div></div><div class="stat-tile"><div class="stat-tile-label">${currentLang === 'fa' ? 'بهترین روز' : 'Best Day'}</div><div class="stat-tile-value">${toFa(best.data.scores.total)}</div><div class="stat-tile-sub">${dayLabel(best.key)}</div></div>`;
     }
 
     document.getElementById('exportBtn').addEventListener('click', ()=>{
-      const payload = {
-        app: 'rooznegar-salamat',
-        exportedAt: new Date().toISOString(),
-        entries, todos, settings, userProfile
-      };
+      const payload = { app: 'rooznegar-salamat', exportedAt: new Date().toISOString(), entries, todos, settings, userProfile };
       const blob = new Blob([JSON.stringify(payload, null, 2)], {type:'application/json'});
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
       a.download = 'rooznegar-salamat-backup-'+todayKey+'.json';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
+      document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
       showToast(currentLang === 'fa' ? 'فایل پشتیبان دانلود شد ✅' : 'Backup file downloaded ✅');
     });
 
@@ -2843,77 +1848,39 @@
         let parsed;
         try{ parsed = JSON.parse(reader.result); }
         catch(err){ showToast(currentLang === 'fa' ? 'فایل معتبر نیست' : 'Invalid file'); importFileInput.value=''; return; }
-        if(!parsed || typeof parsed!=='object' || !parsed.entries){
-          showToast(currentLang === 'fa' ? 'ساختار فایل پشتیبان شناسایی نشد' : 'Backup structure not recognized');
+        if(!parsed || typeof parsed!=='object' || !parsed.entries){ showToast(currentLang === 'fa' ? 'ساختار فایل پشتیبان شناسایی نشد' : 'Backup structure not recognized'); importFileInput.value=''; return; }
+        openConfirm(t('modalTitle'), currentLang === 'fa' ? 'داده‌های فعلی با محتوای این فایل جایگزین می‌شن. مطمئنی؟' : 'Current data will be replaced. Are you sure?', async ()=>{
+          entries = parsed.entries || {};
+          todos = parsed.todos || [];
+          settings = Object.assign({}, DEFAULT_SETTINGS, parsed.settings || {});
+          userProfile = parsed.userProfile || userProfile;
+          await persistEntries(entries); await persistTodos(); await persistSettings();
+          if (userProfile) await persistUser(userProfile);
+          exitEditMode();
+          renderChart(); renderHistory(); renderStreak(); renderTodos(); renderCalendar(); renderStatsDashboard(); updateProfileUI();
+          showToast(currentLang === 'fa' ? 'بازیابی با موفقیت انجام شد ✅' : 'Restore successful ✅');
           importFileInput.value='';
-          return;
-        }
-        openConfirm(
-          t('modalTitle'),
-          currentLang === 'fa' ? 'داده‌های فعلی با محتوای این فایل جایگزین می‌شن. مطمئنی؟' : 'Current data will be replaced. Are you sure?',
-          async ()=>{
-            entries = parsed.entries || {};
-            todos = parsed.todos || [];
-            settings = Object.assign({}, DEFAULT_SETTINGS, parsed.settings || {});
-            userProfile = parsed.userProfile || userProfile;
-            await persistEntries(entries);
-            await persistTodos();
-            await persistSettings();
-            if (userProfile) await persistUser(userProfile);
-            exitEditMode();
-            renderChart();
-            renderHistory();
-            renderStreak();
-            renderTodos();
-            renderCalendar();
-            renderStatsDashboard();
-            updateProfileUI();
-            showToast(currentLang === 'fa' ? 'بازیابی با موفقیت انجام شد ✅' : 'Restore successful ✅');
-            importFileInput.value='';
-          }
-        );
+        });
       };
       reader.readAsText(file);
     });
 
     let lastAccel = {x:0, y:0, z:0};
-    let stepCount = 0;
-    let lastStepTime = 0;
-    let accelBuffer = [];
-    let isStepCounterReady = false;
-
+    let stepCount = 0, lastStepTime = 0, accelBuffer = [], isStepCounterReady = false;
     function initStepCounter(){
-      if (!window.DeviceMotionEvent) {
-        document.getElementById('stepsAutoBadge').textContent = t('stepsUnsupported');
-        return;
-      }
-
-      if (entries[todayKey] && entries[todayKey].steps) {
-        stepCount = entries[todayKey].steps;
-        state.steps = stepCount;
-        document.getElementById('stepsInput').value = stepCount;
-        document.getElementById('stepsVal').textContent = toFa(stepCount) + ' ' + (currentLang === 'fa' ? 'قدم' : 'steps');
-      }
-
-      let threshold = 3.5;
-      let stepTimeout = 120;
-
+      if (!window.DeviceMotionEvent) { document.getElementById('stepsAutoBadge').textContent = t('stepsUnsupported'); return; }
+      if (entries[todayKey] && entries[todayKey].steps) { stepCount = entries[todayKey].steps; state.steps = stepCount; document.getElementById('stepsInput').value = stepCount; document.getElementById('stepsVal').textContent = toFa(stepCount) + ' ' + (currentLang === 'fa' ? 'قدم' : 'steps'); }
+      let threshold = 3.5, stepTimeout = 120;
       function handleMotion(event) {
         const accel = event.accelerationIncludingGravity;
         if (!accel) return;
-
-        const dx = accel.x - lastAccel.x;
-        const dy = accel.y - lastAccel.y;
-        const dz = accel.z - lastAccel.z;
+        const dx = accel.x - lastAccel.x, dy = accel.y - lastAccel.y, dz = accel.z - lastAccel.z;
         const delta = Math.sqrt(dx*dx + dy*dy + dz*dz);
-
         lastAccel = {x: accel.x, y: accel.y, z: accel.z};
-
         const now = Date.now();
         if (delta > threshold && (now - lastStepTime) > stepTimeout) {
           accelBuffer.push(delta);
           if (accelBuffer.length > 6) accelBuffer.shift();
-          
           if (accelBuffer.length >= 3) {
             const avg = accelBuffer.reduce((a,b) => a+b, 0) / accelBuffer.length;
             if (avg > threshold * 0.5) {
@@ -2928,87 +1895,32 @@
           }
         }
       }
-
       if (typeof DeviceMotionEvent.requestPermission === 'function') {
-        DeviceMotionEvent.requestPermission()
-          .then(state => {
-            if (state === 'granted') {
-              window.addEventListener('devicemotion', handleMotion);
-              document.getElementById('stepsAutoBadge').textContent = t('stepsDone');
-              isStepCounterReady = true;
-            } else {
-              document.getElementById('stepsAutoBadge').textContent = '⚠️ ' + (currentLang === 'fa' ? 'دسترسی به گام‌شمار داده نشد' : 'Permission denied');
-            }
-          })
-          .catch(err => {
-            console.warn('Permission error:', err);
-            window.addEventListener('devicemotion', handleMotion);
-            document.getElementById('stepsAutoBadge').textContent = t('stepsDone');
-            isStepCounterReady = true;
-          });
-      } else {
-        window.addEventListener('devicemotion', handleMotion);
-        document.getElementById('stepsAutoBadge').textContent = t('stepsDone');
-        isStepCounterReady = true;
-      }
+        DeviceMotionEvent.requestPermission().then(state => {
+          if (state === 'granted') { window.addEventListener('devicemotion', handleMotion); document.getElementById('stepsAutoBadge').textContent = t('stepsDone'); isStepCounterReady = true; }
+          else { document.getElementById('stepsAutoBadge').textContent = '⚠️ ' + (currentLang === 'fa' ? 'دسترسی به گام‌شمار داده نشد' : 'Permission denied'); }
+        }).catch(err => { console.warn('Permission error:', err); window.addEventListener('devicemotion', handleMotion); document.getElementById('stepsAutoBadge').textContent = t('stepsDone'); isStepCounterReady = true; });
+      } else { window.addEventListener('devicemotion', handleMotion); document.getElementById('stepsAutoBadge').textContent = t('stepsDone'); isStepCounterReady = true; }
     }
 
     const profileModalOverlay = document.getElementById('profileModalOverlay');
-
-    document.getElementById('profileEditBtn').addEventListener('click', () => {
-      populateProfileEditForm();
-      profileModalOverlay.classList.add('visible');
-    });
-    document.getElementById('profileAvatar').addEventListener('click', () => {
-      populateProfileEditForm();
-      profileModalOverlay.classList.add('visible');
-    });
-
-    document.getElementById('profileCancel').addEventListener('click', () => {
-      profileModalOverlay.classList.remove('visible');
-    });
-    profileModalOverlay.addEventListener('click', e => {
-      if (e.target === profileModalOverlay) profileModalOverlay.classList.remove('visible');
-    });
-
-    document.getElementById('profileSave').addEventListener('click', async () => {
+    document.getElementById('profileEditBtn').addEventListener('click', ()=>{ populateProfileEditForm(); profileModalOverlay.classList.add('visible'); });
+    document.getElementById('profileAvatar').addEventListener('click', ()=>{ populateProfileEditForm(); profileModalOverlay.classList.add('visible'); });
+    document.getElementById('profileCancel').addEventListener('click', ()=>{ profileModalOverlay.classList.remove('visible'); });
+    profileModalOverlay.addEventListener('click', e=>{ if(e.target===profileModalOverlay) profileModalOverlay.classList.remove('visible'); });
+    document.getElementById('profileSave').addEventListener('click', async ()=>{
       const name = document.getElementById('profileNameInput').value.trim() || null;
       const age = parseInt(document.getElementById('profileAgeInput').value) || null;
       const height = Number(document.getElementById('profileHeightInput').value) || null;
       const weight = Number(document.getElementById('profileWeightInput').value) || null;
-
-      if (age && (age < 1 || age > 120)) {
-        showToast(currentLang === 'fa' ? 'سن معتبر وارد کن (۱ تا ۱۲۰ سال).' : 'Enter a valid age (1-120).');
-        return;
-      }
-      if (height && (height < 50 || height > 300)) {
-        showToast(currentLang === 'fa' ? 'قد معتبر وارد کن (۵۰ تا ۳۰۰ سانتی‌متر).' : 'Enter a valid height (50-300 cm).');
-        return;
-      }
-      if (weight && (weight < 10 || weight > 500)) {
-        showToast(currentLang === 'fa' ? 'وزن معتبر وارد کن (۱۰ تا ۵۰۰ کیلوگرم).' : 'Enter a valid weight (10-500 kg).');
-        return;
-      }
-
-      userProfile = {
-        ...userProfile,
-        name,
-        age,
-        height,
-        weight,
-        isGuest: false
-      };
-
+      if (age && (age < 1 || age > 120)) { showToast(currentLang === 'fa' ? 'سن معتبر وارد کن (۱ تا ۱۲۰ سال).' : 'Enter a valid age (1-120).'); return; }
+      if (height && (height < 50 || height > 300)) { showToast(currentLang === 'fa' ? 'قد معتبر وارد کن (۵۰ تا ۳۰۰ سانتی‌متر).' : 'Enter a valid height (50-300 cm).'); return; }
+      if (weight && (weight < 10 || weight > 500)) { showToast(currentLang === 'fa' ? 'وزن معتبر وارد کن (۱۰ تا ۵۰۰ کیلوگرم).' : 'Enter a valid weight (10-500 kg).'); return; }
+      userProfile = { ...userProfile, name, age, height, weight, isGuest: false };
       await persistUser(userProfile);
-      if (height) {
-        settings.height = height;
-        await persistSettings();
-      }
-
+      if (height) { settings.height = height; await persistSettings(); }
       profileModalOverlay.classList.remove('visible');
-      updateProfileUI();
-      updateBmiReadout();
-      renderGoals();
+      updateProfileUI(); updateBmiReadout(); renderGoals();
       showToast(currentLang === 'fa' ? 'پروفایل با موفقیت به‌روز شد ✅' : 'Profile updated successfully ✅');
     });
 
@@ -3017,18 +1929,12 @@
     const installBtn = document.getElementById('installBtn');
     const installDismiss = document.getElementById('installDismiss');
     const INSTALL_DISMISS_KEY = 'pwa-install-dismissed';
-
     window.addEventListener('beforeinstallprompt', (e)=>{
-      e.preventDefault();
-      deferredInstallPrompt = e;
-      let dismissed = false;
-      try{ dismissed = localStorage.getItem(INSTALL_DISMISS_KEY)==='1'; }catch(err){}
+      e.preventDefault(); deferredInstallPrompt = e;
+      let dismissed = false; try{ dismissed = localStorage.getItem(INSTALL_DISMISS_KEY)==='1'; }catch(err){}
       const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
-      if(!dismissed && !isStandalone){
-        installBanner.classList.add('visible');
-      }
+      if(!dismissed && !isStandalone){ installBanner.classList.add('visible'); }
     });
-
     installBtn && installBtn.addEventListener('click', async ()=>{
       if(!deferredInstallPrompt) return;
       installBanner.classList.remove('visible');
@@ -3036,46 +1942,25 @@
       try{ await deferredInstallPrompt.userChoice; }catch(e){}
       deferredInstallPrompt = null;
     });
-
     installDismiss && installDismiss.addEventListener('click', ()=>{
       installBanner.classList.remove('visible');
       try{ localStorage.setItem(INSTALL_DISMISS_KEY, '1'); }catch(e){}
     });
-
-    window.addEventListener('appinstalled', ()=>{
-      installBanner.classList.remove('visible');
-      deferredInstallPrompt = null;
-    });
-
-    if('serviceWorker' in navigator){
-      window.addEventListener('load', ()=>{
-        navigator.serviceWorker.register('./sw.js').catch(()=>{});
-      });
-    }
+    window.addEventListener('appinstalled', ()=>{ installBanner.classList.remove('visible'); deferredInstallPrompt = null; });
+    if('serviceWorker' in navigator){ window.addEventListener('load', ()=>{ navigator.serviceWorker.register('./sw.js').catch(()=>{}); }); }
 
     async function init(){
-      const theme = loadTheme();
-      applyTheme(theme);
-
-      const lang = loadLang();
-      applyLanguage(lang);
-
+      const theme = loadTheme(); applyTheme(theme);
+      const lang = loadLang(); applyLanguage(lang);
       buildGauge();
       document.getElementById('gaugeDate').textContent = gaugeDateLabel(todayKey);
-
       entries = await loadAllEntries();
       todos = await loadTodos();
       settings = await loadSettings();
       userProfile = await loadUser();
-
       document.getElementById('appShell').style.display = 'block';
       updateProfileUI();
-
-      if(entries[todayKey]){
-        state = stateFromEntry(entries[todayKey]);
-        savedSnapshot = JSON.stringify(state);
-      }
-
+      if(entries[todayKey]){ state = stateFromEntry(entries[todayKey]); savedSnapshot = JSON.stringify(state); }
       syncFormUI();
       const scores = computeScores(state);
       renderGauge(scores, true);
@@ -3088,8 +1973,12 @@
       renderTodos();
       renderCalendar();
       renderStatsDashboard();
-
       initStepCounter();
+      // Set voice samples
+      const vStatus = document.getElementById('voiceStatus');
+      if (vStatus && !vStatus.classList.contains('success') && !vStatus.classList.contains('error')) {
+        vStatus.innerHTML = '<span class="samples">' + t('voiceSamples') + '</span>';
+      }
       window._initialized = true;
     }
 
