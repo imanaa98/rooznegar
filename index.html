@@ -16,7 +16,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&family=Lalezar&display=swap" rel="stylesheet">
   <style>
-    /* ... same CSS as before with minor additions for sound selector ... */
     :root {
       --c-ink: #232539;
       --c-ink-soft: #6B6E85;
@@ -518,8 +517,6 @@
     .alarm-form-row .days-row .day-btn:hover:not(.active) { border-color: var(--c-gold); }
     .alarm-form-row .repeat-select { width: 100%; padding: 10px 14px; border: 1.5px solid var(--c-line); border-radius: var(--radius-sm); font-size: 14px; font-family: inherit; background: var(--c-linen); color: var(--c-ink); }
     .alarm-form-row .repeat-select:focus { border-color: var(--c-gold); outline: none; }
-    .alarm-form-row .sound-select { width: 100%; padding: 10px 14px; border: 1.5px solid var(--c-line); border-radius: var(--radius-sm); font-size: 14px; font-family: inherit; background: var(--c-linen); color: var(--c-ink); }
-    .alarm-form-row .sound-select:focus { border-color: var(--c-gold); outline: none; }
 
     .alarm-list-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
     .alarm-list-header .count { font-size: 12px; color: var(--c-ink-soft); }
@@ -842,17 +839,6 @@
             <button class="day-btn" data-day="6">ج</button>
           </div>
         </div>
-        <div class="alarm-form-row">
-          <label id="alarmSoundLabel">نوع زنگ</label>
-          <select class="sound-select" id="alarmSoundSelect">
-            <option value="simple">🔔 ساده</option>
-            <option value="gentle">🎵 ملایم</option>
-            <option value="fast">⚡ تند</option>
-            <option value="alert">🚨 هشدار</option>
-            <option value="short">📢 کوتاه</option>
-          </select>
-          <button id="previewSoundBtn" style="margin-top:6px; background:var(--c-card); border:1px solid var(--c-line); border-radius:var(--radius-sm); padding:6px 14px; font-size:12px; font-weight:600; color:var(--c-ink-soft);">▶ پیش‌نمایش</button>
-        </div>
         <button class="btn-primary" id="alarmSaveBtn" style="width:100%; padding:12px; border-radius:var(--radius-sm); font-weight:700;">ذخیره آلارم</button>
       </div>
 
@@ -978,181 +964,171 @@
     let alarms = [];
     let editingAlarmId = null;
     let alarmCheckInterval = null;
+    // Alarm ringing state
     let activeRingingAlarm = null;
     let ringingInterval = null;
     let ringingTimeout = null;
-    let previewSoundTimeout = null;
 
-    // Sound definitions
-    const SOUND_TYPES = {
-      simple: { label: 'ساده', icon: '🔔', freq: 880, duration: 400, gap: 1100, pattern: 'single' },
-      gentle: { label: 'ملایم', icon: '🎵', freq: 550, duration: 600, gap: 1400, pattern: 'single' },
-      fast: { label: 'تند', icon: '⚡', freq: 1000, duration: 200, gap: 300, pattern: 'single' },
-      alert: { label: 'هشدار', icon: '🚨', freq: [800, 1200], duration: 300, gap: 500, pattern: 'alternate' },
-      short: { label: 'کوتاه', icon: '📢', freq: 1400, duration: 150, gap: 800, pattern: 'single' }
+    const translations = {
+      fa: {
+        appTitle: 'روزنگار سلامت', appSub: 'خواب، ورزش و تغذیه‌ی هر روزت', scoreLabel: 'امتیاز امروز',
+        sleepTitle: 'خواب', sleepHoursLabel: 'ساعت خواب شب گذشته', sleepQualityLabel: 'کیفیت خواب',
+        sleepBad: 'ضعیف', sleepMed: 'متوسط', sleepGood: 'خوب', sleepExcel: 'عالی',
+        nutritionTitle: 'تغذیه', nutritionQualityLabel: 'کیفیت تغذیه امروز',
+        nutritionBad: 'ضعیف', nutritionMed: 'متوسط', nutritionGood: 'خوب', nutritionExcel: 'عالی',
+        waterLabel: 'آب مصرفی',
+        exerciseTitle: 'ورزش', exerciseMinutesLabel: 'مدت فعالیت بدنی امروز', intensityLabel: 'شدت فعالیت',
+        intensityRest: 'استراحت', intensityLight: 'سبک', intensityMod: 'متوسط', intensityHard: 'شدید',
+        stepsTitle: 'گام‌شمار', optionalTag: 'اختیاری', stepsLabel: 'تعداد قدم‌های امروز', stepsAuto: '⏳ در حال دریافت گام‌ها...',
+        healthTitle: 'سلامت تکمیلی', moodLabel: 'خلق و خو', weightLabel: 'وزن (کیلوگرم)', bpSystolicLabel: 'فشار سیستول', bpDiastolicLabel: 'فشار دیاستول', pulseLabel: 'نبض (ضربان در دقیقه)',
+        goalsTitle: 'اهداف امروز', goalsSub: 'پیشرفت نسبت به اهدافی که تنظیم کردی',
+        goalSleep: 'خواب', goalWater: 'آب', goalExercise: 'ورزش',
+        analysisTitle: 'تحلیل هوشمند روز', analysisSub: 'بر اساس امتیاز ثبت‌شده‌ی این روز', analysisEmpty: 'بعد از ثبت امتیاز، تحلیل اینجا نمایش داده می‌شه.',
+        todoTitle: 'کارهای مهم', todoSub: 'کارهایی که می‌خوای امروز انجام بدی',
+        chartTitle: 'روند روزهای اخیر', chartSub: 'آخرین ۱۴ روزی که امتیاز ثبت کردی',
+        legendExcellent: 'عالی', legendGood: 'خوب', legendFair: 'متوسط', legendCare: 'نیاز به مراقبت',
+        statsTitle: 'داشبورد آماری ماه', historyTitle: 'تاریخچه', historySub: 'روزهای ثبت‌شده، از جدید به قدیم — برای ویرایش روی ✎ بزن',
+        exportText: 'خروجی پشتیبان (JSON)', importText: 'بازیابی از فایل', resetText: 'پاک‌کردن همه داده‌ها',
+        saveBtn: 'ثبت امتیاز امروز', saveUpdate: 'به‌روزرسانی امتیاز امروز', saveEdit: 'ذخیره تغییرات این روز', saveDay: 'ثبت این روز',
+        editingPrefix: 'در حال ویرایش روز', cancelEdit: 'انصراف',
+        installTitle: 'روزنگار سلامت رو نصب کن', installSub: 'دسترسی سریع از صفحه اصلی گوشی، حتی بدون اینترنت', installBtn: 'نصب',
+        modalTitle: 'حذف اطلاعات', modalText: 'این کار قابل بازگشت نیست.', modalCancel: 'انصراف', modalConfirm: 'حذف',
+        settingsTitle: 'تنظیمات و هدف‌گذاری', settingsText: 'این مقادیر برای محاسبه BMI و درصد تحقق اهداف روزانه استفاده می‌شن.',
+        settingHeight: 'قد (سانتی‌متر)', settingSleepGoal: 'هدف خواب (ساعت)', settingWaterGoal: 'هدف آب (لیوان)', settingExerciseGoal: 'هدف ورزش (دقیقه)',
+        settingsSave: 'ذخیره', settingsCancel: 'انصراف',
+        searchPlaceholder: 'جستجوی تاریخ (مثلاً ۱۴۰۳/۰۱/۱۵ )', searchBtn: 'جستجو',
+        today: 'امروز', saved: 'ذخیره شد ✅',
+        stepsActive: '🚶 در حال شمارش...', stepsDone: '✅ گام‌ها به‌روز می‌شوند', stepsUnsupported: '❌ گام‌شمار پشتیبانی نمی‌شود',
+        guest: 'مهمان', saving: 'در حال ذخیره...',
+        profileTitle: '✎ ویرایش پروفایل', profileText: 'اطلاعات شخصی خودت رو به‌روز کن.',
+        profileName: 'نام شما', profileAge: 'سن شما', profileHeight: 'قد (سانتی‌متر)', profileWeight: 'وزن (کیلوگرم)',
+        profileSave: 'ذخیره', profileCancel: 'انصراف',
+        voiceHint: 'برای ورود صوتی کلیک کن و به فارسی بگو: «خواب ۸ ساعت، آب ۶ لیوان، ورزش ۳۰ دقیقه، تغذیه خوب»',
+        voiceListening: '🎙️ گوش می‌کنم... (فارسی)',
+        voiceSuccess: '✅ اطلاعات از روی صدا دریافت شد.',
+        voiceError: '❌ متوجه نشدم، دوباره سعی کن.',
+        voiceUnsupported: 'مرورگر از ورود صوتی پشتیبانی نمی‌کند.',
+        voiceIntro: 'سلام! لطفاً اطلاعات امروزت رو به فارسی بگو: خواب چند ساعت، آب چند لیوان، ورزش چند دقیقه و کیفیت تغذیه (ضعیف، متوسط، خوب، عالی).',
+        voiceConfirm: 'اطلاعات ثبت شد.',
+        voicePermissionDenied: 'دسترسی به میکروفون داده نشد. لطفاً در تنظیمات مرورگر مجوز را فعال کنید.',
+        voiceNoMatch: 'متن تشخیص داده شد:',
+        voiceSamples: '📢 نمونه‌ها: «خواب ۸ ساعت، آب ۶ لیوان، ورزش ۳۰ دقیقه، تغذیه خوب»',
+        voiceDetectedSleep: 'خواب', voiceDetectedWater: 'آب', voiceDetectedExercise: 'ورزش', voiceDetectedQuality: 'کیفیت تغذیه',
+        alarmTitle: '⏰ مدیریت آلارم‌ها',
+        alarmSub: 'زمان‌هایی که می‌خوای بهت یادآوری بشه رو تنظیم کن.',
+        alarmNew: '➕ آلارم جدید',
+        alarmTitleLabel: 'عنوان',
+        alarmTimeLabel: 'ساعت',
+        alarmDateLabel: 'تاریخ (اختیاری)',
+        alarmRepeatLabel: 'تکرار',
+        alarmOnce: 'یکبار',
+        alarmDaily: 'روزانه',
+        alarmWeekly: 'هفتگی',
+        alarmDays: 'روزهای هفته',
+        alarmSave: 'ذخیره آلارم',
+        alarmCancel: 'انصراف',
+        alarmEmpty: 'هیچ آلارمی تنظیم نشده.',
+        alarmCount: 'عدد',
+        alarmActive: 'فعال',
+        alarmInactive: 'غیرفعال',
+        alarmDelete: 'حذف',
+        alarmEdit: 'ویرایش',
+        alarmToggle: 'تغییر وضعیت',
+        alarmNotificationTitle: '⏰ یادآوری: {title}',
+        alarmNotificationBody: 'زمان {time} فرا رسید!',
+        alarmSound: '🔔 زنگ آلارم',
+        alarmDeleted: 'آلارم حذف شد',
+        alarmSaved: 'آلارم ذخیره شد',
+        alarmUpdated: 'آلارم به‌روز شد',
+        alarmTriggered: '⏰ آلارم! {title}',
+        alarmRinging: '⏰ زنگ آلارم!',
+        alarmDismiss: '✋ قطع کردن زنگ',
+        alarmDismissed: 'آلارم قطع شد',
+        alarmWillDismiss: 'در حال قطع...',
+        voiceRequiresInternet: 'تشخیص صدا نیاز به اتصال اینترنت دارد (برای پردازش در سرور)',
+      },
+      en: {
+        appTitle: 'Rooznegar Salamat', appSub: 'Sleep, Exercise & Nutrition Daily', scoreLabel: "Today's Score",
+        sleepTitle: 'Sleep', sleepHoursLabel: 'Hours of sleep last night', sleepQualityLabel: 'Sleep Quality',
+        sleepBad: 'Poor', sleepMed: 'Fair', sleepGood: 'Good', sleepExcel: 'Excellent',
+        nutritionTitle: 'Nutrition', nutritionQualityLabel: "Today's Nutrition Quality",
+        nutritionBad: 'Poor', nutritionMed: 'Fair', nutritionGood: 'Good', nutritionExcel: 'Excellent',
+        waterLabel: 'Water Intake',
+        exerciseTitle: 'Exercise', exerciseMinutesLabel: "Today's Activity Duration", intensityLabel: 'Intensity',
+        intensityRest: 'Rest', intensityLight: 'Light', intensityMod: 'Moderate', intensityHard: 'Intense',
+        stepsTitle: 'Step Counter', optionalTag: 'Optional', stepsLabel: "Today's Steps", stepsAuto: '⏳ Getting steps...',
+        healthTitle: 'Health Extra', moodLabel: 'Mood', weightLabel: 'Weight (kg)', bpSystolicLabel: 'Systolic BP', bpDiastolicLabel: 'Diastolic BP', pulseLabel: 'Pulse (bpm)',
+        goalsTitle: "Today's Goals", goalsSub: 'Progress toward your goals',
+        goalSleep: 'Sleep', goalWater: 'Water', goalExercise: 'Exercise',
+        analysisTitle: "Today's Analysis", analysisSub: 'Based on today\'s recorded score', analysisEmpty: 'After saving your score, analysis will appear here.',
+        todoTitle: 'Tasks', todoSub: 'Things you want to do today',
+        chartTitle: 'Recent Trend', chartSub: 'Last 14 days with scores',
+        legendExcellent: 'Excellent', legendGood: 'Good', legendFair: 'Fair', legendCare: 'Needs Care',
+        statsTitle: 'Monthly Stats', historyTitle: 'History', historySub: 'Recorded days, newest first — click ✎ to edit',
+        exportText: 'Backup Export (JSON)', importText: 'Restore from File', resetText: 'Clear All Data',
+        saveBtn: "Save Today's Score", saveUpdate: "Update Today's Score", saveEdit: 'Save Changes', saveDay: 'Save This Day',
+        editingPrefix: 'Editing', cancelEdit: 'Cancel',
+        installTitle: 'Install Rooznegar Salamat', installSub: 'Quick access from home screen, even offline', installBtn: 'Install',
+        modalTitle: 'Delete Data', modalText: 'This action cannot be undone.', modalCancel: 'Cancel', modalConfirm: 'Delete',
+        settingsTitle: 'Settings & Goals', settingsText: 'These values are used for BMI calculation and daily goal tracking.',
+        settingHeight: 'Height (cm)', settingSleepGoal: 'Sleep Goal (hours)', settingWaterGoal: 'Water Goal (glasses)', settingExerciseGoal: 'Exercise Goal (minutes)',
+        settingsSave: 'Save', settingsCancel: 'Cancel',
+        searchPlaceholder: 'Search date (e.g. 1403/01/15 or 2024/03/15)', searchBtn: 'Search',
+        today: 'Today', saved: 'Saved ✅',
+        stepsActive: '🚶 Counting...', stepsDone: '✅ Steps updating', stepsUnsupported: '❌ Step counter not supported',
+        guest: 'Guest', saving: 'Saving...',
+        profileTitle: '✎ Edit Profile', profileText: 'Update your personal info.',
+        profileName: 'Your Name', profileAge: 'Your Age', profileHeight: 'Height (cm)', profileWeight: 'Weight (kg)',
+        profileSave: 'Save', profileCancel: 'Cancel',
+        voiceHint: 'Click to speak in Persian (e.g., "خواب ۸ ساعت، آب ۶ لیوان، ورزش ۳۰ دقیقه")',
+        voiceListening: '🎙️ Listening... (Persian)',
+        voiceSuccess: '✅ Voice input processed.',
+        voiceError: '❌ Could not understand, try again.',
+        voiceUnsupported: 'Voice input not supported in this browser.',
+        voiceIntro: 'Hello! Please speak in Persian: sleep hours, water glasses, exercise minutes, and nutrition quality.',
+        voiceConfirm: 'Info saved.',
+        voicePermissionDenied: 'Microphone access denied. Please enable it in browser settings.',
+        voiceNoMatch: 'Heard:',
+        voiceSamples: '📢 Samples: "sleep 8 hours, water 6 glasses, exercise 30 minutes, nutrition good"',
+        voiceDetectedSleep: 'Sleep', voiceDetectedWater: 'Water', voiceDetectedExercise: 'Exercise', voiceDetectedQuality: 'Nutrition',
+        alarmTitle: '⏰ Alarm Manager',
+        alarmSub: 'Set reminders for your daily tasks.',
+        alarmNew: '➕ New Alarm',
+        alarmTitleLabel: 'Title',
+        alarmTimeLabel: 'Time',
+        alarmDateLabel: 'Date (optional)',
+        alarmRepeatLabel: 'Repeat',
+        alarmOnce: 'Once',
+        alarmDaily: 'Daily',
+        alarmWeekly: 'Weekly',
+        alarmDays: 'Weekdays',
+        alarmSave: 'Save Alarm',
+        alarmCancel: 'Cancel',
+        alarmEmpty: 'No alarms set.',
+        alarmCount: 'items',
+        alarmActive: 'Active',
+        alarmInactive: 'Inactive',
+        alarmDelete: 'Delete',
+        alarmEdit: 'Edit',
+        alarmToggle: 'Toggle',
+        alarmNotificationTitle: '⏰ Reminder: {title}',
+        alarmNotificationBody: 'Time {time} has come!',
+        alarmSound: '🔔 Alarm',
+        alarmDeleted: 'Alarm deleted',
+        alarmSaved: 'Alarm saved',
+        alarmUpdated: 'Alarm updated',
+        alarmTriggered: '⏰ Alarm! {title}',
+        alarmRinging: '⏰ Alarm ringing!',
+        alarmDismiss: '✋ Dismiss alarm',
+        alarmDismissed: 'Alarm dismissed',
+        alarmWillDismiss: 'Dismissing...',
+        voiceRequiresInternet: 'Voice recognition requires internet (server-side processing)',
+      }
     };
 
-    function getSoundLabel(type) {
-      return SOUND_TYPES[type]?.label || 'ساده';
-    }
+    function t(key) { return translations[currentLang]?.[key] || translations.fa[key] || key; }
 
-    function getSoundIcon(type) {
-      return SOUND_TYPES[type]?.icon || '🔔';
-    }
-
-    // --- Alarm Sound Engine ---
-    function playSoundOnce(soundType, duration) {
-      const type = soundType || 'simple';
-      const config = SOUND_TYPES[type] || SOUND_TYPES.simple;
-      try {
-        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
-        osc.connect(gain);
-        gain.connect(audioCtx.destination);
-        const freq = Array.isArray(config.freq) ? config.freq[0] : config.freq;
-        osc.frequency.value = freq;
-        osc.type = 'square';
-        gain.gain.value = 0.4;
-        osc.start();
-        setTimeout(() => {
-          try { osc.stop(); audioCtx.close(); } catch(e) {}
-        }, duration || config.duration || 400);
-      } catch(e) {}
-    }
-
-    function startAlarmSound(soundType) {
-      const type = soundType || 'simple';
-      const config = SOUND_TYPES[type] || SOUND_TYPES.simple;
-      let intervalId = null;
-      let isPlaying = true;
-
-      function beep() {
-        if (!isPlaying) return;
-        try {
-          const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-          const osc = audioCtx.createOscillator();
-          const gain = audioCtx.createGain();
-          osc.connect(gain);
-          gain.connect(audioCtx.destination);
-          
-          if (Array.isArray(config.freq)) {
-            // Alternate pattern for alert
-            const idx = Math.floor(Date.now() / 500) % 2;
-            osc.frequency.value = config.freq[idx];
-          } else {
-            osc.frequency.value = config.freq;
-          }
-          osc.type = 'square';
-          gain.gain.value = 0.4;
-          osc.start();
-          setTimeout(() => {
-            try { osc.stop(); audioCtx.close(); } catch(e) {}
-          }, config.duration);
-        } catch(e) {}
-      }
-
-      beep(); // first beep immediately
-      intervalId = setInterval(() => {
-        if (isPlaying) beep();
-        else {
-          clearInterval(intervalId);
-          intervalId = null;
-        }
-      }, config.duration + config.gap);
-
-      // Also vibrate
-      if (navigator.vibrate) {
-        navigator.vibrate([200, 100, 200, 100, 200]);
-      }
-
-      // Auto-stop after 30 seconds
-      const timeoutId = setTimeout(() => {
-        if (isPlaying) {
-          isPlaying = false;
-          if (intervalId) clearInterval(intervalId);
-          // Also auto-dismiss the ringing overlay
-          dismissAlarm();
-        }
-      }, 30000);
-
-      return { intervalId, timeoutId, stop: function() {
-        isPlaying = false;
-        if (this.intervalId) clearInterval(this.intervalId);
-        if (this.timeoutId) clearTimeout(this.timeoutId);
-        if (navigator.vibrate) navigator.vibrate(0);
-      } };
-    }
-
-    let activeSound = null;
-
-    function triggerAlarm(alarm) {
-      if (activeRingingAlarm) return;
-
-      const overlay = document.getElementById('alarmRingingOverlay');
-      document.getElementById('ringingTitle').textContent = t('alarmRinging');
-      document.getElementById('ringingDetails').textContent = alarm.title + ' - ' + formatAlarmTime(alarm.time);
-      overlay.classList.add('visible');
-
-      activeRingingAlarm = alarm;
-
-      // Start the sound with the alarm's sound type
-      activeSound = startAlarmSound(alarm.sound || 'simple');
-
-      // Notification
-      const title = t('alarmNotificationTitle').replace('{title}', alarm.title || '');
-      const body = t('alarmNotificationBody').replace('{time}', formatAlarmTime(alarm.time));
-      if ('Notification' in window && Notification.permission === 'granted') {
-        new Notification(title, { body, icon: './icon-192.png' });
-      }
-
-      showToast('🔔 ' + t('alarmTriggered').replace('{title}', alarm.title || ''));
-
-      // If once, deactivate
-      if (alarm.repeat === 'once') {
-        alarm.active = false;
-        persistAlarms();
-        renderAlarms();
-        updateAlarmBadge();
-      }
-    }
-
-    function dismissAlarm() {
-      if (activeSound) {
-        activeSound.stop();
-        activeSound = null;
-      }
-      if (ringingInterval) { clearInterval(ringingInterval); ringingInterval = null; }
-      if (ringingTimeout) { clearTimeout(ringingTimeout); ringingTimeout = null; }
-      const overlay = document.getElementById('alarmRingingOverlay');
-      overlay.classList.remove('visible');
-      showToast(t('alarmDismissed'));
-      activeRingingAlarm = null;
-      if (navigator.vibrate) navigator.vibrate(0);
-    }
-
-    document.getElementById('dismissAlarmBtn').addEventListener('click', dismissAlarm);
-    document.getElementById('alarmRingingOverlay').addEventListener('click', function(e) {
-      if (e.target === this) dismissAlarm();
-    });
-
-    // Preview sound
-    document.getElementById('previewSoundBtn').addEventListener('click', function() {
-      const soundType = document.getElementById('alarmSoundSelect').value;
-      // Stop any previous preview
-      if (previewSoundTimeout) {
-        clearTimeout(previewSoundTimeout);
-        previewSoundTimeout = null;
-      }
-      playSoundOnce(soundType, 600);
-      // Also a second beep after a short pause for better preview
-      previewSoundTimeout = setTimeout(() => {
-        playSoundOnce(soundType, 400);
-        previewSoundTimeout = null;
-      }, 500);
-    });
-
-    // --- Alarm CRUD ---
+    // --- Alarm System with persistent ringing ---
     function getAlarmIcon(repeat) {
       if (repeat === 'daily') return '🔁';
       if (repeat === 'weekly') return '📅';
@@ -1164,16 +1140,191 @@
       return h + ':' + String(m).padStart(2, '0');
     }
 
-    function getDaysText(days, lang) {
-      if (!days || days.length === 0) return '';
-      const names = lang === 'fa' ? ['ش', 'ی', 'د', 'س', 'چ', 'پ', 'ج'] : ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
-      return days.map(d => names[d]).join(' ');
+    function getWeekdayName(day, lang) {
+      const names = lang === 'fa' ? ['شنبه', 'یکشنبه', 'دوشنبه', 'سه‌شنبه', 'چهارشنبه', 'پنجشنبه', 'جمعه'] : ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+      return names[day] || '';
     }
 
     function getRepeatLabel(repeat, lang) {
       if (repeat === 'daily') return lang === 'fa' ? 'روزانه' : 'Daily';
       if (repeat === 'weekly') return lang === 'fa' ? 'هفتگی' : 'Weekly';
       return lang === 'fa' ? 'یکبار' : 'Once';
+    }
+
+    function getDaysText(days, lang) {
+      if (!days || days.length === 0) return '';
+      const names = lang === 'fa' ? ['ش', 'ی', 'د', 'س', 'چ', 'پ', 'ج'] : ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
+      return days.map(d => names[d]).join(' ');
+    }
+
+    // Play alarm sound loop
+    function startAlarmSound() {
+      // Use a more noticeable sound: repeating beep with higher amplitude
+      let audioCtx = null;
+      let oscillator = null;
+      let gainNode = null;
+      let isPlaying = false;
+
+      function playBeep() {
+        if (!isPlaying) return;
+        try {
+          if (!audioCtx) {
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+          }
+          oscillator = audioCtx.createOscillator();
+          gainNode = audioCtx.createGain();
+          oscillator.connect(gainNode);
+          gainNode.connect(audioCtx.destination);
+          oscillator.frequency.value = 880; // Higher pitch
+          oscillator.type = 'square'; // More piercing
+          gainNode.gain.value = 0.5; // Louder
+          oscillator.start();
+          setTimeout(() => {
+            if (oscillator) {
+              try { oscillator.stop(); } catch(e) {}
+            }
+          }, 400);
+        } catch(e) {
+          console.warn('Audio error', e);
+        }
+      }
+
+      isPlaying = true;
+      playBeep(); // Play immediately
+      // Then repeat every 1.5 seconds
+      ringingInterval = setInterval(() => {
+        if (isPlaying) playBeep();
+        else {
+          clearInterval(ringingInterval);
+          ringingInterval = null;
+        }
+      }, 1500);
+
+      // Also vibrate if supported
+      if (navigator.vibrate) {
+        navigator.vibrate([200, 100, 200, 100, 200, 100, 200]);
+      }
+
+      // Auto-stop after 30 seconds if not dismissed
+      ringingTimeout = setTimeout(() => {
+        if (isPlaying) {
+          stopAlarmSound();
+          // Auto-dismiss the ringing overlay
+          dismissAlarm();
+        }
+      }, 30000);
+    }
+
+    function stopAlarmSound() {
+      if (ringingInterval) {
+        clearInterval(ringingInterval);
+        ringingInterval = null;
+      }
+      if (ringingTimeout) {
+        clearTimeout(ringingTimeout);
+        ringingTimeout = null;
+      }
+      // Also stop any active oscillator
+      if (window._activeOsc) {
+        try { window._activeOsc.stop(); } catch(e) {}
+        window._activeOsc = null;
+      }
+    }
+
+    function triggerAlarm(alarm) {
+      if (activeRingingAlarm) {
+        // If already ringing, ignore
+        return;
+      }
+
+      // Show ringing overlay
+      const overlay = document.getElementById('alarmRingingOverlay');
+      document.getElementById('ringingTitle').textContent = t('alarmRinging');
+      document.getElementById('ringingDetails').textContent = alarm.title + ' - ' + formatAlarmTime(alarm.time);
+      overlay.classList.add('visible');
+
+      activeRingingAlarm = alarm;
+
+      // Play sound
+      startAlarmSound();
+
+      // Show notification
+      const title = t('alarmNotificationTitle').replace('{title}', alarm.title || '');
+      const body = t('alarmNotificationBody').replace('{time}', formatAlarmTime(alarm.time));
+      if ('Notification' in window && Notification.permission === 'granted') {
+        new Notification(title, { body, icon: './icon-192.png' });
+      }
+
+      // Show toast
+      showToast('🔔 ' + t('alarmTriggered').replace('{title}', alarm.title || ''));
+
+      // Update badge
+      updateAlarmBadge();
+
+      // If it's a once alarm, deactivate it after triggering
+      if (alarm.repeat === 'once') {
+        alarm.active = false;
+        persistAlarms();
+        renderAlarms();
+        updateAlarmBadge();
+      }
+    }
+
+    function dismissAlarm() {
+      if (!activeRingingAlarm) return;
+      stopAlarmSound();
+      const overlay = document.getElementById('alarmRingingOverlay');
+      overlay.classList.remove('visible');
+      showToast(t('alarmDismissed'));
+      activeRingingAlarm = null;
+      // Also vibrate stop
+      if (navigator.vibrate) {
+        navigator.vibrate(0);
+      }
+    }
+
+    document.getElementById('dismissAlarmBtn').addEventListener('click', dismissAlarm);
+
+    // Close ringing overlay on background click (as a fallback)
+    document.getElementById('alarmRingingOverlay').addEventListener('click', function(e) {
+      if (e.target === this) dismissAlarm();
+    });
+
+    function checkAlarms() {
+      const now = new Date();
+      const currentTime = String(now.getHours()).padStart(2, '0') + ':' + String(now.getMinutes()).padStart(2, '0');
+      const currentDay = now.getDay(); // 0=Sunday, 6=Saturday
+      const todayStr = getDateKey(now);
+
+      // If already ringing, don't trigger another
+      if (activeRingingAlarm) return;
+
+      alarms.forEach(alarm => {
+        if (!alarm.active) return;
+        const alarmTime = alarm.time;
+        if (alarmTime !== currentTime) return;
+
+        let shouldTrigger = false;
+        if (alarm.repeat === 'once') {
+          if (alarm.date) {
+            const alarmDate = new Date(alarm.date + 'T00:00:00');
+            const alarmKey = getDateKey(alarmDate);
+            if (alarmKey === todayStr) shouldTrigger = true;
+          } else {
+            shouldTrigger = true;
+          }
+        } else if (alarm.repeat === 'daily') {
+          shouldTrigger = true;
+        } else if (alarm.repeat === 'weekly') {
+          if (alarm.days && alarm.days.includes(currentDay)) {
+            shouldTrigger = true;
+          }
+        }
+
+        if (shouldTrigger) {
+          triggerAlarm(alarm);
+        }
+      });
     }
 
     function updateAlarmBadge() {
@@ -1212,15 +1363,13 @@
           const d = new Date(alarm.date + 'T00:00:00');
           details += ' • ' + (currentLang === 'fa' ? formatJalali(d, {day:'numeric', month:'short'}) : formatEnglish(d, {day:'numeric', month:'short'}));
         }
-        const soundIcon = getSoundIcon(alarm.sound || 'simple');
-        const soundLabel = getSoundLabel(alarm.sound || 'simple');
         html += `
           <div class="alarm-card ${isActive ? '' : 'disabled'}">
             <div class="alarm-icon">${icon}</div>
             <div class="alarm-info">
               <div class="alarm-title">${alarm.title || (currentLang === 'fa' ? 'بدون عنوان' : 'Untitled')}</div>
               <div class="alarm-time">${formatAlarmTime(alarm.time)}</div>
-              <div class="alarm-details">${details} • ${soundIcon} ${soundLabel}</div>
+              <div class="alarm-details">${details}</div>
             </div>
             <div class="alarm-actions">
               <button class="toggle-btn ${isActive ? 'active' : 'inactive'}" data-id="${alarm.id}" title="${t('alarmToggle')}">${isActive ? '🔔' : '🔕'}</button>
@@ -1284,7 +1433,6 @@
       const repeatSelect = document.getElementById('alarmRepeatSelect');
       const daysContainer = document.getElementById('alarmDaysContainer');
       const daysRow = document.getElementById('alarmDaysRow');
-      const soundSelect = document.getElementById('alarmSoundSelect');
       const saveBtn = document.getElementById('alarmSaveBtn');
       const formTitle = document.getElementById('alarmFormTitle');
 
@@ -1295,7 +1443,6 @@
         timeInput.value = alarm.time || '08:00';
         dateInput.value = alarm.date || '';
         repeatSelect.value = alarm.repeat || 'once';
-        soundSelect.value = alarm.sound || 'simple';
         daysContainer.querySelectorAll('.day-btn').forEach(btn => {
           const day = parseInt(btn.dataset.day);
           btn.classList.toggle('active', alarm.days && alarm.days.includes(day));
@@ -1311,7 +1458,6 @@
         timeInput.value = hours + ':' + mins;
         dateInput.value = '';
         repeatSelect.value = 'once';
-        soundSelect.value = 'simple';
         daysContainer.querySelectorAll('.day-btn').forEach(btn => btn.classList.remove('active'));
         saveBtn.textContent = t('alarmSave');
       }
@@ -1325,6 +1471,7 @@
       editingAlarmId = null;
     }
 
+    // --- Alarm UI Events ---
     document.getElementById('alarmToggleBtn').addEventListener('click', () => {
       document.getElementById('alarmModalOverlay').classList.add('visible');
       renderAlarms();
@@ -1348,7 +1495,6 @@
       const time = document.getElementById('alarmTimeInput').value;
       const date = document.getElementById('alarmDateInput').value || null;
       const repeat = document.getElementById('alarmRepeatSelect').value;
-      const sound = document.getElementById('alarmSoundSelect').value;
       const days = [];
       document.getElementById('alarmDaysContainer').querySelectorAll('.day-btn.active').forEach(btn => {
         days.push(parseInt(btn.dataset.day));
@@ -1371,7 +1517,6 @@
         date: repeat === 'once' ? date : null,
         repeat,
         days: repeat === 'weekly' ? days : [],
-        sound: sound || 'simple',
         active: true,
         createdAt: new Date().toISOString()
       };
@@ -1397,44 +1542,12 @@
       if (e.target === this) closeAlarmForm();
     });
 
-    // --- Alarm check ---
-    function checkAlarms() {
-      if (activeRingingAlarm) return;
-      const now = new Date();
-      const currentTime = String(now.getHours()).padStart(2, '0') + ':' + String(now.getMinutes()).padStart(2, '0');
-      const currentDay = now.getDay();
-      const todayStr = getDateKey(now);
-
-      alarms.forEach(alarm => {
-        if (!alarm.active) return;
-        if (alarm.time !== currentTime) return;
-
-        let shouldTrigger = false;
-        if (alarm.repeat === 'once') {
-          if (alarm.date) {
-            const alarmDate = new Date(alarm.date + 'T00:00:00');
-            const alarmKey = getDateKey(alarmDate);
-            if (alarmKey === todayStr) shouldTrigger = true;
-          } else {
-            shouldTrigger = true;
-          }
-        } else if (alarm.repeat === 'daily') {
-          shouldTrigger = true;
-        } else if (alarm.repeat === 'weekly') {
-          if (alarm.days && alarm.days.includes(currentDay)) {
-            shouldTrigger = true;
-          }
-        }
-
-        if (shouldTrigger) {
-          triggerAlarm(alarm);
-        }
-      });
-    }
-
     // --- Voice Assistant ---
     let recognition = null;
     let isListening = false;
+
+    // Add note about internet requirement
+    document.getElementById('voiceStatus').innerHTML = '<span class="samples">📢 ' + t('voiceSamples') + ' ⚠️ ' + t('voiceRequiresInternet') + '</span>';
 
     async function requestMicrophonePermission() {
       try {
@@ -1684,7 +1797,7 @@
 
     document.getElementById('voiceBtn').addEventListener('click', toggleVoice);
 
-    // --- Core app functions (condensed but complete) ---
+    // --- Core app functions ---
     function isProfileComplete() {
       if (!userProfile) return false;
       return !!(userProfile.name && userProfile.age && userProfile.height && userProfile.weight);
@@ -2210,7 +2323,6 @@
       document.getElementById('alarmRepeatSelect').options[0].text = t('alarmOnce');
       document.getElementById('alarmRepeatSelect').options[1].text = t('alarmDaily');
       document.getElementById('alarmRepeatSelect').options[2].text = t('alarmWeekly');
-      document.getElementById('alarmSoundLabel').textContent = 'نوع زنگ';
       document.getElementById('alarmSaveBtn').textContent = t('alarmSave');
       document.getElementById('alarmEmptyText').textContent = t('alarmEmpty');
       document.getElementById('dismissAlarmBtn').textContent = t('alarmDismiss');
@@ -2423,6 +2535,7 @@
     window.addEventListener('appinstalled', ()=>{ installBanner.classList.remove('visible'); deferredInstallPrompt = null; });
     if('serviceWorker' in navigator){ window.addEventListener('load', ()=>{ navigator.serviceWorker.register('./sw.js').catch(()=>{}); }); }
 
+    // Request notification permission
     if ('Notification' in window && Notification.permission === 'default') {
       Notification.requestPermission();
     }
