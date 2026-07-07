@@ -521,6 +521,15 @@
     .alarm-list-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
     .alarm-list-header .count { font-size: 12px; color: var(--c-ink-soft); }
 
+    /* Alarm ringing overlay */
+    #alarmRingingOverlay .modal-box { max-width: 380px; text-align: center; }
+    #alarmRingingOverlay .alarm-ring-icon { font-size: 72px; display: block; margin: 0 auto 12px; animation: ring 0.5s ease-in-out infinite alternate; }
+    @keyframes ring { 0% { transform: rotate(-10deg); } 100% { transform: rotate(10deg); } }
+    #alarmRingingOverlay .alarm-ring-title { font-size: 22px; font-weight: 800; color: var(--c-care); margin-bottom: 8px; }
+    #alarmRingingOverlay .alarm-ring-details { font-size: 14px; color: var(--c-ink-soft); margin-bottom: 20px; }
+    #alarmRingingOverlay .dismiss-btn { width: 100%; padding: 14px; background: var(--c-care); color: #fff; border-radius: var(--radius-md); font-size: 16px; font-weight: 700; transition: 0.15s; }
+    #alarmRingingOverlay .dismiss-btn:hover { transform: scale(1.02); }
+
     @media (prefers-reduced-motion: reduce) { * { transition-duration: .01ms !important; animation-duration: .01ms !important; } }
   </style>
 </head>
@@ -844,6 +853,16 @@
     </div>
   </div>
 
+  <!-- Alarm Ringing Overlay -->
+  <div class="modal-overlay" id="alarmRingingOverlay">
+    <div class="modal-box">
+      <div class="alarm-ring-icon">🔔</div>
+      <div class="alarm-ring-title" id="ringingTitle">⏰ زنگ آلارم!</div>
+      <div class="alarm-ring-details" id="ringingDetails">زمان فرا رسید</div>
+      <button class="dismiss-btn" id="dismissAlarmBtn">✋ قطع کردن زنگ</button>
+    </div>
+  </div>
+
   <div class="toast" id="toast"></div>
   <div class="modal-overlay" id="modalOverlay"><div class="modal-box"><div class="modal-title" id="modalTitle">حذف اطلاعات</div><p class="modal-text" id="modalText">این کار قابل بازگشت نیست.</p><div class="modal-actions"><button class="btn-cancel" id="modalCancel">انصراف</button><button class="btn-danger" id="modalConfirm">حذف</button></div></div></div>
   <div class="modal-overlay" id="settingsModalOverlay"><div class="modal-box"><div class="modal-title" id="settingsModalTitle">تنظیمات و هدف‌گذاری</div><p class="modal-text" id="settingsModalText">این مقادیر برای محاسبه BMI و درصد تحقق اهداف روزانه استفاده می‌شن.</p>
@@ -945,6 +964,10 @@
     let alarms = [];
     let editingAlarmId = null;
     let alarmCheckInterval = null;
+    // Alarm ringing state
+    let activeRingingAlarm = null;
+    let ringingInterval = null;
+    let ringingTimeout = null;
 
     const translations = {
       fa: {
@@ -1018,6 +1041,11 @@
         alarmSaved: 'آلارم ذخیره شد',
         alarmUpdated: 'آلارم به‌روز شد',
         alarmTriggered: '⏰ آلارم! {title}',
+        alarmRinging: '⏰ زنگ آلارم!',
+        alarmDismiss: '✋ قطع کردن زنگ',
+        alarmDismissed: 'آلارم قطع شد',
+        alarmWillDismiss: 'در حال قطع...',
+        voiceRequiresInternet: 'تشخیص صدا نیاز به اتصال اینترنت دارد (برای پردازش در سرور)',
       },
       en: {
         appTitle: 'Rooznegar Salamat', appSub: 'Sleep, Exercise & Nutrition Daily', scoreLabel: "Today's Score",
@@ -1090,12 +1118,17 @@
         alarmSaved: 'Alarm saved',
         alarmUpdated: 'Alarm updated',
         alarmTriggered: '⏰ Alarm! {title}',
+        alarmRinging: '⏰ Alarm ringing!',
+        alarmDismiss: '✋ Dismiss alarm',
+        alarmDismissed: 'Alarm dismissed',
+        alarmWillDismiss: 'Dismissing...',
+        voiceRequiresInternet: 'Voice recognition requires internet (server-side processing)',
       }
     };
 
     function t(key) { return translations[currentLang]?.[key] || translations.fa[key] || key; }
 
-    // --- Alarm System ---
+    // --- Alarm System with persistent ringing ---
     function getAlarmIcon(repeat) {
       if (repeat === 'daily') return '🔁';
       if (repeat === 'weekly') return '📅';
@@ -1124,33 +1157,161 @@
       return days.map(d => names[d]).join(' ');
     }
 
+    // Play alarm sound loop
+    function startAlarmSound() {
+      // Use a more noticeable sound: repeating beep with higher amplitude
+      let audioCtx = null;
+      let oscillator = null;
+      let gainNode = null;
+      let isPlaying = false;
+
+      function playBeep() {
+        if (!isPlaying) return;
+        try {
+          if (!audioCtx) {
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+          }
+          oscillator = audioCtx.createOscillator();
+          gainNode = audioCtx.createGain();
+          oscillator.connect(gainNode);
+          gainNode.connect(audioCtx.destination);
+          oscillator.frequency.value = 880; // Higher pitch
+          oscillator.type = 'square'; // More piercing
+          gainNode.gain.value = 0.5; // Louder
+          oscillator.start();
+          setTimeout(() => {
+            if (oscillator) {
+              try { oscillator.stop(); } catch(e) {}
+            }
+          }, 400);
+        } catch(e) {
+          console.warn('Audio error', e);
+        }
+      }
+
+      isPlaying = true;
+      playBeep(); // Play immediately
+      // Then repeat every 1.5 seconds
+      ringingInterval = setInterval(() => {
+        if (isPlaying) playBeep();
+        else {
+          clearInterval(ringingInterval);
+          ringingInterval = null;
+        }
+      }, 1500);
+
+      // Also vibrate if supported
+      if (navigator.vibrate) {
+        navigator.vibrate([200, 100, 200, 100, 200, 100, 200]);
+      }
+
+      // Auto-stop after 30 seconds if not dismissed
+      ringingTimeout = setTimeout(() => {
+        if (isPlaying) {
+          stopAlarmSound();
+          // Auto-dismiss the ringing overlay
+          dismissAlarm();
+        }
+      }, 30000);
+    }
+
+    function stopAlarmSound() {
+      if (ringingInterval) {
+        clearInterval(ringingInterval);
+        ringingInterval = null;
+      }
+      if (ringingTimeout) {
+        clearTimeout(ringingTimeout);
+        ringingTimeout = null;
+      }
+      // Also stop any active oscillator
+      if (window._activeOsc) {
+        try { window._activeOsc.stop(); } catch(e) {}
+        window._activeOsc = null;
+      }
+    }
+
+    function triggerAlarm(alarm) {
+      if (activeRingingAlarm) {
+        // If already ringing, ignore
+        return;
+      }
+
+      // Show ringing overlay
+      const overlay = document.getElementById('alarmRingingOverlay');
+      document.getElementById('ringingTitle').textContent = t('alarmRinging');
+      document.getElementById('ringingDetails').textContent = alarm.title + ' - ' + formatAlarmTime(alarm.time);
+      overlay.classList.add('visible');
+
+      activeRingingAlarm = alarm;
+
+      // Play sound
+      startAlarmSound();
+
+      // Show notification
+      const title = t('alarmNotificationTitle').replace('{title}', alarm.title || '');
+      const body = t('alarmNotificationBody').replace('{time}', formatAlarmTime(alarm.time));
+      if ('Notification' in window && Notification.permission === 'granted') {
+        new Notification(title, { body, icon: './icon-192.png' });
+      }
+
+      // Show toast
+      showToast('🔔 ' + t('alarmTriggered').replace('{title}', alarm.title || ''));
+
+      // Update badge
+      updateAlarmBadge();
+
+      // If it's a once alarm, deactivate it after triggering
+      if (alarm.repeat === 'once') {
+        alarm.active = false;
+        persistAlarms();
+        renderAlarms();
+        updateAlarmBadge();
+      }
+    }
+
+    function dismissAlarm() {
+      if (!activeRingingAlarm) return;
+      stopAlarmSound();
+      const overlay = document.getElementById('alarmRingingOverlay');
+      overlay.classList.remove('visible');
+      showToast(t('alarmDismissed'));
+      activeRingingAlarm = null;
+      // Also vibrate stop
+      if (navigator.vibrate) {
+        navigator.vibrate(0);
+      }
+    }
+
+    document.getElementById('dismissAlarmBtn').addEventListener('click', dismissAlarm);
+
+    // Close ringing overlay on background click (as a fallback)
+    document.getElementById('alarmRingingOverlay').addEventListener('click', function(e) {
+      if (e.target === this) dismissAlarm();
+    });
+
     function checkAlarms() {
       const now = new Date();
       const currentTime = String(now.getHours()).padStart(2, '0') + ':' + String(now.getMinutes()).padStart(2, '0');
       const currentDay = now.getDay(); // 0=Sunday, 6=Saturday
       const todayStr = getDateKey(now);
 
+      // If already ringing, don't trigger another
+      if (activeRingingAlarm) return;
+
       alarms.forEach(alarm => {
         if (!alarm.active) return;
-        // Check if already triggered today (for once, daily, weekly we need to track last triggered)
         const alarmTime = alarm.time;
         if (alarmTime !== currentTime) return;
 
-        // Check repeat logic
         let shouldTrigger = false;
         if (alarm.repeat === 'once') {
-          // For once, check if the date matches (or if no date, today)
           if (alarm.date) {
             const alarmDate = new Date(alarm.date + 'T00:00:00');
             const alarmKey = getDateKey(alarmDate);
             if (alarmKey === todayStr) shouldTrigger = true;
           } else {
             shouldTrigger = true;
-          }
-          // After triggering once, deactivate it
-          if (shouldTrigger) {
-            alarm.active = false;
-            persistAlarms();
           }
         } else if (alarm.repeat === 'daily') {
           shouldTrigger = true;
@@ -1161,57 +1322,9 @@
         }
 
         if (shouldTrigger) {
-          // Trigger alarm
           triggerAlarm(alarm);
         }
       });
-    }
-
-    function triggerAlarm(alarm) {
-      // Show notification
-      const title = t('alarmNotificationTitle').replace('{title}', alarm.title || '');
-      const body = t('alarmNotificationBody').replace('{time}', formatAlarmTime(alarm.time));
-      
-      // Play sound
-      playAlarmSound();
-      
-      // Show toast
-      showToast('🔔 ' + t('alarmTriggered').replace('{title}', alarm.title || ''));
-      
-      // Show notification if permission granted
-      if ('Notification' in window && Notification.permission === 'granted') {
-        new Notification(title, { body, icon: './icon-192.png' });
-      }
-
-      // Vibrate if supported
-      if (navigator.vibrate) {
-        navigator.vibrate([200, 100, 200, 100, 200]);
-      }
-
-      // Update badge
-      updateAlarmBadge();
-      renderAlarms();
-    }
-
-    function playAlarmSound() {
-      try {
-        // Use Web Audio API to generate a simple beep
-        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        const oscillator = audioCtx.createOscillator();
-        const gainNode = audioCtx.createGain();
-        oscillator.connect(gainNode);
-        gainNode.connect(audioCtx.destination);
-        oscillator.frequency.value = 800;
-        oscillator.type = 'square';
-        gainNode.gain.value = 0.3;
-        oscillator.start();
-        setTimeout(() => {
-          oscillator.stop();
-          audioCtx.close();
-        }, 500);
-      } catch(e) {
-        console.warn('Audio not available');
-      }
     }
 
     function updateAlarmBadge() {
@@ -1270,7 +1383,6 @@
       container.innerHTML = html;
       if (countEl) countEl.textContent = alarms.length + ' ' + t('alarmCount');
 
-      // Event listeners
       container.querySelectorAll('.toggle-btn').forEach(btn => {
         btn.addEventListener('click', () => {
           const id = btn.dataset.id;
@@ -1331,7 +1443,6 @@
         timeInput.value = alarm.time || '08:00';
         dateInput.value = alarm.date || '';
         repeatSelect.value = alarm.repeat || 'once';
-        // Set days
         daysContainer.querySelectorAll('.day-btn').forEach(btn => {
           const day = parseInt(btn.dataset.day);
           btn.classList.toggle('active', alarm.days && alarm.days.includes(day));
@@ -1351,9 +1462,7 @@
         saveBtn.textContent = t('alarmSave');
       }
 
-      // Show/hide days row
       daysRow.style.display = repeatSelect.value === 'weekly' ? 'block' : 'none';
-
       overlay.classList.add('visible');
     }
 
@@ -1396,13 +1505,6 @@
         return;
       }
 
-      if (repeat === 'once' && !date) {
-        // If once and no date, set to today
-        const today = new Date();
-        const todayStr = today.getFullYear() + '-' + String(today.getMonth()+1).padStart(2,'0') + '-' + String(today.getDate()).padStart(2,'0');
-        // We'll store null for today's date
-      }
-
       if (repeat === 'weekly' && days.length === 0) {
         showToast(currentLang === 'fa' ? 'لطفاً حداقل یک روز را انتخاب کنید.' : 'Please select at least one day.');
         return;
@@ -1436,7 +1538,6 @@
       closeAlarmForm();
     });
 
-    // Close alarm modal on overlay click
     document.getElementById('alarmModalOverlay').addEventListener('click', function(e) {
       if (e.target === this) closeAlarmForm();
     });
@@ -1444,6 +1545,9 @@
     // --- Voice Assistant ---
     let recognition = null;
     let isListening = false;
+
+    // Add note about internet requirement
+    document.getElementById('voiceStatus').innerHTML = '<span class="samples">📢 ' + t('voiceSamples') + ' ⚠️ ' + t('voiceRequiresInternet') + '</span>';
 
     async function requestMicrophonePermission() {
       try {
@@ -1625,7 +1729,6 @@
       }
 
       if (sleep === null && water === null && exercise === null && quality === null) {
-        // Try fallback assignment
         for (let i = 0; i < numValues.length; i++) {
           const val = numValues[i];
           if (sleep === null && val >= 0 && val <= 12) {
@@ -1694,14 +1797,7 @@
 
     document.getElementById('voiceBtn').addEventListener('click', toggleVoice);
 
-    // --- Core app functions (most are same as before, but we include them for completeness) ---
-    // We'll include the main app logic, but keep it compact since it's already in the code.
-    // The key additions are the alarm system above.
-
-    // ... (rest of the app: storage, UI update, etc. Same as before)
-
-    // Since the full code is long, I'll include the remaining core functions inline.
-
+    // --- Core app functions ---
     function isProfileComplete() {
       if (!userProfile) return false;
       return !!(userProfile.name && userProfile.age && userProfile.height && userProfile.weight);
@@ -2209,14 +2305,14 @@
       document.getElementById('voiceBtn').title = t('voiceHint');
       const vStatus = document.getElementById('voiceStatus');
       if (vStatus && !vStatus.classList.contains('success') && !vStatus.classList.contains('error')) {
-        vStatus.innerHTML = '<span class="samples">' + t('voiceSamples') + '</span>';
+        vStatus.innerHTML = '<span class="samples">📢 ' + t('voiceSamples') + ' ⚠️ ' + t('voiceRequiresInternet') + '</span>';
       }
       const saveBtnText = document.getElementById('saveBtnText');
       if (editingKey === todayKey) { saveBtnText.textContent = entries[todayKey] ? t('saveUpdate') : t('saveBtn'); }
       else { saveBtnText.textContent = t('saveEdit'); }
       document.getElementById('gaugeDate').textContent = gaugeDateLabel(editingKey);
       renderGoals(); renderAnalysis(entries[editingKey] || null); renderChart(); renderHistory(); renderStreak(); renderTodos(); renderCalendar(); renderStatsDashboard(); syncFormUI(); updateProfileUI();
-      // Update alarm UI
+      // Alarm translations
       document.getElementById('alarmModalTitle').textContent = t('alarmTitle');
       document.getElementById('alarmModalText').textContent = t('alarmSub');
       document.getElementById('alarmFormTitle').textContent = t('alarmNew');
@@ -2229,6 +2325,7 @@
       document.getElementById('alarmRepeatSelect').options[2].text = t('alarmWeekly');
       document.getElementById('alarmSaveBtn').textContent = t('alarmSave');
       document.getElementById('alarmEmptyText').textContent = t('alarmEmpty');
+      document.getElementById('dismissAlarmBtn').textContent = t('alarmDismiss');
       renderAlarms();
       updateAlarmBadge();
     }
@@ -2473,13 +2570,11 @@
       initStepCounter();
       const vStatus = document.getElementById('voiceStatus');
       if (vStatus && !vStatus.classList.contains('success') && !vStatus.classList.contains('error')) {
-        vStatus.innerHTML = '<span class="samples">' + t('voiceSamples') + '</span>';
+        vStatus.innerHTML = '<span class="samples">📢 ' + t('voiceSamples') + ' ⚠️ ' + t('voiceRequiresInternet') + '</span>';
       }
       
-      // Start alarm checking every 30 seconds
       if (alarmCheckInterval) clearInterval(alarmCheckInterval);
-      alarmCheckInterval = setInterval(checkAlarms, 30000);
-      // Also check on page load
+      alarmCheckInterval = setInterval(checkAlarms, 15000);
       setTimeout(checkAlarms, 1000);
       
       window._initialized = true;
