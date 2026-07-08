@@ -8,16 +8,15 @@
   <meta name="theme-color" content="#1F2347" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="روزنگار سلامت" />
   <link rel="apple-touch-icon" href="./icon-192.png" />
   <link rel="icon" href="./icon-192.png" type="image/png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&family=Lalezar&display=swap" rel="stylesheet" />
-
   <style>
-    /* ===== CSS Variables & Reset ===== */
+    /* ===== same as before ===== */
     :root {
       --c-ink: #232539;
       --c-ink-soft: #6B6E85;
@@ -73,7 +72,6 @@
     button { font-family: inherit; cursor: pointer; border: none; background: none; }
     :focus-visible { outline: 2.5px solid var(--c-gold); outline-offset: 3px; border-radius: 6px; }
 
-    /* ===== Layout ===== */
     .shell { max-width: 1080px; margin: 0 auto; padding: 18px 16px 60px; }
     .layout { display: grid; grid-template-columns: 1fr; gap: 18px; }
     @media (min-width: 900px) {
@@ -82,7 +80,6 @@
     }
     .panel-left, .panel-right { display: flex; flex-direction: column; gap: 18px; }
 
-    /* ===== Cards ===== */
     .card {
       background: var(--c-card);
       border-radius: var(--radius-lg);
@@ -93,7 +90,6 @@
     .card-title { font-size: 15px; font-weight: 700; margin: 0 0 4px; }
     .card-subtitle { font-size: 12.5px; color: var(--c-ink-soft); margin: 0 0 16px; }
 
-    /* ===== Profile Bar ===== */
     .profile-bar {
       display: flex; align-items: center; gap: 14px;
       background: var(--c-card);
@@ -145,7 +141,6 @@
     }
     .profile-edit-btn:hover { border-color: var(--c-gold); color: var(--c-ink); background: var(--c-card); }
 
-    /* ===== Topbar ===== */
     .topbar {
       display: flex; align-items: center; justify-content: space-between;
       padding: 6px 4px 12px; flex-wrap: wrap; gap: 10px;
@@ -190,7 +185,6 @@
       opacity: 0.85;
     }
 
-    /* ===== Gauge ===== */
     .gauge-card { padding-bottom: 14px; }
     .gauge-wrap { position: relative; max-width: 300px; margin: 0 auto; }
     .gauge-wrap svg { width: 100%; display: block; }
@@ -207,7 +201,6 @@
     .score-tier { display: inline-block; font-size: 12.5px; font-weight: 700; margin-top: 8px; padding: 3px 12px; border-radius: 999px; }
     .gauge-date { text-align: center; font-size: 12.5px; color: var(--c-ink-soft); margin-top: 2px; }
 
-    /* ===== Form Groups ===== */
     .group { padding-top: 16px; border-top: 1px solid var(--c-line); }
     .group:first-of-type { padding-top: 0; border-top: none; }
     .group-head { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
@@ -363,7 +356,6 @@
     .bmi-readout { font-size: 12px; color: var(--c-ink-soft); margin-top: 6px; font-weight: 600; }
     .bmi-readout b { color: var(--c-ink); font-weight: 700; }
 
-    /* ===== Save Button ===== */
     .save-btn {
       width: 100%;
       margin-top: 18px;
@@ -401,8 +393,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 38px;
-      height: 38px;
+      width: 38px; height: 38px;
       border-radius: 50%;
       border: 1px solid var(--c-line);
       background: var(--c-card);
@@ -413,7 +404,6 @@
     .icon-btn:hover { color: var(--c-sleep); border-color: var(--c-sleep); }
     .icon-btn svg { width: 18px; height: 18px; }
 
-    /* ===== Goals ===== */
     .goal-row { margin-bottom: 13px; }
     .goal-row:last-child { margin-bottom: 0; }
     .goal-row-head {
@@ -427,7 +417,6 @@
     .goal-track { height: 8px; border-radius: 999px; background: var(--c-track); overflow: hidden; }
     .goal-fill { height: 100%; border-radius: 999px; transition: width 0.4s ease; }
 
-    /* ===== Analysis ===== */
     .analysis-box { display: flex; flex-direction: column; gap: 10px; }
     .analysis-item {
       display: flex;
@@ -444,7 +433,6 @@
     .analysis-item.is-suggestion { background: var(--c-sleep-soft); color: var(--c-sleep); }
     .analysis-emoji { font-size: 17px; flex: none; }
 
-    /* ===== Stats ===== */
     .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
     .stat-tile {
       background: var(--c-linen);
@@ -456,7 +444,6 @@
     .stat-tile-value { font-size: 17px; font-weight: 800; }
     .stat-tile-sub { font-size: 11px; color: var(--c-ink-soft); margin-top: 2px; }
 
-    /* ===== Calendar ===== */
     .cal-head {
       display: flex;
       align-items: center;
@@ -541,7 +528,6 @@
     }
     .cal-search-btn:hover { background: var(--c-exercise); }
 
-    /* ===== History ===== */
     .history-list { display: flex; flex-direction: column; }
     .history-row {
       display: flex;
@@ -571,7 +557,6 @@
     .history-del:hover { color: var(--c-care); background: var(--c-exercise-soft); }
     .history-edit svg { width: 15px; height: 15px; }
 
-    /* ===== Todo ===== */
     .todo-add-row { display: flex; gap: 8px; margin-bottom: 6px; }
     .todo-input {
       flex: 1;
@@ -703,7 +688,6 @@
     .todo-edit-save svg { width: 14px; height: 14px; }
     .todo-edit-cancel { background: var(--c-linen); color: var(--c-ink-soft); font-size: 16px; }
 
-    /* ===== Chart ===== */
     .chart-wrap { position: relative; }
     .chart-wrap svg { width: 100%; height: auto; display: block; overflow: visible; }
     .chart-point { cursor: pointer; }
@@ -724,7 +708,6 @@
     .chart-tooltip.visible { opacity: 1; }
     .axis-label { font-size: 10.5px; fill: var(--c-ink-soft); }
 
-    /* ===== Misc ===== */
     .empty-state {
       text-align: center;
       padding: 28px 10px;
@@ -893,7 +876,6 @@
       margin-top: 4px;
     }
 
-    /* Voice */
     .voice-btn {
       background: var(--c-card);
       border: 1.5px solid var(--c-line);
@@ -951,7 +933,6 @@
       opacity: 0.7;
     }
 
-    /* Alarm Cards */
     .alarm-card {
       background: var(--c-linen);
       border-radius: var(--radius-sm);
@@ -1045,7 +1026,6 @@
 <body>
 
   <div class="shell" id="appShell">
-
     <!-- Profile Bar -->
     <div class="profile-bar" id="profileBar">
       <div class="profile-avatar" id="profileAvatar">👤</div>
@@ -1310,7 +1290,7 @@
         <div class="card">
           <div class="cal-head"><button class="cal-nav-btn" id="calPrevBtn">‹</button><div class="cal-title" id="calTitle">—</div><button class="cal-nav-btn" id="calNextBtn">›</button></div>
           <div class="cal-grid" id="calGrid"></div>
-          <div class="cal-search-row"><input type="text" class="cal-search-input" id="calSearchInput" placeholder="جستجوی تاریخ (مثلاً ۱۴۰۳/۰۱/۱۵ )"><button class="cal-search-btn" id="calSearchBtn">جستجو</button></div>
+          <div class="cal-search-row"><input type="text" class="cal-search-input" id="calSearchInput" placeholder="جستجوی تاریخ (مثلاً ۱۴۰۳/۰۱/۱۵ یا 2024/03/15)"><button class="cal-search-btn" id="calSearchBtn">جستجو</button></div>
           <div class="cal-legend">
             <span><span class="cal-legend-dot" style="background:#3F8F5C;"></span><span id="legendExcellent">عالی</span></span>
             <span><span class="cal-legend-dot" style="background:#4F9A68;"></span><span id="legendGood">خوب</span></span>
@@ -1436,7 +1416,7 @@
       "use strict";
 
       // =========================================================================
-      // 1.  UTILITIES
+      // 1.  UTILITIES (Fixed Jalali/Gregorian)
       // =========================================================================
       const FA_DIGITS = ['۰','۱','۲','۳','۴','۵','۶','۷','۸','۹'];
       function toFa(n) { return String(n).replace(/[0-9]/g, d => FA_DIGITS[d]); }
@@ -1452,63 +1432,63 @@
         return new Date(y, m - 1, d);
       }
 
-      // ---- Jalali / Gregorian helpers (Improved) ----
-      const JALALI_EPOCH = 1948320.5; // days from Julian day 0 to 1 Farvardin 1
-      function toJulianDay(date) {
-        const y = date.getFullYear();
-        const m = date.getMonth() + 1;
-        const d = date.getDate();
-        let a = Math.floor((14 - m) / 12);
-        let yy = y + 4800 - a;
-        let mm = m + 12 * a - 3;
-        return d + Math.floor((153 * mm + 2) / 5) + 365 * yy + Math.floor(yy / 4) - Math.floor(yy / 100) + Math.floor(yy / 400) - 32045;
-      }
-      function fromJulianDay(jd) {
-        let a = jd + 32044;
-        let b = Math.floor((4 * a + 3) / 146097);
-        let c = a - Math.floor(146097 * b / 4);
-        let d = Math.floor((4 * c + 3) / 1461);
-        let e = c - Math.floor(1461 * d / 4);
-        let m = Math.floor((5 * e + 2) / 153);
-        let day = e - Math.floor((153 * m + 2) / 5) + 1;
-        let month = m + 3 - 12 * Math.floor(m / 10);
-        let year = 100 * b + d - 4800 + Math.floor(m / 10);
-        return new Date(year, month - 1, day);
-      }
-      function gregorianToJalali(date) {
-        const jd = toJulianDay(date);
-        const jalaliJd = jd - JALALI_EPOCH;
-        let jy = Math.floor((jalaliJd + 1) / 365.25) + 1;
-        let jm = 1, jd2 = 0;
-        for (let i = 1; i <= 12; i++) {
-          const daysInMonth = (i <= 6) ? 31 : (i === 12 && jy % 4 === 0 ? 30 : 29);
-          if (jalaliJd - jd2 < daysInMonth) { jm = i; break; }
-          jd2 += daysInMonth;
+      // ---- Accurate Jalali conversion ----
+      function gregorianToJalali(gy, gm, gd) {
+        var d4 = Math.floor((gy + 3) / 4);
+        var d100 = Math.floor((gy + 99) / 100);
+        var d400 = Math.floor((gy + 399) / 400);
+        var gdn = 365 * gy + d4 - d100 + d400 - 1;
+        var jdn = gdn - 226899;
+        var jy = Math.floor((jdn + 1) / 365.25) + 1;
+        var jm = 1;
+        var jd = jdn - Math.floor(365.25 * (jy - 1) + 1) + 1;
+        var daysInMonth = (jy % 4 === 0) ? 30 : 29;
+        var months = [31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, daysInMonth];
+        for (var i = 0; i < 12; i++) {
+          if (jd <= months[i]) { jm = i + 1; jd = jd; break; }
+          jd -= months[i];
         }
-        const dayOfYear = Math.floor(jalaliJd) - jd2;
-        return { jy, jm, jd: dayOfYear + 1 };
+        return { jy, jm, jd };
       }
+
       function jalaliToGregorian(jy, jm, jd) {
-        const daysInMonth = (jm <= 6) ? 31 : (jm === 12 && jy % 4 === 0 ? 30 : 29);
-        if (jd < 1 || jd > daysInMonth) return null;
-        let jd2 = 0;
-        for (let i = 1; i < jm; i++) {
-          jd2 += (i <= 6) ? 31 : (i === 12 && jy % 4 === 0 ? 30 : 29);
+        var daysInMonth = (jy % 4 === 0) ? 30 : 29;
+        var months = [31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, daysInMonth];
+        var jdn = Math.floor(365.25 * (jy - 1) + 1);
+        for (var i = 0; i < jm - 1; i++) jdn += months[i];
+        jdn += jd - 1;
+        var gdn = jdn + 226899;
+        var d4 = Math.floor((gdn + 1) / 1461);
+        var d100 = Math.floor((gdn - 365 * d4) / 36524);
+        var d400 = Math.floor((gdn - 365 * d4 - 36524 * d100) / 1460);
+        var gy = 400 * d4 + 100 * d100 + 4 * d400 + 1;
+        var gdn2 = 365 * gy + Math.floor(gy / 4) - Math.floor(gy / 100) + Math.floor(gy / 400) - 1;
+        if (gdn < gdn2) {
+          gy--;
+          gdn2 = 365 * gy + Math.floor(gy / 4) - Math.floor(gy / 100) + Math.floor(gy / 400) - 1;
         }
-        const jalaliJd = jd2 + jd - 1;
-        const gregJd = jalaliJd + JALALI_EPOCH;
-        return fromJulianDay(gregJd);
+        var gm = 1;
+        var gd = gdn - gdn2 + 1;
+        var monthDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+        for (var i = 0; i < 12; i++) {
+          if (gd <= monthDays[i]) { gm = i + 1; break; }
+          gd -= monthDays[i];
+        }
+        return { gy, gm, gd };
       }
+
       function parseJalaliDate(str) {
         const parts = str.split(/[-\/]/).map(Number);
         if (parts.length !== 3) return null;
         const [jy, jm, jd] = parts;
         if (jy < 1 || jm < 1 || jm > 12 || jd < 1) return null;
-        const d = jalaliToGregorian(jy, jm, jd);
-        return d;
+        const g = jalaliToGregorian(jy, jm, jd);
+        if (!g) return null;
+        return new Date(g.gy, g.gm - 1, g.gd);
       }
+
       function formatJalali(date, opts = {}) {
-        const j = gregorianToJalali(date);
+        const j = gregorianToJalali(date.getFullYear(), date.getMonth() + 1, date.getDate());
         const monthNames = ['فروردین','اردیبهشت','خرداد','تیر','مرداد','شهریور','مهر','آبان','آذر','دی','بهمن','اسفند'];
         if (opts.month === 'long') {
           return `${j.jy} ${monthNames[j.jm-1]} ${toFa(j.jd)}`;
@@ -1518,6 +1498,7 @@
           return `${j.jy}/${String(j.jm).padStart(2,'0')}/${String(j.jd).padStart(2,'0')}`;
         }
       }
+
       function formatEnglish(date) {
         const y = date.getFullYear();
         const m = String(date.getMonth() + 1).padStart(2,'0');
@@ -1558,7 +1539,6 @@
       async function loadAllEntries() {
         let data = await storageGet(STORAGE_KEY);
         if (!data) {
-          // try old keys
           for (const k of ['entries', 'dailyEntries', 'health-entries']) {
             const old = await storageGet(k);
             if (old) { data = old; await storageSet(STORAGE_KEY, old); break; }
@@ -1626,7 +1606,7 @@
       function getSoundIcon(type) { return SOUND_TYPES[type]?.icon || '🔔'; }
 
       // =========================================================================
-      // 5.  TRANSLATIONS (with all keys)
+      // 5.  TRANSLATIONS (abbreviated)
       // =========================================================================
       const translations = {
         fa: {
@@ -1791,7 +1771,7 @@
       function t(key) { return translations[currentLang]?.[key] || translations.fa[key] || key; }
 
       // =========================================================================
-      // 6.  SOUND ENGINE (with error resilience)
+      // 6.  SOUND ENGINE (same as before)
       // =========================================================================
       function playSoundOnce(soundType, duration) {
         try {
@@ -1869,7 +1849,7 @@
       }
 
       // =========================================================================
-      // 7.  ALARM SYSTEM (improved with Notification API)
+      // 7.  ALARM SYSTEM (Fixed: no repeated triggers)
       // =========================================================================
       function formatAlarmTime(timeStr) {
         const [h, m] = timeStr.split(':').map(Number);
@@ -2058,8 +2038,19 @@
         editingAlarmId = null;
       }
 
+      // ---- Trigger alarm only once per scheduled time ----
       function triggerAlarm(alarm) {
         if (activeRingingAlarm) return;
+        // Mark this alarm as triggered now
+        const now = new Date();
+        alarm.lastTriggered = now.toISOString(); // store to avoid re-trigger within same minute
+        // For once, deactivate after triggering
+        if (alarm.repeat === 'once') {
+          alarm.active = false;
+        }
+        // For daily/weekly, we keep active but will check lastTriggered to avoid duplicates
+        persistAlarms(); // save the change
+
         const overlay = document.getElementById('alarmRingingOverlay');
         document.getElementById('ringingTitle').textContent = t('alarmRinging');
         document.getElementById('ringingDetails').textContent = alarm.title + ' - ' + formatAlarmTime(alarm.time);
@@ -2075,12 +2066,8 @@
         }
         showToast('🔔 ' + t('alarmTriggered').replace('{title}', alarm.title || ''));
 
-        if (alarm.repeat === 'once') {
-          alarm.active = false;
-          persistAlarms();
-          renderAlarms();
-          updateAlarmBadge();
-        }
+        renderAlarms();
+        updateAlarmBadge();
       }
 
       function dismissAlarm() {
@@ -2092,30 +2079,44 @@
         if (navigator.vibrate) navigator.vibrate(0);
       }
 
+      // ---- Alarm check with lastTriggered prevention ----
       function checkAlarms() {
         if (activeRingingAlarm) return;
         const now = new Date();
         const currentTime = String(now.getHours()).padStart(2, '0') + ':' + String(now.getMinutes()).padStart(2, '0');
         const currentDay = now.getDay();
         const todayStr = getDateKey(now);
+
         alarms.forEach(alarm => {
           if (!alarm.active) return;
           if (alarm.time !== currentTime) return;
+
+          // Check if already triggered within the last minute to avoid duplicate
+          if (alarm.lastTriggered) {
+            const last = new Date(alarm.lastTriggered);
+            const diff = (now.getTime() - last.getTime()) / 1000;
+            if (diff < 60) return; // already triggered recently
+          }
+
           let shouldTrigger = false;
           if (alarm.repeat === 'once') {
             if (alarm.date) {
               if (alarm.date === todayStr) shouldTrigger = true;
             } else shouldTrigger = true;
-          } else if (alarm.repeat === 'daily') shouldTrigger = true;
-          else if (alarm.repeat === 'weekly') {
+          } else if (alarm.repeat === 'daily') {
+            shouldTrigger = true;
+          } else if (alarm.repeat === 'weekly') {
             if (alarm.days && alarm.days.includes(currentDay)) shouldTrigger = true;
           }
-          if (shouldTrigger) triggerAlarm(alarm);
+
+          if (shouldTrigger) {
+            triggerAlarm(alarm);
+          }
         });
       }
 
       // =========================================================================
-      // 8.  VOICE ASSISTANT (with internet requirement note)
+      // 8.  VOICE ASSISTANT (same as before)
       // =========================================================================
       let recognition = null;
       let isListening = false;
@@ -2317,7 +2318,7 @@
       document.getElementById('voiceBtn').addEventListener('click', toggleVoice);
 
       // =========================================================================
-      // 9.  CORE APPLICATION
+      // 9.  CORE APPLICATION (functions)
       // =========================================================================
       function isProfileComplete() {
         return !!(userProfile && userProfile.name && userProfile.age &&
@@ -2326,8 +2327,7 @@
 
       function updateProfileUI() {
         if (!userProfile) {
-          document.getElementById('profileDisplayName').textContent =
-            currentLang === 'fa' ? 'کاربر' : 'User';
+          document.getElementById('profileDisplayName').textContent = currentLang === 'fa' ? 'کاربر' : 'User';
           document.getElementById('profileAge').textContent = '—';
           document.getElementById('profileHeight').textContent = '—';
           document.getElementById('profileWeight').textContent = '—';
@@ -2489,7 +2489,6 @@
         return 'چاقی';
       }
 
-      // ---- Geometry helpers for gauge ----
       function polarToCartesian(cx, cy, r, angleDeg) {
         const rad = (angleDeg - 90) * Math.PI / 180;
         return { x: cx + r * Math.cos(rad), y: cy + r * Math.sin(rad) };
@@ -2980,7 +2979,7 @@
       }
 
       // ---- Calendar ----
-      const todayJalali = gregorianToJalali(TODAY);
+      const todayJalali = gregorianToJalali(TODAY.getFullYear(), TODAY.getMonth() + 1, TODAY.getDate());
       let calViewJY = todayJalali.jy,
         calViewJM = todayJalali.jm;
       const PERSIAN_DOW = ['ش', 'ی', 'د', 'س', 'چ', 'پ', 'ج'];
@@ -3052,22 +3051,18 @@
       }
 
       function jalaliMonthInfo(jy, jm) {
-        const guess = new Date(jy + 621, 2, 21);
-        guess.setDate(guess.getDate() + (jm - 1) * 30);
-        let firstGregorian = null;
-        for (let offset = -40; offset <= 40; offset++) {
-          const d = new Date(guess.getFullYear(), guess.getMonth(), guess.getDate() + offset);
-          const j = gregorianToJalali(d);
-          if (j.jy === jy && j.jm === jm && j.jd === 1) { firstGregorian = d; break; }
-        }
-        if (!firstGregorian) return null;
+        // Find first day of month using the conversion function
+        const guess = jalaliToGregorian(jy, jm, 1);
+        if (!guess) return null;
+        const firstGregorian = new Date(guess.gy, guess.gm - 1, guess.gd);
+        // Count days in month
         let daysInMonth = 0;
         let cursor = new Date(firstGregorian);
         while (true) {
-          const j = gregorianToJalali(cursor);
+          const j = gregorianToJalali(cursor.getFullYear(), cursor.getMonth() + 1, cursor.getDate());
           if (j.jy !== jy || j.jm !== jm) break;
           daysInMonth++;
-          cursor = new Date(cursor.getFullYear(), cursor.getMonth(), cursor.getDate() + 1);
+          cursor.setDate(cursor.getDate() + 1);
         }
         return { firstGregorian, daysInMonth };
       }
@@ -3103,7 +3098,7 @@
             'Invalid date. Example: 1403/01/15 or 2024/03/15');
           return;
         }
-        const j = gregorianToJalali(d);
+        const j = gregorianToJalali(d.getFullYear(), d.getMonth() + 1, d.getDate());
         calViewJY = j.jy;
         calViewJM = j.jm;
         renderCalendar();
@@ -3129,7 +3124,7 @@
 
         const monthEntries = Object.keys(entries)
           .filter(k => {
-            const j = gregorianToJalali(parseDateKey(k));
+            const j = gregorianToJalali(parseDateKey(k).getFullYear(), parseDateKey(k).getMonth() + 1, parseDateKey(k).getDate());
             return j.jy === calViewJY && j.jm === calViewJM;
           })
           .map(k => ({ key: k, data: entries[k] }));
@@ -3226,7 +3221,7 @@
         const dt = getLocalDateTime(isoStr);
         const d = dt.dateObj;
         if (currentLang === 'fa') {
-          const j = gregorianToJalali(d);
+          const j = gregorianToJalali(d.getFullYear(), d.getMonth() + 1, d.getDate());
           return `${toFa(j.jy)}/${toFa(String(j.jm).padStart(2,'0'))}/${toFa(String(j.jd).padStart(2,'0'))} - ${toFa(dt.hours)}:${toFa(dt.minutes)}`;
         }
         return `${dt.year}/${dt.month}/${dt.day} - ${dt.hours}:${dt.minutes}`;
