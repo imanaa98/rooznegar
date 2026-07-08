@@ -15,9 +15,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&family=Lalezar&display=swap" rel="stylesheet" />
-
   <style>
-    /* ===== Same CSS as before (unchanged) ===== */
+    /* ===== Same CSS as previous version (unchanged) ===== */
     :root {
       --c-ink: #232539;
       --c-ink-soft: #6B6E85;
@@ -1026,7 +1025,7 @@
 </head>
 <body>
 
-  <!-- ===== HTML Structure (same as before) ===== -->
+  <!-- ===== HTML Structure (same as before, unchanged) ===== -->
   <div class="shell" id="appShell">
     <!-- Profile Bar -->
     <div class="profile-bar" id="profileBar">
@@ -1088,7 +1087,6 @@
 
     <!-- Main Layout -->
     <div class="layout">
-
       <!-- LEFT PANEL -->
       <div class="panel-left">
         <!-- Gauge -->
@@ -1419,7 +1417,7 @@
       "use strict";
 
       // =========================================================================
-      // 1.  UTILITIES – CORRECT JALALI/GREGORIAN CONVERSION
+      // 1.  UTILITIES – CORRECT JALALI/GREGORIAN CONVERSION (using well-known algorithm)
       // =========================================================================
       const FA_DIGITS = ['۰','۱','۲','۳','۴','۵','۶','۷','۸','۹'];
       function toFa(n) { return String(n).replace(/[0-9]/g, d => FA_DIGITS[d]); }
@@ -1505,12 +1503,12 @@
       // ---- Format English date ----
       function formatEnglish(date) {
         const y = date.getFullYear();
-        const m = String(date.getMonth() + 1).padStart(2,'0');
-        const d = String(date.getDate()).padStart(2,'0');
+        const m = String(date.getMonth() + 1).padStart(2, '0');
+        const d = String(date.getDate()).padStart(2, '0');
         return `${y}/${m}/${d}`;
       }
 
-      // ---- Jalali month info (first day and days count) ----
+      // ---- Jalali month info (first day and days count) using corrected functions ----
       function jalaliMonthInfo(jy, jm) {
         const first = jalaliToGregorian(jy, jm, 1);
         if (!first) return null;
@@ -2323,10 +2321,10 @@
       document.getElementById('voiceBtn').addEventListener('click', toggleVoice);
 
       // =========================================================================
-      // 9.  CORE APPLICATION (with corrected dates)
+      // 9.  CORE APPLICATION – with FIXED calendar leading blanks
       // =========================================================================
-      // All core functions are identical to the previous working version,
-      // but they now use the corrected Jalali conversion via the new utility functions.
+      // All core functions are identical to previous version, except renderCalendar
+      // which now correctly computes leading blanks based on language.
 
       // ---- isProfileComplete, updateProfileUI, populateProfileEditForm ----
       function isProfileComplete() {
@@ -2989,30 +2987,40 @@
         });
       }
 
-      // ---- Calendar (uses corrected jalaliMonthInfo) ----
+      // ---- Calendar with correct leading blanks ----
       const todayJalali = gregorianToJalali(TODAY.getFullYear(), TODAY.getMonth() + 1, TODAY.getDate());
       let calViewJY = todayJalali.jy,
         calViewJM = todayJalali.jm;
-      const PERSIAN_DOW = ['ش', 'ی', 'د', 'س', 'چ', 'پ', 'ج'];
-      const ENGLISH_DOW = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+      const PERSIAN_DOW = ['ش', 'ی', 'د', 'س', 'چ', 'پ', 'ج']; // Saturday to Friday
+      const ENGLISH_DOW = ['S', 'M', 'T', 'W', 'T', 'F', 'S']; // Sunday to Saturday
 
       function renderCalendar() {
         const grid = document.getElementById('calGrid');
         const titleEl = document.getElementById('calTitle');
         const info = jalaliMonthInfo(calViewJY, calViewJM);
-        if (!info) { grid.innerHTML = '';
-          titleEl.textContent = '—'; return; }
+        if (!info) {
+          grid.innerHTML = '';
+          titleEl.textContent = '—';
+          return;
+        }
 
         titleEl.textContent = currentLang === 'fa' ?
           formatJalali(info.firstGregorian, { month: 'long' }) + ' ' + calViewJY :
           info.firstGregorian.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
 
-        const jsDow = info.firstGregorian.getDay();
-        const leadingBlanks = (jsDow + 1) % 7;
+        // Determine first day of week based on language
+        // For fa: Saturday (6), for en: Sunday (0)
+        const firstDayOfWeek = currentLang === 'fa' ? 6 : 0;
+        const jsDow = info.firstGregorian.getDay(); // 0=Sunday, 1=Monday, ..., 6=Saturday
+        // Compute blanks: number of days before the first day of month
+        let leadingBlanks = (jsDow - firstDayOfWeek + 7) % 7;
+
         const dowLabels = currentLang === 'fa' ? PERSIAN_DOW : ENGLISH_DOW;
 
         let html = dowLabels.map(d => `<div class="cal-dow">${d}</div>`).join('');
-        for (let i = 0; i < leadingBlanks; i++) html += '<div class="cal-cell is-empty"></div>';
+        for (let i = 0; i < leadingBlanks; i++) {
+          html += '<div class="cal-cell is-empty"></div>';
+        }
 
         const todayMidnight = new Date(TODAY.getFullYear(), TODAY.getMonth(), TODAY.getDate());
 
@@ -3033,6 +3041,7 @@
           }
           html += `<div class="${cls}" style="${style}" data-key="${key}" data-has-data="${entry ? '1' : '0'}" data-future="${isFuture ? '1' : '0'}">${toFa(day)}</div>`;
         }
+
         grid.innerHTML = html;
 
         grid.querySelectorAll('.cal-cell[data-key]').forEach(cell => {
@@ -3433,6 +3442,7 @@
 
       // ---- UI Update ----
       function updateUI() {
+        // General texts
         document.getElementById('appTitle').textContent = t('appTitle');
         document.getElementById('brandSubtitle').textContent = t('appSub');
         document.getElementById('scoreLabel').textContent = t('scoreLabel');
@@ -3495,6 +3505,7 @@
         document.getElementById('installSub').textContent = t('installSub');
         document.getElementById('installBtn').textContent = t('installBtn');
 
+        // Settings
         document.getElementById('settingsModalTitle').textContent = t('settingsTitle');
         document.getElementById('settingsModalText').textContent = t('settingsText');
         document.getElementById('settingHeightLabel').textContent = t('settingHeight');
@@ -3504,6 +3515,7 @@
         document.getElementById('settingsSave').textContent = t('settingsSave');
         document.getElementById('settingsCancel').textContent = t('settingsCancel');
 
+        // Profile
         document.getElementById('profileModalTitle').textContent = t('profileTitle');
         document.getElementById('profileModalText').textContent = t('profileText');
         document.getElementById('profileNameLabel').textContent = t('profileName');
@@ -3513,6 +3525,7 @@
         document.getElementById('profileSave').textContent = t('profileSave');
         document.getElementById('profileCancel').textContent = t('profileCancel');
 
+        // Voice
         document.getElementById('voiceBtn').title = t('voiceHint');
         const vStatus = document.getElementById('voiceStatus');
         if (!vStatus.classList.contains('success') && !vStatus.classList.contains('error')) {
@@ -3520,6 +3533,7 @@
             '</span>';
         }
 
+        // Save button
         const saveBtnText = document.getElementById('saveBtnText');
         if (editingKey === todayKey) {
           saveBtnText.textContent = entries[todayKey] ? t('saveUpdate') : t('saveBtn');
@@ -3529,6 +3543,7 @@
 
         document.getElementById('gaugeDate').textContent = gaugeDateLabel(editingKey);
 
+        // Alarm modal
         document.getElementById('alarmModalTitle').textContent = t('alarmTitle');
         document.getElementById('alarmModalText').textContent = t('alarmSub');
         document.getElementById('alarmFormTitle').textContent = t('alarmNew');
@@ -3545,9 +3560,11 @@
         document.getElementById('dismissAlarmBtn').textContent = t('alarmDismiss');
         document.getElementById('alarmDateInput').placeholder = t('alarmDatePlaceholder');
 
+        // Calendar
         document.getElementById('calSearchInput').placeholder = t('searchPlaceholder');
         document.getElementById('calSearchBtn').textContent = t('searchBtn');
 
+        // Modal
         document.getElementById('modalTitle').textContent = t('modalTitle');
         document.getElementById('modalText').textContent = t('modalText');
         document.getElementById('modalCancel').textContent = t('modalCancel');
@@ -3948,5 +3965,6 @@
 
     })();
   </script>
+
 </body>
 </html>
