@@ -16,7 +16,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&family=Lalezar&display=swap" rel="stylesheet" />
   <style>
-    /* ===== same as before ===== */
+    /* CSS - همانند نسخه قبل، بدون تغییر */
     :root {
       --c-ink: #232539;
       --c-ink-soft: #6B6E85;
@@ -1415,9 +1415,9 @@
     (function() {
       "use strict";
 
-      // =========================================================================
-      // 1.  UTILITIES (Fixed Jalali/Gregorian)
-      // =========================================================================
+      // ============================================================
+      // 1.  UTILITIES - ACCURATE JALALI / GREGORIAN CONVERSION
+      // ============================================================
       const FA_DIGITS = ['۰','۱','۲','۳','۴','۵','۶','۷','۸','۹'];
       function toFa(n) { return String(n).replace(/[0-9]/g, d => FA_DIGITS[d]); }
       function clamp(v, min, max) { return Math.max(min, Math.min(max, v)); }
@@ -1432,7 +1432,7 @@
         return new Date(y, m - 1, d);
       }
 
-      // ---- Accurate Jalali conversion ----
+      // ---- Accurate Jalali functions (using algorithm from jalaali-js) ----
       function gregorianToJalali(gy, gm, gd) {
         var d4 = Math.floor((gy + 3) / 4);
         var d100 = Math.floor((gy + 99) / 100);
@@ -1506,9 +1506,9 @@
         return `${y}/${m}/${d}`;
       }
 
-      // =========================================================================
-      // 2.  STORAGE (with fallback + error handling)
-      // =========================================================================
+      // ============================================================
+      // 2.  STORAGE
+      // ============================================================
       const STORAGE_KEY = 'daily-entries';
       const TODO_KEY = 'todo-tasks';
       const SETTINGS_KEY = 'app-settings';
@@ -1565,9 +1565,9 @@
       function loadLang() { try { return localStorage.getItem(LANG_KEY) || 'fa'; } catch(e) { return 'fa'; } }
       function saveLang(l) { try { localStorage.setItem(LANG_KEY, l); } catch(e) {} }
 
-      // =========================================================================
+      // ============================================================
       // 3.  STATE
-      // =========================================================================
+      // ============================================================
       let entries = {}, todos = [];
       const TODAY = new Date();
       const todayKey = getDateKey(TODAY);
@@ -1592,9 +1592,9 @@
       let activeRingingAlarm = null;
       let activeSound = null;
 
-      // =========================================================================
+      // ============================================================
       // 4.  SOUND DEFINITIONS
-      // =========================================================================
+      // ============================================================
       const SOUND_TYPES = {
         simple: { label: 'ساده', icon: '🔔', freq: 880, duration: 400, gap: 1100 },
         gentle: { label: 'ملایم', icon: '🎵', freq: 550, duration: 600, gap: 1400 },
@@ -1605,9 +1605,9 @@
       function getSoundLabel(type) { return SOUND_TYPES[type]?.label || 'ساده'; }
       function getSoundIcon(type) { return SOUND_TYPES[type]?.icon || '🔔'; }
 
-      // =========================================================================
-      // 5.  TRANSLATIONS (abbreviated)
-      // =========================================================================
+      // ============================================================
+      // 5.  TRANSLATIONS (Abbreviated for brevity)
+      // ============================================================
       const translations = {
         fa: {
           appTitle: 'روزنگار سلامت', appSub: 'خواب، ورزش و تغذیه‌ی هر روزت',
@@ -1770,9 +1770,9 @@
       };
       function t(key) { return translations[currentLang]?.[key] || translations.fa[key] || key; }
 
-      // =========================================================================
-      // 6.  SOUND ENGINE (same as before)
-      // =========================================================================
+      // ============================================================
+      // 6.  SOUND ENGINE
+      // ============================================================
       function playSoundOnce(soundType, duration) {
         try {
           const config = SOUND_TYPES[soundType || 'simple'] || SOUND_TYPES.simple;
@@ -1848,9 +1848,9 @@
         };
       }
 
-      // =========================================================================
-      // 7.  ALARM SYSTEM (Fixed: no repeated triggers)
-      // =========================================================================
+      // ============================================================
+      // 7.  ALARM SYSTEM (Fixed: no repeated triggers, accurate date handling)
+      // ============================================================
       function formatAlarmTime(timeStr) {
         const [h, m] = timeStr.split(':').map(Number);
         return h + ':' + String(m).padStart(2, '0');
@@ -2041,15 +2041,12 @@
       // ---- Trigger alarm only once per scheduled time ----
       function triggerAlarm(alarm) {
         if (activeRingingAlarm) return;
-        // Mark this alarm as triggered now
         const now = new Date();
-        alarm.lastTriggered = now.toISOString(); // store to avoid re-trigger within same minute
-        // For once, deactivate after triggering
+        alarm.lastTriggered = now.toISOString();
         if (alarm.repeat === 'once') {
           alarm.active = false;
         }
-        // For daily/weekly, we keep active but will check lastTriggered to avoid duplicates
-        persistAlarms(); // save the change
+        persistAlarms();
 
         const overlay = document.getElementById('alarmRingingOverlay');
         document.getElementById('ringingTitle').textContent = t('alarmRinging');
@@ -2058,7 +2055,6 @@
         activeRingingAlarm = alarm;
         activeSound = startAlarmSound(alarm.sound || 'simple');
 
-        // Notification
         const title = t('alarmNotificationTitle').replace('{title}', alarm.title || '');
         const body = t('alarmNotificationBody').replace('{time}', formatAlarmTime(alarm.time));
         if ('Notification' in window && Notification.permission === 'granted') {
@@ -2079,7 +2075,6 @@
         if (navigator.vibrate) navigator.vibrate(0);
       }
 
-      // ---- Alarm check with lastTriggered prevention ----
       function checkAlarms() {
         if (activeRingingAlarm) return;
         const now = new Date();
@@ -2091,11 +2086,10 @@
           if (!alarm.active) return;
           if (alarm.time !== currentTime) return;
 
-          // Check if already triggered within the last minute to avoid duplicate
           if (alarm.lastTriggered) {
             const last = new Date(alarm.lastTriggered);
             const diff = (now.getTime() - last.getTime()) / 1000;
-            if (diff < 60) return; // already triggered recently
+            if (diff < 60) return;
           }
 
           let shouldTrigger = false;
@@ -2115,9 +2109,9 @@
         });
       }
 
-      // =========================================================================
-      // 8.  VOICE ASSISTANT (same as before)
-      // =========================================================================
+      // ============================================================
+      // 8.  VOICE ASSISTANT
+      // ============================================================
       let recognition = null;
       let isListening = false;
 
@@ -2256,7 +2250,6 @@
           }
         }
 
-        // fallback
         if (sleep === null && water === null && exercise === null && quality === null) {
           for (let v of numValues) {
             if (sleep === null && v >= 0 && v <= 12) sleep = v;
@@ -2317,9 +2310,9 @@
 
       document.getElementById('voiceBtn').addEventListener('click', toggleVoice);
 
-      // =========================================================================
-      // 9.  CORE APPLICATION (functions)
-      // =========================================================================
+      // ============================================================
+      // 9.  CORE APPLICATION (All functions)
+      // ============================================================
       function isProfileComplete() {
         return !!(userProfile && userProfile.name && userProfile.age &&
                   userProfile.height && userProfile.weight);
@@ -2978,12 +2971,29 @@
         });
       }
 
-      // ---- Calendar ----
+      // ---- Calendar (with accurate Jalali month info) ----
       const todayJalali = gregorianToJalali(TODAY.getFullYear(), TODAY.getMonth() + 1, TODAY.getDate());
       let calViewJY = todayJalali.jy,
         calViewJM = todayJalali.jm;
       const PERSIAN_DOW = ['ش', 'ی', 'د', 'س', 'چ', 'پ', 'ج'];
       const ENGLISH_DOW = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+
+      function jalaliMonthInfo(jy, jm) {
+        // Find first day of month using the conversion function
+        const first = jalaliToGregorian(jy, jm, 1);
+        if (!first) return null;
+        const firstGregorian = new Date(first.gy, first.gm - 1, first.gd);
+        // Count days in month
+        let daysInMonth = 0;
+        let cursor = new Date(firstGregorian);
+        while (true) {
+          const j = gregorianToJalali(cursor.getFullYear(), cursor.getMonth() + 1, cursor.getDate());
+          if (j.jy !== jy || j.jm !== jm) break;
+          daysInMonth++;
+          cursor.setDate(cursor.getDate() + 1);
+        }
+        return { firstGregorian, daysInMonth };
+      }
 
       function renderCalendar() {
         const grid = document.getElementById('calGrid');
@@ -2992,8 +3002,10 @@
         if (!info) { grid.innerHTML = '';
           titleEl.textContent = '—'; return; }
 
+        const j = gregorianToJalali(info.firstGregorian.getFullYear(), info.firstGregorian.getMonth() + 1, info.firstGregorian.getDate());
+        const monthName = ['فروردین','اردیبهشت','خرداد','تیر','مرداد','شهریور','مهر','آبان','آذر','دی','بهمن','اسفند'][j.jm - 1];
         titleEl.textContent = currentLang === 'fa' ?
-          formatJalali(info.firstGregorian, { month: 'long' }) + ' ' + calViewJY :
+          `${j.jy} ${monthName}` :
           info.firstGregorian.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
 
         const jsDow = info.firstGregorian.getDay();
@@ -3050,23 +3062,6 @@
         document.querySelector('.panel-left').scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
 
-      function jalaliMonthInfo(jy, jm) {
-        // Find first day of month using the conversion function
-        const guess = jalaliToGregorian(jy, jm, 1);
-        if (!guess) return null;
-        const firstGregorian = new Date(guess.gy, guess.gm - 1, guess.gd);
-        // Count days in month
-        let daysInMonth = 0;
-        let cursor = new Date(firstGregorian);
-        while (true) {
-          const j = gregorianToJalali(cursor.getFullYear(), cursor.getMonth() + 1, cursor.getDate());
-          if (j.jy !== jy || j.jm !== jm) break;
-          daysInMonth++;
-          cursor.setDate(cursor.getDate() + 1);
-        }
-        return { firstGregorian, daysInMonth };
-      }
-
       document.getElementById('calPrevBtn').addEventListener('click', function() {
         calViewJM--;
         if (calViewJM < 1) { calViewJM = 12;
@@ -3118,14 +3113,15 @@
         const grid = document.getElementById('statsGrid');
         const info = jalaliMonthInfo(calViewJY, calViewJM);
         if (!info) { grid.innerHTML = ''; return; }
+        const j = gregorianToJalali(info.firstGregorian.getFullYear(), info.firstGregorian.getMonth() + 1, info.firstGregorian.getDate());
         subtitle.textContent = (currentLang === 'fa' ? 'آمار ' : 'Stats for ') +
-          (currentLang === 'fa' ? formatJalali(info.firstGregorian, { month: 'long' }) :
+          (currentLang === 'fa' ? `${j.jy} ${['فروردین','اردیبهشت','خرداد','تیر','مرداد','شهریور','مهر','آبان','آذر','دی','بهمن','اسفند'][j.jm-1]}` :
             info.firstGregorian.toLocaleDateString('en-US', { month: 'long', year: 'numeric' }));
 
         const monthEntries = Object.keys(entries)
           .filter(k => {
-            const j = gregorianToJalali(parseDateKey(k).getFullYear(), parseDateKey(k).getMonth() + 1, parseDateKey(k).getDate());
-            return j.jy === calViewJY && j.jm === calViewJM;
+            const jj = gregorianToJalali(parseDateKey(k).getFullYear(), parseDateKey(k).getMonth() + 1, parseDateKey(k).getDate());
+            return jj.jy === calViewJY && jj.jm === calViewJM;
           })
           .map(k => ({ key: k, data: entries[k] }));
 
@@ -3439,7 +3435,6 @@
 
       // ---- UI Update ----
       function updateUI() {
-        // general texts
         document.getElementById('appTitle').textContent = t('appTitle');
         document.getElementById('brandSubtitle').textContent = t('appSub');
         document.getElementById('scoreLabel').textContent = t('scoreLabel');
@@ -3502,7 +3497,6 @@
         document.getElementById('installSub').textContent = t('installSub');
         document.getElementById('installBtn').textContent = t('installBtn');
 
-        // settings
         document.getElementById('settingsModalTitle').textContent = t('settingsTitle');
         document.getElementById('settingsModalText').textContent = t('settingsText');
         document.getElementById('settingHeightLabel').textContent = t('settingHeight');
@@ -3512,7 +3506,6 @@
         document.getElementById('settingsSave').textContent = t('settingsSave');
         document.getElementById('settingsCancel').textContent = t('settingsCancel');
 
-        // profile
         document.getElementById('profileModalTitle').textContent = t('profileTitle');
         document.getElementById('profileModalText').textContent = t('profileText');
         document.getElementById('profileNameLabel').textContent = t('profileName');
@@ -3522,7 +3515,6 @@
         document.getElementById('profileSave').textContent = t('profileSave');
         document.getElementById('profileCancel').textContent = t('profileCancel');
 
-        // voice
         document.getElementById('voiceBtn').title = t('voiceHint');
         const vStatus = document.getElementById('voiceStatus');
         if (!vStatus.classList.contains('success') && !vStatus.classList.contains('error')) {
@@ -3530,7 +3522,6 @@
             '</span>';
         }
 
-        // save button
         const saveBtnText = document.getElementById('saveBtnText');
         if (editingKey === todayKey) {
           saveBtnText.textContent = entries[todayKey] ? t('saveUpdate') : t('saveBtn');
@@ -3540,7 +3531,6 @@
 
         document.getElementById('gaugeDate').textContent = gaugeDateLabel(editingKey);
 
-        // Alarm modal
         document.getElementById('alarmModalTitle').textContent = t('alarmTitle');
         document.getElementById('alarmModalText').textContent = t('alarmSub');
         document.getElementById('alarmFormTitle').textContent = t('alarmNew');
@@ -3557,11 +3547,9 @@
         document.getElementById('dismissAlarmBtn').textContent = t('alarmDismiss');
         document.getElementById('alarmDateInput').placeholder = t('alarmDatePlaceholder');
 
-        // Calendar
         document.getElementById('calSearchInput').placeholder = t('searchPlaceholder');
         document.getElementById('calSearchBtn').textContent = t('searchBtn');
 
-        // Modal
         document.getElementById('modalTitle').textContent = t('modalTitle');
         document.getElementById('modalText').textContent = t('modalText');
         document.getElementById('modalCancel').textContent = t('modalCancel');
@@ -3951,7 +3939,6 @@
             '</span>';
         }
 
-        // Alarm check every 10 seconds (faster response)
         if (alarmCheckInterval) clearInterval(alarmCheckInterval);
         alarmCheckInterval = setInterval(checkAlarms, 10000);
         setTimeout(checkAlarms, 1000);
@@ -3959,7 +3946,6 @@
         window._initialized = true;
       }
 
-      // Start the app
       init();
 
     })();
