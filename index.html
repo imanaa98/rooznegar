@@ -604,8 +604,14 @@
           <input type="text" id="alarmTitleInput" placeholder="مثلاً: وقت دارو" maxlength="60">
         </div>
         <div class="alarm-form-row" style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-          <div><label id="alarmTimeLabel">ساعت</label><input type="time" id="alarmTimeInput" step="60"></div>
-          <div><label id="alarmDateLabel">تاریخ (اختیاری)</label><input type="date" id="alarmDateInput"></div>
+          <div>
+            <label id="alarmTimeLabel">ساعت</label>
+            <input type="time" id="alarmTimeInput" step="60">
+          </div>
+          <div>
+            <label id="alarmDateLabel">تاریخ</label>
+            <input type="text" id="alarmDateInput" placeholder="مثلاً ۱۴۰۳/۰۱/۱۵" class="num-input">
+          </div>
         </div>
         <div class="alarm-form-row">
           <label id="alarmRepeatLabel">تکرار</label>
@@ -738,19 +744,15 @@
     // Load entries with fallback to old keys
     async function loadAllEntries(){
       let data = null;
-      // Try primary key
       let v = await storageGet(STORAGE_KEY);
       if(v) data = v;
       else {
-        // Try old keys
         const oldKeys = ['entries', 'dailyEntries', 'health-entries'];
         for (let k of oldKeys) {
           let old = await storageGet(k);
           if(old) {
             data = old;
-            // Migrate to new key
             await storageSet(STORAGE_KEY, old);
-            // Optionally remove old key to clean up
             try { if(!hasClaudeStorage) localStorage.removeItem(k); } catch(e) {}
             break;
           }
@@ -798,7 +800,7 @@
     function getSoundLabel(type) { return SOUND_TYPES[type]?.label || 'ساده'; }
     function getSoundIcon(type) { return SOUND_TYPES[type]?.icon || '🔔'; }
 
-    // ===== Translations (abbreviated for brevity, same as before) =====
+    // ===== Translations (with updated date labels) =====
     const translations = {
       fa: {
         appTitle: 'روزنگار سلامت', appSub: 'خواب، ورزش و تغذیه‌ی هر روزت', scoreLabel: 'امتیاز امروز',
@@ -826,7 +828,7 @@
         settingsTitle: 'تنظیمات و هدف‌گذاری', settingsText: 'این مقادیر برای محاسبه BMI و درصد تحقق اهداف روزانه استفاده می‌شن.',
         settingHeight: 'قد (سانتی‌متر)', settingSleepGoal: 'هدف خواب (ساعت)', settingWaterGoal: 'هدف آب (لیوان)', settingExerciseGoal: 'هدف ورزش (دقیقه)',
         settingsSave: 'ذخیره', settingsCancel: 'انصراف',
-        searchPlaceholder: 'جستجوی تاریخ (مثلاً ۱۴۰۳/۰۱/۱۵ )', searchBtn: 'جستجو',
+        searchPlaceholder: 'جستجوی تاریخ (مثلاً ۱۴۰۳/۰۱/۱۵ یا 2024/03/15)', searchBtn: 'جستجو',
         today: 'امروز', saved: 'ذخیره شد ✅',
         stepsActive: '🚶 در حال شمارش...', stepsDone: '✅ گام‌ها به‌روز می‌شوند', stepsUnsupported: '❌ گام‌شمار پشتیبانی نمی‌شود',
         guest: 'مهمان', saving: 'در حال ذخیره...',
@@ -850,7 +852,7 @@
         alarmNew: '➕ آلارم جدید',
         alarmTitleLabel: 'عنوان',
         alarmTimeLabel: 'ساعت',
-        alarmDateLabel: 'تاریخ (اختیاری)',
+        alarmDateLabel: 'تاریخ (مثلاً ۱۴۰۳/۰۱/۱۵)',
         alarmRepeatLabel: 'تکرار',
         alarmOnce: 'یکبار',
         alarmDaily: 'روزانه',
@@ -874,8 +876,86 @@
         alarmRinging: '⏰ زنگ آلارم!',
         alarmDismiss: '✋ قطع کردن زنگ',
         alarmDismissed: 'آلارم قطع شد',
+        alarmDatePlaceholder: 'مثلاً ۱۴۰۳/۰۱/۱۵',
+        alarmDateFormat: 'YYYY/MM/DD',
       },
-      en: { /* ... same as before but abbreviated ... */ appTitle: 'Rooznegar Salamat', appSub: 'Sleep, Exercise & Nutrition Daily', scoreLabel: "Today's Score", sleepTitle: 'Sleep', sleepHoursLabel: 'Hours of sleep last night', sleepQualityLabel: 'Sleep Quality', sleepBad: 'Poor', sleepMed: 'Fair', sleepGood: 'Good', sleepExcel: 'Excellent', nutritionTitle: 'Nutrition', nutritionQualityLabel: "Today's Nutrition Quality", nutritionBad: 'Poor', nutritionMed: 'Fair', nutritionGood: 'Good', nutritionExcel: 'Excellent', waterLabel: 'Water Intake', exerciseTitle: 'Exercise', exerciseMinutesLabel: "Today's Activity Duration", intensityLabel: 'Intensity', intensityRest: 'Rest', intensityLight: 'Light', intensityMod: 'Moderate', intensityHard: 'Intense', stepsTitle: 'Step Counter', optionalTag: 'Optional', stepsLabel: "Today's Steps", stepsAuto: '⏳ Getting steps...', healthTitle: 'Health Extra', moodLabel: 'Mood', weightLabel: 'Weight (kg)', bpSystolicLabel: 'Systolic BP', bpDiastolicLabel: 'Diastolic BP', pulseLabel: 'Pulse (bpm)', goalsTitle: "Today's Goals", goalsSub: 'Progress toward your goals', goalSleep: 'Sleep', goalWater: 'Water', goalExercise: 'Exercise', analysisTitle: "Today's Analysis", analysisSub: 'Based on today\'s recorded score', analysisEmpty: 'After saving your score, analysis will appear here.', todoTitle: 'Tasks', todoSub: 'Things you want to do today', chartTitle: 'Recent Trend', chartSub: 'Last 14 days with scores', legendExcellent: 'Excellent', legendGood: 'Good', legendFair: 'Fair', legendCare: 'Needs Care', statsTitle: 'Monthly Stats', historyTitle: 'History', historySub: 'Recorded days, newest first — click ✎ to edit', exportText: 'Backup Export (JSON)', importText: 'Restore from File', resetText: 'Clear All Data', saveBtn: "Save Today's Score", saveUpdate: "Update Today's Score", saveEdit: 'Save Changes', saveDay: 'Save This Day', editingPrefix: 'Editing', cancelEdit: 'Cancel', installTitle: 'Install Rooznegar Salamat', installSub: 'Quick access from home screen, even offline', installBtn: 'Install', modalTitle: 'Delete Data', modalText: 'This action cannot be undone.', modalCancel: 'Cancel', modalConfirm: 'Delete', settingsTitle: 'Settings & Goals', settingsText: 'These values are used for BMI calculation and daily goal tracking.', settingHeight: 'Height (cm)', settingSleepGoal: 'Sleep Goal (hours)', settingWaterGoal: 'Water Goal (glasses)', settingExerciseGoal: 'Exercise Goal (minutes)', settingsSave: 'Save', settingsCancel: 'Cancel', searchPlaceholder: 'Search date (e.g. 1403/01/15 or 2024/03/15)', searchBtn: 'Search', today: 'Today', saved: 'Saved ✅', stepsActive: '🚶 Counting...', stepsDone: '✅ Steps updating', stepsUnsupported: '❌ Step counter not supported', guest: 'Guest', saving: 'Saving...', profileTitle: '✎ Edit Profile', profileText: 'Update your personal info.', profileName: 'Your Name', profileAge: 'Your Age', profileHeight: 'Height (cm)', profileWeight: 'Weight (kg)', profileSave: 'Save', profileCancel: 'Cancel', voiceHint: 'Click to speak in Persian', voiceListening: '🎙️ Listening...', voiceSuccess: '✅ Voice input processed.', voiceError: '❌ Could not understand, try again.', voiceUnsupported: 'Voice input not supported.', voiceIntro: 'Hello! Please speak in Persian.', voiceConfirm: 'Info saved.', voicePermissionDenied: 'Microphone access denied.', voiceNoMatch: 'Heard:', voiceSamples: '📢 Samples: "sleep 8 hours, water 6 glasses, exercise 30 minutes, nutrition good"', voiceDetectedSleep: 'Sleep', voiceDetectedWater: 'Water', voiceDetectedExercise: 'Exercise', voiceDetectedQuality: 'Nutrition', voiceRequiresInternet: 'Voice recognition requires internet', alarmTitle: '⏰ Alarm Manager', alarmSub: 'Set reminders.', alarmNew: '➕ New Alarm', alarmTitleLabel: 'Title', alarmTimeLabel: 'Time', alarmDateLabel: 'Date (optional)', alarmRepeatLabel: 'Repeat', alarmOnce: 'Once', alarmDaily: 'Daily', alarmWeekly: 'Weekly', alarmSoundLabel: 'Sound type', alarmSave: 'Save Alarm', alarmCancel: 'Cancel', alarmEmpty: 'No alarms set.', alarmCount: 'items', alarmActive: 'Active', alarmInactive: 'Inactive', alarmDelete: 'Delete', alarmEdit: 'Edit', alarmToggle: 'Toggle', alarmNotificationTitle: '⏰ Reminder: {title}', alarmNotificationBody: 'Time {time} has come!', alarmDeleted: 'Alarm deleted', alarmSaved: 'Alarm saved', alarmUpdated: 'Alarm updated', alarmTriggered: '⏰ Alarm! {title}', alarmRinging: '⏰ Alarm ringing!', alarmDismiss: '✋ Dismiss alarm', alarmDismissed: 'Alarm dismissed' }
+      en: {
+        appTitle: 'Rooznegar Salamat', appSub: 'Sleep, Exercise & Nutrition Daily', scoreLabel: "Today's Score",
+        sleepTitle: 'Sleep', sleepHoursLabel: 'Hours of sleep last night', sleepQualityLabel: 'Sleep Quality',
+        sleepBad: 'Poor', sleepMed: 'Fair', sleepGood: 'Good', sleepExcel: 'Excellent',
+        nutritionTitle: 'Nutrition', nutritionQualityLabel: "Today's Nutrition Quality",
+        nutritionBad: 'Poor', nutritionMed: 'Fair', nutritionGood: 'Good', nutritionExcel: 'Excellent',
+        waterLabel: 'Water Intake',
+        exerciseTitle: 'Exercise', exerciseMinutesLabel: "Today's Activity Duration", intensityLabel: 'Intensity',
+        intensityRest: 'Rest', intensityLight: 'Light', intensityMod: 'Moderate', intensityHard: 'Intense',
+        stepsTitle: 'Step Counter', optionalTag: 'Optional', stepsLabel: "Today's Steps", stepsAuto: '⏳ Getting steps...',
+        healthTitle: 'Health Extra', moodLabel: 'Mood', weightLabel: 'Weight (kg)', bpSystolicLabel: 'Systolic BP', bpDiastolicLabel: 'Diastolic BP', pulseLabel: 'Pulse (bpm)',
+        goalsTitle: "Today's Goals", goalsSub: 'Progress toward your goals',
+        goalSleep: 'Sleep', goalWater: 'Water', goalExercise: 'Exercise',
+        analysisTitle: "Today's Analysis", analysisSub: 'Based on today\'s recorded score', analysisEmpty: 'After saving your score, analysis will appear here.',
+        todoTitle: 'Tasks', todoSub: 'Things you want to do today',
+        chartTitle: 'Recent Trend', chartSub: 'Last 14 days with scores',
+        legendExcellent: 'Excellent', legendGood: 'Good', legendFair: 'Fair', legendCare: 'Needs Care',
+        statsTitle: 'Monthly Stats', historyTitle: 'History', historySub: 'Recorded days, newest first — click ✎ to edit',
+        exportText: 'Backup Export (JSON)', importText: 'Restore from File', resetText: 'Clear All Data',
+        saveBtn: "Save Today's Score", saveUpdate: "Update Today's Score", saveEdit: 'Save Changes', saveDay: 'Save This Day',
+        editingPrefix: 'Editing', cancelEdit: 'Cancel',
+        installTitle: 'Install Rooznegar Salamat', installSub: 'Quick access from home screen, even offline', installBtn: 'Install',
+        modalTitle: 'Delete Data', modalText: 'This action cannot be undone.', modalCancel: 'Cancel', modalConfirm: 'Delete',
+        settingsTitle: 'Settings & Goals', settingsText: 'These values are used for BMI calculation and daily goal tracking.',
+        settingHeight: 'Height (cm)', settingSleepGoal: 'Sleep Goal (hours)', settingWaterGoal: 'Water Goal (glasses)', settingExerciseGoal: 'Exercise Goal (minutes)',
+        settingsSave: 'Save', settingsCancel: 'Cancel',
+        searchPlaceholder: 'Search date (e.g. 1403/01/15 or 2024/03/15)', searchBtn: 'Search',
+        today: 'Today', saved: 'Saved ✅',
+        stepsActive: '🚶 Counting...', stepsDone: '✅ Steps updating', stepsUnsupported: '❌ Step counter not supported',
+        guest: 'Guest', saving: 'Saving...',
+        profileTitle: '✎ Edit Profile', profileText: 'Update your personal info.',
+        profileName: 'Your Name', profileAge: 'Your Age', profileHeight: 'Height (cm)', profileWeight: 'Weight (kg)',
+        profileSave: 'Save', profileCancel: 'Cancel',
+        voiceHint: 'Click to speak in Persian (e.g., "خواب ۸ ساعت، آب ۶ لیوان، ورزش ۳۰ دقیقه")',
+        voiceListening: '🎙️ Listening... (Persian)',
+        voiceSuccess: '✅ Voice input processed.',
+        voiceError: '❌ Could not understand, try again.',
+        voiceUnsupported: 'Voice input not supported in this browser.',
+        voiceIntro: 'Hello! Please speak in Persian: sleep hours, water glasses, exercise minutes, and nutrition quality.',
+        voiceConfirm: 'Info saved.',
+        voicePermissionDenied: 'Microphone access denied. Please enable it in browser settings.',
+        voiceNoMatch: 'Heard:',
+        voiceSamples: '📢 Samples: "sleep 8 hours, water 6 glasses, exercise 30 minutes, nutrition good"',
+        voiceDetectedSleep: 'Sleep', voiceDetectedWater: 'Water', voiceDetectedExercise: 'Exercise', voiceDetectedQuality: 'Nutrition',
+        voiceRequiresInternet: 'Voice recognition requires internet (server-side processing)',
+        alarmTitle: '⏰ Alarm Manager',
+        alarmSub: 'Set reminders for your daily tasks.',
+        alarmNew: '➕ New Alarm',
+        alarmTitleLabel: 'Title',
+        alarmTimeLabel: 'Time',
+        alarmDateLabel: 'Date (e.g. 2024/03/15)',
+        alarmRepeatLabel: 'Repeat',
+        alarmOnce: 'Once',
+        alarmDaily: 'Daily',
+        alarmWeekly: 'Weekly',
+        alarmSoundLabel: 'Sound type',
+        alarmSave: 'Save Alarm',
+        alarmCancel: 'Cancel',
+        alarmEmpty: 'No alarms set.',
+        alarmCount: 'items',
+        alarmActive: 'Active',
+        alarmInactive: 'Inactive',
+        alarmDelete: 'Delete',
+        alarmEdit: 'Edit',
+        alarmToggle: 'Toggle',
+        alarmNotificationTitle: '⏰ Reminder: {title}',
+        alarmNotificationBody: 'Time {time} has come!',
+        alarmDeleted: 'Alarm deleted',
+        alarmSaved: 'Alarm saved',
+        alarmUpdated: 'Alarm updated',
+        alarmTriggered: '⏰ Alarm! {title}',
+        alarmRinging: '⏰ Alarm ringing!',
+        alarmDismiss: '✋ Dismiss alarm',
+        alarmDismissed: 'Alarm dismissed',
+        alarmDatePlaceholder: 'e.g. 2024/03/15',
+        alarmDateFormat: 'YYYY/MM/DD',
+      }
     };
     function t(key) { return translations[currentLang]?.[key] || translations.fa[key] || key; }
 
@@ -985,10 +1065,30 @@
       window._previewTimer = setTimeout(() => { playSoundOnce(soundType, 400); }, 500);
     });
 
-    // ===== Alarm CRUD =====
+    // ===== Alarm CRUD with Jalali/Miladi date support =====
     function formatAlarmTime(timeStr) { const [h, m] = timeStr.split(':').map(Number); return h + ':' + String(m).padStart(2, '0'); }
     function getDaysText(days, lang) { if (!days || days.length === 0) return ''; const names = lang === 'fa' ? ['ش', 'ی', 'د', 'س', 'چ', 'پ', 'ج'] : ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']; return days.map(d => names[d]).join(' '); }
     function getRepeatLabel(repeat, lang) { if (repeat === 'daily') return lang === 'fa' ? 'روزانه' : 'Daily'; if (repeat === 'weekly') return lang === 'fa' ? 'هفتگی' : 'Weekly'; return lang === 'fa' ? 'یکبار' : 'Once'; }
+
+    // Convert date string from user input to ISO (YYYY-MM-DD) for storage
+    function parseUserDate(str, lang) {
+      if (!str) return null;
+      // If lang is fa, try Jalali first
+      if (lang === 'fa') {
+        const d = parseJalaliDate(str);
+        if (d) return getDateKey(d);
+      }
+      // Try English format: YYYY/MM/DD or YYYY-MM-DD
+      const parts = str.split(/[-\/]/).map(Number);
+      if (parts.length === 3) {
+        const [y, m, day] = parts;
+        if (y > 0 && m >= 1 && m <= 12 && day >= 1 && day <= 31) {
+          const d = new Date(y, m-1, day);
+          if (!isNaN(d.getTime())) return getDateKey(d);
+        }
+      }
+      return null;
+    }
 
     function updateAlarmBadge() {
       const active = alarms.filter(a => a.active).length;
@@ -1014,8 +1114,11 @@
         let details = repeatLabel;
         if (alarm.repeat === 'weekly' && alarm.days && alarm.days.length > 0) details += ' • ' + getDaysText(alarm.days, currentLang);
         if (alarm.date && alarm.repeat === 'once') {
-          const d = new Date(alarm.date + 'T00:00:00');
-          details += ' • ' + (currentLang === 'fa' ? formatJalali(d, {day:'numeric', month:'short'}) : formatEnglish(d, {day:'numeric', month:'short'}));
+          const d = parseDateKey(alarm.date);
+          if (!isNaN(d.getTime())) {
+            const dateStr = currentLang === 'fa' ? formatJalali(d, {day:'numeric', month:'short', year:'numeric'}) : formatEnglish(d, {day:'numeric', month:'short', year:'numeric'});
+            details += ' • ' + dateStr;
+          }
         }
         const soundIcon = getSoundIcon(alarm.sound || 'simple');
         const soundLabel = getSoundLabel(alarm.sound || 'simple');
@@ -1086,12 +1189,25 @@
       const saveBtn = document.getElementById('alarmSaveBtn');
       const formTitle = document.getElementById('alarmFormTitle');
 
+      // Set placeholder and label based on language
+      dateInput.placeholder = t('alarmDatePlaceholder');
+
       if (alarm) {
         editingAlarmId = alarm.id;
         formTitle.textContent = '✎ ' + (currentLang === 'fa' ? 'ویرایش آلارم' : 'Edit Alarm');
         titleInput.value = alarm.title || '';
         timeInput.value = alarm.time || '08:00';
-        dateInput.value = alarm.date || '';
+        // Display date in appropriate format
+        if (alarm.date) {
+          const d = parseDateKey(alarm.date);
+          if (!isNaN(d.getTime())) {
+            dateInput.value = currentLang === 'fa' ? formatJalali(d, {year:'numeric', month:'numeric', day:'numeric'}).replace(/\//g, '/') : formatEnglish(d, {year:'numeric', month:'numeric', day:'numeric'}).replace(/\//g, '/');
+          } else {
+            dateInput.value = '';
+          }
+        } else {
+          dateInput.value = '';
+        }
         repeatSelect.value = alarm.repeat || 'once';
         soundSelect.value = alarm.sound || 'simple';
         daysContainer.querySelectorAll('.day-btn').forEach(btn => {
@@ -1132,18 +1248,36 @@
     document.getElementById('alarmSaveBtn').addEventListener('click', async function() {
       const title = document.getElementById('alarmTitleInput').value.trim() || (currentLang === 'fa' ? 'بدون عنوان' : 'Untitled');
       const time = document.getElementById('alarmTimeInput').value;
-      const date = document.getElementById('alarmDateInput').value || null;
+      let dateStr = document.getElementById('alarmDateInput').value.trim() || null;
       const repeat = document.getElementById('alarmRepeatSelect').value;
       const sound = document.getElementById('alarmSoundSelect').value;
       const days = [];
       document.getElementById('alarmDaysContainer').querySelectorAll('.day-btn.active').forEach(btn => days.push(parseInt(btn.dataset.day)));
+
       if (!time) { showToast(currentLang === 'fa' ? 'لطفاً ساعت را انتخاب کنید.' : 'Please select a time.'); return; }
       if (repeat === 'weekly' && days.length === 0) { showToast(currentLang === 'fa' ? 'لطفاً حداقل یک روز را انتخاب کنید.' : 'Please select at least one day.'); return; }
+
+      // Parse date if provided
+      let isoDate = null;
+      if (dateStr) {
+        isoDate = parseUserDate(dateStr, currentLang);
+        if (!isoDate) {
+          showToast(currentLang === 'fa' ? 'تاریخ نامعتبر. فرمت صحیح: ' + t('alarmDateFormat') : 'Invalid date format. Expected: ' + t('alarmDateFormat'));
+          return;
+        }
+      }
+
       const alarmData = {
         id: editingAlarmId || 'alarm_' + Date.now() + '_' + Math.random().toString(36).slice(2,6),
-        title, time, date: repeat === 'once' ? date : null, repeat, days: repeat === 'weekly' ? days : [],
-        sound: sound || 'simple', active: true, createdAt: new Date().toISOString()
+        title, time,
+        date: (repeat === 'once' && isoDate) ? isoDate : null,
+        repeat,
+        days: repeat === 'weekly' ? days : [],
+        sound: sound || 'simple',
+        active: true,
+        createdAt: new Date().toISOString()
       };
+
       if (editingAlarmId) {
         const idx = alarms.findIndex(a => a.id === editingAlarmId);
         if (idx !== -1) alarms[idx] = { ...alarms[idx], ...alarmData };
@@ -1166,9 +1300,7 @@
         let shouldTrigger = false;
         if (alarm.repeat === 'once') {
           if (alarm.date) {
-            const alarmDate = new Date(alarm.date + 'T00:00:00');
-            const alarmKey = getDateKey(alarmDate);
-            if (alarmKey === todayStr) shouldTrigger = true;
+            if (alarm.date === todayStr) shouldTrigger = true;
           } else shouldTrigger = true;
         } else if (alarm.repeat === 'daily') shouldTrigger = true;
         else if (alarm.repeat === 'weekly') {
@@ -1277,7 +1409,7 @@
       }
     }
 
-    // ===== Core app functions (condensed, but including all necessary) =====
+    // ===== Core app functions (condensed, same as before) =====
     function isProfileComplete() { if (!userProfile) return false; return !!(userProfile.name && userProfile.age && userProfile.height && userProfile.weight); }
     function updateProfileUI() {
       if (!userProfile) {
@@ -1535,11 +1667,7 @@
     document.getElementById('langToggle').addEventListener('click', ()=>{ const nextLang=currentLang==='fa'?'en':'fa'; applyLanguage(nextLang); });
 
     function updateUI(){
-      // All the UI updates as before, but we keep it concise.
-      // The important thing is that the alarm translations and other texts are set.
-      // We'll reuse the earlier updateUI implementation but ensure alarm strings are set.
-      // For brevity, I'll assume the updateUI function is present and working.
-      // I'll include a minimal version that updates essential elements.
+      // Update all text elements including date labels
       document.getElementById('appTitle').textContent=t('appTitle');
       document.getElementById('brandSubtitle').textContent=t('appSub');
       document.getElementById('scoreLabel').textContent=t('scoreLabel');
@@ -1631,7 +1759,7 @@
       else saveBtnText.textContent=t('saveEdit');
       document.getElementById('gaugeDate').textContent=gaugeDateLabel(editingKey);
       renderGoals(); renderAnalysis(entries[editingKey]||null); renderChart(); renderHistory(); renderStreak(); renderTodos(); renderCalendar(); renderStatsDashboard(); syncFormUI(); updateProfileUI();
-      // Alarm translations
+      // Alarm UI
       document.getElementById('alarmModalTitle').textContent=t('alarmTitle');
       document.getElementById('alarmModalText').textContent=t('alarmSub');
       document.getElementById('alarmFormTitle').textContent=t('alarmNew');
@@ -1642,18 +1770,20 @@
       document.getElementById('alarmRepeatSelect').options[0].text=t('alarmOnce');
       document.getElementById('alarmRepeatSelect').options[1].text=t('alarmDaily');
       document.getElementById('alarmRepeatSelect').options[2].text=t('alarmWeekly');
-      document.getElementById('alarmSoundLabel').textContent='نوع زنگ';
+      document.getElementById('alarmSoundLabel').textContent=t('alarmSoundLabel');
       document.getElementById('alarmSaveBtn').textContent=t('alarmSave');
       document.getElementById('alarmEmptyText').textContent=t('alarmEmpty');
       document.getElementById('dismissAlarmBtn').textContent=t('alarmDismiss');
+      // Update date input placeholder
+      document.getElementById('alarmDateInput').placeholder = t('alarmDatePlaceholder');
       renderAlarms(); updateAlarmBadge();
     }
 
-    // ===== Calendar and Stats (same as before) =====
+    // ===== Calendar and Stats =====
     const todayJalali=gregorianToJalali(TODAY);
     let calViewJY=todayJalali.jy, calViewJM=todayJalali.jm;
     const PERSIAN_DOW=['ش','ی','د','س','چ','پ','ج'], ENGLISH_DOW=['S','M','T','W','T','F','S'];
-    function renderCalendar(){ /* same as earlier, abbreviated */ 
+    function renderCalendar(){ /* same as before */ 
       const grid=document.getElementById('calGrid'), titleEl=document.getElementById('calTitle');
       const info=jalaliMonthInfo(calViewJY, calViewJM);
       if(!info){ grid.innerHTML=''; titleEl.textContent='—'; return; }
@@ -1696,7 +1826,7 @@
     });
     document.getElementById('calSearchInput').addEventListener('keydown', e=>{ if(e.key==='Enter') document.getElementById('calSearchBtn').click(); });
 
-    function renderStatsDashboard(){ /* same as earlier */ 
+    function renderStatsDashboard(){ /* same as before */ 
       const subtitle=document.getElementById('statsSubtitle'), grid=document.getElementById('statsGrid');
       const info=jalaliMonthInfo(calViewJY, calViewJM);
       if(!info){ grid.innerHTML=''; return; }
@@ -1805,7 +1935,6 @@
       showToast(currentLang==='fa'?'پروفایل با موفقیت به‌روز شد ✅':'Profile updated successfully ✅');
     });
 
-    // Populate profile form
     function populateProfileEditForm() {
       if (!userProfile) {
         document.getElementById('profileNameInput').value = '';
@@ -1820,7 +1949,7 @@
       document.getElementById('profileWeightInput').value = userProfile.weight || '';
     }
 
-    // PWA installation
+    // PWA
     let deferredInstallPrompt=null;
     const installBanner=document.getElementById('installBanner'), installBtn=document.getElementById('installBtn'), installDismiss=document.getElementById('installDismiss');
     const INSTALL_DISMISS_KEY='pwa-install-dismissed';
@@ -1851,7 +1980,7 @@
       const lang=loadLang(); applyLanguage(lang);
       buildGauge();
       document.getElementById('gaugeDate').textContent=gaugeDateLabel(todayKey);
-      entries=await loadAllEntries(); // now with fallback
+      entries=await loadAllEntries();
       todos=await loadTodos();
       settings=await loadSettings();
       userProfile=await loadUser();
