@@ -150,12 +150,7 @@
     .cal-cell.has-data { color: #fff; cursor: pointer; }
     .cal-cell.has-data:hover { transform: scale(1.04); }
     .cal-cell.is-empty { visibility: hidden; }
-    /* تغییر اصلی: غیرفعال کردن کلیک روی روزهای آینده */
-    .cal-cell.is-future {
-      opacity: 0.45;
-      cursor: default !important;
-      pointer-events: none;
-    }
+    .cal-cell.is-future { opacity: 0.45; cursor: default !important; pointer-events: none; }
     .cal-cell.is-today { border-color: var(--c-gold); }
     .cal-legend { display: flex; align-items: center; gap: 10px; margin-top: 12px; flex-wrap: wrap; font-size: 11px; color: var(--c-ink-soft); }
     .cal-legend-dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; margin-left: 4px; }
@@ -1643,8 +1638,46 @@
     const todoCheckSvg='<svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.2 11.5L13 4.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
     function renderTodos(){ const list=document.getElementById('todoList'), progress=document.getElementById('todoProgress'); if(todos.length===0){ list.innerHTML='<div class="empty-state"><span class="emoji">✅</span><span>'+(currentLang==='fa'?'هنوز کاری اضافه نکردی.':'No tasks added yet.')+'</span></div>'; progress.style.display='none'; return; } const doneCount=todos.filter(t=>t.done).length; progress.style.display='block'; progress.textContent=toFa(doneCount)+' '+(currentLang==='fa'?'از':'of')+' '+toFa(todos.length)+' '+(currentLang==='fa'?'کار انجام شده':'tasks done'); list.innerHTML=todos.map((t,idx)=>{ if(editingTodoId===t.id){ return `<div class="todo-row"><div class="todo-edit-row"><input type="text" class="todo-edit-input" id="todoEditInput-${t.id}" value="${escapeAttr(t.text)}" maxlength="120"><button class="todo-edit-save" data-id="${t.id}" aria-label="${currentLang==='fa'?'ذخیره':'Save'}">${todoCheckSvg}</button><button class="todo-edit-cancel" data-id="${t.id}" aria-label="${currentLang==='fa'?'انصراف':'Cancel'}">×</button></div></div>`; } let dateLabel=''; if(t.done && t.completedAt){ dateLabel=(currentLang==='fa'?'✓ تکمیل: ':'✓ Done: ')+formatTodoDateTime(t.completedAt); } else if(!t.done && t.createdAt){ dateLabel=formatTodoDateTime(t.createdAt); } return `<div class="todo-row"><button class="todo-checkbox ${t.done?'is-done':''}" data-id="${t.id}" aria-label="تکمیل شد">${todoCheckSvg}</button><div class="todo-text ${t.done?'is-done':''}">${escapeHtml(t.text)}${dateLabel?`<span class="todo-time">${dateLabel}</span>`:''}</div><div class="todo-move"><button class="todo-move-btn" data-id="${t.id}" data-dir="up" ${idx===0?'disabled':''} aria-label="${currentLang==='fa'?'انتقال به بالا':'Move up'}">▲</button><button class="todo-move-btn" data-id="${t.id}" data-dir="down" ${idx===todos.length-1?'disabled':''} aria-label="${currentLang==='fa'?'انتقال به پایین':'Move down'}">▼</button></div><button class="todo-edit" data-id="${t.id}" aria-label="${currentLang==='fa'?'ویرایش':'Edit'}">${editPencilSvgTodo}</button><button class="todo-del" data-id="${t.id}" aria-label="حذف">×</button></div>`; }).join(''); list.querySelectorAll('.todo-checkbox').forEach(btn=>btn.addEventListener('click', ()=>toggleTodo(btn.dataset.id))); list.querySelectorAll('.todo-del').forEach(btn=>btn.addEventListener('click', ()=>deleteTodo(btn.dataset.id))); list.querySelectorAll('.todo-move-btn').forEach(btn=>{ if(btn.disabled) return; btn.addEventListener('click', ()=>moveTodo(btn.dataset.id,btn.dataset.dir)); }); list.querySelectorAll('.todo-edit').forEach(btn=>{ btn.addEventListener('click', ()=>{ editingTodoId=btn.dataset.id; renderTodos(); const inp=document.getElementById('todoEditInput-'+btn.dataset.id); if(inp){ inp.focus(); inp.select(); } }); }); list.querySelectorAll('.todo-edit-save').forEach(btn=>btn.addEventListener('click', ()=>saveEditTodo(btn.dataset.id))); list.querySelectorAll('.todo-edit-cancel').forEach(btn=>btn.addEventListener('click', ()=>{ editingTodoId=null; renderTodos(); })); list.querySelectorAll('.todo-edit-input').forEach(inp=>{ inp.addEventListener('keydown', e=>{ if(e.key==='Enter'){ e.preventDefault(); saveEditTodo(inp.id.replace('todoEditInput-','')); } else if(e.key==='Escape'){ editingTodoId=null; renderTodos(); } }); }); }
 
-    async function addTodo(rawText){ const text=rawText.trim(); if(!text) return; todos.push({ id:'t'+Date.now()+Math.random().toString(36).slice(2,7), text, done:false, createdAt:new Date().toISOString(), completedAt:null }); renderTodos(); await persistTodos(); }
-    async function toggleTodo(id){ const t=todos.find(x=>x.id===id); if(!t) return; t.done=!t.done; t.completedAt=t.done?new Date().toISOString():null; renderTodos(); await persistTodos(); }
+    // ===== تغییر اصلی: ترتیب کارها =====
+    // 1. کار جدید به ابتدای لیست اضافه شود
+    async function addTodo(rawText) {
+      const text = rawText.trim();
+      if (!text) return;
+      // استفاده از unshift برای قرار دادن در ابتدا
+      todos.unshift({
+        id: 't' + Date.now() + Math.random().toString(36).slice(2,7),
+        text,
+        done: false,
+        createdAt: new Date().toISOString(),
+        completedAt: null
+      });
+      renderTodos();
+      await persistTodos();
+    }
+
+    // 2. وقتی کار تیک می‌خورد، به انتهای لیست برود (اگر انجام شد) یا به ابتدا (اگر انجام نشد)
+    async function toggleTodo(id) {
+      const idx = todos.findIndex(t => t.id === id);
+      if (idx === -1) return;
+      const task = todos[idx];
+      // حذف از جای فعلی
+      todos.splice(idx, 1);
+      // تغییر وضعیت
+      task.done = !task.done;
+      task.completedAt = task.done ? new Date().toISOString() : null;
+      // قرار دادن در موقعیت مناسب
+      if (task.done) {
+        // کار انجام شده: به انتهای لیست
+        todos.push(task);
+      } else {
+        // کار انجام نشده: به ابتدای لیست (اولین کار انجام‌نشده)
+        todos.unshift(task);
+      }
+      renderTodos();
+      await persistTodos();
+    }
+
+    // توابع دیگر todo بدون تغییر
     async function deleteTodo(id){ todos=todos.filter(x=>x.id!==id); if(editingTodoId===id) editingTodoId=null; renderTodos(); await persistTodos(); }
     async function moveTodo(id,dir){ const idx=todos.findIndex(x=>x.id===id); if(idx===-1) return; const swapIdx=dir==='up'?idx-1:idx+1; if(swapIdx<0||swapIdx>=todos.length) return; const tmp=todos[idx]; todos[idx]=todos[swapIdx]; todos[swapIdx]=tmp; renderTodos(); await persistTodos(); }
     async function saveEditTodo(id){ const inp=document.getElementById('todoEditInput-'+id); if(!inp) return; const newText=inp.value.trim(); if(newText){ const t=todos.find(x=>x.id===id); if(t) t.text=newText; } editingTodoId=null; renderTodos(); await persistTodos(); }
